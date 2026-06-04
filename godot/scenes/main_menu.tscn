@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/quit_on_esc.gd" id="1_quit"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_menu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_title"]
-font_size = 64
+font_size = 72
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_menu")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -30,12 +31,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -400.0
-offset_top = -150.0
+offset_top = -250.0
 offset_right = 400.0
-offset_bottom = 150.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
+theme_override_constants/separation = 24
 
 [node name="Title" type="Label" parent="VBox"]
 layout_mode = 2
@@ -45,17 +47,19 @@ horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="VBox"]
 layout_mode = 2
-text = "Sprint 0 — scaffold pronto. Sprint 1 começa quando você der GO."
+text = "Sprint 1 — walking skeleton"
 horizontal_alignment = 1
 
 [node name="Spacer" type="Control" parent="VBox"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 
-[node name="Hint" type="Label" parent="VBox"]
+[node name="PlayButton" type="Button" parent="VBox"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-text = "ESC = sair"
-horizontal_alignment = 1
+text = "JOGAR TUTORIAL"
 
-[node name="QuitOnEsc" type="Node" parent="."]
-script = ExtResource("1_quit")
+[node name="QuitButton" type="Button" parent="VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "SAIR"

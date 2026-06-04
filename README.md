@@ -12,10 +12,10 @@ Pixel-art HD remaster — desktop nativo (Godot 4) — homenagem ao
 │   ├── project.godot
 │   ├── scenes/                .tscn
 │   ├── scripts/               .gd
-│   └── assets/                sprites, audio, fonts, shaders
-├── levels/
-│   ├── new/                   Pack original do remaster (distribuível)
-│   └── reference/             Layouts extraídos do ROM — gitignored
+│   ├── assets/                sprites, audio, fonts, shaders
+│   └── levels/
+│       ├── new/               Pack original do remaster (distribuível)
+│       └── reference/         Layouts extraídos do ROM — gitignored
 ├── tools/                     Scripts Python para R&D (não distribuídos)
 └── README.md                  você está aqui
 ```

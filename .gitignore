@@ -22,9 +22,9 @@ godot/data_*/
 
 # ─── IP protection (ADR-003) ──────────────────────────────────
 # Layouts extraídos do ROM original NÃO entram no Git
-levels/reference/*.xsb
-levels/reference/*.json
-levels/reference/output/
+godot/levels/reference/*.xsb
+godot/levels/reference/*.json
+godot/levels/reference/output/
 
 # ROMs do usuário (BYO importer pode armazenar caches em userdata,
 # nunca no repo). Mega Drive usa .bin/.smd/.gen — NÃO incluímos .md
