@@ -1,0 +1,71 @@
+# ─── Godot 4 ──────────────────────────────────────────────────
+# https://github.com/github/gitignore/blob/main/Godot.gitignore
+godot/.godot/
+godot/.import/
+godot/export.cfg
+godot/export_presets.cfg
+*.translation
+
+# Mono/C# (caso ativemos depois)
+godot/.mono/
+godot/data_*/
+
+# ─── Builds / exports ─────────────────────────────────────────
+/build/
+/dist/
+/exports/
+*.exe
+*.pck
+*.x86_64
+*.dmg
+*.app
+
+# ─── IP protection (ADR-003) ──────────────────────────────────
+# Layouts extraídos do ROM original NÃO entram no Git
+levels/reference/*.xsb
+levels/reference/*.json
+levels/reference/output/
+
+# ROMs do usuário (BYO importer pode armazenar caches em userdata,
+# nunca no repo). Mega Drive usa .bin/.smd/.gen — NÃO incluímos .md
+# aqui porque colide com Markdown (toda a doc do projeto).
+*.bin
+*.smd
+*.gen
+*.rom
+*.iso
+
+# ─── Memória do agente / runtime LLM ──────────────────────────
+# Arquivos criados pelo plugin RAG do Claude que rodou na sessão
+ruvector.db
+ruvector.db-journal
+ruvector.db-wal
+ruvector.db-shm
+*.sqlite
+*.sqlite3
+.claude/
+.cursor/
+
+# Outputs do disassembly e tools de R&D
+tools/extract_levels_output/
+tools/rom_disassembly/dumps/
+tools/**/__pycache__/
+tools/**/*.pyc
+tools/.venv/
+tools/venv/
+
+# ─── Editor / IDE ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.code-workspace
+*.sublime-*
+
+# ─── OS ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs / temp ──────────────────────────────────────────────
+*.log
+*.tmp
+*~
