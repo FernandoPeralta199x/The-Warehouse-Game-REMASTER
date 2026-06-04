@@ -21,18 +21,19 @@ gateados por demonstração funcional, não por porcentagem de "feito".
 
 ## Sprint 1 — Walking skeleton (semanas 2-3)
 
-Objetivo: jogador anda em grid 16×12, empurra 1 caixa, alvo registra clear.
+**Status:** ✅ COMPLETO (validado 2026-06-04 — tutorial em 3 movimentos vs par 8)
 
-- [ ] `level.gd` — TileMap simples com paredes/piso/alvo
-- [ ] `player.gd` — movimento step-by-step com input WASD/setas
-- [ ] `box.gd` — caixa empurrável, detecta sobre alvo
-- [ ] Parser XSB básico (sem frontmatter ainda) em `level_loader.gd`
-- [ ] 1 fase hardcoded (tutorial dummy)
-- [ ] Win condition: todas caixas em alvo → tela "FASE COMPLETA"
+- [x] `level.gd` — render via `_draw()` (TileMap fica pra Sprint 5 com sprites)
+- [x] `player.gd` — movimento step-by-step com input WASD/setas
+- [x] `box.gd` — caixa empurrável, vira verde quando sobre alvo
+- [x] Parser XSB **com frontmatter YAML** em `level_loader.gd`
+- [x] Tutorial: `00_tutorial.xsb` (8×5, par 8)
+- [x] Win condition: tela "FASE COMPLETA" + contador vs par
 
-**Gate:** terminar uma fase do começo ao fim.
-
-**Risco:** subestimar pixel-perfect rendering no Godot 4 (camera, snap).
+**Gate fechado.** Decisões tomadas durante implementação:
+- `_draw()` em vez de TileMap (mais simples pro placeholder; troca em Sprint 5)
+- Entidades como Node2D filhas de `$Level/Entities`, posição = grid * TILE_SIZE
+- Background via `default_clear_color` do projeto (não ColorRect)
 
 ## Sprint 2 — Polimento de input (semana 4)
 
