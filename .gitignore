@@ -1,42 +1,61 @@
-# ─── Godot 4 ──────────────────────────────────────────────────
-# https://github.com/github/gitignore/blob/main/Godot.gitignore
-godot/.godot/
-godot/.import/
-godot/export.cfg
-godot/export_presets.cfg
-*.translation
+# ─── Unity ─────────────────────────────────────────────────────
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/*
+!Builds/.gitkeep
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+Recordings/
 
-# Mono/C# (caso ativemos depois)
-godot/.mono/
-godot/data_*/
+# ─── IDE / editor ──────────────────────────────────────────────
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.user
+*.tmp
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+sysinfo.txt
+crashlytics-build.properties
 
-# ─── Builds / exports ─────────────────────────────────────────
-/build/
-/dist/
-/exports/
-*.exe
-*.pck
-*.x86_64
-*.dmg
-*.app
-
-# ─── IP protection (ADR-003) ──────────────────────────────────
-# Layouts extraídos do ROM original NÃO entram no Git
-godot/levels/reference/*.xsb
-godot/levels/reference/*.json
-godot/levels/reference/output/
-
-# ROMs do usuário (BYO importer pode armazenar caches em userdata,
-# nunca no repo). Mega Drive usa .bin/.smd/.gen — NÃO incluímos .md
-# aqui porque colide com Markdown (toda a doc do projeto).
+# ─── Proibido — ROMs e dumps (Workflow §9 / AGENTS.md) ────────
+roms/
 *.bin
 *.smd
 *.gen
-*.rom
+*.mdx
+*.zip
+*.7z
+*.rar
 *.iso
 
+# ─── Proibido — conteúdo extraído do jogo original ────────────
+extracted_maps/
+original_levels/
+sprites_original/
+music_original/
+sfx_original/
+screenshots_original/
+passwords_original.txt
+shove_it_offsets.md
+
+# ─── Godot legacy (branch godot-legacy preserva histórico) ────
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+
 # ─── Memória do agente / runtime LLM ──────────────────────────
-# Arquivos criados pelo plugin RAG do Claude que rodou na sessão
 ruvector.db
 ruvector.db-journal
 ruvector.db-wal
@@ -46,26 +65,14 @@ ruvector.db-shm
 .claude/
 .cursor/
 
-# Outputs do disassembly e tools de R&D
-tools/extract_levels_output/
-tools/rom_disassembly/dumps/
-tools/**/__pycache__/
-tools/**/*.pyc
-tools/.venv/
-tools/venv/
-
-# ─── Editor / IDE ─────────────────────────────────────────────
-.vscode/
-.idea/
-*.code-workspace
-*.sublime-*
-
-# ─── OS ────────────────────────────────────────────────────────
+# ─── Sistema ───────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
 desktop.ini
-
-# ─── Logs / temp ──────────────────────────────────────────────
 *.log
-*.tmp
-*~
+
+# ─── REFERENCIA (design bible - deve entrar? ver decisão do owner) ──
+# Descomentar a linha abaixo para EXCLUIR a pasta de referência do repo.
+# Por padrão ela ENTRA (contém docs, sprites de referência, personagens).
+# Cuidado: pode conter arquivos grandes (PNG grandes). Considere LFS.
+# REFERENCIA/

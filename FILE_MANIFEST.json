@@ -1,0 +1,1614 @@
+{
+  "files": [
+    {
+      "path": ".editorconfig",
+      "bytes": 698,
+      "sha256": "3422dac4ab412fd3ee395e9238e0b9e8e26d10442e33ea32e601c43a4b513b6d"
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 396,
+      "sha256": "56b0d9ffa6fcecc1f2844e3f7a50aa30626e3d6da226a51e58b55829f2372081"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 261,
+      "sha256": "2208d85c708bddb44e553cb89070045e891137778dfb309d25e1d26c02ca3463"
+    },
+    {
+      "path": "Assets/ThirdParty/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/ThirdParty/README.md",
+      "bytes": 252,
+      "sha256": "7017c62714f66a91efe58208935d308003e77542f4b1530434d49bce0f3bcb2b"
+    },
+    {
+      "path": "Assets/_Project/Art/Characters/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Art/Crates/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Art/Environment/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Art/Forklifts/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Art/Tilesets/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Art/UI/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Art/VFX/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Audio/Ambience/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Audio/Mixers/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Audio/Music/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/PROTOTYPE_AUDIO_NOTICE.md",
+      "bytes": 404,
+      "sha256": "ceaf1342cb2e5b98ad8dd12aab11e384081dec025382f08664443b5ddbd69de3"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ambience/amb_sector01_receiving_loop.wav",
+      "bytes": 2116844,
+      "sha256": "766f4314b0fe25de1dca7bf853543915a9f6c47398e9b1476cbeddb969f2fc94"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ambience/amb_sector02_expedition_loop.wav",
+      "bytes": 2116844,
+      "sha256": "e5b80dd8d294b152efd49492b830c7c871be725f6ee1316adb6b8f58aadce32f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ambience/amb_sector03_cold_loop.wav",
+      "bytes": 2116844,
+      "sha256": "5c8aa97d0f7998a8fcc0eb35ac1b8f8a481ff67c44766faa9827f2e852a91b43"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ambience/amb_sector04_automation_loop.wav",
+      "bytes": 2116844,
+      "sha256": "a24e1679747e5487d1ce34b863e8387eaf632125afef5a53120435c6bafd727d"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ambience/amb_sector05_maintenance_loop.wav",
+      "bytes": 2116844,
+      "sha256": "8ae6dfcd8c6a33cf8d7262d8abc9dd750bcb0e0edb6da614d4997028386d1528"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ambience/amb_sector06_ghost_routes_loop.wav",
+      "bytes": 2116844,
+      "sha256": "744a015db728e78b3c85b6f5e2288e30ca1c08e96109bd0541c5f4b096260228"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ambience/amb_sector08_core_loop.wav",
+      "bytes": 2116844,
+      "sha256": "57561e2183ed81c0001b0f8aa6b50ea171b6ac47093870d99014b056fbf90bb8"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ambience/amb_workshop_n8_loop.wav",
+      "bytes": 2116844,
+      "sha256": "67ba49eb8db0e4300f781c0286ac483036402a3432a2907dd4efdc31ed8a9e59"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/fragile/crate_fragile_break_01.wav",
+      "bytes": 83834,
+      "sha256": "8c01d532d3b48c5dc06e59309ee7e6d2fb2913925b2fafca89ee63b6426a9a97"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/fragile/crate_fragile_damage_01.wav",
+      "bytes": 26504,
+      "sha256": "0ab636447b88e34a7feb8ce9ba48d8770d3909ff5a48eac964b44158cabe17f8"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/fragile/crate_fragile_rattle_01.wav",
+      "bytes": 54728,
+      "sha256": "808dd3c2c323e799951ac98935145236cb80d564f617223e047622ebacd8d9eb"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/heavy/crate_heavy_blocked_01.wav",
+      "bytes": 45908,
+      "sha256": "70bdee786e92bbdcf97c6db41d20167c9ba8f808459a72144366cb6883042498"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/heavy/crate_heavy_push_01.wav",
+      "bytes": 42380,
+      "sha256": "ea03c8302955bf7bda164c7c68c7984041e0a108c01664092ed3270620baf7dc"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/heavy/crate_heavy_push_02.wav",
+      "bytes": 42380,
+      "sha256": "318d284a960fc9521cc8131498d17564bfc1470abf416b759cfd31c41e732700"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/heavy/crate_heavy_stop_01.wav",
+      "bytes": 30912,
+      "sha256": "62e91e9b094d1f44fe8b33944eb024f2896febdee6a7f6e36b164104e6623e06"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/ice/crate_ice_stop_01.wav",
+      "bytes": 31796,
+      "sha256": "5a884f1f352c4c8d768c4a5f87dfef12742e5601a61b8c2234f3aaace87ee0f9"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/ice/crate_slide_ice_01.wav",
+      "bytes": 67076,
+      "sha256": "333ead3280ba0852975dca51b28a3568e0bdd5e62ef77174c2389fd45afd6a15"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/ice/crate_slide_ice_02.wav",
+      "bytes": 70604,
+      "sha256": "db595df6cf8983bd9e235866e6654a61becaf39c782c9738eb88c7e0ca61a310"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/metal/crate_hit_metal_01.wav",
+      "bytes": 38852,
+      "sha256": "c254639aa2dc511dd6c288906997116b5e2a493144942e2a37f4bb15a550006f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/metal/crate_hit_metal_02.wav",
+      "bytes": 38852,
+      "sha256": "f0a9c818d3cafa0bb4bffe07e11e0737a9b133e408b831ecb8eaad37ad69a10b"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/metal/crate_push_metal_01.wav",
+      "bytes": 33560,
+      "sha256": "2934faa258627567e655459b72ace60ccbd9f8e13bede4a4b6194bcec3dcba9d"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/metal/crate_push_metal_02.wav",
+      "bytes": 33560,
+      "sha256": "c02fe74d4f7c32375115e50f3e8bb177f2faf2548a0971906cbeb606fe9fb607"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/wood/crate_hit_wall_wood_01.wav",
+      "bytes": 28268,
+      "sha256": "2b077d937314aa751bb032edeb9cd1252baac62dd8ab32a157feb244c43700f9"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/wood/crate_hit_wall_wood_02.wav",
+      "bytes": 28268,
+      "sha256": "23fa3b9a95ddcf95bdcafa861d4902ea26a2b9acdd41ca98b5334cdbb73888b3"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/wood/crate_off_target_01.wav",
+      "bytes": 29150,
+      "sha256": "6e551c1e3ecdedd13b62c76a34027282bc110ed0d9b335b760431c3e8094b998"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/wood/crate_on_target_01.wav",
+      "bytes": 58256,
+      "sha256": "afc9a7fbc24cb350433d220fe52d246d5bab6cbb248774dd01bf769c74c3774f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/wood/crate_push_wood_01.wav",
+      "bytes": 31354,
+      "sha256": "ebc9e704a824f5bfa196b79d2c8423e0ffcb94e9a8745e58eddff648a46c484a"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/wood/crate_push_wood_02.wav",
+      "bytes": 32678,
+      "sha256": "0d5dbdc1e839248737cb98c89c505682de28c0052584face439dfc17b494d274"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/wood/crate_push_wood_03.wav",
+      "bytes": 34000,
+      "sha256": "7ea07e6387cf2e916d0c3964edd017bdd21eef6b133f4b62c743f7a1c7282edf"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/crates/wood/crate_stop_wood_01.wav",
+      "bytes": 15920,
+      "sha256": "8fa135c5a9d88170ecd0c7086ad43d59f30192e15a3a9f3cdf6985996145b96b"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/alerts/forklift_damage_alarm_01.wav",
+      "bytes": 60020,
+      "sha256": "3d816acfb54c78602dd175c8f6aca2473b246eda8c56b6879296bcaba023ebc5"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/alerts/forklift_reverse_beep_loop.wav",
+      "bytes": 88244,
+      "sha256": "791c7752ed7a19f6fa3769a085e36add8f7c1f863c7e7ad71267dc3bcd1dd3ec"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/cargo/forklift_cargo_fall_01.wav",
+      "bytes": 78542,
+      "sha256": "8d1f1c200dd6771e3c8d3c26c804850f12e96c4fafdb5e1715833adc2f062d24"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/cargo/forklift_cargo_lock_01.wav",
+      "bytes": 35324,
+      "sha256": "67be0af44440730e3ab77779e804fe44abb7adf0595b97f5d26efb99000b8d1c"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/cargo/forklift_cargo_unstable_01.wav",
+      "bytes": 69722,
+      "sha256": "d14eeaa1b2d52edbe7356b3c50d8790bc741ecd3ad585e92a1e2f24fc1593408"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/cargo/forklift_drop_crate_01.wav",
+      "bytes": 55608,
+      "sha256": "e62a55c74b1475fe0b1ceeb343b17ce9e868c98c9f149979c5972efce7441267"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/cargo/forklift_fork_lower_01.wav",
+      "bytes": 72368,
+      "sha256": "5ce155793cec75e4699bd18d075b22e7e437af8c5945dac96bc816c0093016c2"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/cargo/forklift_fork_raise_01.wav",
+      "bytes": 72368,
+      "sha256": "1a2d9009340761892797a43566f8ed1793df025a2a596cce80ed4f6bfe1ac566"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/cargo/forklift_pickup_crate_01.wav",
+      "bytes": 58256,
+      "sha256": "fd651cc65c28daa350729bdf137b40eb3ae5b13565d1556361ec0461ccf3924e"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/collision/forklift_collision_heavy_01.wav",
+      "bytes": 57374,
+      "sha256": "9418f3836fe3e948f4fb79d0acc8579dfa14131c7482a1b28bb7f692fb0be3d8"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/collision/forklift_collision_light_01.wav",
+      "bytes": 42380,
+      "sha256": "3d6c7f0fe7bcd38f9453bf9bd422595ca62c9c764edd6925485e48979fd3d7a8"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/collision/forklift_collision_medium_01.wav",
+      "bytes": 42380,
+      "sha256": "70668992a6ad29407d4dfd824b203bff20f230e517fc080273fdc7e5b78de5bb"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/collision/forklift_hit_cone_01.wav",
+      "bytes": 49436,
+      "sha256": "07f6d9c5f6377d63d7eaab5e98df8c86501519135fe4cd6994b3ca114502899c"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/collision/forklift_hit_pallet_01.wav",
+      "bytes": 31796,
+      "sha256": "d16c432e8146c0314e848a308e4886060d58f60f246d85feb9ec5b441fc7b137"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/engine/forklift_electric_engine_loop.wav",
+      "bytes": 352844,
+      "sha256": "062cb973d4234ec53ef53f118dd26922a754b68e55b81cbd2e1a1f9cd0a8bef0"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/engine/forklift_engine_high_loop.wav",
+      "bytes": 352844,
+      "sha256": "83519b5711338fb42bbda7d6cbc6c5cac522d636c35c7f1fe24738c59361aa88"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/engine/forklift_engine_idle_loop.wav",
+      "bytes": 352844,
+      "sha256": "a7278a2541ed33a3c40eef68275480bd0c70937ca5564be73eb25d0d0e4571b2"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/engine/forklift_engine_low_loop.wav",
+      "bytes": 352844,
+      "sha256": "2842f525d1fc5420f59b1ab6f167eb324a91db8e49d010c9d00d411a04de2433"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/engine/forklift_heavy_engine_loop.wav",
+      "bytes": 352844,
+      "sha256": "0b5b020812091c53cee6fa67891584a0fbedfc86e8c2a05916f0892b04ae3016"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/movement/forklift_accelerate_01.wav",
+      "bytes": 79424,
+      "sha256": "01dda08383308d4cb4de7c166f61bd919a267184bd5882fc9ebc38a4fa1325ad"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/movement/forklift_brake_01.wav",
+      "bytes": 33560,
+      "sha256": "ff88f1815a8b47db8ce939a88771b764edf0bb19f4732c85a8239486b98a17e9"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/movement/forklift_decelerate_01.wav",
+      "bytes": 66194,
+      "sha256": "5c57b2a59aa6732cc49aef70a703b0a5a4531b0a84239717a22f66d55d799a6f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/movement/forklift_handbrake_01.wav",
+      "bytes": 33560,
+      "sha256": "7a7a2b6c8302739c8005a1d32cfe5b97ff78ee5f742aaeade2cd0d44d0bcf625"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/movement/forklift_ice_skid_01.wav",
+      "bytes": 68840,
+      "sha256": "36eadefd5694f26df087e771d88f96cba0c1dc56a3e2b7808a0f601e82023d93"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/forklift/movement/forklift_tire_screech_01.wav",
+      "bytes": 48554,
+      "sha256": "a51f463b7925c825167f47cd7b84ddfa17c01071b2a72e6f302e5846e4b0f5e4"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/conveyors/conveyor_belt_loop.wav",
+      "bytes": 352844,
+      "sha256": "d8c773cf450ec79196db0200d14116830ae52c7a30f46580dd2a21bef35bb183"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/conveyors/conveyor_jam_01.wav",
+      "bytes": 67076,
+      "sha256": "673128a850d8706c46823600d9aa23352e1abbacdb3a8c61e940ca683a4bf868"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/conveyors/conveyor_reverse_01.wav",
+      "bytes": 53846,
+      "sha256": "124ad351304dff7ebc7e0df7d8a0e7046a4814f3f984d967e2cd3d32a70b1aab"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/conveyors/conveyor_start_01.wav",
+      "bytes": 83834,
+      "sha256": "8c5fc1c50dfbc1af6229f4c219f368012b8738bae10265360550130aac9ed391"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/conveyors/conveyor_stop_01.wav",
+      "bytes": 70604,
+      "sha256": "ecbf2c62a29e417e14d1c661e5dc3b7654bcfe1a09cecc0bf47fea6c2001d9ff"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/doors/door_close_heavy_01.wav",
+      "bytes": 173798,
+      "sha256": "d60bc5443e6ea8354fc812de2aae4cd61baef801be0ec736e3f949780fee8ffe"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/doors/door_close_light_01.wav",
+      "bytes": 98828,
+      "sha256": "46b44bbc6e19f86ca8e319fbfd8d8924300aaadabc32717a43bf378177a928bb"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/doors/door_emergency_shut_01.wav",
+      "bytes": 105884,
+      "sha256": "fc5bb496016d3dfafd4450e9635ece07915a665ce96ad969550f82d782a30e6e"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/doors/door_locked_01.wav",
+      "bytes": 37088,
+      "sha256": "69e104a3e1ecb4beb26369c3fd45e657ff03f1e60533b0d61409cc24cf04aeb3"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/doors/door_manual_crank_01.wav",
+      "bytes": 98828,
+      "sha256": "3cff84dfe858ccd6b6707f4ce1bbbc56dbe6205f2ec6e3d024b461832980ffbc"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/doors/door_open_heavy_01.wav",
+      "bytes": 173798,
+      "sha256": "f85cbbfe1108d8c182664ffc6360fb64fb729f8bf69704c3a9d48daffc7f551e"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/doors/door_open_light_01.wav",
+      "bytes": 98828,
+      "sha256": "af9541df6b24f6621d9d05e8ac2e7674e049a736f728afa9cac0a55f172f479e"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/doors/door_unlock_01.wav",
+      "bytes": 42380,
+      "sha256": "31b6162dc5a7b275731a5d7ce209307eb48f2e7b1871a786142a8b69bb0cc28f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/generators/electric_spark_01.wav",
+      "bytes": 15920,
+      "sha256": "d8393fd755d88a3bff6144830442d33bb1615365204904d5a55680e31fcc675b"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/generators/electric_spark_02.wav",
+      "bytes": 15920,
+      "sha256": "8c180b4c8283a9c09655e8354b57c946f78946a72ae4103fc26cee5ed3735b7d"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/generators/generator_fail_01.wav",
+      "bytes": 128816,
+      "sha256": "fb012c87dc4754df6f4091dc66e58edb09f8ff9aff589cdcca1649b5605bdafc"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/generators/generator_idle_loop.wav",
+      "bytes": 529244,
+      "sha256": "c7ec4a3cfae251b71cff64ef5e48e5a107bafbf9ce7ae5c052f90f1a59c72609"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/generators/generator_start_01.wav",
+      "bytes": 242592,
+      "sha256": "c1ec5fe12c596edca54aa2ec6d7d014a597079de9c35eccc7657fa88d8ebcbfd"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/generators/power_down_01.wav",
+      "bytes": 88242,
+      "sha256": "ce33d29200ed739bac4c5e012811fda4508e4cb1955375ee3e9448fcd5728a13"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/generators/power_up_01.wav",
+      "bytes": 105884,
+      "sha256": "051886b12588ea7cffb9b9386b3a4ad994448390eecf95d22ca748e511e1c009"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/robots/robot_error_01.wav",
+      "bytes": 59138,
+      "sha256": "7540863f7b6e9d8b6d1e53eb704bf3bad78d44187f55899b41698050bce421cc"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/robots/robot_move_loop.wav",
+      "bytes": 176444,
+      "sha256": "b3dd560b9ac89fae32f6c8d24fbf111076d970bd22cf285d263ff9833ad3e2f0"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/robots/robot_scan_01.wav",
+      "bytes": 42380,
+      "sha256": "12a32014caf1499a6469090c0e3a51504607e87a8db742bee87d1b784ed38aa2"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/robots/robot_shutdown_01.wav",
+      "bytes": 58256,
+      "sha256": "e276bcb477114fee3ead2aafc849cc5ac1caa81d66f1c85d18c775426b4dc355"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/robots/robot_turn_01.wav",
+      "bytes": 22976,
+      "sha256": "3d98ca3282fcfacb7d1cacf335dc9d6a6cf28c5b10b6536a0db7d8320a9f1d61"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/sensors/button_press_01.wav",
+      "bytes": 10628,
+      "sha256": "48394f0dc1f4e0b86d3dc160353a7a35571130039b0c04414fb39ea0d8744c8f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/sensors/lever_pull_01.wav",
+      "bytes": 45908,
+      "sha256": "5c2f8cb86b5bd4530b9983b42275b6e402a550a1604623f95a1d91281dcf1868"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/sensors/sensor_activate_01.wav",
+      "bytes": 24740,
+      "sha256": "2fac747efe5308cea3983690b0f669452bd95c3e9921996414b8acfcb42ff9fc"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/sensors/sensor_deactivate_01.wav",
+      "bytes": 22976,
+      "sha256": "313ebb104cca5fc1572b158b6c1ddf8c0ca19c4f2c47fbb28f69d3762a406912"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/sensors/sensor_false_01.wav",
+      "bytes": 55608,
+      "sha256": "43ae6281e60ccbd105a8cca49af267c1bd99fd6498a3bb6dd7a37797f55cf3fb"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/sensors/switch_power_01.wav",
+      "bytes": 27386,
+      "sha256": "52b7ce7a8f9861db5671f6c90ea6f72b04f4dc2119658a4fb6231078c2e656f2"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/terminals/terminal_access_denied_01.wav",
+      "bytes": 39734,
+      "sha256": "d75daadbd43f988fd5a52f310d0e28bf452045d68a1b827171280896c278c881"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/terminals/terminal_access_granted_01.wav",
+      "bytes": 24740,
+      "sha256": "4bcacfd47cf9516233e852d6a76648a99024e08fe355b638da61fa3a408daf21"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/terminals/terminal_beep_01.wav",
+      "bytes": 10628,
+      "sha256": "0a0d147675296baa683085575cb04cf8ff82f0025a69d832e27ff1e4dae95afd"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/terminals/terminal_boot_01.wav",
+      "bytes": 76776,
+      "sha256": "8f1c0b075988cece00da9ac622c1b2a7f888787ab824a9ab76f4b36e5877d1ec"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/terminals/terminal_data_deleted_01.wav",
+      "bytes": 60900,
+      "sha256": "4a215d96b3b50517a9c2c62b552fe9a677d7277e64bd4804863df551781b0652"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/terminals/terminal_data_recover_01.wav",
+      "bytes": 67076,
+      "sha256": "59b60fcc8b0ee557932b678f2b33eb6cc9a992dcca7cd8990643fa938a70da7f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/machines/terminals/terminal_glitch_01.wav",
+      "bytes": 57374,
+      "sha256": "71d85517cef04d817f7f80b7b41f113b021bbbecc85b57f70e9913de67eccfe9"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_concrete_01.wav",
+      "bytes": 13274,
+      "sha256": "71749f5e11417f55e1af04d94314d94b2dd6bbb856010e47d425db4ff40cc5d2"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_concrete_02.wav",
+      "bytes": 13274,
+      "sha256": "24c3ab06ec2a15a8f6f83b8569e06552dbb1bf87ecd82e1912676dab36b253c5"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_concrete_03.wav",
+      "bytes": 13274,
+      "sha256": "2084d89a8ac3839754a6220915f44a928bf56f750e7f66ee4cfc957af4be3f3d"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_ice_01.wav",
+      "bytes": 15920,
+      "sha256": "8c00594661d0d7c8759c9dcb5ab8310197875cbf716d5a4b607db7440eaf36b6"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_ice_02.wav",
+      "bytes": 15920,
+      "sha256": "a9ee86f5cda5de154fdece4a5e8c4ae943b29c5671f2778844ba9ecec07a1ef3"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_metal_01.wav",
+      "bytes": 13274,
+      "sha256": "994e56a6e5c3eacad283ec5feef73ec4b637427910caba8a6c6d7200712d2674"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_metal_02.wav",
+      "bytes": 13274,
+      "sha256": "93210840f62016815e6a8a7a11d24a964dd08c17ebb5dc0544e6d607d5fbc53c"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_metal_03.wav",
+      "bytes": 13274,
+      "sha256": "b0176e5b709ae94b0afcfaa4e8087df8c27a0ace7fbad39272ca070b29df185c"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_water_01.wav",
+      "bytes": 13274,
+      "sha256": "832ff2a5227541c4dcbaee2fed0be36dfca5160ff9b38051f35d7f5344c290e0"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/footsteps/step_water_02.wav",
+      "bytes": 13274,
+      "sha256": "a93b1d59c1ad04103934a57b3945c33339a1c23b77165af2092d21d11e403cb2"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/movement/player_blocked_01.wav",
+      "bytes": 17684,
+      "sha256": "c3945464d31317284c0760955e2cd4d69ce3a0ca8f8715f19781b11a2a2ee98e"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/movement/player_push_effort_01.wav",
+      "bytes": 21212,
+      "sha256": "d67f4b08d2be91f75617610e350f6d959ddd87762f73790b03b67a1cf0207bbe"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/player/movement/player_push_effort_02.wav",
+      "bytes": 21212,
+      "sha256": "b74a807e9e8f4629778e9dbb7e9efbba39d1b306c9c6034823970c3430399945"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_battery_reserve_01.wav",
+      "bytes": 72368,
+      "sha256": "71e14b86be064fe59bf66e6b568bf056d31421fc7ccb4cbea971a908a854e9da"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_emergency_brake_01.wav",
+      "bytes": 45908,
+      "sha256": "e1c6795ee733effb6aac756e069d61241d913284762954a818190ee0e0310a84"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_ghost_sim_start_01.wav",
+      "bytes": 70604,
+      "sha256": "8b8387a1f836d10cb26a3cdebaa3c5682508561cac21284b865e00bc3f5bf9fb"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_hint_open_01.wav",
+      "bytes": 33560,
+      "sha256": "2faf6d6abb2267504a544bd1994487a23470606c6261a2199d61e81d18b61a3c"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_hydraulic_force_01.wav",
+      "bytes": 87362,
+      "sha256": "60bbf8940608f7abb29013242e9644fdc37f8f522c6d8bcf02bd22b273794934"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_jack_pull_01.wav",
+      "bytes": 101472,
+      "sha256": "cc03a96b547533b74f1ebbfcfcb8dd8040695619be4a53ea8e1a16b72968d24d"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_rewind_activate_01.wav",
+      "bytes": 79424,
+      "sha256": "fab3c8379cf6445a29b133eb63b03052fdec27ab34529c033bd996dfb31b372f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_route_marker_01.wav",
+      "bytes": 48554,
+      "sha256": "71f646072e01256e541b126569e7b784c0c142ff4c7224d1327ce2779b0c7963"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_scanner_activate_01.wav",
+      "bytes": 52964,
+      "sha256": "9bd45d9712886e671cc4869a7eb44bf1fa9459fca711f0978847c0ee79544dce"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/powerups/powerup_scanner_ping_01.wav",
+      "bytes": 19448,
+      "sha256": "08cfbd00b0ac9e019b9a11e7ccd4fdb93c32c8bb66f9a3ef974f444b09f63157"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/puzzle_feedback/puzzle_complete_01.wav",
+      "bytes": 194084,
+      "sha256": "9466d788e1e548486f33886222081d9c0c142f0006a730b468394a11bf1f4e5f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/puzzle_feedback/puzzle_deadlock_warning_01.wav",
+      "bytes": 38852,
+      "sha256": "74e6671960e00a5197dd2b3991077229d2ce1d6ff1f6d270a85609e63c688325"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/puzzle_feedback/puzzle_invalid_move_01.wav",
+      "bytes": 22094,
+      "sha256": "c1cfd90e6581f7035e1e28868d859c3d823910b43d3c5c35bf7a0e2cc9a3f554"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/puzzle_feedback/puzzle_map_reveal_01.wav",
+      "bytes": 88244,
+      "sha256": "ee6d9dbfac5e407614e09023fadfa4b3363a611e97d4cd49acea69246537058d"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/puzzle_feedback/puzzle_secret_found_01.wav",
+      "bytes": 97064,
+      "sha256": "d201cc136e4a5a33c22c9a2a4d2f1a93008d1ad1e9600886775e37ea063bf489"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/puzzle_feedback/puzzle_success_01.wav",
+      "bytes": 21212,
+      "sha256": "c0d85fd2c75468578ce44468ab6d68465db1b5264e9ce45d28390bc80eac40af"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/puzzle_feedback/puzzle_target_order_correct_01.wav",
+      "bytes": 31796,
+      "sha256": "b89ffe73c684cd683788ee69689e0a2402b6b7994485ecf11448d325b3c022ac"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/puzzle_feedback/puzzle_target_order_wrong_01.wav",
+      "bytes": 28268,
+      "sha256": "2f5987ed44a9a64b596d6a1a333d01a8419c2d4fb98eb636210de5f3ddd38340"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/puzzle_feedback/puzzle_unlock_path_01.wav",
+      "bytes": 64430,
+      "sha256": "66871944a665c0f6fd8e6e08534fc6ee2c0316ee523ca45e1fca32f15b344b6f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/characters/story_duda_clue_reveal_01.wav",
+      "bytes": 98826,
+      "sha256": "cc11a71a792d9eba34edff2f9f1c13b09b4d7114cec2ddcdbbde001f9eab1258"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/characters/story_duda_log_start_01.wav",
+      "bytes": 65312,
+      "sha256": "929e1fcab92b6ed09c41c3cace0c74ffe2de6d7a6caa992fce3eea9aedcc971b"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/characters/story_duda_stinger_01.wav",
+      "bytes": 114702,
+      "sha256": "387e320c5fdf4ae0c7e3e60830d08c73e26b51d325fb555ba3cf191020c6f884"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/characters/story_elias_record_found_01.wav",
+      "bytes": 98828,
+      "sha256": "debcb6d1ab93e23101fba17dcb63d93628a7ad42bef2521f76e61f95ee2d7e5f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/characters/story_elias_stinger_01.wav",
+      "bytes": 120876,
+      "sha256": "8dbdb451fed5288e9f8200345a1ad4ffdd6eb1f2f53814329f4931a4dbe698bb"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/characters/story_john_stinger_01.wav",
+      "bytes": 103238,
+      "sha256": "ef6d23e755114075a7e1be484b7caa9934560599bb118256b6afb60023235e46"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/characters/story_robert_serious_stinger_01.wav",
+      "bytes": 104120,
+      "sha256": "6d229e4b6fd0e5fa1e60f7975252dfba5c20d25121873d9a1d00a94fa88d9d03"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/characters/story_robert_stinger_01.wav",
+      "bytes": 87362,
+      "sha256": "b2c6e458ef409b30c72a73602a693d184cbc2ff43df5a838d51060d1dcca1656"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/radio/story_radio_off_01.wav",
+      "bytes": 45908,
+      "sha256": "579cabbe390d7786f32dcc5fd2a23a1fe85ccd82033fbdd133ccfc422c648253"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/radio/story_radio_on_01.wav",
+      "bytes": 47672,
+      "sha256": "d89692779707a303b87de339d878922882080372eec78ce564ff3055bd9a82f2"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/secret/secret_duda_path_01.wav",
+      "bytes": 216130,
+      "sha256": "4564325fd56bfb8271718a5b0080d79531449cdb0f5e565ac127125da6600483"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/secret/secret_elias_truth_01.wav",
+      "bytes": 217896,
+      "sha256": "7a949a904e6e4257a3602866ed769d84ea2e677db60e050091a304d3f0d1957c"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/secret/secret_room_enter_01.wav",
+      "bytes": 90890,
+      "sha256": "40a38e6c5fc749e85164fd8bfe77708ae8653e063e24ebfa4f0c56eb5ddf8b43"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/story/secret/secret_unlock_01.wav",
+      "bytes": 114704,
+      "sha256": "a4e4071dbcf7678d46f48f8861dee344e84315d726958f0e1584e255dbe2fe61"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/system/system_core_unstable_01.wav",
+      "bytes": 121760,
+      "sha256": "53de8b8d8c1266c9192f65758330ec8edcf1cd7d76f9996949f5b07bb684d829"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/system/system_data_corrupt_01.wav",
+      "bytes": 78542,
+      "sha256": "9b5d42637bf614d10948d6bd64b04ff31eeb73728efb852e2c13971027a9d496"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/system/system_lockdown_alarm_loop.wav",
+      "bytes": 88244,
+      "sha256": "96884f1933bb45f2d54180bf0e93fa2aed5871f94fbf1b58737cb9cc27c24dca"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/system/system_lockdown_start_01.wav",
+      "bytes": 99710,
+      "sha256": "d51b3c4beea470a337006dc817eee6acc37802d5995ab2cd1c3ec5f55d466cbd"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/system/system_sector_unlocked_01.wav",
+      "bytes": 101472,
+      "sha256": "91a665b0647a4a2c702c6c23b1dba9ab2ac3b5b5d3ec8b6a67f41f2ed192fd30"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/menu/ui_back_01.wav",
+      "bytes": 9746,
+      "sha256": "650a18fa0e3e07f4c4d2b16cbae283dd1d8fde6fd53174c62757e6432ba87f68"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/menu/ui_confirm_01.wav",
+      "bytes": 9746,
+      "sha256": "50c5206c7ecc039a09b7f65f4f70adc1b29e13d13b1c1ba71321d2f6028d93c8"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/menu/ui_error_01.wav",
+      "bytes": 17684,
+      "sha256": "a0ce746490522b36fa13e2a2439f623b8dc31e1c53ebf610eeda4f1280d6f6ac"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/menu/ui_pause_01.wav",
+      "bytes": 15920,
+      "sha256": "13a584168c8c498d9566b7dd78f29aff072aace113518735142160853723487e"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/menu/ui_select_01.wav",
+      "bytes": 6218,
+      "sha256": "3ece150285acd82f4c0d4d3eed534dfb8299b5f687d394aa5a415fd58a8028a0"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/menu/ui_tab_change_01.wav",
+      "bytes": 7982,
+      "sha256": "b1c16bae705ca9689f0afb488b142775cefd31a0d762a17e5b23fa8ab2fbfea2"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/menu/ui_unpause_01.wav",
+      "bytes": 15920,
+      "sha256": "0eb7c177ee41185cf77a98c9ee3091cba428bbec5789fe76a2b8cf732f65e83d"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/results/assisted_run_badge_01.wav",
+      "bytes": 22976,
+      "sha256": "859fe35623e60cd5cdf931ffbcbe3f307f749226f44b039aad6bb08bab1af702"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/results/clean_run_badge_01.wav",
+      "bytes": 22976,
+      "sha256": "5792490b6c4ce8ea38c58047394c00b6e2bbb848286b7d3727fbd2784f5a5775"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/results/medal_bronze_01.wav",
+      "bytes": 66194,
+      "sha256": "4fd03e166fa5727692ed6c340dc28943f25d295d48248c04584ec82b4f38677b"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/results/medal_gold_01.wav",
+      "bytes": 92654,
+      "sha256": "dac4e714d6121b8feee94a81d6aee53be34cdb897a5267262cde1f5b6532055f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/results/medal_platinum_01.wav",
+      "bytes": 119114,
+      "sha256": "474825b4aa371f31bc227d00a5f7d99f5e89a4087a711616435b40663062ab3a"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/results/medal_silver_01.wav",
+      "bytes": 75014,
+      "sha256": "c2b90f500c647018fe63d8d100c245cfb7b5e05b63d0cfbddcb88045b09f5e99"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/results/result_screen_open_01.wav",
+      "bytes": 52964,
+      "sha256": "6412832eb20e2899b0dbedb62ed1864ca9a31cc06e05596763d49e8f74cbc1ce"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/shop/credits_gain_01.wav",
+      "bytes": 40616,
+      "sha256": "5651ea586caa227f916ca49d2e93e614fdc285fdbcd7e027b8a9fc53c14de2c7"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/shop/shop_buy_01.wav",
+      "bytes": 35324,
+      "sha256": "681da8da72971c60b5fa9bd404f81012eef4741583aaa7fd4de7753fc12a2c96"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/shop/shop_close_01.wav",
+      "bytes": 40616,
+      "sha256": "bcfc3519b516a8f5dcb115f7f12e427eeac7c2c49d5cb8c3270ad4797bf7962f"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/shop/shop_no_credits_01.wav",
+      "bytes": 31796,
+      "sha256": "c2d14ae11c6241e8ac2b639beed6965bf4d81cd3b28a48abdefa931b545b2681"
+    },
+    {
+      "path": "Assets/_Project/Audio/SFX/Prototype/ui/shop/shop_open_01.wav",
+      "bytes": 52964,
+      "sha256": "ea014aae6410dc577a3fa1677b549babecef72370009a3eb6701246513688583"
+    },
+    {
+      "path": "Assets/_Project/Audio/ScriptableObjects/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Characters/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Crates/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Forklifts/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Interactables/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Machines/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/UI/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Bootstrap/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Menu/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Scenes/SecretLevels/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Sectors/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Tests/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Workshop/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/ScriptableObjects/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Assets/_Project/ScriptableObjects/Audio/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/ScriptableObjects/Characters/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/ScriptableObjects/Forklifts/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/ScriptableObjects/Levels/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/ScriptableObjects/PowerUps/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Audio/AudioEvent.cs",
+      "bytes": 1167,
+      "sha256": "4f3b72bcf3206e1eed63fc801a8947a67fd1b5f87b6f3a53db96011b57b02f95"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Audio/AudioService.cs",
+      "bytes": 4228,
+      "sha256": "177b0478700345c780c7eb6c410cbde4761f5cae15efce4c73dee28f367abe9e"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Audio/MusicService.cs",
+      "bytes": 3604,
+      "sha256": "93788b6fb347c39091094e55e56b3531f5013bda58308f9e7fbec1ab9600bdf9"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Audio/MusicTrack.cs",
+      "bytes": 728,
+      "sha256": "1a79ec3e206b9b6f06696daea777c5ee4044f472ae493954c37e89e13e408a3e"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/Common/CameraFollow2D.cs",
+      "bytes": 841,
+      "sha256": "53ee008e7ce639be1966d881e22acef9ea23d8dde1790bfb220367be5bfda5a6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/Common/Guard.cs",
+      "bytes": 769,
+      "sha256": "d18a358b4c8d2dbe92619d4599dd7cbe81c9818d3b69169e2ed544e5dea55ea6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/Common/PrototypeSpriteRenderer.cs",
+      "bytes": 1723,
+      "sha256": "8b2f6b44b9959755e84955ab41c20a0fb3c618fb1aae5dd8cd564d8426566570"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/Data/GameConfig.cs",
+      "bytes": 885,
+      "sha256": "9da2e06a739c23e4ed71304fc096bec73a61edc8bf7d358336dae90a28303dda"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/GameBootstrap.cs",
+      "bytes": 2728,
+      "sha256": "c38657f05b85c5d8dade4db37d9521d44b2003f2675060a2e846d5845132d3b9"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/GameMode.cs",
+      "bytes": 154,
+      "sha256": "64c7d5f72fa829b6f0745d4d14b5716880c13546f42b9806d9b74b90eacef95f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/GameState.cs",
+      "bytes": 260,
+      "sha256": "0025021d44f68b0b785f3305a22fe1edd760fe6b0935507a74eddf4b8021fbc0"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/GameStateMachine.cs",
+      "bytes": 968,
+      "sha256": "b43cff0b878e58d37a4c0d9f25bb7d38e1f588af06e40705127fe68e73d786f2"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/PauseService.cs",
+      "bytes": 1127,
+      "sha256": "574dbc12971157a4c60b550c793e9336f148aad7d035f3b25bc127f01541f296"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/SceneLoader.cs",
+      "bytes": 1372,
+      "sha256": "b108b959c9ed9784b848f4f9509c7d5c129d3a3bb66cbf03a9db17bb90d7bf51"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/Services/IGameService.cs",
+      "bytes": 155,
+      "sha256": "1b9f69ec2b468febf96587b82a24615740c30bdd8b9cf3c677803618b90e3d52"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/Services/ServiceRegistry.cs",
+      "bytes": 1743,
+      "sha256": "283ccb4d6d8e826984d717f06f1d666c9befcb6b24fa91de0faf81bbe58e2458"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Editor/PixelArtTexturePostprocessor.cs",
+      "bytes": 836,
+      "sha256": "2bf9de788120e37c197e40b82d7192c2e1416cc75278b3117bc6deb1cd793b7f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Editor/TW08.Editor.asmdef",
+      "bytes": 395,
+      "sha256": "ec650f78fc99523c1d133f50c16a7e8d097310799bd9dd081fb4feb628c5cec8"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Editor/TW08ProjectSetup.cs",
+      "bytes": 17732,
+      "sha256": "e73eda01c353015426a99659169d7c17aa619820541958c5d2ba1a8338875c80"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Editor/TW08ProjectValidator.cs",
+      "bytes": 2885,
+      "sha256": "709e441bb8e9ef105cbf06e1ce1926657eb36b85ace861be4a95fca0cd9d6bae"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/ArcadeForkliftController2D.cs",
+      "bytes": 7098,
+      "sha256": "f8e6c419a1d3430222b5b7694aeb2e917a66776f11e7857795585e8d2b9dc23e"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/BoostPad.cs",
+      "bytes": 637,
+      "sha256": "df5e6d75d24ebef2d9a48d5d74f49212a76b1da7b21eb78284f5f849f4716318"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/ForkliftDamage.cs",
+      "bytes": 1670,
+      "sha256": "72da66f1a749d7c1bc3d092bbc00f58ae5430a837b8faeb27d553b1f1e59bfe1"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/ForkliftStats.cs",
+      "bytes": 2099,
+      "sha256": "753c3eb0a427629ad7247fbe2789d39e5697bb42e11c6a602c5b16a1e898bc4f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/OilHazard.cs",
+      "bytes": 1079,
+      "sha256": "aa4fb69d84d1c3406f64fdd61889fcee95fba5a60c00a8e5552de26de9904cc9"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/PowerUpContext.cs",
+      "bytes": 598,
+      "sha256": "7cc66d3e120d778ed6ae1c71a418196cd13fde997c2538584bcfb1abe97f930d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/PowerUpDefinition.cs",
+      "bytes": 1118,
+      "sha256": "5b4c6abfaaa0aa26fc45ea75e8f72c0ec51cdb785e58851639e9b978a1789090"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/PowerUpEffect.cs",
+      "bytes": 212,
+      "sha256": "79195dd1b049e616f3491d35e7352451a8d81756ac5a6e8ea7fa2a6a1e60b1c1"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/PowerUpExecutor.cs",
+      "bytes": 2611,
+      "sha256": "35b2c34fef0acc142f2a1710fd9ed4630e61c4f3296fad66c7c2eb7e047d8376"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/PowerUpInventory.cs",
+      "bytes": 935,
+      "sha256": "dbef7b015b5214e173f414ead71f1c2b3d477796664db6a084fa605ee28284e3"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/PowerUpPickup.cs",
+      "bytes": 2296,
+      "sha256": "5dee466f02bfe16d658c159d70cd6db9a81187f3b44d72ee6704cf7008b04b6d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/PowerUpType.cs",
+      "bytes": 194,
+      "sha256": "4373ddc7bf6b87eada6e0eeb93361eeb3a195463bd8d87d0ab62dd212910d117"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/StandardPowerUpEffect.cs",
+      "bytes": 2181,
+      "sha256": "591e27de33792daa3a11d1d685d4ededb7731ab3b9dfaa18a05114dc6a987329"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/PowerUps/WeightedPowerUpTable.cs",
+      "bytes": 2192,
+      "sha256": "d81f2998e45154ae6779089fa22fe8490913ee8f3f55843f5619a66e748be77c"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/RaceCheckpoint.cs",
+      "bytes": 966,
+      "sha256": "8820510e920776bb9e5ac1ad92846bf6e59fc603ab67404c036fe114e9a82d04"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/RaceCountdown.cs",
+      "bytes": 985,
+      "sha256": "f8efca5709895e4c1b1f4529f7286f764721c609ddad80004d1fc0103de3016c"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/RaceDefinition.cs",
+      "bytes": 1345,
+      "sha256": "8ffc45e06994ff428a32c34c4de9c9cd9c9996c93e90f472462401803f74f5a2"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/RaceManager.cs",
+      "bytes": 4045,
+      "sha256": "3e67d7c78088e41cc5a6c80362e20a6291a899f1d5fc788b8bc9927f63b45f34"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/RaceResult.cs",
+      "bytes": 517,
+      "sha256": "72e7ba272e7be4ae13b65e565b7395d1428c25453dec717648b40444c54353e3"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/RaceWaypointPath.cs",
+      "bytes": 764,
+      "sha256": "6fe056cdc56c5bffa373cd81bfea1266b0cbd7ffe3d1954e0c27363332b5fd48"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/RacerProgress.cs",
+      "bytes": 1786,
+      "sha256": "928795329f2b141c40c567bb2c7e07d38a37cc3e801b426b7245a61dd3efe19f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/SurfaceGripZone.cs",
+      "bytes": 708,
+      "sha256": "134018f40a23236089568dbbee9b2427e53a21854b6543355478801438a70c41"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Forklift/WaypointRaceAI.cs",
+      "bytes": 1824,
+      "sha256": "4aeae8e902b65e2a215c88500c81359e0dab946900179094ecf370dbd5e26d54"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Levels/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Levels/LevelCatalog.cs",
+      "bytes": 1449,
+      "sha256": "00eb118ab3940dda2a1c3503edba03d8baa7ca3e7981bd6c5a35481ce57d97d1"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Levels/LevelDefinition.cs",
+      "bytes": 1616,
+      "sha256": "f799fe9fa3b8d93be9913e2d788288a6ffa408b23b87752e30a8ce0a1ee93779"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Levels/LevelProgressionService.cs",
+      "bytes": 1311,
+      "sha256": "cf13cb300b356397db031ef71587d05d02a3ea63c31a7d5917ee87db0db3b5ce"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Levels/SectorId.cs",
+      "bytes": 256,
+      "sha256": "c66bc028dbe4f776be292f1215628d8b484ddf87afaec3d9c8d8b6a44357547f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Narrative/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Narrative/NarrativeSequence.cs",
+      "bytes": 1150,
+      "sha256": "215f6cb196736725c3d451a5ffa516595a0e04407e70199f904250d1f0a60416"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Narrative/NarrativeService.cs",
+      "bytes": 1453,
+      "sha256": "eb3c506e77548252400f7b5a642e55a76ac52f03330cf0b75d6f09ba375bd3fe"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Narrative/NarrativeTrigger.cs",
+      "bytes": 783,
+      "sha256": "db04113f7bdecb226cf37d953384a8783db03e2918acd44d709f30c83cfd4483"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/GameInput.cs",
+      "bytes": 6415,
+      "sha256": "208c6ef1fd26c341e86d786f6dc70c9fa2416ab6ef9c526335d07e04333db7a1"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/GridCoordinate.cs",
+      "bytes": 1590,
+      "sha256": "1605f9e1025f88d5e999bec7e33a052081349c10f75c02c9ead0c123fd94ac17"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzleBoardModel.cs",
+      "bytes": 6336,
+      "sha256": "58a884274a26882eab1301c156a51ac8f0a06df660c20a7e1187c5ac80624d77"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzleCrateDefinition.cs",
+      "bytes": 672,
+      "sha256": "6f5e7f1be7b179bde2fd3e60862039bdbab3b93e8a91833b105c00a9e5304f79"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzleEntityKind.cs",
+      "bytes": 159,
+      "sha256": "c9ecf01cdfda26235bae01eec7cb5f3e46b02a40b097c0148f4a0db53b5d99d8"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzleEntityView.cs",
+      "bytes": 738,
+      "sha256": "524376e41c954d4b61f27db50c6fbe7f97ca740013fc3bd1a0ae04e7b79bebe0"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzleHistory.cs",
+      "bytes": 1236,
+      "sha256": "6c57f846a973557be070b8c5f431b80c0ed803a457c20656fce609b23e145e83"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzleLevelDefinition.cs",
+      "bytes": 1989,
+      "sha256": "5267131363d14d1d03293c97de5c5a3a79b1aa84eee2743b70ae145716db3b28"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzleLevelValidator.cs",
+      "bytes": 3136,
+      "sha256": "93a9a1b8f409f2606013d23c1c14f7148c4d5794ec9d6defc565fe6af5364f0c"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzleMove.cs",
+      "bytes": 1074,
+      "sha256": "7d323198bae9af9ba48e417f743998c350e76210107709d32ec3a8a440cf1935"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzlePlayerController.cs",
+      "bytes": 1297,
+      "sha256": "6fc30ccfc70dd50b8375d12ffc840b7ba0705ac50bd87162dd5c37b1aa2580e7"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/PuzzleRuntime.cs",
+      "bytes": 4492,
+      "sha256": "03de9f7246b3236e6c6f4d5ec1468dbf10a6ee3558a9a5446d6eab13c2405968"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzle/SimpleDeadlockDetector.cs",
+      "bytes": 1102,
+      "sha256": "1d7c9811851dc92dd0096ccd28b9fa999c934850391fb6ccd5d12f9b8993089e"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/JsonSaveService.cs",
+      "bytes": 3062,
+      "sha256": "54299684fbc600e2ee4f95556fd42f9f9f43224bed31f44e7ffb99b7ba37ef61"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/SaveEnvelope.cs",
+      "bytes": 208,
+      "sha256": "3ee2f3946703d97a21bb7a7c249c5aba87b433a67c9238e1382af6692f3f1582"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/SaveGameData.cs",
+      "bytes": 973,
+      "sha256": "46885a0a6efc6936f7a996552316e69d7631322253a5371bc543548e4737466f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/SaveIntegrity.cs",
+      "bytes": 867,
+      "sha256": "b64361e8f7bf3aee9ef20ca21862c1752ed5685750affc5c2968b7adb0020723"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/SaveManager.cs",
+      "bytes": 715,
+      "sha256": "c3e66383a00ea3eac7be8f01c0785ed0ac0e49469461702d18d0db1122455eaa"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/SaveMigrationPipeline.cs",
+      "bytes": 1371,
+      "sha256": "13d9e64e6b539573431bd1bdd7c04a7b7452b7dea6293597e7303cafa7c3c233"
+    },
+    {
+      "path": "Assets/_Project/Scripts/TW08.Runtime.asmdef",
+      "bytes": 353,
+      "sha256": "3ce3b36e6b0f4a75c3b0ca95c693138c3b7be12ccc8c0f813f1d91eafb1ee4f6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/LoadingScreenPresenter.cs",
+      "bytes": 1419,
+      "sha256": "5f15c85c4b8dd64aadbcaa860dd956e50fb28b38d8c25313add504b188cc2367"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/UIFlowController.cs",
+      "bytes": 1964,
+      "sha256": "73e3699662cbba26e114fc8f3ff3897e351976681892785a142790e2d950212e"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/UIScreen.cs",
+      "bytes": 839,
+      "sha256": "95a79149233183b921506d0fdf47baecdda1e6cb21fda04476ebb1221bb4fc37"
+    },
+    {
+      "path": "Assets/_Project/Settings/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/PuzzleBoardModelTests.cs",
+      "bytes": 3539,
+      "sha256": "a40898b93a9b98e8c980756fa88c5189112925b391797adfc0bbfb1906128fa2"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/PuzzleLevelValidatorTests.cs",
+      "bytes": 363,
+      "sha256": "a46745b3b414075b5bbea9bce2c8c6c4436d6fb642c778df11e8c360842dc4c2"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/SaveIntegrityTests.cs",
+      "bytes": 540,
+      "sha256": "476d2eb5913060f543957b86a2ddcca3bd31d36087353cb453766fe08a7aec86"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/TW08.Tests.EditMode.asmdef",
+      "bytes": 464,
+      "sha256": "1609ed0abc19a92fa7f890de35048f1e27d27c11a58f7aacbca026cc02c6888e"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/BootstrapSmokeTests.cs",
+      "bytes": 854,
+      "sha256": "12e2ee98e91ee183a2ae5b31cc3f8be94889bf7c7b5bb766fe6eef906dde567a"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/TW08.Tests.PlayMode.asmdef",
+      "bytes": 457,
+      "sha256": "7e5f5393a7e71fe69ee385274357f38c114e61e7fbe70e965c44e4379854522a"
+    },
+    {
+      "path": "Builds/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Docs/AUDIO_DESIGN.md",
+      "bytes": 39316,
+      "sha256": "9a9628e451616744854ed3de284bb4abc95fdd2f8acd48ea4e258c0454472d59"
+    },
+    {
+      "path": "Docs/Audio/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/Audio/SFX_CATALOG.md",
+      "bytes": 19939,
+      "sha256": "6fea3ed5efbcfb395d3d6d167d2d9a078c26835636908677849a4a080bbd3d6a"
+    },
+    {
+      "path": "Docs/Design/Characters/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/Design/Characters/JOHN_MILLER.md",
+      "bytes": 21910,
+      "sha256": "f17601e865992996f0726e4c98aae1778a6212fde9042ebdd2a45803470628c2"
+    },
+    {
+      "path": "Docs/Design/Characters/MARIA_EDUARDA_DUDA.md",
+      "bytes": 15947,
+      "sha256": "c0333ecb0856f38ae241cb2f5ae6a1284bba0758620f09a1593aa8262a298b31"
+    },
+    {
+      "path": "Docs/Design/Characters/ROBERT_HAYES_BIG_ROB.md",
+      "bytes": 17529,
+      "sha256": "af0cb61766e1d1a3c3751bdefac77dbec6dc3ab7fbd3c3dffd0c39177fa1fcf5"
+    },
+    {
+      "path": "Docs/Design/FORKLIFT_RACES.md",
+      "bytes": 26557,
+      "sha256": "74fc62c0f64244c3c9d5ef11175cb036cd606d5fe26b0220a83210a5efa3e545"
+    },
+    {
+      "path": "Docs/Design/POWERUPS.md",
+      "bytes": 26692,
+      "sha256": "63f16919b4448ea3ec04d42b1ecf701606490663053cfe8b1a8fe77f1d290da7"
+    },
+    {
+      "path": "Docs/Design/STORY_BIBLE.md",
+      "bytes": 20875,
+      "sha256": "287f1b65887ea43520414a3fc0d650b0180b0eb8186fee311af2d52f69badf5b"
+    },
+    {
+      "path": "Docs/GDD.md",
+      "bytes": 1344,
+      "sha256": "cff6bb46a493098e52a3f816a677cba7486435b3c91e49cca987d14c8b5349a0"
+    },
+    {
+      "path": "Docs/LEGAL_IP_CHECKLIST.md",
+      "bytes": 971,
+      "sha256": "ba598445af6598a0e19eb3da218b37aeba66bd776a53ac4dffafe0af3ab60d49"
+    },
+    {
+      "path": "Docs/LEVEL_DESIGN.md",
+      "bytes": 38964,
+      "sha256": "4b5f3e624a6625cf1bfd4dbcb162c5aba5c83ef3d19e9a270a0189e02701c6b0"
+    },
+    {
+      "path": "Docs/STEAM_RELEASE_CHECKLIST.md",
+      "bytes": 1121,
+      "sha256": "9394562e1cd2702cc810f85c456e3c58b3f5139ebcd78ef4abdf088efddfb78b"
+    },
+    {
+      "path": "Docs/Technical/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/Technical/CODING_STANDARDS.md",
+      "bytes": 628,
+      "sha256": "014ccc3f8167339b917abda3321425e8d03ef30b2e6c781516614fcde709ff19"
+    },
+    {
+      "path": "Docs/Technical/RESEARCH_REFERENCES.md",
+      "bytes": 1291,
+      "sha256": "8d43aaaa662e647ea8a0b3baa26509e2213b6bb1db3f8cbe086e46b1e2959db5"
+    },
+    {
+      "path": "Docs/Technical/ROADMAP.md",
+      "bytes": 800,
+      "sha256": "b23951a94f68f1ea70cc00a34565356fdf290596d5cd909988c10c9be01ce8d6"
+    },
+    {
+      "path": "Docs/Technical/SETUP.md",
+      "bytes": 642,
+      "sha256": "8ff148f9ed806866ab6ba73308248cdb8b783b6ce5df6f063c3cdf59586b91aa"
+    },
+    {
+      "path": "Docs/Technical/STARTER_ARCHITECTURE.md",
+      "bytes": 2162,
+      "sha256": "a0c5d913d5e55b70e037d103bb1dd2576591127e74ba2d103f316b17ddbae9dc"
+    },
+    {
+      "path": "Docs/Technical/STARTER_GAMEPLAY_FOUNDATION.md",
+      "bytes": 1039,
+      "sha256": "37d648a4663892834589b0b40374b1b4aae656efa3f85e1164932d469c3d8a40"
+    },
+    {
+      "path": "Docs/Technical/STARTER_POWERUP_DESIGN.md",
+      "bytes": 727,
+      "sha256": "b9e29ad72359f9bd86ec2d40c8cabc2dd3d1831cdbbaa2701b588bb9c7e348d4"
+    },
+    {
+      "path": "Docs/Technical/STARTER_RACE_DESIGN.md",
+      "bytes": 1552,
+      "sha256": "574a0519f31aa5e3762ec7e88f613292c25e45f6e0a2f309dae2d2652f92b14a"
+    },
+    {
+      "path": "Docs/Technical/STARTER_RESEARCH_REFERENCES.md",
+      "bytes": 1388,
+      "sha256": "397f5ef75fa04451d9beeadf7c0cb083ddfd5027b760e1c1961f0d6fbf98031e"
+    },
+    {
+      "path": "Docs/Technical/STARTER_ROADMAP.md",
+      "bytes": 951,
+      "sha256": "e444458bbf88e97d9fe2dce14cebb19d575dba49be5f89b96332ababe7dd2677"
+    },
+    {
+      "path": "Docs/Technical/STARTER_SETUP.md",
+      "bytes": 1423,
+      "sha256": "75443dd6154e0d9b88fe00d726f9b48f052837730e9cbe4bcb8d6728116d522a"
+    },
+    {
+      "path": "Docs/Technical/STARTER_VALIDATION_REPORT.md",
+      "bytes": 641,
+      "sha256": "2d9c4db58bb3ce66193ec111abb035fbf4a96ab4836055c47f39295c4d3ef942"
+    },
+    {
+      "path": "Docs/Technical/TESTING.md",
+      "bytes": 610,
+      "sha256": "cb5724214ac9da0da4cf353b1bec805bbf7c43f4fcac110f0e24c3220c38e3f0"
+    },
+    {
+      "path": "Docs/UNITY_ARCHITECTURE.md",
+      "bytes": 1787,
+      "sha256": "e3293dcb65be0057dbc0f47cd16c9e2f7ce39445e69d5030b727c90e7aab3cb8"
+    },
+    {
+      "path": "Docs/VALIDATION_REPORT.md",
+      "bytes": 694,
+      "sha256": "eb1cc8f38b73f3aebd18e99177a45edcf05229687f23b10fc105b2e5ce182f08"
+    },
+    {
+      "path": "Licenses/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Licenses/THIRD_PARTY_NOTICES.md",
+      "bytes": 680,
+      "sha256": "619f026f6795dfc2ff5b4b0713844eec3c620b1e0d2ce1a0caee8ce8a164eb49"
+    },
+    {
+      "path": "Marketing/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "Packages/manifest.json",
+      "bytes": 308,
+      "sha256": "7021bf61eb413bcf98674155fe3387cc0f1eeb85eda4ed379195cf0d10c50513"
+    },
+    {
+      "path": "ProjectSettings/ProjectVersion.txt",
+      "bytes": 28,
+      "sha256": "8e0abf0bc8972fded06adf2afeafea6885564ab777eadf422760187857bb0325"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2165,
+      "sha256": "1230568c788f382e9e646ab34aa546668fcd49a93cc79c6cef6b61714fd13224"
+    },
+    {
+      "path": "static_validation.json",
+      "bytes": 250,
+      "sha256": "16087c0743074c28842360d8f4ba439fa826af92f33f47ca06f22a5bd8362ce2"
+    }
+  ]
+}
