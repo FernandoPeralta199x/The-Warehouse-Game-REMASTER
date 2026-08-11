@@ -10,9 +10,9 @@ Saída:
   Docs/level-layouts-enriched.json — consumido pelo TW08CampaignExpansionImporter (C#).
   Formato 100% explícito (sem chars): o C# não precisa entender a linguagem ASCII.
 
-Política de medalhas (movimentos, custo real do engine):
-  platinum = optimalCost + 2      (jogo quase perfeito, 1 hesitação)
-  gold     = ceil(optimalCost * 1.4) + 2
+Política de medalhas (movimentos, custo real do engine — convenção do projeto):
+  platinum = optimalCost          (jogo perfeito)
+  gold     = max(opt+2, ceil(optimalCost * 1.3))
 """
 from __future__ import annotations
 
@@ -50,8 +50,10 @@ def main() -> int:
 
         lv = parse_layout(obj)
         opt = int(rep["optimalCost"])
-        platinum = opt + 2
-        gold = math.ceil(opt * 1.4) + 2
+        # Convenção do projeto (auditada nas 9 fases existentes):
+        # platinum = ótimo exato; gold ≈ 30% de folga.
+        platinum = opt
+        gold = max(opt + 2, math.ceil(opt * 1.3))
 
         power_ups_raw = str(spec.get("powerUps", "")).lower()
         allow_power_ups = "bloquead" not in power_ups_raw
