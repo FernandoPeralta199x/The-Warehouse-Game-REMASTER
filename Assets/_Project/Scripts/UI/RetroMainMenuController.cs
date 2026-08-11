@@ -1,6 +1,6 @@
+using TW08.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TW08.UI
@@ -40,8 +40,7 @@ namespace TW08.UI
 
         public void StartNewShift()
         {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(firstLevelScene, LoadSceneMode.Single);
+            SceneLoader.TryLoadImmediate(firstLevelScene, "central de operações");
         }
 
         public void ContinueShift()
