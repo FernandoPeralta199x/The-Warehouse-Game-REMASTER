@@ -14,20 +14,24 @@ namespace TW08.Puzzle
                 return errors;
             }
 
-            if (level.Width <= 0 || level.Height <= 0)
+            if (level.Width < 3 || level.Height < 3)
             {
-                errors.Add("Board dimensions must be positive.");
+                errors.Add("Board dimensions must be at least 3x3.");
             }
 
-            HashSet<GridCoordinate> occupied = new();
-            foreach (GridCoordinate wall in level.Walls)
+            IReadOnlyList<GridCoordinate> walls = level.Walls ?? Array.Empty<GridCoordinate>();
+            IReadOnlyList<GridCoordinate> goalsSource = level.Goals ?? Array.Empty<GridCoordinate>();
+            IReadOnlyList<PuzzleCrateDefinition> crates = level.Crates ?? Array.Empty<PuzzleCrateDefinition>();
+
+            HashSet<GridCoordinate> wallCells = new();
+            foreach (GridCoordinate wall in walls)
             {
                 if (!IsInside(level, wall))
                 {
                     errors.Add($"Wall {wall} is outside the board.");
                 }
 
-                if (!occupied.Add(wall))
+                if (!wallCells.Add(wall))
                 {
                     errors.Add($"Duplicate wall at {wall}.");
                 }
@@ -37,14 +41,19 @@ namespace TW08.Puzzle
             {
                 errors.Add("Player start is outside the board.");
             }
-            else if (occupied.Contains(level.PlayerStart))
+            else if (wallCells.Contains(level.PlayerStart))
             {
                 errors.Add("Player starts on a wall.");
             }
 
+            if (crates.Count == 0)
+            {
+                errors.Add("Standard puzzle levels require at least one crate.");
+            }
+
             HashSet<string> ids = new(StringComparer.Ordinal);
             HashSet<GridCoordinate> cratePositions = new();
-            foreach (PuzzleCrateDefinition crate in level.Crates)
+            foreach (PuzzleCrateDefinition crate in crates)
             {
                 if (crate == null)
                 {
@@ -57,18 +66,40 @@ namespace TW08.Puzzle
                     errors.Add($"Crate id '{crate.Id}' is empty or duplicated.");
                 }
 
+                if (crate.Kind == PuzzleEntityKind.Player)
+                {
+                    errors.Add($"Crate '{crate.Id}' cannot use the Player entity kind.");
+                }
+
                 if (!IsInside(level, crate.Position))
                 {
                     errors.Add($"Crate '{crate.Id}' is outside the board.");
+                    continue;
                 }
-                else if (occupied.Contains(crate.Position) || !cratePositions.Add(crate.Position))
+
+                if (wallCells.Contains(crate.Position))
                 {
-                    errors.Add($"Crate '{crate.Id}' overlaps another blocked entity at {crate.Position}.");
+                    errors.Add($"Crate '{crate.Id}' overlaps a wall at {crate.Position}.");
+                }
+
+                if (crate.Position == level.PlayerStart)
+                {
+                    errors.Add($"Crate '{crate.Id}' overlaps the player start at {crate.Position}.");
+                }
+
+                if (!cratePositions.Add(crate.Position))
+                {
+                    errors.Add($"Crate '{crate.Id}' overlaps another crate at {crate.Position}.");
                 }
             }
 
-            HashSet<GridCoordinate> goals = new(level.Goals);
-            if (goals.Count != level.Goals.Count)
+            if (goalsSource.Count == 0)
+            {
+                errors.Add("Standard puzzle levels require at least one goal.");
+            }
+
+            HashSet<GridCoordinate> goals = new(goalsSource);
+            if (goals.Count != goalsSource.Count)
             {
                 errors.Add("Level contains duplicate goals.");
             }
@@ -79,9 +110,13 @@ namespace TW08.Puzzle
                 {
                     errors.Add($"Goal {goal} is outside the board.");
                 }
+                else if (wallCells.Contains(goal))
+                {
+                    errors.Add($"Goal {goal} overlaps a wall.");
+                }
             }
 
-            if (level.Crates.Count != level.Goals.Count)
+            if (crates.Count != goalsSource.Count)
             {
                 errors.Add("Standard puzzle levels require the same number of crates and goals.");
             }
