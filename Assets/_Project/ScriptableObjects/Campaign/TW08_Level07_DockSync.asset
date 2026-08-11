@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6028ca1cdbf8e3d49922bb9935d0eae7, type: 3}
+  m_Name: TW08_Level07_DockSync
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Puzzle.PuzzleLevelDefinition
+  levelId: TW08_Level07_DockSync
+  displayName: Dock Sync
+  sectorId: S03
+  briefing: "Cada doca aceita um tipo espec\xEDfico de carga. Heavy, fragile e padr\xE3o
+    precisam terminar no destino correto."
+  previewImage: {fileID: 0}
+  gimmickTags:
+  - typed-dock
+  - cargo
+  - order
+  width: 9
+  height: 8
+  cellSize: 1
+  playerStart:
+    x: 1
+    y: 1
+  walls:
+  - x: 0
+    y: 0
+  - x: 0
+    y: 7
+  - x: 1
+    y: 0
+  - x: 1
+    y: 7
+  - x: 2
+    y: 0
+  - x: 2
+    y: 7
+  - x: 3
+    y: 0
+  - x: 3
+    y: 7
+  - x: 4
+    y: 0
+  - x: 4
+    y: 7
+  - x: 5
+    y: 0
+  - x: 5
+    y: 7
+  - x: 6
+    y: 0
+  - x: 6
+    y: 7
+  - x: 7
+    y: 0
+  - x: 7
+    y: 7
+  - x: 8
+    y: 0
+  - x: 8
+    y: 7
+  - x: 0
+    y: 1
+  - x: 8
+    y: 1
+  - x: 0
+    y: 2
+  - x: 8
+    y: 2
+  - x: 0
+    y: 3
+  - x: 8
+    y: 3
+  - x: 0
+    y: 4
+  - x: 8
+    y: 4
+  - x: 0
+    y: 5
+  - x: 8
+    y: 5
+  - x: 0
+    y: 6
+  - x: 8
+    y: 6
+  - x: 3
+    y: 3
+  - x: 5
+    y: 3
+  goals:
+  - x: 2
+    y: 5
+  - x: 4
+    y: 5
+  - x: 6
+    y: 5
+  goalRequirements:
+  - position:
+      x: 2
+      y: 5
+    requiredKind: 1
+  - position:
+      x: 4
+      y: 5
+    requiredKind: 2
+  - position:
+      x: 6
+      y: 5
+    requiredKind: 3
+  crates:
+  - id: crate-standard
+    kind: 1
+    position:
+      x: 2
+      y: 2
+  - id: crate-heavy
+    kind: 2
+    position:
+      x: 4
+      y: 2
+  - id: crate-fragile
+    kind: 3
+    position:
+      x: 6
+      y: 2
+  costlyCells: []
+  switchGroups: []
+  goldMoveLimit: 26
+  platinumMoveLimit: 20
+  allowPowerUps: 0

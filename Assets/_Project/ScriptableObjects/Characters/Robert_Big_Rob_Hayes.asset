@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63e5488728f741d47bfc9fa1cd6ff8fa, type: 3}
+  m_Name: Robert_Big_Rob_Hayes
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Data.CharacterProfile
+  characterId: robert
+  displayName: "Robert \u2014 Big Rob \u2014 Hayes"
+  role: "Mec\xE2nico da Oficina N-8"
+  description: "Mec\xE2nico e mentor da garagem. D\xE1 suporte \xE0s empilhadeiras
+    e briefings de manuten\xE7\xE3o."
+  portrait: {fileID: 21300000, guid: 5ac4ae8e06cebe741a66c23d06714288, type: 3}
+  puzzleSprites: {fileID: 0}
+  uiAccent: {r: 0.78, g: 0.43, b: 0.12, a: 1}
+  puzzleEnabled: 0
+  raceEnabled: 0
+  unlockedByDefault: 0

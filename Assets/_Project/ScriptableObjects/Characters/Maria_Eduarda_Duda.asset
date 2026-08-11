@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63e5488728f741d47bfc9fa1cd6ff8fa, type: 3}
+  m_Name: Maria_Eduarda_Duda
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Data.CharacterProfile
+  characterId: duda
+  displayName: "Maria Eduarda \u2014 Duda"
+  role: "Sistemas & Seguran\xE7a"
+  description: "Analista de sistemas log\xEDsticos do N-8. L\xEA rotas, sensores
+    e terminais com precis\xE3o operacional."
+  portrait: {fileID: 21300000, guid: 0e7a5a326fc1f0c4d8e732f6b70383a2, type: 3}
+  puzzleSprites: {fileID: 11400000, guid: b254590dc1c9ce3428423bc59a49e975, type: 2}
+  uiAccent: {r: 0.18, g: 0.78, b: 0.82, a: 1}
+  puzzleEnabled: 1
+  raceEnabled: 1
+  unlockedByDefault: 1

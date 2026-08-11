@@ -4,5 +4,65 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_MainMenu.unity
+    guid: c1af895809d40114882a86f308ac4f5a
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Menus/TW08_ModeSelect.unity
+    guid: 205c47481b2f8d54da4f5ce0716cb266
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Menus/TW08_OperatorSelect.unity
+    guid: 9d9dea1ef7a75dc48b5320181095eee4
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Menus/TW08_PuzzleSelect.unity
+    guid: 43120030883167840a8d4400363df069
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Menus/TW08_RaceSelect.unity
+    guid: 2d1f474d0620fa14aa4ebbfbab42394d
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Menus/TW08_Settings.unity
+    guid: e613bdac9b0018147ab8481262d6d978
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Menus/TW08_Credits.unity
+    guid: 01afe1381c7a1824684a6f211b8c7cb8
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level01_FirstShift.unity
+    guid: 6701d2014c4c15e48a9e712bb8e62611
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level02_TightCorridor.unity
+    guid: 66deb7c265b4598468472f89816f6241
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level03_CrossLoad.unity
+    guid: a496c11438835954f86b10fb665eb234
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level04_SensorSplit.unity
+    guid: 94ee83b4e9b6c2343809f385d68607c0
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level05_TightLift.unity
+    guid: 43bb9ee05a51df24c98c70802c4133fe
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level06_TerminalRoute.unity
+    guid: 7db0275ccd94e2e4c8124a20d56d7345
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level07_DockSync.unity
+    guid: 32360f048e325004089b395fa21930b2
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level08_ColdStorage.unity
+    guid: 6f040d9134455df4388b8d0cf68cd2d9
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level09_CrossDispatch.unity
+    guid: 94a1cde8298f0b34dbea3a7d89c0664d
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Race/TW08_Race01_ReceivingLoop.unity
+    guid: 8a1b89d6d2c7ed24f99508fd14e645c9
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Race/TW08_Race02_IndustrialCorridor.unity
+    guid: 82b2ffdc574dfd34faca29d044b382ce
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Race/TW08_Race03_FrozenRoute.unity
+    guid: 2f6e6f29681e6104a9999d5fae37066e
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 858d13055b3b2f94ab22867d7d71b473, type: 2}
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
+  m_UseUCBPForAssetBundles: 0

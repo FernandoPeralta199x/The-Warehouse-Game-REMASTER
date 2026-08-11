@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d843d2fc26f716d48b567b4a6d666ee5, type: 3}
+  m_Name: MusicTrack_Music_Puzzle
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Audio.MusicTrack
+  trackId: Music_Puzzle
+  clip: {fileID: 8300000, guid: 3aa9f2a8d62766a499db1ddb5440a484, type: 3}
+  mixerGroup: {fileID: 0}
+  volume: 0.48
+  loop: 1

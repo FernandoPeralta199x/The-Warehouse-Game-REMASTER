@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4954f5a8b4247164ab01e4262a0895ba, type: 3}
+  m_Name: John_DirectionalSpriteSet
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Presentation.DirectionalSpriteSet
+  idleDown: {fileID: 21300000, guid: de20fae7f4b309c40b4f8a646e3f404a, type: 3}
+  idleUp: {fileID: 21300000, guid: 43c2321efff7f7948b758c54dd8ec918, type: 3}
+  idleLeft: {fileID: 21300000, guid: fb1b041f29a6a1a40852326a5219bdc3, type: 3}
+  idleRight: {fileID: 21300000, guid: 84206b462c56e8846befb088813a7ba1, type: 3}
+  walkDown:
+  - {fileID: 21300000, guid: 0951d6e129f540b4ebaadcffc75237ed, type: 3}
+  - {fileID: 21300000, guid: 0e3c853f69a02f743b6458f9324cc332, type: 3}
+  - {fileID: 21300000, guid: 69c21b0ddc912f148830571adfaa7291, type: 3}
+  walkUp:
+  - {fileID: 21300000, guid: 7a9649dcb7104bb4cb7569b4b960d863, type: 3}
+  - {fileID: 21300000, guid: 512244f52d42e7c479df9f0c32d89b97, type: 3}
+  - {fileID: 21300000, guid: 0b0bd2ce82140ee498fc7787815a4d52, type: 3}
+  walkLeft:
+  - {fileID: 21300000, guid: 71f6af0a4fa8d604fb21a9727f17c3f5, type: 3}
+  - {fileID: 21300000, guid: c890e987cebf3314481014cdea30bd21, type: 3}
+  - {fileID: 21300000, guid: f5a6d66c34d2ca7419eb41d1530a8824, type: 3}
+  walkRight:
+  - {fileID: 21300000, guid: 35bfdd8f9e1d94a4fb3a30ef08a0160d, type: 3}
+  - {fileID: 21300000, guid: 7c9f01b1bf8eef84ba79ee7361d77001, type: 3}
+  - {fileID: 21300000, guid: f723d012ad4b2004ab97bca9381807ee, type: 3}
+  framesPerSecond: 8

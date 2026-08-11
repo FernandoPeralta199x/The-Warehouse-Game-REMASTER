@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4954f5a8b4247164ab01e4262a0895ba, type: 3}
+  m_Name: Duda_DirectionalSpriteSet
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Presentation.DirectionalSpriteSet
+  idleDown: {fileID: 21300000, guid: ba0e9c3a14d183848818e16c9d8832ce, type: 3}
+  idleUp: {fileID: 21300000, guid: 7d8b936d09136324a9261cbe8bd22511, type: 3}
+  idleLeft: {fileID: 21300000, guid: b2305f2585bfe804dbf74c52fe56108a, type: 3}
+  idleRight: {fileID: 21300000, guid: ba0fa59ff7dff824580169d88f146434, type: 3}
+  walkDown:
+  - {fileID: 21300000, guid: 0fd0d84dfb6ea8f48834fb3da68612b4, type: 3}
+  - {fileID: 21300000, guid: 3d4d12100d79be04f875a13574154785, type: 3}
+  - {fileID: 21300000, guid: ac232f6aa5dfffa459e833f18a1f2a65, type: 3}
+  walkUp:
+  - {fileID: 21300000, guid: 3c4aa3accee263048a4fbce2484a3c6b, type: 3}
+  - {fileID: 21300000, guid: bd5099d03399c8f4cafe6c4dc8e31933, type: 3}
+  - {fileID: 21300000, guid: d9676023553ce214aaa5529de74b97c3, type: 3}
+  walkLeft:
+  - {fileID: 21300000, guid: aeb209fd575145847810829cacaed245, type: 3}
+  - {fileID: 21300000, guid: e153824ab26431f4dbb6bb2bd5e8cda8, type: 3}
+  - {fileID: 21300000, guid: e0f7be84199cca14ab1b50002b756c46, type: 3}
+  walkRight:
+  - {fileID: 21300000, guid: 97331a7f3a974e244893db59eb5ac802, type: 3}
+  - {fileID: 21300000, guid: 913c61e52052f5242b39e7f7b604307f, type: 3}
+  - {fileID: 21300000, guid: af64551d2f7506d4b96a142863dffc2d, type: 3}
+  framesPerSecond: 8

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2f13c5d5d74af7b282f2249d4cfa36, type: 3}
+  m_Name: TW08GraphicsProfile
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Presentation.TW08GraphicsProfile
+  targetFrameRate: 60
+  vSyncCount: 0
+  antiAliasing: 0
+  pixelSnap: 1
+  pixelsPerUnit: 32
+  cameraSmoothTime: 0.095
+  lookAheadTime: 0.15
+  maximumLookAhead: 1.8
+  baseOrthographicSize: 6.65
+  maximumSpeedZoomOut: 0.95
+  zoomSmoothTime: 0.17
+  defaultImpactShake: 0.11
+  shakeFrequency: 30

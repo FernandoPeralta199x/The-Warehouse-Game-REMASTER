@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0caaa9dddbd81e541b0abba85219e0d3, type: 3}
+  m_Name: TW08_RaceCampaign
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Race.RaceCampaignDefinition
+  tracks:
+  - {fileID: 11400000, guid: 4d089db73b6f8d0428d997b4481b58fd, type: 2}
+  - {fileID: 11400000, guid: ef22316ad8bcb024a8479d1f415c74e7, type: 2}
+  - {fileID: 11400000, guid: efbbe8a3018e0d142a493b453c8ecb30, type: 2}

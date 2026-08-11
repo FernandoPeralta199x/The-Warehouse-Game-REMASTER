@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9fc3a9f69d2bc4899862bbb65f32b0, type: 3}
+  m_Name: Track_frozen-route
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Race.RaceTrackDefinition
+  trackId: frozen-route
+  displayName: Frozen Route
+  sceneName: TW08_Race03_FrozenRoute
+  raceRules: {fileID: 11400000, guid: 3f4e4d9cd26c84b4c911dbdd12f1c9f3, type: 2}
+  briefing: "C\xE2mara fria com zonas de baixa ader\xEAncia. Antecipe a curva e use
+    boost apenas na sa\xEDda."
+  previewImage: {fileID: 0}
+  surfaceGrip: 0.45

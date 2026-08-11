@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6028ca1cdbf8e3d49922bb9935d0eae7, type: 3}
+  m_Name: TW08_Level02_TightCorridor
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Puzzle.PuzzleLevelDefinition
+  levelId: TW08_Level02_TightCorridor
+  displayName: Corredor Apertado
+  sectorId: S01
+  briefing: "Corredores estreitos punem empurr\xF5es sem rota de retorno. Caixas
+    n\xE3o podem ser puxadas."
+  previewImage: {fileID: 0}
+  gimmickTags: []
+  width: 8
+  height: 7
+  cellSize: 1
+  playerStart:
+    x: 1
+    y: 1
+  walls:
+  - x: 0
+    y: 0
+  - x: 0
+    y: 6
+  - x: 1
+    y: 0
+  - x: 1
+    y: 6
+  - x: 2
+    y: 0
+  - x: 2
+    y: 6
+  - x: 3
+    y: 0
+  - x: 3
+    y: 6
+  - x: 4
+    y: 0
+  - x: 4
+    y: 6
+  - x: 5
+    y: 0
+  - x: 5
+    y: 6
+  - x: 6
+    y: 0
+  - x: 6
+    y: 6
+  - x: 7
+    y: 0
+  - x: 7
+    y: 6
+  - x: 0
+    y: 1
+  - x: 7
+    y: 1
+  - x: 0
+    y: 2
+  - x: 7
+    y: 2
+  - x: 0
+    y: 3
+  - x: 7
+    y: 3
+  - x: 0
+    y: 4
+  - x: 7
+    y: 4
+  - x: 0
+    y: 5
+  - x: 7
+    y: 5
+  - x: 4
+    y: 1
+  - x: 4
+    y: 2
+  - x: 4
+    y: 3
+  goals:
+  - x: 2
+    y: 5
+  - x: 6
+    y: 1
+  goalRequirements: []
+  crates:
+  - id: crate-a
+    kind: 1
+    position:
+      x: 2
+      y: 2
+  - id: crate-b
+    kind: 1
+    position:
+      x: 5
+      y: 4
+  costlyCells: []
+  switchGroups: []
+  goldMoveLimit: 16
+  platinumMoveLimit: 12
+  allowPowerUps: 0
