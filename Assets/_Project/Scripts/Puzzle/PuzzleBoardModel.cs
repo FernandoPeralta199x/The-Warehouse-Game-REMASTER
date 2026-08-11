@@ -11,6 +11,7 @@ namespace TW08.Puzzle
         private readonly HashSet<GridCoordinate> goals;
         private readonly HashSet<GridCoordinate> costlyCells;
         private readonly HashSet<GridCoordinate> dynamicBlockedCells = new();
+        private readonly Dictionary<GridCoordinate, PuzzleEntityKind> goalRequirements;
         private readonly Dictionary<GridCoordinate, string> crateByPosition;
         private readonly Dictionary<string, PuzzleEntityKind> crateKinds;
 
@@ -22,8 +23,9 @@ namespace TW08.Puzzle
         public IReadOnlyCollection<GridCoordinate> Goals => goals;
         public IReadOnlyCollection<GridCoordinate> CostlyCells => costlyCells;
         public IReadOnlyCollection<GridCoordinate> DynamicBlockedCells => dynamicBlockedCells;
+        public IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> GoalRequirements => goalRequirements;
         public IReadOnlyDictionary<GridCoordinate, string> Crates => crateByPosition;
-        public bool IsComplete => goals.Count > 0 && goals.Count == crateByPosition.Count && goals.All(crateByPosition.ContainsKey);
+        public bool IsComplete => EvaluateCompletion();
 
         public PuzzleBoardModel(PuzzleLevelDefinition level)
             : this(
@@ -34,7 +36,10 @@ namespace TW08.Puzzle
                 level.PlayerStart,
                 level.Crates.ToDictionary(c => c.Id, c => c.Position),
                 level.Crates.ToDictionary(c => c.Id, c => c.Kind),
-                level.CostlyCells)
+                level.CostlyCells,
+                level.GoalRequirements
+                    .Where(requirement => requirement != null)
+                    .ToDictionary(requirement => requirement.Position, requirement => requirement.RequiredKind))
         {
         }
 
@@ -46,13 +51,17 @@ namespace TW08.Puzzle
             GridCoordinate playerStart,
             IReadOnlyDictionary<string, GridCoordinate> crates,
             IReadOnlyDictionary<string, PuzzleEntityKind> kinds = null,
-            IEnumerable<GridCoordinate> costlyCells = null)
+            IEnumerable<GridCoordinate> costlyCells = null,
+            IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> goalRequirements = null)
         {
             Width = Guard.Positive(width, nameof(width));
             Height = Guard.Positive(height, nameof(height));
             this.walls = new HashSet<GridCoordinate>(walls ?? Array.Empty<GridCoordinate>());
             this.goals = new HashSet<GridCoordinate>(goals ?? Array.Empty<GridCoordinate>());
             this.costlyCells = new HashSet<GridCoordinate>(costlyCells ?? Array.Empty<GridCoordinate>());
+            this.goalRequirements = goalRequirements != null
+                ? new Dictionary<GridCoordinate, PuzzleEntityKind>(goalRequirements)
+                : new Dictionary<GridCoordinate, PuzzleEntityKind>();
             crateByPosition = new Dictionary<GridCoordinate, string>();
             crateKinds = new Dictionary<string, PuzzleEntityKind>();
             PlayerPosition = playerStart;
@@ -196,6 +205,11 @@ namespace TW08.Puzzle
             return costlyCells.Contains(cell);
         }
 
+        public bool TryGetGoalRequirement(GridCoordinate cell, out PuzzleEntityKind kind)
+        {
+            return goalRequirements.TryGetValue(cell, out kind);
+        }
+
         public int GetMoveCost(GridCoordinate destination)
         {
             return costlyCells.Contains(destination) ? 2 : 1;
@@ -224,6 +238,30 @@ namespace TW08.Puzzle
         public PuzzleEntityKind GetCrateKind(string crateId)
         {
             return crateKinds.TryGetValue(crateId, out PuzzleEntityKind kind) ? kind : PuzzleEntityKind.Crate;
+        }
+
+        private bool EvaluateCompletion()
+        {
+            if (goals.Count == 0 || goals.Count != crateByPosition.Count)
+            {
+                return false;
+            }
+
+            foreach (GridCoordinate goal in goals)
+            {
+                if (!crateByPosition.TryGetValue(goal, out string crateId))
+                {
+                    return false;
+                }
+
+                if (goalRequirements.TryGetValue(goal, out PuzzleEntityKind requiredKind)
+                    && GetCrateKind(crateId) != requiredKind)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void ValidateCell(GridCoordinate cell, string label)
