@@ -28,7 +28,7 @@ namespace TW08.Save
     {
         public int version = 2;
         public string selectedCharacterId = "john";
-        public string lastUnlockedLevel = "tw08-s01-001";
+        public string lastUnlockedLevel = "TW08_Level01_FirstShift";
         public int credits;
         public List<string> unlockedCharacters = new() { "john", "duda" };
         public List<LevelProgressRecord> levels = new();
@@ -68,7 +68,7 @@ namespace TW08.Save
         public void EnsureDefaults()
         {
             selectedCharacterId = string.IsNullOrWhiteSpace(selectedCharacterId) ? "john" : selectedCharacterId;
-            lastUnlockedLevel = string.IsNullOrWhiteSpace(lastUnlockedLevel) ? "tw08-s01-001" : lastUnlockedLevel;
+            lastUnlockedLevel = string.IsNullOrWhiteSpace(lastUnlockedLevel) ? "TW08_Level01_FirstShift" : lastUnlockedLevel;
             levels ??= new List<LevelProgressRecord>();
             races ??= new List<RaceProgressRecord>();
             unlockedCharacters ??= new List<string>();
