@@ -10,6 +10,12 @@ namespace TW08.Save
             data ??= new SaveGameData();
             data.version = ToVersion;
             data.selectedCharacterId = string.IsNullOrWhiteSpace(data.selectedCharacterId) ? "john" : data.selectedCharacterId;
+            if (string.IsNullOrWhiteSpace(data.lastUnlockedLevel)
+                || data.lastUnlockedLevel == "prototype-001"
+                || data.lastUnlockedLevel == "tw08-s01-001")
+            {
+                data.lastUnlockedLevel = "TW08_Level01_FirstShift";
+            }
             data.masterVolume = 1f;
             data.musicVolume = 0.8f;
             data.sfxVolume = 1f;
