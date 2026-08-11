@@ -42,8 +42,14 @@ namespace TW08.Editor
 
                 EditorUtility.DisplayProgressBar(
                     "The Warehouse Nº 08 — Mega Update",
+                    "Aplicando acabamento procedural dos menus...",
+                    0.72f);
+                TW08MenuPolishUtility.Apply();
+
+                EditorUtility.DisplayProgressBar(
+                    "The Warehouse Nº 08 — Mega Update",
                     "Salvando assets e atualizando o banco do Unity...",
-                    0.88f);
+                    0.90f);
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
 
@@ -66,6 +72,7 @@ namespace TW08.Editor
                     "UI/UX\n" +
                     "- entrada animada dos menus\n" +
                     "- foco visual para teclado/gamepad\n" +
+                    "- grid/scanlines procedurais atrás do terminal\n" +
                     "- transições de cena assíncronas no player\n\n" +
                     "CONTEÚDO GRANDE\n" +
                     "- Addressables 2.7.6 inicializado\n" +
