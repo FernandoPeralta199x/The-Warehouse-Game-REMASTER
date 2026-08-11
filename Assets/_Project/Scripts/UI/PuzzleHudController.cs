@@ -97,24 +97,9 @@ namespace TW08.UI
         private void Restart() => runtime?.Restart();
 
         private void OnBoardChanged(PuzzleMove _) => Refresh();
-
-        private void OnRestarted()
-        {
-            SetStatus("ROTA REINICIADA");
-            Refresh();
-        }
-
-        private void OnCompleted()
-        {
-            SetStatus("ROTA LIBERADA // TURNO CONCLUÍDO");
-            Refresh();
-        }
-
-        private void OnDeadlock()
-        {
-            SetStatus("ALERTA: CARGA TRAVADA // USE UNDO");
-            Refresh();
-        }
+        private void OnRestarted() => Refresh();
+        private void OnCompleted() => Refresh();
+        private void OnDeadlock() => Refresh();
 
         private void Refresh()
         {
@@ -145,14 +130,37 @@ namespace TW08.UI
             {
                 redoButton.interactable = runtime.RedoCount > 0;
             }
+
+            RefreshStatus();
         }
 
-        private void SetStatus(string value)
+        private void RefreshStatus()
         {
-            if (statusText != null)
+            if (statusText == null)
             {
-                statusText.text = value;
+                return;
             }
+
+            PuzzleBoardModel board = runtime.Board;
+            if (board == null)
+            {
+                statusText.text = "ROTA INDISPONÍVEL";
+                return;
+            }
+
+            if (board.IsComplete)
+            {
+                statusText.text = "ROTA LIBERADA // TURNO CONCLUÍDO";
+                return;
+            }
+
+            if (SimpleDeadlockDetector.HasStaticCornerDeadlock(board))
+            {
+                statusText.text = "ALERTA: CARGA TRAVADA // USE UNDO";
+                return;
+            }
+
+            statusText.text = "ROTA ATIVA";
         }
     }
 }
