@@ -92,6 +92,14 @@ Sprint 01 só é considerado concluído quando:
 9. Menu → Fase 01 → Fase 02 → Fase 03 → Menu funciona.
 10. Development Build Windows é gerada sem erro bloqueante.
 
+## Estado de validação
+
+[Certeza] Antes da entrada desta camada de produção, o projeto já foi aberto pelo owner em Unity 6.3.0f1 e o gerador do vertical slice foi executado. Os erros de compilação/packages encontrados nesse processo foram corrigidos na branch.
+
+[Certeza] As referências reais foram importadas localmente para `Assets/_Project/Art/ReferenceSource` com 24 PNGs e 0 ponteiros LFS ignorados.
+
+[Não validado] As mudanças novas deste Sprint 01 — `DirectionalSpriteSet`, animação direcional, interpolação visual, catálogo e scene upgrader — ainda precisam ser recompiladas e executadas no Unity após `git pull`.
+
 ## Fora do Sprint 01
 
 - Corridas de empilhadeira completas.
