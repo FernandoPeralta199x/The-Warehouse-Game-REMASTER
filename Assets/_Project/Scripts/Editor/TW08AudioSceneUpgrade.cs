@@ -67,8 +67,17 @@ namespace TW08.Editor
         {
             if (AssetDatabase.LoadAssetAtPath<SceneAsset>(path) == null) return;
             Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
-            SceneMusicPresenter presenter = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>()
-                ?? new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
+
+            SceneMusicPresenter presenter = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>();
+            if (presenter == null)
+            {
+                presenter = new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
+            }
+            if (presenter == null)
+            {
+                throw new InvalidOperationException($"TW08 failed to attach SceneMusicPresenter in '{path}'.");
+            }
+
             presenter.Configure(track);
             EditorUtility.SetDirty(presenter);
             EditorSceneManager.MarkSceneDirty(scene);
@@ -84,9 +93,28 @@ namespace TW08.Editor
             Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
             PuzzleRuntime runtime = UnityEngine.Object.FindFirstObjectByType<PuzzleRuntime>();
             if (runtime == null) return;
-            PuzzleAudioFeedback feedback = runtime.GetComponent<PuzzleAudioFeedback>() ?? runtime.gameObject.AddComponent<PuzzleAudioFeedback>();
+
+            PuzzleAudioFeedback feedback = runtime.GetComponent<PuzzleAudioFeedback>();
+            if (feedback == null)
+            {
+                feedback = runtime.gameObject.AddComponent<PuzzleAudioFeedback>();
+            }
+            if (feedback == null)
+            {
+                throw new InvalidOperationException($"TW08 failed to attach PuzzleAudioFeedback in '{path}'.");
+            }
+
+            SceneMusicPresenter music = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>();
+            if (music == null)
+            {
+                music = new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
+            }
+            if (music == null)
+            {
+                throw new InvalidOperationException($"TW08 failed to attach SceneMusicPresenter in puzzle scene '{path}'.");
+            }
+
             feedback.Configure(runtime, catalog);
-            SceneMusicPresenter music = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>() ?? new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
             music.Configure(catalog.PuzzleMusic);
             EditorUtility.SetDirty(feedback);
             EditorUtility.SetDirty(music);
@@ -103,9 +131,28 @@ namespace TW08.Editor
             Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
             RaceSessionController session = UnityEngine.Object.FindFirstObjectByType<RaceSessionController>();
             if (session == null) return;
-            RaceAudioFeedback feedback = session.GetComponent<RaceAudioFeedback>() ?? session.gameObject.AddComponent<RaceAudioFeedback>();
+
+            RaceAudioFeedback feedback = session.GetComponent<RaceAudioFeedback>();
+            if (feedback == null)
+            {
+                feedback = session.gameObject.AddComponent<RaceAudioFeedback>();
+            }
+            if (feedback == null)
+            {
+                throw new InvalidOperationException($"TW08 failed to attach RaceAudioFeedback in '{path}'.");
+            }
+
+            SceneMusicPresenter music = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>();
+            if (music == null)
+            {
+                music = new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
+            }
+            if (music == null)
+            {
+                throw new InvalidOperationException($"TW08 failed to attach SceneMusicPresenter in race scene '{path}'.");
+            }
+
             feedback.Configure(session, catalog);
-            SceneMusicPresenter music = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>() ?? new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
             music.Configure(catalog.RaceMusic);
             EditorUtility.SetDirty(feedback);
             EditorUtility.SetDirty(music);
