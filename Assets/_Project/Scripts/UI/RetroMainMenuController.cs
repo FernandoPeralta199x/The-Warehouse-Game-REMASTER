@@ -22,6 +22,8 @@ namespace TW08.UI
 
         private void Awake()
         {
+            ResolveSceneReferences();
+
             if (continueButton != null)
             {
                 continueButton.interactable = false;
@@ -69,6 +71,25 @@ namespace TW08.UI
 #else
             Application.Quit();
 #endif
+        }
+
+        private void ResolveSceneReferences()
+        {
+            if (firstSelectedButton == null)
+            {
+                firstSelectedButton = FindButton("New Shift");
+            }
+
+            if (continueButton == null)
+            {
+                continueButton = FindButton("Continue");
+            }
+        }
+
+        private static Button FindButton(string objectName)
+        {
+            GameObject candidate = GameObject.Find(objectName);
+            return candidate != null ? candidate.GetComponent<Button>() : null;
         }
 
         private void SelectInitialButton()
