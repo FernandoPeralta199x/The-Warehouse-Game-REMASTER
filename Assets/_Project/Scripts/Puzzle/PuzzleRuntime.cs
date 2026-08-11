@@ -14,6 +14,7 @@ namespace TW08.Puzzle
         [SerializeField] private bool initializeOnStart = true;
 
         private readonly PuzzleHistory history = new();
+        private readonly Dictionary<string, bool> switchStates = new(StringComparer.Ordinal);
         private Dictionary<string, PuzzleEntityView> crateViewById = new();
 
         public PuzzleBoardModel Board { get; private set; }
@@ -28,6 +29,7 @@ namespace TW08.Puzzle
         public event Action LevelRestarted;
         public event Action LevelCompleted;
         public event Action StaticDeadlockDetected;
+        public event Action<string, bool> SwitchGroupStateChanged;
 
         private void Start()
         {
@@ -62,6 +64,7 @@ namespace TW08.Puzzle
             {
                 Board = null;
                 history.Clear();
+                switchStates.Clear();
                 crateViewById.Clear();
                 Debug.LogError("Puzzle level is invalid:\n- " + string.Join("\n- ", validationErrors), level);
                 return;
@@ -69,10 +72,13 @@ namespace TW08.Puzzle
 
             Board = new PuzzleBoardModel(level);
             history.Clear();
+            switchStates.Clear();
             crateViewById = crateViews
                 .Where(view => view != null && !string.IsNullOrWhiteSpace(view.EntityId))
                 .GroupBy(view => view.EntityId)
                 .ToDictionary(group => group.Key, group => group.First());
+
+            ApplySwitchGroups(true);
             SyncViews(false);
             Initialized?.Invoke();
         }
@@ -85,6 +91,7 @@ namespace TW08.Puzzle
             }
 
             history.Record(move);
+            ApplySwitchGroups(false);
             SyncViews(true);
             MoveApplied?.Invoke(move);
             EvaluateBoardState();
@@ -105,6 +112,7 @@ namespace TW08.Puzzle
             }
 
             history.PushRedo(move);
+            ApplySwitchGroups(false);
             SyncViews(true);
             MoveUndone?.Invoke(move);
             return true;
@@ -125,6 +133,7 @@ namespace TW08.Puzzle
             }
 
             history.RestoreUndo(repeated);
+            ApplySwitchGroups(false);
             SyncViews(true);
             MoveRedone?.Invoke(repeated);
             EvaluateBoardState();
@@ -137,6 +146,59 @@ namespace TW08.Puzzle
             if (Board != null)
             {
                 LevelRestarted?.Invoke();
+            }
+        }
+
+        public bool IsSwitchGroupOpen(string groupId)
+        {
+            return !string.IsNullOrWhiteSpace(groupId)
+                && switchStates.TryGetValue(groupId, out bool open)
+                && open;
+        }
+
+        private void ApplySwitchGroups(bool forceNotify)
+        {
+            if (Board == null || level == null)
+            {
+                return;
+            }
+
+            IReadOnlyList<PuzzleSwitchGroupDefinition> groups = level.SwitchGroups;
+            if (groups == null || groups.Count == 0)
+            {
+                return;
+            }
+
+            foreach (PuzzleSwitchGroupDefinition group in groups)
+            {
+                if (group == null || string.IsNullOrWhiteSpace(group.Id))
+                {
+                    continue;
+                }
+
+                bool requestedOpen = group.Sensors != null
+                    && group.Sensors.Count > 0
+                    && group.Sensors.All(sensor => Board.Crates.ContainsKey(sensor));
+
+                foreach (GridCoordinate door in group.Doors ?? Array.Empty<GridCoordinate>())
+                {
+                    Board.SetDynamicBlocked(door, !requestedOpen);
+                }
+
+                bool effectiveOpen = requestedOpen;
+                if (!requestedOpen && group.Doors != null && group.Doors.Count > 0)
+                {
+                    // A closing door never crushes the player or a crate. If a door cell is occupied,
+                    // SetDynamicBlocked refuses to close it and presentation follows that safe state.
+                    effectiveOpen = group.Doors.Any(door => !Board.DynamicBlockedCells.Contains(door));
+                }
+
+                bool changed = !switchStates.TryGetValue(group.Id, out bool previous) || previous != effectiveOpen;
+                switchStates[group.Id] = effectiveOpen;
+                if (forceNotify || changed)
+                {
+                    SwitchGroupStateChanged?.Invoke(group.Id, effectiveOpen);
+                }
             }
         }
 
