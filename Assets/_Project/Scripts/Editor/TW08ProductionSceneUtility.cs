@@ -43,6 +43,10 @@ namespace TW08.Editor
             camera.orthographicSize = size;
             camera.clearFlags = CameraClearFlags.SolidColor;
             camera.backgroundColor = Background;
+
+            // Every standalone generated scene owns exactly one primary camera. Keeping the
+            // AudioListener on that camera prevents silent scenes and Unity's missing-listener warning.
+            go.AddComponent<AudioListener>();
             return camera;
         }
 
