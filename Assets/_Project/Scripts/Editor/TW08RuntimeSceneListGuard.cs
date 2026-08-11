@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TW08.Puzzle;
+using TW08.Race;
 using UnityEditor;
 using UnityEditor.Build.Profile;
 using UnityEngine;
@@ -58,30 +60,29 @@ namespace TW08.Editor
             applying = true;
             try
             {
-                List<string> scenePaths = DiscoverRuntimeScenes();
-                if (scenePaths.Count == 0)
+                List<string> expected = BuildExpectedScenePaths();
+                if (expected.Count == 0)
                 {
                     if (showDialog)
                     {
                         EditorUtility.DisplayDialog(
                             "The Warehouse Nº 08 — Scene List",
-                            "Nenhuma cena TW08 de runtime foi encontrada. Execute primeiro Build Full Production Expansion.",
+                            "Os dados de produção ainda não existem. Execute primeiro Build Full Production Expansion.",
                             "OK");
                     }
                     return;
                 }
 
-                // Once the full expansion exists, never replace a healthy production Scene List with
-                // a partial discovery result. This guard is allowed to repair state, not destroy it.
-                bool productionDataExists =
-                    AssetDatabase.LoadAssetAtPath<TW08.Puzzle.PuzzleCampaignDefinition>(TW08ExpansionDataSetup.PuzzleCampaignPath) != null &&
-                    AssetDatabase.LoadAssetAtPath<TW08.Race.RaceCampaignDefinition>(TW08ExpansionDataSetup.RaceCampaignPath) != null;
-
-                if (productionDataExists && scenePaths.Count < ExpectedProductionSceneCount)
+                List<string> missing = expected.Where(path => !SceneFileExists(path)).ToList();
+                if (expected.Count != ExpectedProductionSceneCount || missing.Count > 0)
                 {
+                    string details = missing.Count > 0
+                        ? "\n\nArquivos de cena ausentes:\n- " + string.Join("\n- ", missing)
+                        : string.Empty;
                     string message =
-                        $"TW08 Scene List guard discovered only {scenePaths.Count}/{ExpectedProductionSceneCount} production scenes. " +
-                        "The current Scene List was left untouched. Run Build Full Production Expansion or Repair Runtime Scene Registration.";
+                        $"TW08 Scene List encontrou {expected.Count - missing.Count}/{ExpectedProductionSceneCount} cenas físicas válidas. " +
+                        "A Scene List atual foi preservada." + details +
+                        "\n\nExecute Tools > TW08 > Production > Repair Runtime Scene Registration.";
                     Debug.LogWarning(message);
                     if (showDialog)
                     {
@@ -90,10 +91,13 @@ namespace TW08.Editor
                     return;
                 }
 
-                EditorBuildSettingsScene[] entries = scenePaths
+                EditorBuildSettingsScene[] entries = expected
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
                     .Select(path => new EditorBuildSettingsScene(path, true))
                     .ToArray();
 
+                // Global scenes are the single source of truth. Unity 6 build profiles use this list
+                // whenever overrideGlobalScenes is false.
                 EditorBuildSettings.globalScenes = entries;
 
                 BuildProfile activeProfile = BuildProfile.GetActiveBuildProfile();
@@ -103,11 +107,7 @@ namespace TW08.Editor
                     EditorUtility.SetDirty(activeProfile);
                 }
 
-                // With overrideGlobalScenes disabled this resolves to the global list. Setting it as
-                // well makes the current Editor session observe the synchronized list immediately.
-                EditorBuildSettings.scenes = entries;
                 AssetDatabase.SaveAssets();
-
                 Validate(entries);
 
                 if (showDialog)
@@ -125,53 +125,51 @@ namespace TW08.Editor
             }
         }
 
-        private static List<string> DiscoverRuntimeScenes()
+        private static List<string> BuildExpectedScenePaths()
         {
-            List<string> ordered = new();
-            AddIfExists(ordered, TW08MenuSceneBuilder.MainMenuPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.ModePath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.OperatorPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.PuzzleSelectPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.RaceSelectPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.SettingsPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.CreditsPath);
+            PuzzleCampaignDefinition puzzleCampaign =
+                AssetDatabase.LoadAssetAtPath<PuzzleCampaignDefinition>(TW08ExpansionDataSetup.PuzzleCampaignPath);
+            RaceCampaignDefinition raceCampaign =
+                AssetDatabase.LoadAssetAtPath<RaceCampaignDefinition>(TW08ExpansionDataSetup.RaceCampaignPath);
 
-            foreach (string path in FindScenes(TW08PuzzleSceneBuilder.SceneRoot, "TW08_Level"))
+            if (puzzleCampaign == null || raceCampaign == null)
             {
-                AddIfExists(ordered, path);
+                return new List<string>();
             }
 
-            foreach (string path in FindScenes(TW08RaceSceneBuilder.SceneRoot, "TW08_Race"))
+            List<string> paths = new()
             {
-                AddIfExists(ordered, path);
+                TW08MenuSceneBuilder.MainMenuPath,
+                TW08MenuSceneBuilder.ModePath,
+                TW08MenuSceneBuilder.OperatorPath,
+                TW08MenuSceneBuilder.PuzzleSelectPath,
+                TW08MenuSceneBuilder.RaceSelectPath,
+                TW08MenuSceneBuilder.SettingsPath,
+                TW08MenuSceneBuilder.CreditsPath
+            };
+
+            foreach (PuzzleCampaignEntry entry in puzzleCampaign.Levels)
+            {
+                if (entry == null || string.IsNullOrWhiteSpace(entry.SceneName)) continue;
+                paths.Add(TW08PuzzleSceneBuilder.SceneRoot + "/" + entry.SceneName + ".unity");
             }
 
-            return ordered.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+            foreach (RaceTrackDefinition track in raceCampaign.Tracks)
+            {
+                if (track == null || string.IsNullOrWhiteSpace(track.SceneName)) continue;
+                paths.Add(TW08RaceSceneBuilder.SceneRoot + "/" + track.SceneName + ".unity");
+            }
+
+            return paths.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
         }
 
-        private static IEnumerable<string> FindScenes(string root, string filePrefix)
+        private static bool SceneFileExists(string assetPath)
         {
-            if (!AssetDatabase.IsValidFolder(root))
-            {
-                return Enumerable.Empty<string>();
-            }
-
-            // AssetDatabase type filters use class names. Unity scene files are represented by
-            // UnityEditor.SceneAsset, so t:Scene silently misses them while t:SceneAsset is correct.
-            return AssetDatabase.FindAssets("t:SceneAsset", new[] { root })
-                .Select(AssetDatabase.GUIDToAssetPath)
-                .Where(path =>
-                    !string.IsNullOrWhiteSpace(path) &&
-                    Path.GetFileNameWithoutExtension(path).StartsWith(filePrefix, StringComparison.OrdinalIgnoreCase))
-                .OrderBy(path => Path.GetFileNameWithoutExtension(path), StringComparer.OrdinalIgnoreCase);
-        }
-
-        private static void AddIfExists(ICollection<string> paths, string path)
-        {
-            if (!string.IsNullOrWhiteSpace(path) && AssetDatabase.LoadAssetAtPath<SceneAsset>(path) != null)
-            {
-                paths.Add(path);
-            }
+            if (string.IsNullOrWhiteSpace(assetPath)) return false;
+            string fullPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                assetPath.Replace('/', Path.DirectorySeparatorChar));
+            return File.Exists(fullPath);
         }
 
         private static void Validate(IEnumerable<EditorBuildSettingsScene> expected)
