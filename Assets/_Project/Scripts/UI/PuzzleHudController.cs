@@ -58,6 +58,7 @@ namespace TW08.UI
                 return;
             }
 
+            runtime.Initialized += OnInitialized;
             runtime.MoveApplied += OnBoardChanged;
             runtime.MoveUndone += OnBoardChanged;
             runtime.MoveRedone += OnBoardChanged;
@@ -80,6 +81,7 @@ namespace TW08.UI
 
             if (runtime != null)
             {
+                runtime.Initialized -= OnInitialized;
                 runtime.MoveApplied -= OnBoardChanged;
                 runtime.MoveUndone -= OnBoardChanged;
                 runtime.MoveRedone -= OnBoardChanged;
@@ -113,6 +115,7 @@ namespace TW08.UI
             runtime.Restart();
         }
 
+        private void OnInitialized() => Refresh();
         private void OnBoardChanged(PuzzleMove _) => Refresh();
         private void OnRestarted() => Refresh();
         private void OnDeadlock() => Refresh();
