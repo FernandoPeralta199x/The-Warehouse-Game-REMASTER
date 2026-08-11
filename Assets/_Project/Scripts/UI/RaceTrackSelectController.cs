@@ -3,7 +3,6 @@ using System.Linq;
 using TW08.Core;
 using TW08.Race;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TW08.UI
@@ -50,7 +49,7 @@ namespace TW08.UI
 
         public void Back()
         {
-            TryLoadScene(backScene, "menu de modos");
+            SceneLoader.TryLoadImmediate(backScene, "menu de modos");
         }
 
         private void Bind()
@@ -100,33 +99,13 @@ namespace TW08.UI
                 return;
             }
 
-            if (!TryLoadScene(track.SceneName, $"pista {index + 1:00}"))
+            if (!SceneLoader.TryLoadImmediate(track.SceneName, $"pista {index + 1:00}"))
             {
                 if (index >= 0 && index < trackButtons.Count && trackButtons[index] != null)
                 {
                     trackButtons[index].interactable = false;
                 }
             }
-        }
-
-        private static bool TryLoadScene(string sceneName, string context)
-        {
-            if (string.IsNullOrWhiteSpace(sceneName))
-            {
-                Debug.LogError($"TW08 cannot load {context}: scene name is empty.");
-                return false;
-            }
-
-            if (!Application.CanStreamedLevelBeLoaded(sceneName))
-            {
-                Debug.LogError(
-                    $"TW08 cannot load {context} scene '{sceneName}' because it is not registered in the active/shared Scene List. " +
-                    "Run Tools > TW08 > Production > Repair Runtime Scene Registration.");
-                return false;
-            }
-
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-            return true;
         }
 
         private void Refresh()
