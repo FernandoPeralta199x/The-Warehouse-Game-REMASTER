@@ -19,24 +19,115 @@ namespace TW08.Editor
     internal static class TW08PuzzleSceneBuilder
     {
         internal const string SceneRoot = "Assets/_Project/Scenes/VerticalSlice";
+        private const int ExpectedPuzzleSceneCount = 9;
 
         internal static List<string> BuildAll(TW08ExpansionDataSetup.ExpansionData data, TW08ArtCatalog catalog)
         {
             TW08ProductionSceneUtility.EnsureFolder(SceneRoot);
-            List<string> paths = new();
-            for (int i = 0; i < data.PuzzleLevels.Count; i++)
+
+            // ExpansionData contains UnityEngine.Object references. Scene authoring/import callbacks can
+            // invalidate those native handles while this builder is running, even though the serialized
+            // assets still exist. Capture only stable asset paths before creating any scene, then reload
+            // every Unity object immediately before the scene that consumes it.
+            List<PuzzleSceneSpec> specs = LoadBuildSpecs();
+            if (specs.Count != ExpectedPuzzleSceneCount)
             {
-                PuzzleLevelDefinition level = data.PuzzleLevels[i];
-                if (level == null) continue;
-                string sceneName = ResolveSceneName(level, i + 1);
-                string nextScene = i + 1 < data.PuzzleLevels.Count
-                    ? ResolveSceneName(data.PuzzleLevels[i + 1], i + 2)
-                    : "TW08_PuzzleSelect";
-                string path = SceneRoot + "/" + sceneName + ".unity";
-                Build(level, data.Roster, catalog, path, nextScene);
+                throw new InvalidOperationException(
+                    $"Puzzle scene builder expected {ExpectedPuzzleSceneCount} stable level specs but resolved {specs.Count}.");
+            }
+
+            List<string> paths = new();
+            foreach (PuzzleSceneSpec spec in specs)
+            {
+                PuzzleLevelDefinition level = AssetDatabase.LoadAssetAtPath<PuzzleLevelDefinition>(spec.LevelAssetPath);
+                CharacterRoster roster = AssetDatabase.LoadAssetAtPath<CharacterRoster>(TW08ExpansionDataSetup.RosterPath);
+                TW08ArtCatalog liveCatalog = AssetDatabase.LoadAssetAtPath<TW08ArtCatalog>(TW08ProductionArtSetup.CatalogPath);
+
+                if (level == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Puzzle scene builder could not reload level asset '{spec.LevelAssetPath}'.");
+                }
+                if (roster == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Puzzle scene builder could not reload character roster '{TW08ExpansionDataSetup.RosterPath}'.");
+                }
+                if (liveCatalog == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Puzzle scene builder could not reload art catalog '{TW08ProductionArtSetup.CatalogPath}'.");
+                }
+
+                string path = SceneRoot + "/" + spec.SceneName + ".unity";
+                Build(level, roster, liveCatalog, path, spec.NextSceneName);
                 paths.Add(path);
             }
+
+            if (paths.Count != ExpectedPuzzleSceneCount)
+            {
+                throw new InvalidOperationException(
+                    $"Puzzle scene builder produced {paths.Count}/{ExpectedPuzzleSceneCount} scene paths.");
+            }
+
             return paths;
+        }
+
+        private static List<PuzzleSceneSpec> LoadBuildSpecs()
+        {
+            PuzzleCampaignDefinition campaign =
+                AssetDatabase.LoadAssetAtPath<PuzzleCampaignDefinition>(TW08ExpansionDataSetup.PuzzleCampaignPath);
+            if (campaign == null)
+            {
+                throw new InvalidOperationException(
+                    $"Puzzle campaign could not be loaded from '{TW08ExpansionDataSetup.PuzzleCampaignPath}'.");
+            }
+
+            if (campaign.Levels.Count != ExpectedPuzzleSceneCount)
+            {
+                throw new InvalidOperationException(
+                    $"Puzzle campaign contains {campaign.Levels.Count}/{ExpectedPuzzleSceneCount} entries.");
+            }
+
+            List<PuzzleSceneSpec> specs = new(ExpectedPuzzleSceneCount);
+            for (int i = 0; i < campaign.Levels.Count; i++)
+            {
+                PuzzleCampaignEntry entry = campaign.Levels[i];
+                if (entry == null || entry.Level == null)
+                {
+                    throw new InvalidOperationException($"Puzzle campaign entry {i + 1:00} has no valid level asset.");
+                }
+
+                string levelPath = AssetDatabase.GetAssetPath(entry.Level);
+                if (string.IsNullOrWhiteSpace(levelPath))
+                {
+                    throw new InvalidOperationException(
+                        $"Puzzle campaign entry {i + 1:00} does not resolve to a persistent asset path.");
+                }
+
+                string sceneName = !string.IsNullOrWhiteSpace(entry.SceneName)
+                    ? entry.SceneName
+                    : ResolveSceneName(entry.Level, i + 1);
+                string nextScene = i + 1 < campaign.Levels.Count
+                    ? ResolveEntrySceneName(campaign.Levels[i + 1], i + 2)
+                    : "TW08_PuzzleSelect";
+
+                specs.Add(new PuzzleSceneSpec(levelPath, sceneName, nextScene));
+            }
+
+            return specs;
+        }
+
+        private static string ResolveEntrySceneName(PuzzleCampaignEntry entry, int index)
+        {
+            if (entry == null || entry.Level == null)
+            {
+                throw new InvalidOperationException($"Puzzle campaign entry {index:00} is invalid while resolving progression.");
+            }
+
+            return !string.IsNullOrWhiteSpace(entry.SceneName)
+                ? entry.SceneName
+                : ResolveSceneName(entry.Level, index);
         }
 
         private static void Build(
@@ -98,7 +189,10 @@ namespace TW08.Editor
             EditorUtility.SetDirty(selectedPresenter);
             EditorUtility.SetDirty(mechanicView);
             EditorSceneManager.MarkSceneDirty(scene);
-            EditorSceneManager.SaveScene(scene, path);
+            if (!EditorSceneManager.SaveScene(scene, path))
+            {
+                throw new InvalidOperationException($"Unity failed to save generated puzzle scene '{path}'.");
+            }
         }
 
         private static void DrawBoard(PuzzleLevelDefinition level, TW08ArtCatalog catalog, out PuzzleMechanicView mechanicView)
@@ -234,6 +328,20 @@ namespace TW08.Editor
             if (index == 2) return "TW08_Level02_TightCorridor";
             if (index == 3) return "TW08_Level03_CrossLoad";
             return level != null && !string.IsNullOrWhiteSpace(level.LevelId) ? level.LevelId : $"TW08_Level{index:00}";
+        }
+
+        private readonly struct PuzzleSceneSpec
+        {
+            public PuzzleSceneSpec(string levelAssetPath, string sceneName, string nextSceneName)
+            {
+                LevelAssetPath = levelAssetPath;
+                SceneName = sceneName;
+                NextSceneName = nextSceneName;
+            }
+
+            public string LevelAssetPath { get; }
+            public string SceneName { get; }
+            public string NextSceneName { get; }
         }
     }
 }
