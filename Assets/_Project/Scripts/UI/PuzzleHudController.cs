@@ -38,6 +38,13 @@ namespace TW08.UI
             primaryActionButton = primaryAction;
             Bind();
             Refresh();
+
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+#endif
         }
 
         private void OnEnable()
