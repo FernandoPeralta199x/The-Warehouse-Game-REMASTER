@@ -73,7 +73,7 @@ namespace TW08.Puzzle
                 .Where(view => view != null && !string.IsNullOrWhiteSpace(view.EntityId))
                 .GroupBy(view => view.EntityId)
                 .ToDictionary(group => group.Key, group => group.First());
-            SyncViews();
+            SyncViews(false);
             Initialized?.Invoke();
         }
 
@@ -85,7 +85,7 @@ namespace TW08.Puzzle
             }
 
             history.Record(move);
-            SyncViews();
+            SyncViews(true);
             MoveApplied?.Invoke(move);
             EvaluateBoardState();
             return true;
@@ -105,7 +105,7 @@ namespace TW08.Puzzle
             }
 
             history.PushRedo(move);
-            SyncViews();
+            SyncViews(true);
             MoveUndone?.Invoke(move);
             return true;
         }
@@ -125,7 +125,7 @@ namespace TW08.Puzzle
             }
 
             history.RestoreUndo(repeated);
-            SyncViews();
+            SyncViews(true);
             MoveRedone?.Invoke(repeated);
             EvaluateBoardState();
             return true;
@@ -157,19 +157,19 @@ namespace TW08.Puzzle
             }
         }
 
-        private void SyncViews()
+        private void SyncViews(bool animate)
         {
             if (Board == null)
             {
                 return;
             }
 
-            playerView?.Snap(Board.PlayerPosition, level.CellSize);
+            playerView?.MoveTo(Board.PlayerPosition, level.CellSize, animate);
             foreach (KeyValuePair<GridCoordinate, string> crate in Board.Crates)
             {
                 if (crateViewById.TryGetValue(crate.Value, out PuzzleEntityView view))
                 {
-                    view.Snap(crate.Key, level.CellSize);
+                    view.MoveTo(crate.Key, level.CellSize, animate);
                 }
             }
         }
