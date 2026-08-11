@@ -182,6 +182,7 @@ namespace TW08.UI
             if (!Application.isPlaying)
             {
                 UnityEditor.EditorUtility.SetDirty(this);
+            }
 #endif
         }
     }
