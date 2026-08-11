@@ -1,5 +1,5 @@
+using TW08.Core;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace TW08.UI
 {
@@ -13,23 +13,16 @@ namespace TW08.UI
         [SerializeField] private string creditsScene = "TW08_Credits";
         [SerializeField] private string mainMenuScene = "TW08_MainMenu";
 
-        public void OpenCampaign() => Load(campaignScene);
-        public void OpenRace() => Load(raceScene);
-        public void OpenOperators() => Load(operatorsScene);
-        public void OpenSettings() => Load(settingsScene);
-        public void OpenCredits() => Load(creditsScene);
-        public void BackToMainMenu() => Load(mainMenuScene);
+        public void OpenCampaign() => Load(campaignScene, "campanha");
+        public void OpenRace() => Load(raceScene, "corrida");
+        public void OpenOperators() => Load(operatorsScene, "operadores");
+        public void OpenSettings() => Load(settingsScene, "configurações");
+        public void OpenCredits() => Load(creditsScene, "créditos");
+        public void BackToMainMenu() => Load(mainMenuScene, "menu principal");
 
-        private static void Load(string sceneName)
+        private static void Load(string sceneName, string context)
         {
-            if (string.IsNullOrWhiteSpace(sceneName))
-            {
-                Debug.LogError("TW08 menu navigation received an empty scene name.");
-                return;
-            }
-
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            SceneLoader.TryLoadImmediate(sceneName, context);
         }
     }
 }
