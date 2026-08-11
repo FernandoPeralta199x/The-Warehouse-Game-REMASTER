@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TW08.Audio;
 using TW08.Data;
@@ -20,6 +21,8 @@ namespace TW08.Editor
 {
     public static class TW08FullProductionExpansionSetup
     {
+        private const int ExpectedRuntimeSceneCount = 19;
+
         [MenuItem("Tools/TW08/Production/Build Full Production Expansion")]
         public static void BuildFullProductionExpansion()
         {
@@ -40,8 +43,6 @@ namespace TW08.Editor
                 TW08ExpansionDataSetup.EnsureAll();
                 AssetDatabase.SaveAssets();
 
-                // EnsureAll and the art pipeline may refresh the AssetDatabase. Never continue with
-                // references captured before those refreshes; reload the serialized assets by path.
                 TW08ExpansionDataSetup.ExpansionData data = ReloadStableExpansionData();
                 TW08ArtCatalog catalog = RequireAsset<TW08ArtCatalog>(TW08ProductionArtSetup.CatalogPath);
                 TW08AudioCatalog audioCatalog = RequireAsset<TW08AudioCatalog>(TW08StarterAudioSetup.CatalogPath);
@@ -61,11 +62,9 @@ namespace TW08.Editor
                 TW08AudioSceneUpgrade.Apply(audioCatalog, menuPaths, puzzlePaths, racePaths);
                 EnsureAudioListeners(menuPaths.Concat(puzzlePaths).Concat(racePaths));
 
-                // Scene authoring and import callbacks can still cause Unity to recreate native asset
-                // handles. Validate against freshly loaded campaign assets, never stale local handles.
                 data = ReloadStableExpansionData();
 
-                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Validando conteúdo e Build Settings...", 0.92f);
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Validando conteúdo e Scene List...", 0.92f);
                 IReadOnlyList<string> validationErrors = TW08ProductionExpansionValidator.Validate(data, menuPaths, puzzlePaths, racePaths);
                 if (validationErrors.Count > 0)
                 {
@@ -89,7 +88,7 @@ namespace TW08.Editor
                     "Save: schema v2 + migração v1\n" +
                     "VFX: puzzle + drift/finish\n" +
                     "Áudio: SFX + loops starter para menu, puzzle e corrida\n" +
-                    "Scene List: compartilhada + perfil ativo sincronizados\n\n" +
+                    "Scene List: 19 cenas na lista global compartilhada\n\n" +
                     "Gate obrigatório restante: Console sem erros + EditMode/PlayMode Test Runner + playtest manual.",
                     "OK");
             }
@@ -116,35 +115,81 @@ namespace TW08.Editor
             {
                 if (Application.isPlaying)
                 {
-                    throw new InvalidOperationException("Saia do Play Mode antes de reparar o registro das cenas.");
+                    throw new InvalidOperationException("Saia do Play Mode antes de reparar as cenas de runtime.");
                 }
 
                 TW08ExpansionDataSetup.ExpansionData data = ReloadStableExpansionData();
+                TW08ArtCatalog catalog = RequireAsset<TW08ArtCatalog>(TW08ProductionArtSetup.CatalogPath);
+                TW08AudioCatalog audioCatalog = RequireAsset<TW08AudioCatalog>(TW08StarterAudioSetup.CatalogPath);
+
                 List<string> menuPaths = GetMenuPaths();
                 List<string> puzzlePaths = GetPuzzlePaths(data);
                 List<string> racePaths = GetRacePaths(data);
+                List<string> expected = CombineScenePaths(menuPaths, puzzlePaths, racePaths);
+                List<string> missingBefore = expected.Where(path => !SceneFileExists(path)).ToList();
 
+                if (missingBefore.Count > 0)
+                {
+                    Debug.LogWarning(
+                        "TW08 Runtime Repair will recreate missing scene files:\n- " +
+                        string.Join("\n- ", missingBefore));
+
+                    EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Recriando menus...", 0.15f);
+                    menuPaths = TW08MenuSceneBuilder.BuildAll(data);
+                    FixModeSelectNavigation();
+
+                    EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Recriando fases de puzzle...", 0.42f);
+                    puzzlePaths = TW08PuzzleSceneBuilder.BuildAll(data, catalog);
+
+                    EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Recriando pistas de corrida...", 0.68f);
+                    racePaths = TW08RaceSceneBuilder.BuildAll(data);
+
+                    EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Reaplicando feedback e áudio...", 0.82f);
+                    TW08FeedbackSceneUpgrade.Apply(puzzlePaths, racePaths);
+                    TW08AudioSceneUpgrade.Apply(audioCatalog, menuPaths, puzzlePaths, racePaths);
+                    AssetDatabase.SaveAssets();
+                }
+
+                expected = CombineScenePaths(menuPaths, puzzlePaths, racePaths);
+                List<string> missingAfter = expected.Where(path => !SceneFileExists(path)).ToList();
+                if (expected.Count != ExpectedRuntimeSceneCount || missingAfter.Count > 0)
+                {
+                    throw new InvalidOperationException(
+                        $"Runtime Repair esperava {ExpectedRuntimeSceneCount} cenas e encontrou " +
+                        $"{expected.Count - missingAfter.Count}. Arquivos ainda ausentes:\n- " +
+                        string.Join("\n- ", missingAfter));
+                }
+
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Sincronizando Scene List e áudio...", 0.94f);
+                EnsureAudioListeners(expected);
                 ConfigureBuildSettings(menuPaths, puzzlePaths, racePaths);
-                EnsureAudioListeners(menuPaths.Concat(puzzlePaths).Concat(racePaths));
                 AssetDatabase.SaveAssets();
 
+                EditorUtility.ClearProgressBar();
                 EditorUtility.DisplayDialog(
                     "The Warehouse Nº 08 — Runtime Repair",
-                    "Registro de cenas reparado.\n\n" +
-                    "- Scene List compartilhada sincronizada\n" +
-                    "- Build Profile ativo sincronizado quando aplicável\n" +
-                    "- AudioListener garantido nas cenas geradas\n\n" +
-                    "Agora execute o Play Mode e tente abrir a Fase 01 novamente.",
+                    "Runtime reparado e validado.\n\n" +
+                    $"Cenas físicas: {expected.Count}/{ExpectedRuntimeSceneCount}\n" +
+                    $"Cenas recriadas nesta execução: {missingBefore.Count}\n" +
+                    "Scene List: global compartilhada\n" +
+                    "Build Profile ativo: usando lista global\n" +
+                    "AudioListener: verificado\n\n" +
+                    "Agora teste Campanha e Receiving Loop em Play Mode.",
                     "OK");
             }
             catch (Exception exception)
             {
+                EditorUtility.ClearProgressBar();
                 Debug.LogException(exception);
                 EditorUtility.DisplayDialog(
                     "The Warehouse Nº 08 — Falha no Repair",
                     exception.Message,
                     "OK");
                 throw;
+            }
+            finally
+            {
+                EditorUtility.ClearProgressBar();
             }
         }
 
@@ -192,7 +237,7 @@ namespace TW08.Editor
             if (asset == null)
             {
                 throw new InvalidOperationException(
-                    $"Asset obrigatório não pôde ser recarregado após o refresh: {path} ({typeof(T).Name}).");
+                    $"Asset obrigatório não pôde ser recarregado: {path} ({typeof(T).Name}).");
             }
 
             return asset;
@@ -200,7 +245,7 @@ namespace TW08.Editor
 
         private static void FixModeSelectNavigation()
         {
-            if (AssetDatabase.LoadAssetAtPath<SceneAsset>(TW08MenuSceneBuilder.ModePath) == null) return;
+            if (!SceneFileExists(TW08MenuSceneBuilder.ModePath)) return;
             Scene scene = EditorSceneManager.OpenScene(TW08MenuSceneBuilder.ModePath, OpenSceneMode.Single);
             ModeSelectMenuController controller = UnityEngine.Object.FindFirstObjectByType<ModeSelectMenuController>();
             if (controller == null) return;
@@ -259,44 +304,48 @@ namespace TW08.Editor
                 .ToList();
         }
 
+        private static List<string> CombineScenePaths(
+            IEnumerable<string> menuPaths,
+            IEnumerable<string> puzzlePaths,
+            IEnumerable<string> racePaths)
+        {
+            return (menuPaths ?? Enumerable.Empty<string>())
+                .Concat(puzzlePaths ?? Enumerable.Empty<string>())
+                .Concat(racePaths ?? Enumerable.Empty<string>())
+                .Where(path => !string.IsNullOrWhiteSpace(path))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+
         private static void ConfigureBuildSettings(
             IEnumerable<string> menuPaths,
             IEnumerable<string> puzzlePaths,
             IEnumerable<string> racePaths)
         {
-            List<string> ordered = new();
-            AddIfExists(ordered, TW08MenuSceneBuilder.MainMenuPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.ModePath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.OperatorPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.PuzzleSelectPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.RaceSelectPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.SettingsPath);
-            AddIfExists(ordered, TW08MenuSceneBuilder.CreditsPath);
+            List<string> ordered = CombineScenePaths(menuPaths, puzzlePaths, racePaths);
+            List<string> missingFiles = ordered.Where(path => !SceneFileExists(path)).ToList();
 
-            foreach (string path in puzzlePaths ?? Enumerable.Empty<string>()) AddIfExists(ordered, path);
-            foreach (string path in racePaths ?? Enumerable.Empty<string>()) AddIfExists(ordered, path);
+            if (ordered.Count != ExpectedRuntimeSceneCount || missingFiles.Count > 0)
+            {
+                throw new InvalidOperationException(
+                    $"Não é seguro atualizar a Scene List: {ordered.Count - missingFiles.Count}/{ExpectedRuntimeSceneCount} " +
+                    "cenas físicas estão disponíveis. Ausentes:\n- " + string.Join("\n- ", missingFiles));
+            }
 
             EditorBuildSettingsScene[] entries = ordered
-                .Distinct(StringComparer.OrdinalIgnoreCase)
                 .Select(path => new EditorBuildSettingsScene(path, true))
                 .ToArray();
 
-            // Unity 6 can switch the active Build Profile (Player tests are one example). Register the
-            // production scenes in the shared/global list as the stable source of truth, then mirror
-            // them into the currently active build profile when that profile overrides global scenes.
+            // One source of truth for Unity 6. Profiles that do not override use globalScenes.
             EditorBuildSettings.globalScenes = entries;
 
             BuildProfile activeProfile = BuildProfile.GetActiveBuildProfile();
-            if (activeProfile != null)
+            if (activeProfile != null && activeProfile.overrideGlobalScenes)
             {
-                activeProfile.overrideGlobalScenes = true;
-                activeProfile.scenes = entries;
+                activeProfile.overrideGlobalScenes = false;
                 EditorUtility.SetDirty(activeProfile);
             }
 
-            // This property targets the active platform/build profile and keeps the current Editor
-            // session immediately consistent with the shared scene list.
-            EditorBuildSettings.scenes = entries;
             AssetDatabase.SaveAssets();
             ValidateSceneRegistration(entries);
         }
@@ -317,13 +366,13 @@ namespace TW08.Editor
             List<string> missing = expectedScenes
                 .Where(scene => scene != null && scene.enabled)
                 .Select(scene => scene.path)
-                .Where(path => !global.Contains(path) && !active.Contains(path))
+                .Where(path => !global.Contains(path) || !active.Contains(path))
                 .ToList();
 
             if (missing.Count > 0)
             {
                 throw new InvalidOperationException(
-                    "As seguintes cenas não ficaram registradas nem na Scene List compartilhada nem no perfil ativo:\n- " +
+                    "As seguintes cenas não ficaram registradas na lista global/ativa:\n- " +
                     string.Join("\n- ", missing));
             }
         }
@@ -334,7 +383,7 @@ namespace TW08.Editor
                          .Where(path => !string.IsNullOrWhiteSpace(path))
                          .Distinct(StringComparer.OrdinalIgnoreCase))
             {
-                if (AssetDatabase.LoadAssetAtPath<SceneAsset>(path) == null) continue;
+                if (!SceneFileExists(path)) continue;
 
                 Scene scene = SceneManager.GetSceneByPath(path);
                 bool openedHere = !scene.IsValid() || !scene.isLoaded;
@@ -379,12 +428,13 @@ namespace TW08.Editor
             return null;
         }
 
-        private static void AddIfExists(ICollection<string> paths, string path)
+        private static bool SceneFileExists(string assetPath)
         {
-            if (!string.IsNullOrWhiteSpace(path) && AssetDatabase.LoadAssetAtPath<SceneAsset>(path) != null)
-            {
-                paths.Add(path);
-            }
+            if (string.IsNullOrWhiteSpace(assetPath)) return false;
+            string fullPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                assetPath.Replace('/', Path.DirectorySeparatorChar));
+            return File.Exists(fullPath);
         }
     }
 }
