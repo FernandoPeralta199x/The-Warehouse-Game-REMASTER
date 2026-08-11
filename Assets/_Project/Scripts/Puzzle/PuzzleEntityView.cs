@@ -16,6 +16,13 @@ namespace TW08.Puzzle
         {
             entityId = id;
             kind = entityKind;
+
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+#endif
         }
 
         public void Snap(GridCoordinate cell, float cellSize)
