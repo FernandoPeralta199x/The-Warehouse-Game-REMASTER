@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TW08.Core;
 using TW08.Input;
@@ -16,8 +17,14 @@ namespace TW08.Race
 
         private Rigidbody2D body;
         private Coroutine speedModifierRoutine;
+        private Coroutine gripAssistRoutine;
+        private Coroutine handlingAssistRoutine;
+        private Coroutine impactProtectionRoutine;
         private float speedMultiplier = 1f;
         private float surfaceGripMultiplier = 1f;
+        private float temporaryGripMultiplier = 1f;
+        private float steeringMultiplier = 1f;
+        private float impactDamageMultiplier = 1f;
         private float driftCharge;
         private bool driftWasHeld;
         private float aiSteer;
@@ -25,9 +32,13 @@ namespace TW08.Race
         private bool aiDrift;
 
         public float CurrentSpeed => body == null ? 0f : body.linearVelocity.magnitude;
-        public float NormalizedSpeed => stats == null ? 0f : Mathf.Clamp01(CurrentSpeed / stats.MaxForwardSpeed);
+        public float NormalizedSpeed => stats == null ? 0f : Mathf.Clamp01(CurrentSpeed / Mathf.Max(0.01f, stats.MaxForwardSpeed));
         public bool IsDrifting { get; private set; }
         public bool ControlsEnabled { get; set; } = true;
+        public bool PlayerControlled => playerControlled;
+        public Rigidbody2D Body => body;
+
+        public event Action<float> Impacted;
 
         private void Awake()
         {
@@ -82,6 +93,33 @@ namespace TW08.Race
             speedModifierRoutine = StartCoroutine(SpeedModifierRoutine(multiplier, duration));
         }
 
+        public void ApplyGripAssist(float multiplier, float duration)
+        {
+            if (gripAssistRoutine != null)
+            {
+                StopCoroutine(gripAssistRoutine);
+            }
+            gripAssistRoutine = StartCoroutine(GripAssistRoutine(Mathf.Clamp(multiplier, 0.25f, 3f), duration));
+        }
+
+        public void ApplyHandlingAssist(float multiplier, float duration)
+        {
+            if (handlingAssistRoutine != null)
+            {
+                StopCoroutine(handlingAssistRoutine);
+            }
+            handlingAssistRoutine = StartCoroutine(HandlingAssistRoutine(Mathf.Clamp(multiplier, 0.5f, 2f), duration));
+        }
+
+        public void ApplyImpactProtection(float damageMultiplier, float duration)
+        {
+            if (impactProtectionRoutine != null)
+            {
+                StopCoroutine(impactProtectionRoutine);
+            }
+            impactProtectionRoutine = StartCoroutine(ImpactProtectionRoutine(Mathf.Clamp(damageMultiplier, 0f, 1f), duration));
+        }
+
         private void FixedUpdate()
         {
             if (stats == null || !ControlsEnabled)
@@ -123,7 +161,7 @@ namespace TW08.Race
             float forwardSpeed = Vector2.Dot(body.linearVelocity, transform.up);
             float directionSign = Mathf.Abs(forwardSpeed) < 0.05f ? 1f : Mathf.Sign(forwardSpeed);
             float speedFactor = Mathf.Lerp(stats.LowSpeedSteering, 1f, NormalizedSpeed);
-            float rotation = steer * stats.SteeringDegreesPerSecond * speedFactor * directionSign * Time.fixedDeltaTime;
+            float rotation = steer * stats.SteeringDegreesPerSecond * steeringMultiplier * speedFactor * directionSign * Time.fixedDeltaTime;
             body.MoveRotation(body.rotation - rotation);
         }
 
@@ -134,7 +172,7 @@ namespace TW08.Race
             Vector2 forwardVelocity = forward * Vector2.Dot(body.linearVelocity, forward);
             Vector2 lateralVelocity = right * Vector2.Dot(body.linearVelocity, right);
             float retention = driftHeld ? stats.DriftLateralRetention : stats.NormalLateralRetention;
-            retention = Mathf.Clamp01(retention * surfaceGripMultiplier);
+            retention = Mathf.Clamp01(retention * surfaceGripMultiplier * temporaryGripMultiplier);
             body.linearVelocity = forwardVelocity + lateralVelocity * retention;
             IsDrifting = driftHeld && NormalizedSpeed > 0.25f;
         }
@@ -178,19 +216,47 @@ namespace TW08.Race
             speedModifierRoutine = null;
         }
 
+        private IEnumerator GripAssistRoutine(float multiplier, float duration)
+        {
+            temporaryGripMultiplier = multiplier;
+            yield return new WaitForSeconds(Mathf.Max(0.01f, duration));
+            temporaryGripMultiplier = 1f;
+            gripAssistRoutine = null;
+        }
+
+        private IEnumerator HandlingAssistRoutine(float multiplier, float duration)
+        {
+            steeringMultiplier = multiplier;
+            yield return new WaitForSeconds(Mathf.Max(0.01f, duration));
+            steeringMultiplier = 1f;
+            handlingAssistRoutine = null;
+        }
+
+        private IEnumerator ImpactProtectionRoutine(float multiplier, float duration)
+        {
+            impactDamageMultiplier = multiplier;
+            yield return new WaitForSeconds(Mathf.Max(0.01f, duration));
+            impactDamageMultiplier = 1f;
+            impactProtectionRoutine = null;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            ForkliftDamage damage = GetComponent<ForkliftDamage>();
-            if (damage == null)
+            float impact = collision.relativeVelocity.magnitude;
+            if (impact <= 0f)
             {
                 return;
             }
 
-            float impact = collision.relativeVelocity.magnitude;
-            if (impact > 2f)
+            Impacted?.Invoke(impact);
+
+            ForkliftDamage damage = GetComponent<ForkliftDamage>();
+            if (damage == null || impact <= 2f)
             {
-                damage.ApplyDamage((impact - 2f) * collisionDamageScale);
+                return;
             }
+
+            damage.ApplyDamage((impact - 2f) * collisionDamageScale * impactDamageMultiplier);
         }
     }
 }

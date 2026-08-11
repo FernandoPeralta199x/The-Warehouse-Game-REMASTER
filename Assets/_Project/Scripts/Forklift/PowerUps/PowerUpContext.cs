@@ -8,13 +8,20 @@ namespace TW08.PowerUps
         public readonly Transform User;
         public readonly ArcadeForkliftController2D Controller;
         public readonly ForkliftDamage Damage;
+        public readonly RaceCargoController Cargo;
         public readonly LayerMask RacerLayers;
 
-        public PowerUpContext(Transform user, ArcadeForkliftController2D controller, ForkliftDamage damage, LayerMask racerLayers)
+        public PowerUpContext(
+            Transform user,
+            ArcadeForkliftController2D controller,
+            ForkliftDamage damage,
+            RaceCargoController cargo,
+            LayerMask racerLayers)
         {
             User = user;
             Controller = controller;
             Damage = damage;
+            Cargo = cargo;
             RacerLayers = racerLayers;
         }
     }

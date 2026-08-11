@@ -19,6 +19,7 @@ namespace TW08.Race
         public float ElapsedTime => elapsedTime;
         public int TotalLaps => totalLaps;
         public int CheckpointCount => checkpoints.Count;
+        public int RacerCount => racers.Count;
         public IReadOnlyList<RacerProgress> Racers => racers;
 
         public event Action RaceStarted;
@@ -43,7 +44,8 @@ namespace TW08.Race
 
         public void Configure(IEnumerable<RaceCheckpoint> orderedCheckpoints, int laps)
         {
-            checkpoints = orderedCheckpoints?.OrderBy(c => c.CheckpointIndex).ToList() ?? new List<RaceCheckpoint>();
+            checkpoints = orderedCheckpoints?.Where(c => c != null).OrderBy(c => c.CheckpointIndex).ToList()
+                ?? new List<RaceCheckpoint>();
             totalLaps = Mathf.Max(1, laps);
         }
 
@@ -66,7 +68,10 @@ namespace TW08.Race
             RaceRunning = true;
             foreach (RacerProgress racer in racers)
             {
-                racer.ResetProgress();
+                if (racer != null)
+                {
+                    racer.ResetProgress();
+                }
             }
             RaceStarted?.Invoke();
         }
@@ -87,11 +92,35 @@ namespace TW08.Race
             if (racer.Finished)
             {
                 RacerFinished?.Invoke(racer);
-                if (racers.Count > 0 && racers.All(r => r.Finished))
+                if (racers.Count > 0 && racers.Where(r => r != null).All(r => r.Finished))
                 {
                     RaceRunning = false;
                 }
             }
+        }
+
+        public bool TryGetCheckpointPosition(int checkpointIndex, out Vector2 position)
+        {
+            if (checkpointIndex < 0 || checkpointIndex >= checkpoints.Count || checkpoints[checkpointIndex] == null)
+            {
+                position = default;
+                return false;
+            }
+
+            position = checkpoints[checkpointIndex].transform.position;
+            return true;
+        }
+
+        public int GetRacePosition(RacerProgress target)
+        {
+            if (target == null)
+            {
+                return 0;
+            }
+
+            List<RacerProgress> ordered = BuildOrderedRacers();
+            int index = ordered.IndexOf(target);
+            return index < 0 ? 0 : index + 1;
         }
 
         public float GetNormalizedRank(RacerProgress target)
@@ -101,16 +130,33 @@ namespace TW08.Race
                 return 0.5f;
             }
 
-            List<RacerProgress> ordered = racers
+            List<RacerProgress> ordered = BuildOrderedRacers();
+            int index = ordered.IndexOf(target);
+            return index < 0 ? 0.5f : index / (float)Mathf.Max(1, ordered.Count - 1);
+        }
+
+        private List<RacerProgress> BuildOrderedRacers()
+        {
+            return racers
+                .Where(r => r != null)
                 .OrderByDescending(GetProgressScore)
                 .ThenBy(r => r.Finished ? r.FinishTime : float.MaxValue)
+                .ThenBy(r => r.RacerId, StringComparer.Ordinal)
                 .ToList();
-            int index = ordered.IndexOf(target);
-            return index < 0 ? 0.5f : index / (float)(ordered.Count - 1);
         }
 
         private float GetProgressScore(RacerProgress racer)
         {
+            if (racer == null)
+            {
+                return float.MinValue;
+            }
+
+            if (racer.Finished)
+            {
+                return totalLaps * Mathf.Max(1, checkpoints.Count) + 1000f - racer.FinishTime * 0.0001f;
+            }
+
             int lastPassed = racer.NextCheckpointIndex == 0
                 ? Mathf.Max(0, checkpoints.Count - 1)
                 : racer.NextCheckpointIndex - 1;
