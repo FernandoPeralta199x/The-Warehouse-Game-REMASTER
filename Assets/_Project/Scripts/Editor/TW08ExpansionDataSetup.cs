@@ -402,7 +402,11 @@ namespace TW08.Editor
                     95f, 82f, 72f, 65f, 0.9f),
                 EnsureRaceTrack("frozen-route", "Frozen Route", "TW08_Race03_FrozenRoute",
                     "Câmara fria com zonas de baixa aderência. Antecipe a curva e use boost apenas na saída.",
-                    110f, 95f, 84f, 76f, 0.45f)
+                    110f, 95f, 84f, 76f, 0.45f),
+                EnsureRaceTrack("ghost-route", "Ghost Route", "TW08_Race04_GhostRoute",
+                    "Rota fantasma do Setor 08: a empilhadeira sem operador registrada nos logs. " +
+                    "Aderência mínima, sem margem de erro — carga frágil a bordo.",
+                    125f, 108f, 95f, 86f, 0.3f)
             };
         }
 

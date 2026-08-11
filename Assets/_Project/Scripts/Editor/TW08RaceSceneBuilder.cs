@@ -17,7 +17,7 @@ namespace TW08.Editor
     internal static class TW08RaceSceneBuilder
     {
         internal const string SceneRoot = "Assets/_Project/Scenes/Production/Race";
-        private const int ExpectedRaceSceneCount = 3;
+        // Contagem de pistas deriva da RaceCampaign (dinâmica).
 
         internal static List<string> BuildAll(TW08ExpansionDataSetup.ExpansionData data)
         {
@@ -25,10 +25,10 @@ namespace TW08.Editor
             TW08ProductionSceneUtility.EnsureFolder(SceneRoot);
 
             List<RaceSceneSpec> specs = LoadBuildSpecs();
-            if (specs.Count != ExpectedRaceSceneCount)
+            if (specs.Count == 0)
             {
                 throw new InvalidOperationException(
-                    $"Race scene builder expected {ExpectedRaceSceneCount} stable track specs but resolved {specs.Count}.");
+                    "Race scene builder resolved zero stable track specs from the campaign.");
             }
 
             List<string> paths = new();
@@ -53,10 +53,10 @@ namespace TW08.Editor
                 paths.Add(path);
             }
 
-            if (paths.Count != ExpectedRaceSceneCount)
+            if (paths.Count != specs.Count)
             {
                 throw new InvalidOperationException(
-                    $"Race scene builder produced {paths.Count}/{ExpectedRaceSceneCount} scene paths.");
+                    $"Race scene builder produced {paths.Count}/{specs.Count} scene paths.");
             }
 
             return paths;
@@ -72,13 +72,7 @@ namespace TW08.Editor
                     $"Race campaign could not be loaded from '{TW08ExpansionDataSetup.RaceCampaignPath}'.");
             }
 
-            if (campaign.Tracks.Count != ExpectedRaceSceneCount)
-            {
-                throw new InvalidOperationException(
-                    $"Race campaign contains {campaign.Tracks.Count}/{ExpectedRaceSceneCount} tracks.");
-            }
-
-            List<RaceSceneSpec> specs = new(ExpectedRaceSceneCount);
+            List<RaceSceneSpec> specs = new(campaign.Tracks.Count);
             for (int i = 0; i < campaign.Tracks.Count; i++)
             {
                 RaceTrackDefinition track = campaign.Tracks[i];

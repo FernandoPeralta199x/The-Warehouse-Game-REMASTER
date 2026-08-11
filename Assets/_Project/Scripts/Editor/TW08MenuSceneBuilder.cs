@@ -267,11 +267,17 @@ namespace TW08.Editor
             Text pilot = TW08ProductionSceneUtility.CreateText(shell, "Pilot", "PILOTO // JOHN", 16, TW08ProductionSceneUtility.Amber, TextAnchor.MiddleRight);
             TW08ProductionSceneUtility.SetRect(pilot.rectTransform, new Vector2(1f, 1f), new Vector2(470f, 40f), new Vector2(-58f, -118f));
             List<Button> buttons = new();
-            string[] names = { "RECEIVING LOOP", "INDUSTRIAL CORRIDOR", "FROZEN ROUTE" };
-            for (int i = 0; i < 3; i++)
+            int trackCount = campaign != null ? campaign.Tracks.Count : 0;
+            float buttonHeight = trackCount > 3 ? 88f : 105f;
+            float spacing = trackCount > 3 ? 112f : 145f;
+            float top = spacing * (trackCount - 1) * 0.5f;
+            for (int i = 0; i < trackCount; i++)
             {
-                Button button = TW08ProductionSceneUtility.CreateButton(shell, "Track " + (i + 1), $"{i + 1:00} // {names[i]}", i == 0 ? TW08ProductionSceneUtility.Green : TW08ProductionSceneUtility.Cyan, 18);
-                TW08ProductionSceneUtility.SetRect((RectTransform)button.transform, new Vector2(0.5f, 0.5f), new Vector2(780f, 105f), new Vector2(0f, 150f - i * 145f));
+                string trackName = campaign.Tracks[i] != null
+                    ? campaign.Tracks[i].DisplayName.ToUpperInvariant()
+                    : $"PISTA {i + 1:00}";
+                Button button = TW08ProductionSceneUtility.CreateButton(shell, "Track " + (i + 1), $"{i + 1:00} // {trackName}", i == 0 ? TW08ProductionSceneUtility.Green : TW08ProductionSceneUtility.Cyan, 18);
+                TW08ProductionSceneUtility.SetRect((RectTransform)button.transform, new Vector2(0.5f, 0.5f), new Vector2(780f, buttonHeight), new Vector2(0f, top - i * spacing));
                 buttons.Add(button);
             }
             Button back = TW08ProductionSceneUtility.CreateButton(shell, "Back", "VOLTAR", TW08ProductionSceneUtility.TextMuted, 15);
