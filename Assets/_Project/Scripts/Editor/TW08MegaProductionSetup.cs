@@ -40,6 +40,15 @@ namespace TW08.Editor
                     0.22f);
                 TW08MegaContentSetup.MegaContentData content = TW08MegaContentSetup.EnsureAll();
 
+                // Addressables/content authoring may import or resave assets. Rebuild the canonical
+                // race campaign after those operations so the scene upgrader never receives stale
+                // UnityEngine.Object references captured before an AssetDatabase mutation.
+                EditorUtility.DisplayProgressBar(
+                    "The Warehouse Nº 08 — Mega Update",
+                    "Revalidando pistas após authoring de assets...",
+                    0.46f);
+                TW08RaceCampaignIntegrity.EnsureValidCampaign(force: true);
+
                 EditorUtility.DisplayProgressBar(
                     "The Warehouse Nº 08 — Mega Update",
                     "Aplicando câmera, IA, itens, carga e UI profissional...",
@@ -97,8 +106,8 @@ namespace TW08.Editor
                     "A atualização foi interrompida no primeiro erro. Corrija o erro antes de repetir o comando.\n\n" +
                     exception.Message,
                     "OK");
-                // Menu commands should consume the exception after surfacing it once.
-                // Rethrowing here makes Unity print the same stack trace a second time.
+                // Menu commands consume the exception after surfacing it once so Unity does not
+                // print a duplicate stack trace for the same authoring failure.
             }
             finally
             {
