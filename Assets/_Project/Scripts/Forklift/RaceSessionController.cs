@@ -118,7 +118,10 @@ namespace TW08.Race
         private void OnCountdownCompleted()
         {
             countdownValue = 0;
-            raceManager?.StartRace();
+            if (raceManager != null)
+            {
+                raceManager.StartRace();
+            }
             if (playerVehicle != null) playerVehicle.ControlsEnabled = true;
             StateChanged?.Invoke();
         }
@@ -144,7 +147,13 @@ namespace TW08.Race
             float cargoDamage = playerCargo != null ? playerCargo.DamagePercent : 0f;
             int medal = track != null ? track.GetMedal(finishTime, cargoDamage) : 0;
             RaceProgressStore.Record(track, finishTime);
-            UnityEngine.Object.FindFirstObjectByType<SaveManager>()?.RecordRaceCompletion(track, finishTime);
+
+            SaveManager saveManager = UnityEngine.Object.FindFirstObjectByType<SaveManager>();
+            if (saveManager != null)
+            {
+                saveManager.RecordRaceCompletion(track, finishTime);
+            }
+
             PlayerFinished?.Invoke(finishTime, medal);
             StateChanged?.Invoke();
         }
