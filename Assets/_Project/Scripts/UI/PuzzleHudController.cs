@@ -256,27 +256,21 @@ namespace TW08.UI
 
         private void LoadNextSceneOrMenu()
         {
-            Time.timeScale = 1f;
-
-            if (!string.IsNullOrWhiteSpace(nextSceneName))
+            if (!string.IsNullOrWhiteSpace(nextSceneName) &&
+                SceneLoader.TryLoadImmediate(nextSceneName, "próxima fase"))
             {
-                SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 return;
             }
 
-            int sceneCount = SceneManager.sceneCountInBuildSettings;
             Scene activeScene = SceneManager.GetActiveScene();
             int nextIndex = activeScene.buildIndex + 1;
-            if (activeScene.buildIndex >= 0 && nextIndex < sceneCount)
+            if (activeScene.buildIndex >= 0 && nextIndex < SceneManager.sceneCountInBuildSettings)
             {
                 SceneManager.LoadScene(nextIndex, LoadSceneMode.Single);
                 return;
             }
 
-            if (!string.IsNullOrWhiteSpace(campaignSelectScene))
-            {
-                SceneManager.LoadScene(campaignSelectScene, LoadSceneMode.Single);
-            }
+            SceneLoader.TryLoadImmediate(campaignSelectScene, "seleção da campanha");
         }
 
         private void MarkDirtyInEditor()
