@@ -14,6 +14,7 @@ namespace TW08.Input
         private InputActionMap raceMap;
         private InputAction puzzleMove;
         private InputAction puzzleUndo;
+        private InputAction puzzleRedo;
         private InputAction puzzleRestart;
         private InputAction puzzlePause;
         private InputAction raceSteer;
@@ -24,6 +25,7 @@ namespace TW08.Input
 
         public event Action<GridCoordinate> PuzzleMoveRequested;
         public event Action PuzzleUndoRequested;
+        public event Action PuzzleRedoRequested;
         public event Action PuzzleRestartRequested;
         public event Action PauseRequested;
         public event Action RacePowerUpRequested;
@@ -41,6 +43,7 @@ namespace TW08.Input
         {
             puzzleMove.performed += OnPuzzleMove;
             puzzleUndo.performed += OnPuzzleUndo;
+            puzzleRedo.performed += OnPuzzleRedo;
             puzzleRestart.performed += OnPuzzleRestart;
             puzzlePause.performed += OnPause;
             racePowerUp.performed += OnRacePowerUp;
@@ -52,6 +55,7 @@ namespace TW08.Input
         {
             puzzleMove.performed -= OnPuzzleMove;
             puzzleUndo.performed -= OnPuzzleUndo;
+            puzzleRedo.performed -= OnPuzzleRedo;
             puzzleRestart.performed -= OnPuzzleRestart;
             puzzlePause.performed -= OnPause;
             racePowerUp.performed -= OnRacePowerUp;
@@ -62,8 +66,8 @@ namespace TW08.Input
 
         private void OnDestroy()
         {
-            puzzleMap?.Disable();
-            raceMap?.Disable();
+            puzzleMap?.Dispose();
+            raceMap?.Dispose();
         }
 
         public void SetMode(GameMode mode)
@@ -86,11 +90,17 @@ namespace TW08.Input
             puzzleMap = new InputActionMap("Puzzle");
             puzzleMove = puzzleMap.AddAction("Move", InputActionType.Value);
             AddVector2Bindings(puzzleMove);
+
             puzzleUndo = puzzleMap.AddAction("Undo", InputActionType.Button, "<Keyboard>/z");
             puzzleUndo.AddBinding("<Keyboard>/backspace");
             puzzleUndo.AddBinding("<Gamepad>/buttonWest");
+
+            puzzleRedo = puzzleMap.AddAction("Redo", InputActionType.Button, "<Keyboard>/y");
+            puzzleRedo.AddBinding("<Gamepad>/buttonNorth");
+
             puzzleRestart = puzzleMap.AddAction("Restart", InputActionType.Button, "<Keyboard>/r");
             puzzleRestart.AddBinding("<Gamepad>/select");
+
             puzzlePause = puzzleMap.AddAction("Pause", InputActionType.Button, "<Keyboard>/escape");
             puzzlePause.AddBinding("<Gamepad>/start");
 
@@ -99,16 +109,20 @@ namespace TW08.Input
             AddAxisBindings(raceSteer, "<Keyboard>/a", "<Keyboard>/d");
             AddAxisBindings(raceSteer, "<Keyboard>/leftArrow", "<Keyboard>/rightArrow");
             raceSteer.AddBinding("<Gamepad>/leftStick/x");
+
             raceThrottle = raceMap.AddAction("Throttle", InputActionType.Value);
             AddAxisBindings(raceThrottle, "<Keyboard>/s", "<Keyboard>/w");
             AddAxisBindings(raceThrottle, "<Keyboard>/downArrow", "<Keyboard>/upArrow");
             raceThrottle.AddCompositeBinding("1DAxis")
                 .With("Negative", "<Gamepad>/leftTrigger")
                 .With("Positive", "<Gamepad>/rightTrigger");
+
             raceDrift = raceMap.AddAction("Drift", InputActionType.Button, "<Keyboard>/leftShift");
             raceDrift.AddBinding("<Gamepad>/buttonSouth");
+
             racePowerUp = raceMap.AddAction("PowerUp", InputActionType.Button, "<Keyboard>/space");
             racePowerUp.AddBinding("<Gamepad>/buttonEast");
+
             racePause = raceMap.AddAction("Pause", InputActionType.Button, "<Keyboard>/escape");
             racePause.AddBinding("<Gamepad>/start");
         }
@@ -157,6 +171,7 @@ namespace TW08.Input
         }
 
         private void OnPuzzleUndo(InputAction.CallbackContext _) => PuzzleUndoRequested?.Invoke();
+        private void OnPuzzleRedo(InputAction.CallbackContext _) => PuzzleRedoRequested?.Invoke();
         private void OnPuzzleRestart(InputAction.CallbackContext _) => PuzzleRestartRequested?.Invoke();
         private void OnPause(InputAction.CallbackContext _) => PauseRequested?.Invoke();
         private void OnRacePowerUp(InputAction.CallbackContext _) => RacePowerUpRequested?.Invoke();
