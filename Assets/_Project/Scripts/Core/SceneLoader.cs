@@ -48,7 +48,7 @@ namespace TW08.Core
             Debug.LogError(
                 $"TW08 cannot load {context} scene '{sceneName}'. The scene is not available in the active/shared Scene List" +
 #if UNITY_EDITOR
-                " and no matching Scene asset was found under Assets/_Project/Scenes. " +
+                " and no matching .unity file was found under Assets/_Project/Scenes. " +
                 "Run Tools > TW08 > Production > Repair Runtime Scene Registration."
 #else
                 ". The player build is missing this scene from its build profile."
@@ -119,8 +119,6 @@ namespace TW08.Core
                 return null;
             }
 
-            // Generated TW08 scenes live in three deterministic roots. Resolve those first so editor
-            // playtests do not depend on AssetDatabase search indexing being up-to-date.
             string[] candidatePaths =
             {
                 $"Assets/_Project/Scenes/VerticalSlice/{sceneName}.unity",
@@ -130,27 +128,46 @@ namespace TW08.Core
 
             foreach (string candidate in candidatePaths)
             {
-                if (UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(candidate) != null)
+                if (EditorSceneFileExists(candidate))
                 {
                     return candidate;
                 }
             }
 
-            // AssetDatabase type filters use class names. Scene files are represented by SceneAsset;
-            // using t:Scene can return no results even when the .unity file exists.
-            string[] guids = UnityEditor.AssetDatabase.FindAssets(
-                sceneName + " t:SceneAsset",
-                new[] { "Assets/_Project/Scenes" });
-            foreach (string guid in guids)
+            string projectRoot = Directory.GetCurrentDirectory();
+            string sceneRoot = Path.Combine(projectRoot, "Assets", "_Project", "Scenes");
+            if (!Directory.Exists(sceneRoot))
             {
-                string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                if (string.Equals(Path.GetFileNameWithoutExtension(path), sceneName, StringComparison.OrdinalIgnoreCase))
+                return null;
+            }
+
+            foreach (string fullPath in Directory.EnumerateFiles(sceneRoot, "*.unity", SearchOption.AllDirectories))
+            {
+                if (!string.Equals(
+                        Path.GetFileNameWithoutExtension(fullPath),
+                        sceneName,
+                        StringComparison.OrdinalIgnoreCase))
                 {
-                    return path;
+                    continue;
+                }
+
+                string normalizedRoot = projectRoot.Replace('\\', '/').TrimEnd('/');
+                string normalizedPath = fullPath.Replace('\\', '/');
+                if (normalizedPath.StartsWith(normalizedRoot + "/", StringComparison.OrdinalIgnoreCase))
+                {
+                    return normalizedPath.Substring(normalizedRoot.Length + 1);
                 }
             }
 
             return null;
+        }
+
+        private static bool EditorSceneFileExists(string assetPath)
+        {
+            string fullPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                assetPath.Replace('/', Path.DirectorySeparatorChar));
+            return File.Exists(fullPath);
         }
 #endif
     }
