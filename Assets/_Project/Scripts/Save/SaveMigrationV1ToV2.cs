@@ -9,6 +9,10 @@ namespace TW08.Save
         {
             data ??= new SaveGameData();
             data.version = ToVersion;
+            data.selectedCharacterId = string.IsNullOrWhiteSpace(data.selectedCharacterId) ? "john" : data.selectedCharacterId;
+            data.masterVolume = 1f;
+            data.musicVolume = 0.8f;
+            data.sfxVolume = 1f;
             data.EnsureDefaults();
             return data;
         }
