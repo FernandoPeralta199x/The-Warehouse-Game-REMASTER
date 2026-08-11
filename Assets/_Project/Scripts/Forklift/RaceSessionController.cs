@@ -21,7 +21,7 @@ namespace TW08.Race
         public int CountdownValue => countdownValue;
         public bool RaceRunning => raceManager != null && raceManager.RaceRunning;
         public float ElapsedTime => raceManager != null ? raceManager.ElapsedTime : 0f;
-        public float BestTime => track == null ? 0f : PlayerPrefs.GetFloat(GetBestTimeKey(track.TrackId), 0f);
+        public float BestTime => track == null ? 0f : RaceProgressStore.GetBestTime(track.TrackId);
         public string SelectedCharacterId => CharacterSelectionState.SelectedCharacterId;
 
         public event Action StateChanged;
@@ -137,30 +137,9 @@ namespace TW08.Race
 
             float finishTime = racer.FinishTime;
             int medal = track != null ? track.GetMedal(finishTime) : 0;
-            SaveBestTime(finishTime);
+            RaceProgressStore.Record(track, finishTime);
             PlayerFinished?.Invoke(finishTime, medal);
             StateChanged?.Invoke();
-        }
-
-        private void SaveBestTime(float finishTime)
-        {
-            if (track == null || finishTime <= 0f)
-            {
-                return;
-            }
-
-            string key = GetBestTimeKey(track.TrackId);
-            float previous = PlayerPrefs.GetFloat(key, 0f);
-            if (previous <= 0f || finishTime < previous)
-            {
-                PlayerPrefs.SetFloat(key, finishTime);
-                PlayerPrefs.Save();
-            }
-        }
-
-        private static string GetBestTimeKey(string trackId)
-        {
-            return "tw08.race.best." + (string.IsNullOrWhiteSpace(trackId) ? "unknown" : trackId);
         }
     }
 }
