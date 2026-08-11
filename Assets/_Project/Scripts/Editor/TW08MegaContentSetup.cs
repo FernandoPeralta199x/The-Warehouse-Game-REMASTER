@@ -16,8 +16,8 @@ namespace TW08.Editor
 
         internal sealed class MegaContentData
         {
-            public TW08GraphicsProfile GraphicsProfile { get; init; }
-            public WeightedPowerUpTable RacePowerUpTable { get; init; }
+            public TW08GraphicsProfile GraphicsProfile { get; set; }
+            public WeightedPowerUpTable RacePowerUpTable { get; set; }
         }
 
         internal static MegaContentData EnsureAll()
