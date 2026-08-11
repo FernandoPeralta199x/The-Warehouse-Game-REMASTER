@@ -42,6 +42,17 @@ namespace TW08.Puzzle
             level = definition;
             playerView = player;
             crateViews = crates?.ToList() ?? new List<PuzzleEntityView>();
+
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+                if (gameObject.scene.IsValid())
+                {
+                    UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(gameObject.scene);
+                }
+            }
+#endif
         }
 
         public void Initialize()
