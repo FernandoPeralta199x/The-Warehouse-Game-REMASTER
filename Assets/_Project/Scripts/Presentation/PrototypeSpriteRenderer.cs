@@ -7,7 +7,6 @@ namespace TW08
     /// It intentionally lives in the runtime assembly so generated scenes remain
     /// valid in player builds. Final game art should replace this component.
     /// </summary>
-    [ExecuteAlways]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(SpriteRenderer))]
     public sealed class PrototypeSpriteRenderer : MonoBehaviour
@@ -24,9 +23,7 @@ namespace TW08
         public void Configure(Color tint, Vector2 dimensions, int order)
         {
             color = tint;
-            size = new Vector2(
-                Mathf.Max(MinimumSize, Mathf.Abs(dimensions.x)),
-                Mathf.Max(MinimumSize, Mathf.Abs(dimensions.y)));
+            size = SanitizeSize(dimensions);
             sortingOrder = order;
             Apply();
         }
@@ -44,10 +41,9 @@ namespace TW08
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            size = new Vector2(
-                Mathf.Max(MinimumSize, Mathf.Abs(size.x)),
-                Mathf.Max(MinimumSize, Mathf.Abs(size.y)));
-            Apply();
+            // Keep validation side-effect free. Unity forbids SpriteRenderer property
+            // changes from OnValidate because they can trigger internal SendMessage calls.
+            size = SanitizeSize(size);
         }
 #endif
 
@@ -67,6 +63,13 @@ namespace TW08
             targetRenderer.color = color;
             targetRenderer.sortingOrder = sortingOrder;
             transform.localScale = new Vector3(size.x, size.y, 1f);
+        }
+
+        private static Vector2 SanitizeSize(Vector2 dimensions)
+        {
+            return new Vector2(
+                Mathf.Max(MinimumSize, Mathf.Abs(dimensions.x)),
+                Mathf.Max(MinimumSize, Mathf.Abs(dimensions.y)));
         }
 
         private static Sprite GetOrCreateSquareSprite()
