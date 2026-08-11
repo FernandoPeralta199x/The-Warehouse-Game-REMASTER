@@ -14,26 +14,63 @@ namespace TW08.Editor
     /// </summary>
     public static class TW08ReferenceArtImporter
     {
-        private const string SourceRoot = "REFERENCIA";
+        private const string RepositorySourceRoot = "REFERENCIA";
         private const string DestinationRoot = "Assets/_Project/Art/ReferenceSource";
         private const float CandidatePixelsPerUnit = 32f;
 
-        [MenuItem("Tools/TW08/Art/Import Reference Folder")]
-        public static void ImportReferenceFolder()
+        [MenuItem("Tools/TW08/Art/Import Repository Reference Folder")]
+        public static void ImportRepositoryReferenceFolder()
         {
-            string projectRoot = Directory.GetParent(Application.dataPath)?.FullName;
+            string projectRoot = ResolveProjectRoot();
             if (string.IsNullOrWhiteSpace(projectRoot))
             {
-                Debug.LogError("TW08: Could not resolve the Unity project root.");
                 return;
             }
 
-            string sourceRoot = Path.Combine(projectRoot, SourceRoot);
+            ImportFromSource(Path.Combine(projectRoot, RepositorySourceRoot), projectRoot);
+        }
+
+        [MenuItem("Tools/TW08/Art/Import Reference Folder...")]
+        public static void ImportExternalReferenceFolder()
+        {
+            string projectRoot = ResolveProjectRoot();
+            if (string.IsNullOrWhiteSpace(projectRoot))
+            {
+                return;
+            }
+
+            string selectedFolder = EditorUtility.OpenFolderPanel(
+                "Selecione a pasta REFERENCIA extraída",
+                projectRoot,
+                RepositorySourceRoot);
+
+            if (string.IsNullOrWhiteSpace(selectedFolder))
+            {
+                return;
+            }
+
+            ImportFromSource(selectedFolder, projectRoot);
+        }
+
+        private static string ResolveProjectRoot()
+        {
+            string projectRoot = Directory.GetParent(Application.dataPath)?.FullName;
+            if (!string.IsNullOrWhiteSpace(projectRoot))
+            {
+                return projectRoot;
+            }
+
+            Debug.LogError("TW08: Could not resolve the Unity project root.");
+            return null;
+        }
+
+        private static void ImportFromSource(string sourceRoot, string projectRoot)
+        {
             if (!Directory.Exists(sourceRoot))
             {
                 EditorUtility.DisplayDialog(
                     "The Warehouse Nº 08 — Referências",
-                    "A pasta REFERENCIA não foi encontrada na raiz do projeto. Extraia o pacote de referência para a raiz do repositório e tente novamente.",
+                    "A pasta de referências selecionada não existe.",
                     "OK");
                 return;
             }
@@ -47,7 +84,7 @@ namespace TW08.Editor
             {
                 EditorUtility.DisplayDialog(
                     "The Warehouse Nº 08 — Referências",
-                    "Nenhuma imagem PNG foi encontrada dentro de REFERENCIA.",
+                    "Nenhuma imagem PNG foi encontrada na pasta selecionada.",
                     "OK");
                 return;
             }
@@ -68,7 +105,9 @@ namespace TW08.Editor
                     }
 
                     string destinationAssetPath = $"{DestinationRoot}/{relative}".Replace('\\', '/');
-                    string destinationAbsolutePath = Path.Combine(projectRoot, destinationAssetPath.Replace('/', Path.DirectorySeparatorChar));
+                    string destinationAbsolutePath = Path.Combine(
+                        projectRoot,
+                        destinationAssetPath.Replace('/', Path.DirectorySeparatorChar));
                     string destinationDirectory = Path.GetDirectoryName(destinationAbsolutePath);
                     if (!string.IsNullOrWhiteSpace(destinationDirectory))
                     {
@@ -99,15 +138,16 @@ namespace TW08.Editor
                 string sample = string.Join("\n", lfsPointers.Take(6));
                 Debug.LogWarning(
                     $"TW08: {lfsPointers.Count} arquivo(s) de referência são ponteiros Git LFS e não contêm a imagem real. " +
-                    "Execute 'git lfs pull' ou extraia o pacote REFERENCIA sobre a pasta da raiz antes de importar.\n" + sample);
+                    "Use 'git lfs pull' ou escolha a pasta extraída do RAR pelo menu de importação externa.\n" + sample);
             }
 
             string result =
                 $"Referências importadas: {importedAssets.Count}\n" +
                 $"Ponteiros Git LFS ignorados: {lfsPointers.Count}\n\n" +
                 "Destino: Assets/_Project/Art/ReferenceSource\n\n" +
-                "As imagens de personagem e empilhadeira continuam sendo material de direção visual. " +
-                "Somente arquivos em REFERENCIA/Sprites entram como candidatos de sprite pixel-art; nada é promovido automaticamente a arte final.";
+                "Personagens e empilhadeiras permanecem material de direção visual. " +
+                "Somente arquivos provenientes de /Sprites/ são configurados como candidatos de sprite pixel-art; " +
+                "nada é promovido automaticamente a arte final sem revisão.";
 
             EditorUtility.DisplayDialog("The Warehouse Nº 08 — Referências", result, "OK");
         }
