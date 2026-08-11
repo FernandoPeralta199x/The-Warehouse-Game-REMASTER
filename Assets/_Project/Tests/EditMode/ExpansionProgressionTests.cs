@@ -15,6 +15,7 @@ namespace TW08.Tests.EditMode
             {
                 version = 1,
                 selectedCharacterId = null,
+                lastUnlockedLevel = "prototype-001",
                 masterVolume = 0f,
                 musicVolume = 0f,
                 sfxVolume = 0f
@@ -24,6 +25,7 @@ namespace TW08.Tests.EditMode
 
             Assert.That(migrated.version, Is.EqualTo(2));
             Assert.That(migrated.selectedCharacterId, Is.EqualTo("john"));
+            Assert.That(migrated.lastUnlockedLevel, Is.EqualTo("TW08_Level01_FirstShift"));
             Assert.That(migrated.unlockedCharacters, Does.Contain("john"));
             Assert.That(migrated.unlockedCharacters, Does.Contain("duda"));
             Assert.That(migrated.masterVolume, Is.EqualTo(1f));
