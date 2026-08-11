@@ -1,5 +1,7 @@
 using TW08.Puzzle;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TW08.UI
@@ -13,7 +15,7 @@ namespace TW08.UI
         [SerializeField] private Text statusText;
         [SerializeField] private Button undoButton;
         [SerializeField] private Button redoButton;
-        [SerializeField] private Button restartButton;
+        [SerializeField] private Button primaryActionButton;
 
         private bool bound;
 
@@ -24,7 +26,7 @@ namespace TW08.UI
             Text status,
             Button undo,
             Button redo,
-            Button restart)
+            Button primaryAction)
         {
             Unbind();
             runtime = puzzleRuntime;
@@ -33,7 +35,7 @@ namespace TW08.UI
             statusText = status;
             undoButton = undo;
             redoButton = redo;
-            restartButton = restart;
+            primaryActionButton = primaryAction;
             Bind();
             Refresh();
         }
@@ -65,7 +67,7 @@ namespace TW08.UI
 
             undoButton?.onClick.AddListener(Undo);
             redoButton?.onClick.AddListener(Redo);
-            restartButton?.onClick.AddListener(Restart);
+            primaryActionButton?.onClick.AddListener(PrimaryAction);
             bound = true;
         }
 
@@ -88,18 +90,42 @@ namespace TW08.UI
 
             undoButton?.onClick.RemoveListener(Undo);
             redoButton?.onClick.RemoveListener(Redo);
-            restartButton?.onClick.RemoveListener(Restart);
+            primaryActionButton?.onClick.RemoveListener(PrimaryAction);
             bound = false;
         }
 
         private void Undo() => runtime?.Undo();
         private void Redo() => runtime?.Redo();
-        private void Restart() => runtime?.Restart();
+
+        private void PrimaryAction()
+        {
+            if (runtime?.Board == null)
+            {
+                return;
+            }
+
+            if (runtime.Board.IsComplete)
+            {
+                LoadNextSceneOrMenu();
+                return;
+            }
+
+            runtime.Restart();
+        }
 
         private void OnBoardChanged(PuzzleMove _) => Refresh();
         private void OnRestarted() => Refresh();
-        private void OnCompleted() => Refresh();
         private void OnDeadlock() => Refresh();
+
+        private void OnCompleted()
+        {
+            Refresh();
+            if (primaryActionButton != null && EventSystem.current != null)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(primaryActionButton.gameObject);
+            }
+        }
 
         private void Refresh()
         {
@@ -132,6 +158,7 @@ namespace TW08.UI
             }
 
             RefreshStatus();
+            RefreshPrimaryAction();
         }
 
         private void RefreshStatus()
@@ -161,6 +188,46 @@ namespace TW08.UI
             }
 
             statusText.text = "ROTA ATIVA";
+        }
+
+        private void RefreshPrimaryAction()
+        {
+            if (primaryActionButton == null)
+            {
+                return;
+            }
+
+            Text label = primaryActionButton.GetComponentInChildren<Text>();
+            if (label == null)
+            {
+                return;
+            }
+
+            label.text = runtime.Board != null && runtime.Board.IsComplete
+                ? "PRÓXIMA [ENTER/A]"
+                : "RESET [R]";
+        }
+
+        private static void LoadNextSceneOrMenu()
+        {
+            int sceneCount = SceneManager.sceneCountInBuildSettings;
+            if (sceneCount <= 0)
+            {
+                Debug.LogError("No scenes are configured in Build Settings.");
+                return;
+            }
+
+            Scene activeScene = SceneManager.GetActiveScene();
+            int nextIndex = activeScene.buildIndex + 1;
+            Time.timeScale = 1f;
+
+            if (activeScene.buildIndex >= 0 && nextIndex < sceneCount)
+            {
+                SceneManager.LoadScene(nextIndex, LoadSceneMode.Single);
+                return;
+            }
+
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
     }
 }
