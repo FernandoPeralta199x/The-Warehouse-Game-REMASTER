@@ -23,6 +23,15 @@ namespace TW08.Presentation
         [SerializeField, Min(1f)] private float framesPerSecond = 8f;
 
         public float FramesPerSecond => Mathf.Max(1f, framesPerSecond);
+        public bool IsGameplayReady =>
+            idleDown != null &&
+            idleUp != null &&
+            idleLeft != null &&
+            idleRight != null &&
+            HasFrame(walkDown) &&
+            HasFrame(walkUp) &&
+            HasFrame(walkLeft) &&
+            HasFrame(walkRight);
 
         public Sprite GetIdle(FacingDirection direction)
         {
@@ -52,6 +61,24 @@ namespace TW08.Presentation
                 default:
                     return walkDown ?? Array.Empty<Sprite>();
             }
+        }
+
+        private static bool HasFrame(Sprite[] frames)
+        {
+            if (frames == null || frames.Length == 0)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                if (frames[i] != null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void OnValidate()
