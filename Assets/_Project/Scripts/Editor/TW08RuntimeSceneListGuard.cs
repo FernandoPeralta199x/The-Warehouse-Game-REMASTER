@@ -149,6 +149,11 @@ namespace TW08.Editor
                 TW08MenuSceneBuilder.CreditsPath
             };
 
+            if (SceneFileExists(TW08MenuSceneBuilder.SecretSelectPath))
+            {
+                paths.Add(TW08MenuSceneBuilder.SecretSelectPath);
+            }
+
             foreach (PuzzleCampaignEntry entry in puzzleCampaign.Levels)
             {
                 if (entry == null || string.IsNullOrWhiteSpace(entry.SceneName)) continue;

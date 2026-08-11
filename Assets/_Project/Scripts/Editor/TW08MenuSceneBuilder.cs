@@ -24,6 +24,7 @@ namespace TW08.Editor
         internal const string ModePath = SceneRoot + "/TW08_ModeSelect.unity";
         internal const string OperatorPath = SceneRoot + "/TW08_OperatorSelect.unity";
         internal const string PuzzleSelectPath = SceneRoot + "/TW08_PuzzleSelect.unity";
+        internal const string SecretSelectPath = SceneRoot + "/TW08_SecretSelect.unity";
         internal const string RaceSelectPath = SceneRoot + "/TW08_RaceSelect.unity";
         internal const string SettingsPath = SceneRoot + "/TW08_Settings.unity";
         internal const string CreditsPath = SceneRoot + "/TW08_Credits.unity";
@@ -43,10 +44,16 @@ namespace TW08.Editor
             BuildSettings();
             BuildCredits();
 
-            return new List<string>
+            List<string> paths = new()
             {
                 MainMenuPath, ModePath, OperatorPath, PuzzleSelectPath, RaceSelectPath, SettingsPath, CreditsPath
             };
+            if (System.IO.File.Exists(SecretSelectPath))
+            {
+                paths.Add(SecretSelectPath);
+            }
+
+            return paths;
         }
 
         private static void BuildMainMenu()
@@ -149,26 +156,109 @@ namespace TW08.Editor
 
         private static void BuildPuzzleSelect(PuzzleCampaignDefinition campaign)
         {
-            Scene scene = CreateMenuShell("CAMPANHA // ROTAS", "9 FASES OPERACIONAIS", out Transform shell, out EventSystem eventSystem);
+            PuzzleCampaignDefinition secretCampaign =
+                AssetDatabase.LoadAssetAtPath<PuzzleCampaignDefinition>(
+                    TW08CampaignExpansionImporter.SecretCampaignPath);
+
+            BuildLevelGridSelect(
+                campaign,
+                PuzzleSelectPath,
+                "CAMPANHA // ROTAS",
+                $"{campaign.Levels.Count} FASES OPERACIONAIS",
+                "TW08_ModeSelect",
+                secretCampaign != null ? "TW08_SecretSelect" : null);
+
+            if (secretCampaign != null)
+            {
+                BuildLevelGridSelect(
+                    secretCampaign,
+                    SecretSelectPath,
+                    "ARQUIVO SECRETO // N-8",
+                    $"{secretCampaign.Levels.Count} REGISTROS OCULTOS",
+                    "TW08_PuzzleSelect",
+                    null);
+            }
+        }
+
+        private static void BuildLevelGridSelect(
+            PuzzleCampaignDefinition campaign,
+            string scenePath,
+            string title,
+            string subtitle,
+            string backSceneName,
+            string secretSceneName)
+        {
+            Scene scene = CreateMenuShell(title, subtitle, out Transform shell, out EventSystem eventSystem);
             Text operatorText = TW08ProductionSceneUtility.CreateText(shell, "Operator", "OPERADOR // JOHN", 16, TW08ProductionSceneUtility.Amber, TextAnchor.MiddleRight);
             TW08ProductionSceneUtility.SetRect(operatorText.rectTransform, new Vector2(1f, 1f), new Vector2(470f, 40f), new Vector2(-58f, -118f));
+
+            // Viewport rolável: suporta qualquer quantidade de fases.
+            var scrollGo = new GameObject("Level Scroll",
+                typeof(RectTransform), typeof(ScrollRect), typeof(RectMask2D), typeof(ScrollToSelected));
+            scrollGo.transform.SetParent(shell, false);
+            var scrollRt = (RectTransform)scrollGo.transform;
+            TW08ProductionSceneUtility.SetRect(scrollRt, new Vector2(0.5f, 0.5f), new Vector2(1270f, 470f), new Vector2(0f, 10f));
+
+            var contentGo = new GameObject("Content",
+                typeof(RectTransform), typeof(GridLayoutGroup), typeof(ContentSizeFitter));
+            contentGo.transform.SetParent(scrollGo.transform, false);
+            var contentRt = (RectTransform)contentGo.transform;
+            contentRt.anchorMin = new Vector2(0f, 1f);
+            contentRt.anchorMax = new Vector2(1f, 1f);
+            contentRt.pivot = new Vector2(0.5f, 1f);
+            contentRt.offsetMin = Vector2.zero;
+            contentRt.offsetMax = Vector2.zero;
+
+            var grid = contentGo.GetComponent<GridLayoutGroup>();
+            grid.cellSize = new Vector2(400f, 118f);
+            grid.spacing = new Vector2(18f, 16f);
+            grid.padding = new RectOffset(8, 8, 6, 6);
+            grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            grid.constraintCount = 3;
+            grid.childAlignment = TextAnchor.UpperCenter;
+
+            var fitter = contentGo.GetComponent<ContentSizeFitter>();
+            fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+            var scrollRect = scrollGo.GetComponent<ScrollRect>();
+            scrollRect.content = contentRt;
+            scrollRect.viewport = scrollRt;
+            scrollRect.horizontal = false;
+            scrollRect.vertical = true;
+            scrollRect.movementType = ScrollRect.MovementType.Clamped;
+            scrollRect.scrollSensitivity = 42f;
+
             List<Button> buttons = new();
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < campaign.Levels.Count; i++)
             {
-                int col = i % 3;
-                int row = i / 3;
-                Button button = TW08ProductionSceneUtility.CreateButton(shell, "Level " + (i + 1), $"{i + 1:00} // ROTA", i < 3 ? TW08ProductionSceneUtility.Green : TW08ProductionSceneUtility.Cyan, 15);
-                Vector2 pos = new(-410f + col * 410f, 125f - row * 155f);
-                TW08ProductionSceneUtility.SetRect((RectTransform)button.transform, new Vector2(0.5f, 0.5f), new Vector2(360f, 120f), pos);
+                Button button = TW08ProductionSceneUtility.CreateButton(
+                    contentGo.transform,
+                    "Level " + (i + 1),
+                    $"{i + 1:00} // ROTA",
+                    i < 3 ? TW08ProductionSceneUtility.Green : TW08ProductionSceneUtility.Cyan,
+                    15);
                 buttons.Add(button);
             }
+
             Button back = TW08ProductionSceneUtility.CreateButton(shell, "Back", "VOLTAR", TW08ProductionSceneUtility.TextMuted, 15);
             TW08ProductionSceneUtility.SetRect((RectTransform)back.transform, new Vector2(0f, 0f), new Vector2(180f, 50f), new Vector2(60f, 44f));
+
+            if (!string.IsNullOrEmpty(secretSceneName))
+            {
+                Button secretButton = TW08ProductionSceneUtility.CreateButton(
+                    shell, "Secret Archive", "ARQUIVO SECRETO", TW08ProductionSceneUtility.Amber, 15);
+                TW08ProductionSceneUtility.SetRect(
+                    (RectTransform)secretButton.transform, new Vector2(1f, 0f), new Vector2(260f, 50f), new Vector2(-70f, 44f));
+                SceneNavButton nav = secretButton.gameObject.AddComponent<SceneNavButton>();
+                nav.Configure(secretSceneName);
+                UnityEventTools.AddPersistentListener(secretButton.onClick, nav.Navigate);
+            }
+
             PuzzleLevelSelectController controller = new GameObject("Puzzle Level Select Controller").AddComponent<PuzzleLevelSelectController>();
-            controller.Configure(campaign, buttons, operatorText, back, "TW08_ModeSelect");
+            controller.Configure(campaign, buttons, operatorText, back, backSceneName);
             TW08ProductionSceneUtility.Select(eventSystem, buttons.Count > 0 ? buttons[0] : back);
             EditorSceneManager.MarkSceneDirty(scene);
-            EditorSceneManager.SaveScene(scene, PuzzleSelectPath);
+            EditorSceneManager.SaveScene(scene, scenePath);
         }
 
         private static void BuildRaceSelect(RaceCampaignDefinition campaign)

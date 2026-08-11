@@ -56,11 +56,20 @@ def main() -> int:
         power_ups_raw = str(spec.get("powerUps", "")).lower()
         allow_power_ups = "bloquead" not in power_ups_raw
 
+        # Falas do spec entram no briefing (exibido no HUD da fase).
+        briefing = obj.get("briefing") or spec.get("briefing", "")
+        narrative = spec.get("narrative") or []
+        if narrative:
+            falas = "  ".join(
+                f"{n['speaker']}: “{n['line']}”" for n in narrative[:2]
+            )
+            briefing = f"{briefing}\n{falas}" if briefing else falas
+
         out_levels.append({
             "id": lid,
             "displayName": obj.get("displayName") or spec.get("displayName", lid),
             "sectorId": obj.get("sectorId") or spec.get("sectorId", "S01"),
-            "briefing": obj.get("briefing") or spec.get("briefing", ""),
+            "briefing": briefing,
             "gimmickTags": obj.get("gimmickTags") or spec.get("gimmickTags", []),
             "kind": spec.get("kind", "main"),
             "specIndex": spec.get("index", 0),
