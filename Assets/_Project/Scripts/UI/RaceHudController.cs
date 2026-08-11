@@ -1,4 +1,5 @@
 using TW08.Core;
+using TW08.PowerUps;
 using TW08.Race;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,9 @@ namespace TW08.UI
         [SerializeField] private Text bestText;
         [SerializeField] private Text pilotText;
         [SerializeField] private Text statusText;
+        [SerializeField] private Text positionText;
+        [SerializeField] private Text itemText;
+        [SerializeField] private PowerUpInventory playerInventory;
         [SerializeField] private Button restartButton;
         [SerializeField] private Button exitButton;
         [SerializeField] private string exitSceneName = "TW08_RaceSelect";
@@ -45,6 +49,15 @@ namespace TW08.UI
             MarkDirtyInEditor();
         }
 
+        public void ConfigureArcadeOverlay(Text positionLabel, Text itemLabel, PowerUpInventory inventory)
+        {
+            positionText = positionLabel;
+            itemText = itemLabel;
+            playerInventory = inventory;
+            RefreshItem(playerInventory != null ? playerInventory.Stored : null);
+            MarkDirtyInEditor();
+        }
+
         private void OnEnable()
         {
             if (session != null)
@@ -52,6 +65,11 @@ namespace TW08.UI
                 session.StateChanged += Refresh;
                 session.CountdownChanged += OnCountdownChanged;
                 session.PlayerFinished += OnPlayerFinished;
+            }
+
+            if (playerInventory != null)
+            {
+                playerInventory.StoredChanged += RefreshItem;
             }
 
             if (restartButton != null)
@@ -68,6 +86,7 @@ namespace TW08.UI
         private void Start()
         {
             Refresh();
+            RefreshItem(playerInventory != null ? playerInventory.Stored : null);
         }
 
         private void Update()
@@ -82,6 +101,13 @@ namespace TW08.UI
                 int total = session.Track != null ? session.Track.Laps : 1;
                 lapText.text = $"VOLTA {Mathf.Min(session.PlayerProgress.CurrentLap, total):00}/{total:00}";
             }
+
+            if (positionText != null && session != null && session.RaceManager != null && session.PlayerProgress != null)
+            {
+                int position = session.RaceManager.GetRacePosition(session.PlayerProgress);
+                int count = Mathf.Max(1, session.RaceManager.RacerCount);
+                positionText.text = position > 0 ? $"POS {position:00}/{count:00}" : $"POS --/{count:00}";
+            }
         }
 
         private void OnDisable()
@@ -91,6 +117,11 @@ namespace TW08.UI
                 session.StateChanged -= Refresh;
                 session.CountdownChanged -= OnCountdownChanged;
                 session.PlayerFinished -= OnPlayerFinished;
+            }
+
+            if (playerInventory != null)
+            {
+                playerInventory.StoredChanged -= RefreshItem;
             }
 
             if (restartButton != null)
@@ -177,6 +208,18 @@ namespace TW08.UI
             {
                 bestText.text = "BEST " + FormatTime(session.BestTime);
             }
+        }
+
+        private void RefreshItem(PowerUpDefinition definition)
+        {
+            if (itemText == null)
+            {
+                return;
+            }
+
+            itemText.text = definition != null
+                ? "ITEM // " + definition.DisplayName.ToUpperInvariant()
+                : "ITEM // --";
         }
 
         private static string FormatTime(float seconds)
