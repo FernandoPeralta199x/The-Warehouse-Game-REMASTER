@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using TW08.Core;
 using TW08.Puzzle;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TW08.UI
@@ -49,7 +49,7 @@ namespace TW08.UI
 
         public void Back()
         {
-            TryLoadScene(backScene, "menu de modos");
+            SceneLoader.TryLoadImmediate(backScene, "menu de modos");
         }
 
         private void Bind()
@@ -76,8 +76,6 @@ namespace TW08.UI
                 return;
             }
 
-            // Runtime-created delegates cannot be removed one-by-one without retaining each delegate.
-            // Removing all runtime listeners is safe because generated buttons do not carry gameplay listeners.
             foreach (Button button in levelButtons)
             {
                 button?.onClick.RemoveAllListeners();
@@ -101,7 +99,7 @@ namespace TW08.UI
                 return;
             }
 
-            if (!TryLoadScene(entry.SceneName, $"fase {index + 1:00}"))
+            if (!SceneLoader.TryLoadImmediate(entry.SceneName, $"fase {index + 1:00}"))
             {
                 if (index >= 0 && index < levelButtons.Count && levelButtons[index] != null)
                 {
@@ -110,31 +108,11 @@ namespace TW08.UI
             }
         }
 
-        private static bool TryLoadScene(string sceneName, string context)
-        {
-            if (string.IsNullOrWhiteSpace(sceneName))
-            {
-                Debug.LogError($"TW08 cannot load {context}: scene name is empty.");
-                return false;
-            }
-
-            if (!Application.CanStreamedLevelBeLoaded(sceneName))
-            {
-                Debug.LogError(
-                    $"TW08 cannot load {context} scene '{sceneName}' because it is not registered in the active/shared Scene List. " +
-                    "Run Tools > TW08 > Production > Repair Runtime Scene Registration.");
-                return false;
-            }
-
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-            return true;
-        }
-
         private void Refresh()
         {
             if (operatorText != null)
             {
-                operatorText.text = "OPERADOR // " + Core.CharacterSelectionState.SelectedCharacterId.ToUpperInvariant();
+                operatorText.text = "OPERADOR // " + CharacterSelectionState.SelectedCharacterId.ToUpperInvariant();
             }
 
             if (campaign == null)
