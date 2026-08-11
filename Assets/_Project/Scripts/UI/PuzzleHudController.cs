@@ -1,4 +1,6 @@
+using TW08.Core;
 using TW08.Puzzle;
+using TW08.Save;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -13,9 +15,13 @@ namespace TW08.UI
         [SerializeField] private Text levelNameText;
         [SerializeField] private Text movesText;
         [SerializeField] private Text statusText;
+        [SerializeField] private Text operatorText;
+        [SerializeField] private Text targetText;
         [SerializeField] private Button undoButton;
         [SerializeField] private Button redoButton;
         [SerializeField] private Button primaryActionButton;
+        [SerializeField] private string nextSceneName;
+        [SerializeField] private string campaignSelectScene = "TW08_PuzzleSelect";
 
         private bool bound;
 
@@ -38,13 +44,22 @@ namespace TW08.UI
             primaryActionButton = primaryAction;
             Bind();
             Refresh();
+            MarkDirtyInEditor();
+        }
 
-#if UNITY_EDITOR
-            if (!Application.isPlaying)
-            {
-                UnityEditor.EditorUtility.SetDirty(this);
-            }
-#endif
+        public void ConfigureCampaignFlow(string nextScene, string selectScene = "TW08_PuzzleSelect")
+        {
+            nextSceneName = nextScene;
+            campaignSelectScene = string.IsNullOrWhiteSpace(selectScene) ? "TW08_PuzzleSelect" : selectScene;
+            MarkDirtyInEditor();
+        }
+
+        public void ConfigureExtendedLabels(Text operatorLabel, Text targetLabel)
+        {
+            operatorText = operatorLabel;
+            targetText = targetLabel;
+            Refresh();
+            MarkDirtyInEditor();
         }
 
         private void OnEnable()
@@ -72,6 +87,7 @@ namespace TW08.UI
             runtime.LevelRestarted += OnRestarted;
             runtime.LevelCompleted += OnCompleted;
             runtime.StaticDeadlockDetected += OnDeadlock;
+            runtime.SwitchGroupStateChanged += OnSwitchChanged;
 
             undoButton?.onClick.AddListener(Undo);
             redoButton?.onClick.AddListener(Redo);
@@ -95,6 +111,7 @@ namespace TW08.UI
                 runtime.LevelRestarted -= OnRestarted;
                 runtime.LevelCompleted -= OnCompleted;
                 runtime.StaticDeadlockDetected -= OnDeadlock;
+                runtime.SwitchGroupStateChanged -= OnSwitchChanged;
             }
 
             undoButton?.onClick.RemoveListener(Undo);
@@ -126,9 +143,17 @@ namespace TW08.UI
         private void OnBoardChanged(PuzzleMove _) => Refresh();
         private void OnRestarted() => Refresh();
         private void OnDeadlock() => Refresh();
+        private void OnSwitchChanged(string _, bool __) => Refresh();
 
         private void OnCompleted()
         {
+            if (runtime?.Level != null && runtime.Board != null)
+            {
+                PuzzleProgressStore.RecordCompletion(runtime.Level, runtime.Board.MoveCount);
+                SaveManager saveManager = Object.FindFirstObjectByType<SaveManager>();
+                saveManager?.RecordPuzzleCompletion(runtime.Level, runtime.Board.MoveCount);
+            }
+
             Refresh();
             if (primaryActionButton != null && EventSystem.current != null)
             {
@@ -147,7 +172,7 @@ namespace TW08.UI
             if (levelNameText != null)
             {
                 levelNameText.text = runtime.Level != null
-                    ? runtime.Level.DisplayName.ToUpperInvariant()
+                    ? $"{runtime.Level.SectorId} // {runtime.Level.DisplayName}".ToUpperInvariant()
                     : "ROTA DESCONHECIDA";
             }
 
@@ -155,6 +180,16 @@ namespace TW08.UI
             {
                 int moves = runtime.Board?.MoveCount ?? 0;
                 movesText.text = $"MOVIMENTOS {moves:000}   UNDO {runtime.UndoCount:00}   REDO {runtime.RedoCount:00}";
+            }
+
+            if (operatorText != null)
+            {
+                operatorText.text = "OPERADOR // " + CharacterSelectionState.SelectedCharacterId.ToUpperInvariant();
+            }
+
+            if (targetText != null && runtime.Level != null)
+            {
+                targetText.text = $"PLAT {runtime.Level.PlatinumMoveLimit:000} // GOLD {runtime.Level.GoldMoveLimit:000}";
             }
 
             if (undoButton != null)
@@ -187,7 +222,8 @@ namespace TW08.UI
 
             if (board.IsComplete)
             {
-                statusText.text = "ROTA LIBERADA // TURNO CONCLUÍDO";
+                int medal = PuzzleProgressStore.EvaluateMedal(runtime.Level, board.MoveCount);
+                statusText.text = $"ROTA LIBERADA // MEDALHA {medal}";
                 return;
             }
 
@@ -218,26 +254,39 @@ namespace TW08.UI
                 : "RESET [R]";
         }
 
-        private static void LoadNextSceneOrMenu()
+        private void LoadNextSceneOrMenu()
         {
-            int sceneCount = SceneManager.sceneCountInBuildSettings;
-            if (sceneCount <= 0)
+            Time.timeScale = 1f;
+
+            if (!string.IsNullOrWhiteSpace(nextSceneName))
             {
-                Debug.LogError("No scenes are configured in Build Settings.");
+                SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 return;
             }
 
+            int sceneCount = SceneManager.sceneCountInBuildSettings;
             Scene activeScene = SceneManager.GetActiveScene();
             int nextIndex = activeScene.buildIndex + 1;
-            Time.timeScale = 1f;
-
             if (activeScene.buildIndex >= 0 && nextIndex < sceneCount)
             {
                 SceneManager.LoadScene(nextIndex, LoadSceneMode.Single);
                 return;
             }
 
-            SceneManager.LoadScene(0, LoadSceneMode.Single);
+            if (!string.IsNullOrWhiteSpace(campaignSelectScene))
+            {
+                SceneManager.LoadScene(campaignSelectScene, LoadSceneMode.Single);
+            }
+        }
+
+        private void MarkDirtyInEditor()
+        {
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+#endif
         }
     }
 }
