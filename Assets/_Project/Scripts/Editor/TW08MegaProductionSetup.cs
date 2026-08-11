@@ -24,14 +24,20 @@ namespace TW08.Editor
             {
                 EditorUtility.DisplayProgressBar(
                     "The Warehouse Nº 08 — Mega Update",
+                    "Validando e reparando campanha de corrida...",
+                    0.04f);
+                TW08RaceCampaignIntegrity.EnsureValidCampaign();
+
+                EditorUtility.DisplayProgressBar(
+                    "The Warehouse Nº 08 — Mega Update",
                     "Inicializando content streaming e grupos Addressables...",
-                    0.08f);
+                    0.10f);
                 TW08AddressablesSetup.EnsureProductionGroups();
 
                 EditorUtility.DisplayProgressBar(
                     "The Warehouse Nº 08 — Mega Update",
                     "Criando perfis gráficos e conteúdo de corrida...",
-                    0.20f);
+                    0.22f);
                 TW08MegaContentSetup.MegaContentData content = TW08MegaContentSetup.EnsureAll();
 
                 EditorUtility.DisplayProgressBar(
@@ -91,7 +97,8 @@ namespace TW08.Editor
                     "A atualização foi interrompida no primeiro erro. Corrija o erro antes de repetir o comando.\n\n" +
                     exception.Message,
                     "OK");
-                throw;
+                // Menu commands should consume the exception after surfacing it once.
+                // Rethrowing here makes Unity print the same stack trace a second time.
             }
             finally
             {
