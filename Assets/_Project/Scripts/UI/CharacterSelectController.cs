@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TW08.Core;
 using TW08.Data;
+using TW08.Save;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -97,6 +98,7 @@ namespace TW08.UI
             }
 
             CharacterSelectionState.Select(profile);
+            Object.FindFirstObjectByType<SaveManager>()?.SelectCharacter(profile.CharacterId);
             Refresh();
         }
 
@@ -144,28 +146,16 @@ namespace TW08.UI
             if (confirmButton != null) confirmButton.interactable = playable;
             if (statusText != null)
             {
-                if (!playable)
-                {
-                    statusText.text = "NPC // OFICINA N-8";
-                }
-                else if (profile.CharacterId == CharacterSelectionState.SelectedCharacterId)
-                {
-                    statusText.text = "OPERADOR ATIVO";
-                }
-                else
-                {
-                    statusText.text = "DISPONÍVEL";
-                }
+                if (!playable) statusText.text = "NPC // OFICINA N-8";
+                else if (profile.CharacterId == CharacterSelectionState.SelectedCharacterId) statusText.text = "OPERADOR ATIVO";
+                else statusText.text = "DISPONÍVEL";
             }
         }
 
         private void MarkDirtyInEditor()
         {
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
-            {
-                UnityEditor.EditorUtility.SetDirty(this);
-            }
+            if (!Application.isPlaying) UnityEditor.EditorUtility.SetDirty(this);
 #endif
         }
     }
