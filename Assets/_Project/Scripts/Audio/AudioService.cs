@@ -25,31 +25,15 @@ namespace TW08.Audio
             }
 
             Instance = this;
-
-            if (persistAcrossScenes)
-            {
-                DontDestroyOnLoad(gameObject);
-            }
-
-            for (int i = 0; i < initialPoolSize; i++)
-            {
-                available.Enqueue(CreateSource());
-            }
+            if (persistAcrossScenes) DontDestroyOnLoad(gameObject);
+            for (int i = 0; i < initialPoolSize; i++) available.Enqueue(CreateSource());
         }
 
         public void PlayOneShot(AudioEvent audioEvent, Vector3 position = default)
         {
-            if (audioEvent == null)
-            {
-                return;
-            }
-
+            if (audioEvent == null) return;
             AudioClip clip = audioEvent.GetRandomClip();
-            if (clip == null)
-            {
-                return;
-            }
-
+            if (clip == null) return;
             AudioSource source = GetSource();
             Configure(source, audioEvent, clip, position);
             source.loop = false;
@@ -59,17 +43,9 @@ namespace TW08.Audio
 
         public void StartLoop(AudioEvent audioEvent, Vector3 position = default)
         {
-            if (audioEvent == null || loops.ContainsKey(audioEvent.EventId))
-            {
-                return;
-            }
-
+            if (audioEvent == null || loops.ContainsKey(audioEvent.EventId)) return;
             AudioClip clip = audioEvent.GetRandomClip();
-            if (clip == null)
-            {
-                return;
-            }
-
+            if (clip == null) return;
             AudioSource source = GetSource();
             Configure(source, audioEvent, clip, position);
             source.loop = true;
@@ -79,11 +55,7 @@ namespace TW08.Audio
 
         public void StopLoop(string eventId)
         {
-            if (!loops.TryGetValue(eventId, out AudioSource source))
-            {
-                return;
-            }
-
+            if (!loops.TryGetValue(eventId, out AudioSource source)) return;
             loops.Remove(eventId);
             source.Stop();
             Return(source);
@@ -111,7 +83,8 @@ namespace TW08.Audio
             source.transform.position = position;
             source.clip = clip;
             source.outputAudioMixerGroup = audioEvent.MixerGroup;
-            source.volume = Random.Range(audioEvent.VolumeRange.x, audioEvent.VolumeRange.y);
+            float sfxVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("tw08.audio.sfx", 1f));
+            source.volume = Random.Range(audioEvent.VolumeRange.x, audioEvent.VolumeRange.y) * sfxVolume;
             source.pitch = Random.Range(audioEvent.PitchRange.x, audioEvent.PitchRange.y);
             source.spatialBlend = audioEvent.SpatialBlend;
         }
@@ -124,10 +97,7 @@ namespace TW08.Audio
 
         private void OnDestroy()
         {
-            if (Instance == this)
-            {
-                Instance = null;
-            }
+            if (Instance == this) Instance = null;
         }
 
         private void Return(AudioSource source)
