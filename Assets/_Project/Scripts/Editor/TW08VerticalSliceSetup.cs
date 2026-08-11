@@ -35,6 +35,7 @@ namespace TW08.Editor
             PuzzleLevelDefinition level01 = CreateLevel01();
             PuzzleLevelDefinition level02 = CreateLevel02();
             PuzzleLevelDefinition level03 = CreateLevel03();
+            AssetDatabase.SaveAssets();
 
             string menuPath = $"{SceneRoot}/TW08_MainMenu.unity";
             string level01Path = $"{SceneRoot}/TW08_Level01_FirstShift.unity";
@@ -246,8 +247,19 @@ namespace TW08.Editor
                 .ToList();
 
             runtime.Configure(level, player, crates);
+            EditorUtility.SetDirty(runtime);
+
             PuzzlePlayerController controller = player.gameObject.AddComponent<PuzzlePlayerController>();
             controller.Configure(input, runtime);
+            EditorUtility.SetDirty(controller);
+
+            player.Snap(level.PlayerStart, level.CellSize);
+            EditorUtility.SetDirty(player);
+            for (int i = 0; i < level.Crates.Count && i < crates.Count; i++)
+            {
+                crates[i].Snap(level.Crates[i].Position, level.CellSize);
+                EditorUtility.SetDirty(crates[i]);
+            }
 
             Camera camera = CreateCamera(
                 new Vector3((level.Width - 1) * 0.5f, (level.Height - 1) * 0.5f, -10f),
@@ -258,7 +270,7 @@ namespace TW08.Editor
             CreateEventSystem();
             CreatePuzzleHud(canvas.transform, runtime, hint);
 
-            runtime.Initialize();
+            EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene, path);
         }
 
@@ -362,6 +374,7 @@ namespace TW08.Editor
             GameObject entity = CreateSquare(name, Vector3.zero, color, Vector2.one * 0.76f, order);
             PuzzleEntityView view = entity.AddComponent<PuzzleEntityView>();
             view.Configure(id, kind);
+            EditorUtility.SetDirty(view);
             return view;
         }
 
