@@ -2,7 +2,8 @@
   "name": "TW08.Runtime",
   "rootNamespace": "TW08",
   "references": [
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "UnityEngine.UI"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

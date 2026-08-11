@@ -9,6 +9,9 @@ namespace TW08.Puzzle
     {
         private readonly HashSet<GridCoordinate> walls;
         private readonly HashSet<GridCoordinate> goals;
+        private readonly HashSet<GridCoordinate> costlyCells;
+        private readonly HashSet<GridCoordinate> dynamicBlockedCells = new();
+        private readonly Dictionary<GridCoordinate, PuzzleEntityKind> goalRequirements;
         private readonly Dictionary<GridCoordinate, string> crateByPosition;
         private readonly Dictionary<string, PuzzleEntityKind> crateKinds;
 
@@ -18,8 +21,11 @@ namespace TW08.Puzzle
         public int MoveCount { get; private set; }
         public IReadOnlyCollection<GridCoordinate> Walls => walls;
         public IReadOnlyCollection<GridCoordinate> Goals => goals;
+        public IReadOnlyCollection<GridCoordinate> CostlyCells => costlyCells;
+        public IReadOnlyCollection<GridCoordinate> DynamicBlockedCells => dynamicBlockedCells;
+        public IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> GoalRequirements => goalRequirements;
         public IReadOnlyDictionary<GridCoordinate, string> Crates => crateByPosition;
-        public bool IsComplete => goals.Count > 0 && goals.Count == crateByPosition.Count && goals.All(crateByPosition.ContainsKey);
+        public bool IsComplete => EvaluateCompletion();
 
         public PuzzleBoardModel(PuzzleLevelDefinition level)
             : this(
@@ -29,7 +35,11 @@ namespace TW08.Puzzle
                 level.Goals,
                 level.PlayerStart,
                 level.Crates.ToDictionary(c => c.Id, c => c.Position),
-                level.Crates.ToDictionary(c => c.Id, c => c.Kind))
+                level.Crates.ToDictionary(c => c.Id, c => c.Kind),
+                level.CostlyCells,
+                level.GoalRequirements
+                    .Where(requirement => requirement != null)
+                    .ToDictionary(requirement => requirement.Position, requirement => requirement.RequiredKind))
         {
         }
 
@@ -40,12 +50,18 @@ namespace TW08.Puzzle
             IEnumerable<GridCoordinate> goals,
             GridCoordinate playerStart,
             IReadOnlyDictionary<string, GridCoordinate> crates,
-            IReadOnlyDictionary<string, PuzzleEntityKind> kinds = null)
+            IReadOnlyDictionary<string, PuzzleEntityKind> kinds = null,
+            IEnumerable<GridCoordinate> costlyCells = null,
+            IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> goalRequirements = null)
         {
             Width = Guard.Positive(width, nameof(width));
             Height = Guard.Positive(height, nameof(height));
             this.walls = new HashSet<GridCoordinate>(walls ?? Array.Empty<GridCoordinate>());
             this.goals = new HashSet<GridCoordinate>(goals ?? Array.Empty<GridCoordinate>());
+            this.costlyCells = new HashSet<GridCoordinate>(costlyCells ?? Array.Empty<GridCoordinate>());
+            this.goalRequirements = goalRequirements != null
+                ? new Dictionary<GridCoordinate, PuzzleEntityKind>(goalRequirements)
+                : new Dictionary<GridCoordinate, PuzzleEntityKind>();
             crateByPosition = new Dictionary<GridCoordinate, string>();
             crateKinds = new Dictionary<string, PuzzleEntityKind>();
             PlayerPosition = playerStart;
@@ -85,18 +101,19 @@ namespace TW08.Puzzle
 
             GridCoordinate destination = PlayerPosition + direction;
 
-            if (!IsInside(destination) || walls.Contains(destination))
+            if (!IsInside(destination) || IsBlocked(destination))
             {
                 return false;
             }
 
             GridCoordinate previousPlayer = PlayerPosition;
+            int moveCost = GetMoveCost(destination);
 
             if (!crateByPosition.TryGetValue(destination, out string crateId))
             {
                 PlayerPosition = destination;
-                MoveCount++;
-                move = new PuzzleMove(previousPlayer, PlayerPosition);
+                MoveCount += moveCost;
+                move = new PuzzleMove(previousPlayer, PlayerPosition, moveCost);
                 return true;
             }
 
@@ -110,8 +127,8 @@ namespace TW08.Puzzle
             crateByPosition.Remove(destination);
             crateByPosition.Add(crateDestination, crateId);
             PlayerPosition = destination;
-            MoveCount++;
-            move = new PuzzleMove(previousPlayer, PlayerPosition, crateId, destination, crateDestination);
+            MoveCount += moveCost;
+            move = new PuzzleMove(previousPlayer, PlayerPosition, crateId, destination, crateDestination, moveCost);
             return true;
         }
 
@@ -134,8 +151,33 @@ namespace TW08.Puzzle
             }
 
             PlayerPosition = move.PlayerFrom;
-            MoveCount = Math.Max(0, MoveCount - 1);
+            MoveCount = Math.Max(0, MoveCount - Math.Max(1, move.MoveCost));
             return true;
+        }
+
+        public bool SetDynamicBlocked(GridCoordinate cell, bool blocked)
+        {
+            if (!IsInside(cell) || walls.Contains(cell))
+            {
+                return false;
+            }
+
+            if (blocked)
+            {
+                if (PlayerPosition == cell || crateByPosition.ContainsKey(cell))
+                {
+                    return false;
+                }
+
+                return dynamicBlockedCells.Add(cell);
+            }
+
+            return dynamicBlockedCells.Remove(cell);
+        }
+
+        public void ClearDynamicBlocked()
+        {
+            dynamicBlockedCells.Clear();
         }
 
         public bool IsInside(GridCoordinate cell)
@@ -143,9 +185,39 @@ namespace TW08.Puzzle
             return cell.X >= 0 && cell.Y >= 0 && cell.X < Width && cell.Y < Height;
         }
 
+        public bool IsWall(GridCoordinate cell)
+        {
+            return walls.Contains(cell);
+        }
+
+        public bool IsBlocked(GridCoordinate cell)
+        {
+            return walls.Contains(cell) || dynamicBlockedCells.Contains(cell);
+        }
+
+        public bool IsGoal(GridCoordinate cell)
+        {
+            return goals.Contains(cell);
+        }
+
+        public bool IsCostly(GridCoordinate cell)
+        {
+            return costlyCells.Contains(cell);
+        }
+
+        public bool TryGetGoalRequirement(GridCoordinate cell, out PuzzleEntityKind kind)
+        {
+            return goalRequirements.TryGetValue(cell, out kind);
+        }
+
+        public int GetMoveCost(GridCoordinate destination)
+        {
+            return costlyCells.Contains(destination) ? 2 : 1;
+        }
+
         public bool IsFree(GridCoordinate cell)
         {
-            return IsInside(cell) && !walls.Contains(cell) && !crateByPosition.ContainsKey(cell);
+            return IsInside(cell) && !IsBlocked(cell) && !crateByPosition.ContainsKey(cell);
         }
 
         public bool TryGetCratePosition(string crateId, out GridCoordinate position)
@@ -166,6 +238,30 @@ namespace TW08.Puzzle
         public PuzzleEntityKind GetCrateKind(string crateId)
         {
             return crateKinds.TryGetValue(crateId, out PuzzleEntityKind kind) ? kind : PuzzleEntityKind.Crate;
+        }
+
+        private bool EvaluateCompletion()
+        {
+            if (goals.Count == 0 || goals.Count != crateByPosition.Count)
+            {
+                return false;
+            }
+
+            foreach (GridCoordinate goal in goals)
+            {
+                if (!crateByPosition.TryGetValue(goal, out string crateId))
+                {
+                    return false;
+                }
+
+                if (goalRequirements.TryGetValue(goal, out PuzzleEntityKind requiredKind)
+                    && GetCrateKind(crateId) != requiredKind)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void ValidateCell(GridCoordinate cell, string label)

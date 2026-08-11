@@ -3,7 +3,8 @@
   "rootNamespace": "TW08.Editor",
   "references": [
     "TW08.Runtime",
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "UnityEngine.UI"
   ],
   "includePlatforms": [
     "Editor"

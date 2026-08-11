@@ -10,6 +10,12 @@ UserSettings/
 MemoryCaptures/
 Recordings/
 
+# ─── Addressables / generated delivery output ─────────────────
+# Settings, groups and labels under Assets/AddressableAssetsData stay versioned.
+# Built bundles/catalog delivery output is generated and must not pollute Git.
+ServerData/
+AddressablesBuildTEP.json
+
 # ─── IDE / editor ──────────────────────────────────────────────
 .vs/
 .idea/

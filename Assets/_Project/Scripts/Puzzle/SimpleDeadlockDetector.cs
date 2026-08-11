@@ -11,7 +11,7 @@ namespace TW08.Puzzle
 
             foreach (GridCoordinate crate in board.Crates.Keys)
             {
-                if (board.Goals.Contains(crate))
+                if (board.IsGoal(crate))
                 {
                     continue;
                 }
@@ -32,7 +32,7 @@ namespace TW08.Puzzle
 
         private static bool IsBlocked(PuzzleBoardModel board, GridCoordinate cell)
         {
-            return !board.IsInside(cell) || board.Walls.Contains(cell);
+            return !board.IsInside(cell) || board.IsWall(cell);
         }
     }
 }

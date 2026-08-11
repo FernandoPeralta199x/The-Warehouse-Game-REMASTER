@@ -14,6 +14,7 @@ namespace TW08.Puzzle
         [SerializeField] private bool initializeOnStart = true;
 
         private readonly PuzzleHistory history = new();
+        private readonly Dictionary<string, bool> switchStates = new(StringComparer.Ordinal);
         private Dictionary<string, PuzzleEntityView> crateViewById = new();
 
         public PuzzleBoardModel Board { get; private set; }
@@ -21,12 +22,14 @@ namespace TW08.Puzzle
         public int UndoCount => history.UndoCount;
         public int RedoCount => history.RedoCount;
 
+        public event Action Initialized;
         public event Action<PuzzleMove> MoveApplied;
         public event Action<PuzzleMove> MoveUndone;
         public event Action<PuzzleMove> MoveRedone;
         public event Action LevelRestarted;
         public event Action LevelCompleted;
         public event Action StaticDeadlockDetected;
+        public event Action<string, bool> SwitchGroupStateChanged;
 
         private void Start()
         {
@@ -41,6 +44,17 @@ namespace TW08.Puzzle
             level = definition;
             playerView = player;
             crateViews = crates?.ToList() ?? new List<PuzzleEntityView>();
+
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+                if (gameObject.scene.IsValid())
+                {
+                    UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(gameObject.scene);
+                }
+            }
+#endif
         }
 
         public void Initialize()
@@ -48,17 +62,25 @@ namespace TW08.Puzzle
             IReadOnlyList<string> validationErrors = PuzzleLevelValidator.Validate(level);
             if (validationErrors.Count > 0)
             {
+                Board = null;
+                history.Clear();
+                switchStates.Clear();
+                crateViewById.Clear();
                 Debug.LogError("Puzzle level is invalid:\n- " + string.Join("\n- ", validationErrors), level);
                 return;
             }
 
             Board = new PuzzleBoardModel(level);
             history.Clear();
+            switchStates.Clear();
             crateViewById = crateViews
                 .Where(view => view != null && !string.IsNullOrWhiteSpace(view.EntityId))
                 .GroupBy(view => view.EntityId)
                 .ToDictionary(group => group.Key, group => group.First());
-            SyncViews();
+
+            ApplySwitchGroups(true);
+            SyncViews(false);
+            Initialized?.Invoke();
         }
 
         public bool TryMove(GridCoordinate direction)
@@ -69,18 +91,10 @@ namespace TW08.Puzzle
             }
 
             history.Record(move);
-            SyncViews();
+            ApplySwitchGroups(false);
+            SyncViews(true);
             MoveApplied?.Invoke(move);
-
-            if (Board.IsComplete)
-            {
-                LevelCompleted?.Invoke();
-            }
-            else if (SimpleDeadlockDetector.HasStaticCornerDeadlock(Board))
-            {
-                StaticDeadlockDetected?.Invoke();
-            }
-
+            EvaluateBoardState();
             return true;
         }
 
@@ -98,7 +112,8 @@ namespace TW08.Puzzle
             }
 
             history.PushRedo(move);
-            SyncViews();
+            ApplySwitchGroups(false);
+            SyncViews(true);
             MoveUndone?.Invoke(move);
             return true;
         }
@@ -118,30 +133,128 @@ namespace TW08.Puzzle
             }
 
             history.RestoreUndo(repeated);
-            SyncViews();
+            ApplySwitchGroups(false);
+            SyncViews(true);
             MoveRedone?.Invoke(repeated);
+            EvaluateBoardState();
             return true;
         }
 
         public void Restart()
         {
             Initialize();
-            LevelRestarted?.Invoke();
+            if (Board != null)
+            {
+                LevelRestarted?.Invoke();
+            }
         }
 
-        private void SyncViews()
+        public bool IsSwitchGroupOpen(string groupId)
+        {
+            return !string.IsNullOrWhiteSpace(groupId)
+                && switchStates.TryGetValue(groupId, out bool open)
+                && open;
+        }
+
+        private void ApplySwitchGroups(bool forceNotify)
+        {
+            if (Board == null || level == null)
+            {
+                return;
+            }
+
+            IReadOnlyList<PuzzleSwitchGroupDefinition> groups = level.SwitchGroups;
+            if (groups == null || groups.Count == 0)
+            {
+                return;
+            }
+
+            foreach (PuzzleSwitchGroupDefinition group in groups)
+            {
+                if (group == null || string.IsNullOrWhiteSpace(group.Id))
+                {
+                    continue;
+                }
+
+                IReadOnlyList<GridCoordinate> doors = group.Doors ?? Array.Empty<GridCoordinate>();
+                bool requestedOpen = group.Sensors != null
+                    && group.Sensors.Count > 0
+                    && group.Sensors.All(sensor => Board.Crates.ContainsKey(sensor));
+
+                bool effectiveOpen = requestedOpen;
+                if (requestedOpen)
+                {
+                    foreach (GridCoordinate door in doors)
+                    {
+                        Board.SetDynamicBlocked(door, false);
+                    }
+                }
+                else
+                {
+                    bool allClosed = true;
+                    foreach (GridCoordinate door in doors)
+                    {
+                        if (!Board.SetDynamicBlocked(door, true) && !Board.DynamicBlockedCells.Contains(door))
+                        {
+                            allClosed = false;
+                        }
+                    }
+
+                    if (!allClosed)
+                    {
+                        // Door groups transition atomically: if one panel cannot close because the player
+                        // or cargo occupies the cell, keep every panel in the group open.
+                        foreach (GridCoordinate door in doors)
+                        {
+                            Board.SetDynamicBlocked(door, false);
+                        }
+                        effectiveOpen = true;
+                    }
+                    else
+                    {
+                        effectiveOpen = false;
+                    }
+                }
+
+                bool changed = !switchStates.TryGetValue(group.Id, out bool previous) || previous != effectiveOpen;
+                switchStates[group.Id] = effectiveOpen;
+                if (forceNotify || changed)
+                {
+                    SwitchGroupStateChanged?.Invoke(group.Id, effectiveOpen);
+                }
+            }
+        }
+
+        private void EvaluateBoardState()
         {
             if (Board == null)
             {
                 return;
             }
 
-            playerView?.Snap(Board.PlayerPosition, level.CellSize);
+            if (Board.IsComplete)
+            {
+                LevelCompleted?.Invoke();
+            }
+            else if (SimpleDeadlockDetector.HasStaticCornerDeadlock(Board))
+            {
+                StaticDeadlockDetected?.Invoke();
+            }
+        }
+
+        private void SyncViews(bool animate)
+        {
+            if (Board == null)
+            {
+                return;
+            }
+
+            playerView?.MoveTo(Board.PlayerPosition, level.CellSize, animate);
             foreach (KeyValuePair<GridCoordinate, string> crate in Board.Crates)
             {
                 if (crateViewById.TryGetValue(crate.Value, out PuzzleEntityView view))
                 {
-                    view.Snap(crate.Key, level.CellSize);
+                    view.MoveTo(crate.Key, level.CellSize, animate);
                 }
             }
         }

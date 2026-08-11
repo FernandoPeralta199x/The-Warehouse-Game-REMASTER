@@ -11,6 +11,7 @@ namespace TW08.PowerUps
         [SerializeField] private PowerUpInventory inventory;
         [SerializeField] private ArcadeForkliftController2D controller;
         [SerializeField] private ForkliftDamage damage;
+        [SerializeField] private RaceCargoController cargo;
         [SerializeField] private LayerMask racerLayers = ~0;
         [SerializeField] private StandardPowerUpEffect fallbackEffect;
 
@@ -18,6 +19,11 @@ namespace TW08.PowerUps
 
         private void Awake()
         {
+            if (cargo == null)
+            {
+                cargo = GetComponent<RaceCargoController>();
+            }
+
             if (fallbackEffect == null)
             {
                 runtimeFallback = ScriptableObject.CreateInstance<StandardPowerUpEffect>();
@@ -40,12 +46,21 @@ namespace TW08.PowerUps
             }
         }
 
-        public void Configure(GameInput gameInput, PowerUpInventory powerUpInventory, ArcadeForkliftController2D forklift, ForkliftDamage forkliftDamage)
+        public void Configure(
+            GameInput gameInput,
+            PowerUpInventory powerUpInventory,
+            ArcadeForkliftController2D forklift,
+            ForkliftDamage forkliftDamage,
+            RaceCargoController raceCargo = null)
         {
             input = gameInput;
             inventory = powerUpInventory;
             controller = forklift;
             damage = forkliftDamage;
+            cargo = raceCargo != null ? raceCargo : forklift != null ? forklift.GetComponent<RaceCargoController>() : null;
+#if UNITY_EDITOR
+            if (!Application.isPlaying) UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
 
         public void UseStored()
@@ -76,14 +91,21 @@ namespace TW08.PowerUps
                 return false;
             }
 
-            PowerUpEffect effect = definition.Effect != null ? definition.Effect : (fallbackEffect != null ? fallbackEffect : runtimeFallback);
+            PowerUpEffect effect = definition.Effect != null
+                ? definition.Effect
+                : fallbackEffect != null ? fallbackEffect : runtimeFallback;
             if (effect == null)
             {
                 Debug.LogWarning($"Power Up '{definition.Id}' has no effect strategy.", definition);
                 return false;
             }
 
-            PowerUpContext context = new(transform, controller, damage, racerLayers);
+            if (cargo == null && controller != null)
+            {
+                cargo = controller.GetComponent<RaceCargoController>();
+            }
+
+            PowerUpContext context = new(transform, controller, damage, cargo, racerLayers);
             return effect.TryApply(definition, context);
         }
     }

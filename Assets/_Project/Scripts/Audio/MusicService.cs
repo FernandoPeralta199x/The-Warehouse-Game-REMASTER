@@ -25,37 +25,21 @@ namespace TW08.Audio
 
         public void Shutdown()
         {
-            if (transition != null)
-            {
-                StopCoroutine(transition);
-            }
-
+            if (transition != null) StopCoroutine(transition);
             sourceA?.Stop();
             sourceB?.Stop();
         }
 
         public void Play(MusicTrack track, float fadeSeconds = -1f)
         {
-            if (track == null || track.Clip == null || track.TrackId == CurrentTrackId)
-            {
-                return;
-            }
-
-            if (transition != null)
-            {
-                StopCoroutine(transition);
-            }
-
+            if (track == null || track.Clip == null || track.TrackId == CurrentTrackId) return;
+            if (transition != null) StopCoroutine(transition);
             transition = StartCoroutine(Crossfade(track, fadeSeconds < 0f ? defaultFadeSeconds : fadeSeconds));
         }
 
         public void Stop(float fadeSeconds = -1f)
         {
-            if (transition != null)
-            {
-                StopCoroutine(transition);
-            }
-
+            if (transition != null) StopCoroutine(transition);
             transition = StartCoroutine(FadeOut(fadeSeconds < 0f ? defaultFadeSeconds : fadeSeconds));
         }
 
@@ -79,6 +63,7 @@ namespace TW08.Audio
             next.Play();
 
             float startVolume = active.volume;
+            float targetVolume = track.Volume * Mathf.Clamp01(PlayerPrefs.GetFloat("tw08.audio.music", 0.8f));
             float duration = Mathf.Max(0.01f, seconds);
             float elapsed = 0f;
 
@@ -87,7 +72,7 @@ namespace TW08.Audio
                 elapsed += Time.unscaledDeltaTime;
                 float t = Mathf.Clamp01(elapsed / duration);
                 active.volume = Mathf.Lerp(startVolume, 0f, t);
-                next.volume = Mathf.Lerp(0f, track.Volume, t);
+                next.volume = Mathf.Lerp(0f, targetVolume, t);
                 yield return null;
             }
 

@@ -20,6 +20,7 @@ namespace TW08.Puzzle
             input.SetMode(GameMode.Puzzle);
             input.PuzzleMoveRequested += OnMove;
             input.PuzzleUndoRequested += OnUndo;
+            input.PuzzleRedoRequested += OnRedo;
             input.PuzzleRestartRequested += OnRestart;
         }
 
@@ -32,6 +33,7 @@ namespace TW08.Puzzle
 
             input.PuzzleMoveRequested -= OnMove;
             input.PuzzleUndoRequested -= OnUndo;
+            input.PuzzleRedoRequested -= OnRedo;
             input.PuzzleRestartRequested -= OnRestart;
         }
 
@@ -39,10 +41,18 @@ namespace TW08.Puzzle
         {
             input = gameInput;
             runtime = puzzleRuntime;
+
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+#endif
         }
 
         private void OnMove(GridCoordinate direction) => runtime.TryMove(direction);
         private void OnUndo() => runtime.Undo();
+        private void OnRedo() => runtime.Redo();
         private void OnRestart() => runtime.Restart();
     }
 }
