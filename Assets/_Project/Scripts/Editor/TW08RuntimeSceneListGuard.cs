@@ -12,6 +12,7 @@ namespace TW08.Editor
     [InitializeOnLoad]
     internal static class TW08RuntimeSceneListGuard
     {
+        private const int ExpectedProductionSceneCount = 19;
         private static bool applying;
         private static bool scheduled;
 
@@ -66,6 +67,25 @@ namespace TW08.Editor
                             "The Warehouse Nº 08 — Scene List",
                             "Nenhuma cena TW08 de runtime foi encontrada. Execute primeiro Build Full Production Expansion.",
                             "OK");
+                    }
+                    return;
+                }
+
+                // Once the full expansion exists, never replace a healthy production Scene List with
+                // a partial discovery result. This guard is allowed to repair state, not destroy it.
+                bool productionDataExists =
+                    AssetDatabase.LoadAssetAtPath<TW08.Puzzle.PuzzleCampaignDefinition>(TW08ExpansionDataSetup.PuzzleCampaignPath) != null &&
+                    AssetDatabase.LoadAssetAtPath<TW08.Race.RaceCampaignDefinition>(TW08ExpansionDataSetup.RaceCampaignPath) != null;
+
+                if (productionDataExists && scenePaths.Count < ExpectedProductionSceneCount)
+                {
+                    string message =
+                        $"TW08 Scene List guard discovered only {scenePaths.Count}/{ExpectedProductionSceneCount} production scenes. " +
+                        "The current Scene List was left untouched. Run Build Full Production Expansion or Repair Runtime Scene Registration.";
+                    Debug.LogWarning(message);
+                    if (showDialog)
+                    {
+                        EditorUtility.DisplayDialog("The Warehouse Nº 08 — Scene List", message, "OK");
                     }
                     return;
                 }
@@ -131,7 +151,14 @@ namespace TW08.Editor
 
         private static IEnumerable<string> FindScenes(string root, string filePrefix)
         {
-            return AssetDatabase.FindAssets("t:Scene", new[] { root })
+            if (!AssetDatabase.IsValidFolder(root))
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            // AssetDatabase type filters use class names. Unity scene files are represented by
+            // UnityEditor.SceneAsset, so t:Scene silently misses them while t:SceneAsset is correct.
+            return AssetDatabase.FindAssets("t:SceneAsset", new[] { root })
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Where(path =>
                     !string.IsNullOrWhiteSpace(path) &&
