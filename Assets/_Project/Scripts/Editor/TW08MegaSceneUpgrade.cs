@@ -25,9 +25,12 @@ namespace TW08.Editor
                 throw new ArgumentNullException(nameof(content));
             }
 
+            // Race authoring is the most sensitive step because it reads ScriptableObject references
+            // and then saves multiple scenes. Run it before menu scene churn and reload each track by
+            // stable asset path inside UpgradeRaceScenes.
+            UpgradeRaceScenes(content.GraphicsProfile, content.RacePowerUpTable);
             UpgradeMainGraphicsService(content.GraphicsProfile);
             UpgradeMenus();
-            UpgradeRaceScenes(content.GraphicsProfile, content.RacePowerUpTable);
             AssetDatabase.SaveAssets();
         }
 
@@ -91,26 +94,58 @@ namespace TW08.Editor
 
         private static void UpgradeRaceScenes(TW08GraphicsProfile profile, WeightedPowerUpTable table)
         {
-            RaceCampaignDefinition campaign = AssetDatabase.LoadAssetAtPath<RaceCampaignDefinition>(TW08ExpansionDataSetup.RaceCampaignPath);
+            RaceCampaignDefinition campaign = TW08RaceCampaignIntegrity.EnsureValidCampaign(force: true);
             ForkliftStats stats = AssetDatabase.LoadAssetAtPath<ForkliftStats>(TW08ExpansionDataSetup.ForkliftStatsPath);
             TW08ArtCatalog artCatalog = AssetDatabase.LoadAssetAtPath<TW08ArtCatalog>(TW08ProductionArtSetup.CatalogPath);
             if (campaign == null || stats == null)
             {
-                throw new InvalidOperationException("TW08 mega race upgrade requires the production race campaign and forklift stats.");
+                throw new InvalidOperationException("TW08 mega race upgrade requires a valid production race campaign and forklift stats.");
             }
 
-            foreach (RaceTrackDefinition trackAsset in campaign.Tracks)
+            IReadOnlyList<RaceTrackDefinition> campaignTracks = campaign.Tracks;
+            if (campaignTracks == null || campaignTracks.Count != 3)
             {
-                if (trackAsset == null || string.IsNullOrWhiteSpace(trackAsset.SceneName))
+                throw new InvalidOperationException(
+                    $"TW08 mega race upgrade expected 3 canonical tracks after repair, but found {campaignTracks?.Count ?? 0}.");
+            }
+
+            // Never keep RaceTrackDefinition references across scene saves. Unity editor authoring can
+            // invalidate native Object wrappers after AssetDatabase/scene operations. Asset paths are
+            // plain managed strings and remain stable, so capture all three before opening any scene.
+            List<string> trackPaths = new(campaignTracks.Count);
+            for (int i = 0; i < campaignTracks.Count; i++)
+            {
+                RaceTrackDefinition trackAsset = campaignTracks[i];
+                if (trackAsset == null)
                 {
-                    throw new InvalidOperationException("Race campaign contains an invalid track while applying mega update.");
+                    throw new InvalidOperationException(
+                        $"Race campaign track index {i} became invalid immediately after canonical repair.");
                 }
 
                 string trackPath = AssetDatabase.GetAssetPath(trackAsset);
+                if (string.IsNullOrWhiteSpace(trackPath))
+                {
+                    throw new InvalidOperationException(
+                        $"Race campaign track index {i} ('{trackAsset.name}') has no stable AssetDatabase path.");
+                }
+
+                trackPaths.Add(trackPath);
+            }
+
+            for (int i = 0; i < trackPaths.Count; i++)
+            {
+                string trackPath = trackPaths[i];
                 RaceTrackDefinition track = AssetDatabase.LoadAssetAtPath<RaceTrackDefinition>(trackPath);
                 if (track == null)
                 {
-                    throw new InvalidOperationException($"Race track could not be reloaded from '{trackPath}'.");
+                    throw new InvalidOperationException(
+                        $"Race track index {i} could not be reloaded from stable path '{trackPath}'.");
+                }
+
+                if (string.IsNullOrWhiteSpace(track.SceneName))
+                {
+                    throw new InvalidOperationException(
+                        $"Race track '{trackPath}' has an empty SceneName after canonical repair.");
                 }
 
                 string scenePath = TW08RaceSceneBuilder.SceneRoot + "/" + track.SceneName + ".unity";
