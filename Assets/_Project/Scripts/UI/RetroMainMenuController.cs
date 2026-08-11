@@ -18,6 +18,13 @@ namespace TW08.UI
             firstSelectedButton = firstSelected;
             continueButton = continueControl;
             versionText = versionLabel;
+
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+#endif
         }
 
         private void Awake()
