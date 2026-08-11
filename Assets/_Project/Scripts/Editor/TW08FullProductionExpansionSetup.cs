@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Linq;
+using TW08.Audio;
 using TW08.Presentation;
 using TW08.UI;
 using UnityEditor;
@@ -22,10 +23,11 @@ namespace TW08.Editor
                 EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Validando dados base...", 0.05f);
                 TW08BasePuzzleDataRecovery.EnsureBaseLevels();
 
-                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando dados, personagens e campanhas...", 0.16f);
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando dados, personagens, campanhas e áudio...", 0.16f);
                 TW08ExpansionDataSetup.ExpansionData data = TW08ExpansionDataSetup.EnsureAll();
                 TW08ArtCatalog catalog = TW08ProductionArtSetup.EnsureProductionArtAssets();
                 TW08ExpansionStarterArt.EnsureAll();
+                TW08AudioCatalog audioCatalog = TW08StarterAudioSetup.EnsureAll();
 
                 EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando hub e menus...", 0.32f);
                 List<string> menuPaths = TW08MenuSceneBuilder.BuildAll(data);
@@ -34,11 +36,12 @@ namespace TW08.Editor
                 EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando 9 fases de puzzle...", 0.52f);
                 List<string> puzzlePaths = TW08PuzzleSceneBuilder.BuildAll(data, catalog);
 
-                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando 3 pistas de corrida...", 0.74f);
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando 3 pistas de corrida...", 0.72f);
                 List<string> racePaths = TW08RaceSceneBuilder.BuildAll(data);
 
-                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Injetando VFX de gameplay...", 0.84f);
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Injetando VFX e áudio...", 0.82f);
                 TW08FeedbackSceneUpgrade.Apply(puzzlePaths, racePaths);
+                TW08AudioSceneUpgrade.Apply(audioCatalog, menuPaths, puzzlePaths, racePaths);
 
                 EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Validando conteúdo e Build Settings...", 0.92f);
                 IReadOnlyList<string> validationErrors = TW08ProductionExpansionValidator.Validate(data, menuPaths, puzzlePaths, racePaths);
@@ -62,7 +65,8 @@ namespace TW08.Editor
                     "Corrida: 3 pistas\n" +
                     "Menus: Hub, Operadores, Campanha, Corrida, Configurações e Créditos\n" +
                     "Save: schema v2 + migração v1\n" +
-                    "VFX: puzzle + drift/finish\n\n" +
+                    "VFX: puzzle + drift/finish\n" +
+                    "Áudio: SFX + loops starter para menu, puzzle e corrida\n\n" +
                     "Gate obrigatório restante: Console sem erros + EditMode/PlayMode Test Runner + playtest manual.",
                     "OK");
             }
