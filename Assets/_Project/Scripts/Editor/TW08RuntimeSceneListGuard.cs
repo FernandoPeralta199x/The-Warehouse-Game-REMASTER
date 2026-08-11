@@ -14,7 +14,8 @@ namespace TW08.Editor
     [InitializeOnLoad]
     internal static class TW08RuntimeSceneListGuard
     {
-        private const int ExpectedProductionSceneCount = 19;
+        // Contagem de cenas é derivada dinamicamente das campanhas (puzzle,
+        // secreta e corrida); nenhuma constante fixa — a lista cresce com o conteúdo.
         private static bool applying;
         private static bool scheduled;
 
@@ -74,13 +75,13 @@ namespace TW08.Editor
                 }
 
                 List<string> missing = expected.Where(path => !SceneFileExists(path)).ToList();
-                if (expected.Count != ExpectedProductionSceneCount || missing.Count > 0)
+                if (missing.Count > 0)
                 {
                     string details = missing.Count > 0
                         ? "\n\nArquivos de cena ausentes:\n- " + string.Join("\n- ", missing)
                         : string.Empty;
                     string message =
-                        $"TW08 Scene List encontrou {expected.Count - missing.Count}/{ExpectedProductionSceneCount} cenas físicas válidas. " +
+                        $"TW08 Scene List encontrou {expected.Count - missing.Count}/{expected.Count} cenas físicas válidas. " +
                         "A Scene List atual foi preservada." + details +
                         "\n\nExecute Tools > TW08 > Production > Repair Runtime Scene Registration.";
                     Debug.LogWarning(message);
@@ -152,6 +153,18 @@ namespace TW08.Editor
             {
                 if (entry == null || string.IsNullOrWhiteSpace(entry.SceneName)) continue;
                 paths.Add(TW08PuzzleSceneBuilder.SceneRoot + "/" + entry.SceneName + ".unity");
+            }
+
+            PuzzleCampaignDefinition secretCampaign =
+                AssetDatabase.LoadAssetAtPath<PuzzleCampaignDefinition>(
+                    TW08CampaignExpansionImporter.SecretCampaignPath);
+            if (secretCampaign != null)
+            {
+                foreach (PuzzleCampaignEntry entry in secretCampaign.Levels)
+                {
+                    if (entry == null || string.IsNullOrWhiteSpace(entry.SceneName)) continue;
+                    paths.Add(TW08PuzzleSceneBuilder.SecretSceneRoot + "/" + entry.SceneName + ".unity");
+                }
             }
 
             foreach (RaceTrackDefinition track in raceCampaign.Tracks)

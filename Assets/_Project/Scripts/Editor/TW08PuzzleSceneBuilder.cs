@@ -19,7 +19,7 @@ namespace TW08.Editor
     internal static class TW08PuzzleSceneBuilder
     {
         internal const string SceneRoot = "Assets/_Project/Scenes/VerticalSlice";
-        private const int ExpectedPuzzleSceneCount = 9;
+        internal const string SecretSceneRoot = "Assets/_Project/Scenes/Secret";
 
         internal static List<string> BuildAll(TW08ExpansionDataSetup.ExpansionData data, TW08ArtCatalog catalog)
         {
@@ -30,10 +30,10 @@ namespace TW08.Editor
             // assets still exist. Capture only stable asset paths before creating any scene, then reload
             // every Unity object immediately before the scene that consumes it.
             List<PuzzleSceneSpec> specs = LoadBuildSpecs();
-            if (specs.Count != ExpectedPuzzleSceneCount)
+            if (specs.Count == 0)
             {
                 throw new InvalidOperationException(
-                    $"Puzzle scene builder expected {ExpectedPuzzleSceneCount} stable level specs but resolved {specs.Count}.");
+                    "Puzzle scene builder resolved zero stable level specs from the campaign.");
             }
 
             List<string> paths = new();
@@ -64,10 +64,46 @@ namespace TW08.Editor
                 paths.Add(path);
             }
 
-            if (paths.Count != ExpectedPuzzleSceneCount)
+            if (paths.Count != specs.Count)
             {
                 throw new InvalidOperationException(
-                    $"Puzzle scene builder produced {paths.Count}/{ExpectedPuzzleSceneCount} scene paths.");
+                    $"Puzzle scene builder produced {paths.Count}/{specs.Count} scene paths.");
+            }
+
+            return paths;
+        }
+
+        /// <summary>
+        /// Constrói cenas para uma campanha arbitrária (ex.: TW08_SecretCampaign)
+        /// num diretório próprio. Última fase volta para a cena de fallback.
+        /// </summary>
+        internal static List<string> BuildForCampaign(
+            PuzzleCampaignDefinition campaign,
+            string sceneRoot,
+            string fallbackScene = "TW08_PuzzleSelect")
+        {
+            if (campaign == null)
+            {
+                throw new ArgumentNullException(nameof(campaign));
+            }
+
+            TW08ProductionSceneUtility.EnsureFolder(sceneRoot);
+            List<PuzzleSceneSpec> specs = LoadSpecsFrom(campaign, fallbackScene);
+            List<string> paths = new();
+            foreach (PuzzleSceneSpec spec in specs)
+            {
+                PuzzleLevelDefinition level = AssetDatabase.LoadAssetAtPath<PuzzleLevelDefinition>(spec.LevelAssetPath);
+                CharacterRoster roster = AssetDatabase.LoadAssetAtPath<CharacterRoster>(TW08ExpansionDataSetup.RosterPath);
+                TW08ArtCatalog liveCatalog = AssetDatabase.LoadAssetAtPath<TW08ArtCatalog>(TW08ProductionArtSetup.CatalogPath);
+                if (level == null || roster == null || liveCatalog == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Secret scene builder could not reload dependencies for '{spec.LevelAssetPath}'.");
+                }
+
+                string path = sceneRoot + "/" + spec.SceneName + ".unity";
+                Build(level, roster, liveCatalog, path, spec.NextSceneName);
+                paths.Add(path);
             }
 
             return paths;
@@ -83,13 +119,12 @@ namespace TW08.Editor
                     $"Puzzle campaign could not be loaded from '{TW08ExpansionDataSetup.PuzzleCampaignPath}'.");
             }
 
-            if (campaign.Levels.Count != ExpectedPuzzleSceneCount)
-            {
-                throw new InvalidOperationException(
-                    $"Puzzle campaign contains {campaign.Levels.Count}/{ExpectedPuzzleSceneCount} entries.");
-            }
+            return LoadSpecsFrom(campaign, "TW08_PuzzleSelect");
+        }
 
-            List<PuzzleSceneSpec> specs = new(ExpectedPuzzleSceneCount);
+        private static List<PuzzleSceneSpec> LoadSpecsFrom(PuzzleCampaignDefinition campaign, string fallbackScene)
+        {
+            List<PuzzleSceneSpec> specs = new(campaign.Levels.Count);
             for (int i = 0; i < campaign.Levels.Count; i++)
             {
                 PuzzleCampaignEntry entry = campaign.Levels[i];
@@ -110,7 +145,7 @@ namespace TW08.Editor
                     : ResolveSceneName(entry.Level, i + 1);
                 string nextScene = i + 1 < campaign.Levels.Count
                     ? ResolveEntrySceneName(campaign.Levels[i + 1], i + 2)
-                    : "TW08_PuzzleSelect";
+                    : fallbackScene;
 
                 specs.Add(new PuzzleSceneSpec(levelPath, sceneName, nextScene));
             }

@@ -1,0 +1,88 @@
+{
+  "levels": [
+    {
+      "id": "TW08_Level04_SensorSplit",
+      "displayName": "Sensor Split",
+      "board": "8x7",
+      "crates": 2,
+      "goals": 2,
+      "solvable": true,
+      "optimalCost": 8,
+      "pushes": 5,
+      "solution": "RULURRRR",
+      "states": 342,
+      "replayOk": true,
+      "replayCost": 8
+    },
+    {
+      "id": "TW08_Level05_TightLift",
+      "displayName": "Tight Lift",
+      "board": "9x7",
+      "crates": 3,
+      "goals": 3,
+      "solvable": true,
+      "optimalCost": 20,
+      "pushes": 9,
+      "solution": "RUUUDDDRRUUUDDDRRUUU",
+      "states": 11723,
+      "replayOk": true,
+      "replayCost": 20
+    },
+    {
+      "id": "TW08_Level06_TerminalRoute",
+      "displayName": "Terminal Route",
+      "board": "9x7",
+      "crates": 3,
+      "goals": 3,
+      "solvable": true,
+      "optimalCost": 13,
+      "pushes": 7,
+      "solution": "URLUURLDRRRRR",
+      "states": 4597,
+      "replayOk": true,
+      "replayCost": 13
+    },
+    {
+      "id": "TW08_Level07_DockSync",
+      "displayName": "Dock Sync",
+      "board": "9x8",
+      "crates": 3,
+      "goals": 3,
+      "solvable": true,
+      "optimalCost": 20,
+      "pushes": 9,
+      "solution": "RUUUDDDRRUUUDDDRRUUU",
+      "states": 34342,
+      "replayOk": true,
+      "replayCost": 20
+    },
+    {
+      "id": "TW08_Level08_ColdStorage",
+      "displayName": "Cold Storage",
+      "board": "9x7",
+      "crates": 2,
+      "goals": 2,
+      "solvable": true,
+      "optimalCost": 22,
+      "pushes": 8,
+      "solution": "URRRRRLULURR",
+      "states": 4341,
+      "replayOk": true,
+      "replayCost": 22
+    },
+    {
+      "id": "TW08_Level09_CrossDispatch",
+      "displayName": "Cross Dispatch",
+      "board": "10x7",
+      "crates": 3,
+      "goals": 3,
+      "solvable": true,
+      "optimalCost": 28,
+      "pushes": 11,
+      "solution": "URLURRRRRLLLLLURRRRR",
+      "states": 320436,
+      "replayOk": true,
+      "replayCost": 28
+    }
+  ]
+}

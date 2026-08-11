@@ -21,7 +21,7 @@ namespace TW08.Editor
 {
     public static class TW08FullProductionExpansionSetup
     {
-        private const int ExpectedRuntimeSceneCount = 19;
+        // Contagem de cenas é derivada das campanhas (dinâmica) — sem constante fixa.
 
         [MenuItem("Tools/TW08/Production/Build Full Production Expansion")]
         public static void BuildFullProductionExpansion()
@@ -152,11 +152,11 @@ namespace TW08.Editor
 
                 expected = CombineScenePaths(menuPaths, puzzlePaths, racePaths);
                 List<string> missingAfter = expected.Where(path => !SceneFileExists(path)).ToList();
-                if (expected.Count != ExpectedRuntimeSceneCount || missingAfter.Count > 0)
+                if (missingAfter.Count > 0)
                 {
                     throw new InvalidOperationException(
-                        $"Runtime Repair esperava {ExpectedRuntimeSceneCount} cenas e encontrou " +
-                        $"{expected.Count - missingAfter.Count}. Arquivos ainda ausentes:\n- " +
+                        $"Runtime Repair encontrou {expected.Count - missingAfter.Count}/{expected.Count} cenas. " +
+                        "Arquivos ainda ausentes:\n- " +
                         string.Join("\n- ", missingAfter));
                 }
 
@@ -169,7 +169,7 @@ namespace TW08.Editor
                 EditorUtility.DisplayDialog(
                     "The Warehouse Nº 08 — Runtime Repair",
                     "Runtime reparado e validado.\n\n" +
-                    $"Cenas físicas: {expected.Count}/{ExpectedRuntimeSceneCount}\n" +
+                    $"Cenas físicas: {expected.Count}\n" +
                     $"Cenas recriadas nesta execução: {missingBefore.Count}\n" +
                     "Scene List: global compartilhada\n" +
                     "Build Profile ativo: usando lista global\n" +
@@ -325,10 +325,10 @@ namespace TW08.Editor
             List<string> ordered = CombineScenePaths(menuPaths, puzzlePaths, racePaths);
             List<string> missingFiles = ordered.Where(path => !SceneFileExists(path)).ToList();
 
-            if (ordered.Count != ExpectedRuntimeSceneCount || missingFiles.Count > 0)
+            if (missingFiles.Count > 0)
             {
                 throw new InvalidOperationException(
-                    $"Não é seguro atualizar a Scene List: {ordered.Count - missingFiles.Count}/{ExpectedRuntimeSceneCount} " +
+                    $"Não é seguro atualizar a Scene List: {ordered.Count - missingFiles.Count}/{ordered.Count} " +
                     "cenas físicas estão disponíveis. Ausentes:\n- " + string.Join("\n- ", missingFiles));
             }
 
