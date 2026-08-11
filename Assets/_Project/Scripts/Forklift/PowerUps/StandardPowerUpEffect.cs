@@ -28,6 +28,7 @@ namespace TW08.PowerUps
                     if (context.Controller == null) return false;
                     context.Controller.ApplyGripAssist(Mathf.Max(1.15f, definition.Magnitude), definition.Duration);
                     context.Controller.ApplyImpactProtection(0.45f, definition.Duration);
+                    context.Cargo?.ApplyStabilityProtection(0.25f, definition.Duration);
                     context.Damage?.GrantShield(1);
                     return true;
 
@@ -35,17 +36,20 @@ namespace TW08.PowerUps
                     if (context.Controller == null) return false;
                     context.Controller.ApplyGripAssist(Mathf.Max(1.35f, definition.Magnitude), definition.Duration);
                     context.Controller.ApplyHandlingAssist(1.18f, definition.Duration);
+                    context.Cargo?.ApplyStabilityProtection(0.70f, definition.Duration);
                     return true;
 
                 case PowerUpType.MagneticFork:
                     if (context.Controller == null) return false;
                     context.Controller.ApplyGripAssist(Mathf.Max(1.2f, definition.Magnitude), definition.Duration);
                     context.Controller.ApplyImpactProtection(0.65f, definition.Duration);
+                    context.Cargo?.ApplyStabilityProtection(0.32f, definition.Duration);
                     return true;
 
                 case PowerUpType.ReinforcedSuspension:
                     if (context.Controller == null) return false;
                     context.Controller.ApplyImpactProtection(Mathf.Clamp(definition.Magnitude, 0.2f, 0.8f), definition.Duration);
+                    context.Cargo?.ApplyStabilityProtection(0.58f, definition.Duration);
                     return true;
 
                 case PowerUpType.OilCanister:
@@ -69,11 +73,10 @@ namespace TW08.PowerUps
 
                 case PowerUpType.RepairKit:
                     context.Damage?.Repair(definition.Magnitude);
-                    return context.Damage != null;
+                    context.Cargo?.Repair(definition.Magnitude * 0.55f);
+                    return context.Damage != null || context.Cargo != null;
 
                 case PowerUpType.RouteScanner:
-                    // Reserved for the route-overlay subsystem. Do not consume the item until that
-                    // presenter is present on the vehicle.
                     RaceRouteScanner scanner = context.User != null
                         ? context.User.GetComponent<RaceRouteScanner>()
                         : null;
