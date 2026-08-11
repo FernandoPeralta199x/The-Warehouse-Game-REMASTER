@@ -131,9 +131,31 @@ namespace TW08.Editor
 
         internal static BoxCollider2D AddBoxCollider(GameObject go, Vector2 size, bool trigger = false)
         {
-            BoxCollider2D collider = go.GetComponent<BoxCollider2D>() ?? go.AddComponent<BoxCollider2D>();
+            if (go == null)
+            {
+                throw new ArgumentNullException(nameof(go), "TW08 cannot add a BoxCollider2D to a null GameObject.");
+            }
+
+            // UnityEngine.Object implements custom null semantics. Do not use ?? here: a missing
+            // Component can be represented by a managed wrapper that is non-null to C# while Unity's
+            // overloaded == reports null. In that case ?? would skip AddComponent and the first native
+            // property access would throw MissingComponentException.
+            BoxCollider2D collider = go.GetComponent<BoxCollider2D>();
+            if (collider == null)
+            {
+                collider = go.AddComponent<BoxCollider2D>();
+            }
+
+            if (collider == null)
+            {
+                throw new InvalidOperationException(
+                    $"TW08 failed to attach BoxCollider2D to GameObject '{go.name}'. " +
+                    "Verify that Unity's 2D Physics module is available for this project.");
+            }
+
             collider.size = size;
             collider.isTrigger = trigger;
+            EditorUtility.SetDirty(collider);
             return collider;
         }
 
