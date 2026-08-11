@@ -13,17 +13,20 @@ namespace TW08.Race
         [SerializeField] private RaceCountdown countdown;
         [SerializeField] private ArcadeForkliftController2D playerVehicle;
         [SerializeField] private RacerProgress playerProgress;
+        [SerializeField] private RaceCargoController playerCargo;
 
         private int countdownValue = -1;
 
         public RaceTrackDefinition Track => track;
         public RaceManager RaceManager => raceManager;
         public RacerProgress PlayerProgress => playerProgress;
+        public RaceCargoController PlayerCargo => playerCargo;
         public int CountdownValue => countdownValue;
         public bool RaceRunning => raceManager != null && raceManager.RaceRunning;
         public float ElapsedTime => raceManager != null ? raceManager.ElapsedTime : 0f;
         public float BestTime => track == null ? 0f : RaceProgressStore.GetBestTime(track.TrackId);
         public string SelectedCharacterId => CharacterSelectionState.SelectedCharacterId;
+        public float CargoDamagePercent => playerCargo != null ? playerCargo.DamagePercent : 0f;
 
         public event Action StateChanged;
         public event Action<int> CountdownChanged;
@@ -41,7 +44,19 @@ namespace TW08.Race
             countdown = raceCountdown;
             playerVehicle = vehicle;
             playerProgress = progress;
+            if (playerVehicle != null)
+            {
+                playerCargo = playerVehicle.GetComponent<RaceCargoController>();
+            }
 
+#if UNITY_EDITOR
+            if (!Application.isPlaying) UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
+
+        public void ConfigureCargo(RaceCargoController cargo)
+        {
+            playerCargo = cargo;
 #if UNITY_EDITOR
             if (!Application.isPlaying) UnityEditor.EditorUtility.SetDirty(this);
 #endif
@@ -58,6 +73,11 @@ namespace TW08.Race
             {
                 raceManager.RaceStarted += OnRaceStarted;
                 raceManager.RacerFinished += OnRacerFinished;
+            }
+            if (playerCargo != null)
+            {
+                playerCargo.IntegrityChanged += OnCargoChanged;
+                playerCargo.CargoDestroyed += OnCargoDestroyed;
             }
         }
 
@@ -81,6 +101,11 @@ namespace TW08.Race
                 raceManager.RaceStarted -= OnRaceStarted;
                 raceManager.RacerFinished -= OnRacerFinished;
             }
+            if (playerCargo != null)
+            {
+                playerCargo.IntegrityChanged -= OnCargoChanged;
+                playerCargo.CargoDestroyed -= OnCargoDestroyed;
+            }
         }
 
         private void OnCountdownTick(int value)
@@ -99,6 +124,16 @@ namespace TW08.Race
         }
 
         private void OnRaceStarted() => StateChanged?.Invoke();
+        private void OnCargoChanged(float _, float __) => StateChanged?.Invoke();
+
+        private void OnCargoDestroyed()
+        {
+            if (playerVehicle != null)
+            {
+                playerVehicle.ControlsEnabled = false;
+            }
+            StateChanged?.Invoke();
+        }
 
         private void OnRacerFinished(RacerProgress racer)
         {
@@ -106,7 +141,8 @@ namespace TW08.Race
             if (playerVehicle != null) playerVehicle.ControlsEnabled = false;
 
             float finishTime = racer.FinishTime;
-            int medal = track != null ? track.GetMedal(finishTime) : 0;
+            float cargoDamage = playerCargo != null ? playerCargo.DamagePercent : 0f;
+            int medal = track != null ? track.GetMedal(finishTime, cargoDamage) : 0;
             RaceProgressStore.Record(track, finishTime);
             UnityEngine.Object.FindFirstObjectByType<SaveManager>()?.RecordRaceCompletion(track, finishTime);
             PlayerFinished?.Invoke(finishTime, medal);
