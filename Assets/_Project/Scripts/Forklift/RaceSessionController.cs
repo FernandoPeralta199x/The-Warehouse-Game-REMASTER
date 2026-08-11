@@ -108,7 +108,7 @@ namespace TW08.Race
             float finishTime = racer.FinishTime;
             int medal = track != null ? track.GetMedal(finishTime) : 0;
             RaceProgressStore.Record(track, finishTime);
-            Object.FindFirstObjectByType<SaveManager>()?.RecordRaceCompletion(track, finishTime);
+            UnityEngine.Object.FindFirstObjectByType<SaveManager>()?.RecordRaceCompletion(track, finishTime);
             PlayerFinished?.Invoke(finishTime, medal);
             StateChanged?.Invoke();
         }
