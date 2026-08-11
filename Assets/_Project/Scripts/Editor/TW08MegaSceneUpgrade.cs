@@ -40,10 +40,19 @@ namespace TW08.Editor
             TW08GraphicsDirector director = UnityEngine.Object.FindFirstObjectByType<TW08GraphicsDirector>();
             if (director == null)
             {
-                GameObject root = GameObject.Find("Production Bootstrap") ?? new GameObject("Graphics Runtime");
+                GameObject root = GameObject.Find("Production Bootstrap");
+                if (root == null)
+                {
+                    root = new GameObject("Graphics Runtime");
+                }
+
                 director = root.GetComponent<TW08GraphicsDirector>();
-                if (director == null) director = root.AddComponent<TW08GraphicsDirector>();
+                if (director == null)
+                {
+                    director = root.AddComponent<TW08GraphicsDirector>();
+                }
             }
+
             director.Configure(profile, true);
             EditorUtility.SetDirty(director);
             Save(scene, path);
@@ -84,6 +93,7 @@ namespace TW08.Editor
         {
             RaceCampaignDefinition campaign = AssetDatabase.LoadAssetAtPath<RaceCampaignDefinition>(TW08ExpansionDataSetup.RaceCampaignPath);
             ForkliftStats stats = AssetDatabase.LoadAssetAtPath<ForkliftStats>(TW08ExpansionDataSetup.ForkliftStatsPath);
+            TW08ArtCatalog artCatalog = AssetDatabase.LoadAssetAtPath<TW08ArtCatalog>(TW08ProductionArtSetup.CatalogPath);
             if (campaign == null || stats == null)
             {
                 throw new InvalidOperationException("TW08 mega race upgrade requires the production race campaign and forklift stats.");
@@ -98,6 +108,11 @@ namespace TW08.Editor
 
                 string trackPath = AssetDatabase.GetAssetPath(trackAsset);
                 RaceTrackDefinition track = AssetDatabase.LoadAssetAtPath<RaceTrackDefinition>(trackPath);
+                if (track == null)
+                {
+                    throw new InvalidOperationException($"Race track could not be reloaded from '{trackPath}'.");
+                }
+
                 string scenePath = TW08RaceSceneBuilder.SceneRoot + "/" + track.SceneName + ".unity";
                 RequireScene(scenePath);
 
@@ -120,16 +135,50 @@ namespace TW08.Editor
                     throw new InvalidOperationException($"Race scene '{scenePath}' player is missing progress or damage components.");
                 }
 
+                RaceCargoController playerCargo = EnsureCargo(player.gameObject, player, artCatalog);
                 PowerUpInventory playerInventory = EnsureVehiclePowerUps(
-                    player.gameObject, input, player, playerDamage, manager, playerProgress, false);
+                    player.gameObject, input, player, playerDamage, playerCargo, manager, playerProgress, false);
+                session.ConfigureCargo(playerCargo);
                 EnsureCamera(scene, player, profile);
                 EnsureSceneGraphicsDirector(profile);
-                EnsureAiField(manager, stats, track, table);
+                EnsureAiField(manager, stats, track, table, artCatalog);
                 EnsureItemBoxes(manager, table);
                 UpgradeRaceHud(session, playerInventory);
 
+                EditorUtility.SetDirty(session);
                 Save(scene, scenePath);
             }
+        }
+
+        private static RaceCargoController EnsureCargo(
+            GameObject vehicle,
+            ArcadeForkliftController2D controller,
+            TW08ArtCatalog artCatalog)
+        {
+            RaceCargoController cargo = vehicle.GetComponent<RaceCargoController>();
+            if (cargo == null)
+            {
+                cargo = vehicle.AddComponent<RaceCargoController>();
+            }
+            cargo.Configure(controller);
+
+            Transform visual = vehicle.transform.Find("Cargo Load");
+            if (visual == null && artCatalog != null && artCatalog.CrateDefault != null)
+            {
+                GameObject cargoVisual = new("Cargo Load");
+                cargoVisual.transform.SetParent(vehicle.transform, false);
+                cargoVisual.transform.localPosition = new Vector3(0f, 0.48f, 0f);
+                cargoVisual.transform.localRotation = Quaternion.identity;
+                cargoVisual.transform.localScale = new Vector3(0.48f, 0.48f, 1f);
+                SpriteRenderer renderer = cargoVisual.AddComponent<SpriteRenderer>();
+                renderer.sprite = artCatalog.CrateDefault;
+                renderer.sortingOrder = 31;
+                renderer.color = new Color(1f, 0.88f, 0.62f, 1f);
+                EditorUtility.SetDirty(renderer);
+            }
+
+            EditorUtility.SetDirty(cargo);
+            return cargo;
         }
 
         private static PowerUpInventory EnsureVehiclePowerUps(
@@ -137,6 +186,7 @@ namespace TW08.Editor
             GameInput input,
             ArcadeForkliftController2D controller,
             ForkliftDamage damage,
+            RaceCargoController cargo,
             RaceManager manager,
             RacerProgress progress,
             bool ai)
@@ -146,7 +196,7 @@ namespace TW08.Editor
 
             PowerUpExecutor executor = vehicle.GetComponent<PowerUpExecutor>();
             if (executor == null) executor = vehicle.AddComponent<PowerUpExecutor>();
-            executor.Configure(ai ? null : input, inventory, controller, damage);
+            executor.Configure(ai ? null : input, inventory, controller, damage, cargo);
 
             RaceRouteScanner scanner = vehicle.GetComponent<RaceRouteScanner>();
             if (scanner == null) scanner = vehicle.AddComponent<RaceRouteScanner>();
@@ -170,7 +220,8 @@ namespace TW08.Editor
             RaceManager manager,
             ForkliftStats stats,
             RaceTrackDefinition track,
-            WeightedPowerUpTable table)
+            WeightedPowerUpTable table,
+            TW08ArtCatalog artCatalog)
         {
             RaceAiDriver[] existing = UnityEngine.Object.FindObjectsByType<RaceAiDriver>(FindObjectsSortMode.None);
             if (existing.Length >= 3)
@@ -185,11 +236,11 @@ namespace TW08.Editor
 
             Sprite john = TW08ExpansionStarterArt.LoadRaceSprite("Forklift_John");
             Sprite duda = TW08ExpansionStarterArt.LoadRaceSprite("Forklift_Duda");
-            CreateAiVehicle(manager, stats, track, table, "ai-duda", new Vector2(-8.65f, -3.35f), duda != null ? duda : john,
+            CreateAiVehicle(manager, stats, track, table, artCatalog, "ai-duda", new Vector2(-8.65f, -3.35f), duda != null ? duda : john,
                 new Color(0.86f, 0.95f, 1f, 1f), 0.91f, 0.70f);
-            CreateAiVehicle(manager, stats, track, table, "ai-heavy", new Vector2(-8.85f, -4.65f), john,
+            CreateAiVehicle(manager, stats, track, table, artCatalog, "ai-heavy", new Vector2(-8.85f, -4.65f), john,
                 new Color(1f, 0.74f, 0.34f, 1f), 0.84f, 0.42f);
-            CreateAiVehicle(manager, stats, track, table, "ai-elite", new Vector2(-9.25f, -3.85f), john,
+            CreateAiVehicle(manager, stats, track, table, artCatalog, "ai-elite", new Vector2(-9.25f, -3.85f), john,
                 new Color(0.72f, 1f, 0.72f, 1f), 0.98f, 0.82f);
         }
 
@@ -198,6 +249,7 @@ namespace TW08.Editor
             ForkliftStats stats,
             RaceTrackDefinition track,
             WeightedPowerUpTable table,
+            TW08ArtCatalog artCatalog,
             string id,
             Vector2 position,
             Sprite sprite,
@@ -224,10 +276,11 @@ namespace TW08.Editor
             ForkliftDamage damage = go.AddComponent<ForkliftDamage>();
             RacerProgress progress = go.AddComponent<RacerProgress>();
             progress.Configure(manager, id);
+            RaceCargoController cargo = EnsureCargo(go, controller, artCatalog);
 
             RaceAiDriver ai = go.AddComponent<RaceAiDriver>();
             ai.Configure(manager, controller, progress, skill, aggression);
-            PowerUpInventory inventory = EnsureVehiclePowerUps(go, null, controller, damage, manager, progress, true);
+            PowerUpInventory inventory = EnsureVehiclePowerUps(go, null, controller, damage, cargo, manager, progress, true);
             PowerUpExecutor executor = go.GetComponent<PowerUpExecutor>();
             RaceAiPowerUpDriver itemAi = go.AddComponent<RaceAiPowerUpDriver>();
             itemAi.Configure(manager, progress, inventory, executor);
@@ -236,6 +289,7 @@ namespace TW08.Editor
             EditorUtility.SetDirty(controller);
             EditorUtility.SetDirty(damage);
             EditorUtility.SetDirty(progress);
+            EditorUtility.SetDirty(cargo);
             EditorUtility.SetDirty(ai);
             EditorUtility.SetDirty(itemAi);
         }
@@ -335,10 +389,20 @@ namespace TW08.Editor
                     bottom.transform, "Item", "ITEM // --", 14,
                     TW08ProductionSceneUtility.Cyan, TextAnchor.MiddleCenter);
                 TW08ProductionSceneUtility.SetRect(
-                    item.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(420f, 40f), new Vector2(120f, 0f));
+                    item.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(420f, 40f), new Vector2(70f, 0f));
             }
 
-            hud.ConfigureArcadeOverlay(position, item, inventory);
+            Text cargo = FindChildText(bottom.transform, "Cargo");
+            if (cargo == null)
+            {
+                cargo = TW08ProductionSceneUtility.CreateText(
+                    bottom.transform, "Cargo", "CARGA // 100%", 14,
+                    TW08ProductionSceneUtility.Green, TextAnchor.MiddleCenter);
+                TW08ProductionSceneUtility.SetRect(
+                    cargo.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(320f, 40f), new Vector2(-300f, 0f));
+            }
+
+            hud.ConfigureArcadeOverlay(position, item, cargo, inventory);
             EditorUtility.SetDirty(hud);
         }
 
