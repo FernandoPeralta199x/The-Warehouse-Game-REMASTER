@@ -212,6 +212,7 @@ namespace TW08.Editor
             Button continueShift = CreateButton(shell.transform, "Continue", "CONTINUAR [EM BREVE]", TextMuted);
             continueShift.interactable = false;
             SetRect((RectTransform)continueShift.transform, new Vector2(0.5f, 0.5f), new Vector2(430f, 58f), new Vector2(0f, -30f));
+            controller.Configure(newShift, continueShift);
 
             Button quit = CreateButton(shell.transform, "Quit", "ENCERRAR TERMINAL", Amber);
             SetRect((RectTransform)quit.transform, new Vector2(0.5f, 0.5f), new Vector2(430f, 58f), new Vector2(0f, -100f));
@@ -220,7 +221,6 @@ namespace TW08.Editor
             Text footer = CreateText(shell.transform, "Footer", "WASD / SETAS / D-PAD     ENTER / A CONFIRMAR", 15, TextMuted, TextAnchor.MiddleCenter);
             SetRect(footer.rectTransform, new Vector2(0.5f, 0f), new Vector2(700f, 36f), new Vector2(0f, 42f));
 
-            EventSystem.current.SetSelectedGameObject(newShift.gameObject);
             EditorSceneManager.SaveScene(scene, path);
         }
 
@@ -313,10 +313,15 @@ namespace TW08.Editor
             SetRect(hintText.rectTransform, new Vector2(0f, 0.5f), new Vector2(800f, 52f), new Vector2(28f, 0f));
 
             Button undo = CreateButton(bottom.transform, "Undo", "UNDO [Z]", Accent);
+            DisableNavigation(undo);
             SetRect((RectTransform)undo.transform, new Vector2(1f, 0.5f), new Vector2(130f, 44f), new Vector2(-360f, 0f));
+
             Button redo = CreateButton(bottom.transform, "Redo", "REDO [Y]", Accent);
+            DisableNavigation(redo);
             SetRect((RectTransform)redo.transform, new Vector2(1f, 0.5f), new Vector2(130f, 44f), new Vector2(-215f, 0f));
+
             Button restart = CreateButton(bottom.transform, "Restart", "RESET [R]", Amber);
+            DisableNavigation(restart);
             SetRect((RectTransform)restart.transform, new Vector2(1f, 0.5f), new Vector2(130f, 44f), new Vector2(-70f, 0f));
 
             PuzzleHudController hud = new GameObject("Puzzle HUD Controller").AddComponent<PuzzleHudController>();
@@ -338,9 +343,7 @@ namespace TW08.Editor
 
         private static void CreateEventSystem()
         {
-            GameObject eventSystemObject = new("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
-            InputSystemUIInputModule module = eventSystemObject.GetComponent<InputSystemUIInputModule>();
-            module.AssignDefaultActions();
+            new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
         }
 
         private static Camera CreateCamera(Vector3 position, float size)
@@ -413,6 +416,13 @@ namespace TW08.Editor
             Text text = CreateText(go.transform, "Label", label, 17, accent, TextAnchor.MiddleCenter);
             Stretch(text.rectTransform);
             return button;
+        }
+
+        private static void DisableNavigation(Selectable selectable)
+        {
+            Navigation navigation = selectable.navigation;
+            navigation.mode = Navigation.Mode.None;
+            selectable.navigation = navigation;
         }
 
         private static void Stretch(RectTransform rect)
