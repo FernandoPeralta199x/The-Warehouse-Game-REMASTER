@@ -1,3 +1,4 @@
+using TW08.Core;
 using TW08.Race;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -105,17 +106,13 @@ namespace TW08.UI
 
         public void RestartRace()
         {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+            string activeSceneName = SceneManager.GetActiveScene().name;
+            SceneLoader.TryLoadImmediate(activeSceneName, "reinício da corrida");
         }
 
         public void ExitRace()
         {
-            Time.timeScale = 1f;
-            if (!string.IsNullOrWhiteSpace(exitSceneName))
-            {
-                SceneManager.LoadScene(exitSceneName, LoadSceneMode.Single);
-            }
+            SceneLoader.TryLoadImmediate(exitSceneName, "seleção de pistas");
         }
 
         private void Refresh()
