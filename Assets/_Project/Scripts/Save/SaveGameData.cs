@@ -74,9 +74,9 @@ namespace TW08.Save
             unlockedCharacters ??= new List<string>();
             if (!unlockedCharacters.Contains("john")) unlockedCharacters.Add("john");
             if (!unlockedCharacters.Contains("duda")) unlockedCharacters.Add("duda");
-            masterVolume = Clamp01(masterVolume <= 0f ? 1f : masterVolume);
-            musicVolume = Clamp01(musicVolume <= 0f ? 0.8f : musicVolume);
-            sfxVolume = Clamp01(sfxVolume <= 0f ? 1f : sfxVolume);
+            masterVolume = Clamp01(masterVolume);
+            musicVolume = Clamp01(musicVolume);
+            sfxVolume = Clamp01(sfxVolume);
         }
 
         private static float Clamp01(float value)
