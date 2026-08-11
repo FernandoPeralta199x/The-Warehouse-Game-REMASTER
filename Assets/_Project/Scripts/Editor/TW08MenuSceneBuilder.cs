@@ -102,13 +102,9 @@ namespace TW08.Editor
             UnityEventTools.AddPersistentListener(campaign.onClick, controller.OpenCampaign);
             UnityEventTools.AddPersistentListener(race.onClick, controller.OpenRace);
             UnityEventTools.AddPersistentListener(operators.onClick, controller.OpenOperators);
+            UnityEventTools.AddPersistentListener(settings.onClick, controller.OpenSettings);
+            UnityEventTools.AddPersistentListener(credits.onClick, controller.OpenCredits);
             UnityEventTools.AddPersistentListener(back.onClick, controller.BackToMainMenu);
-
-            SimpleBackNavigationController settingsNav = settings.gameObject.AddComponent<SimpleBackNavigationController>();
-            // We use explicit persistent scene loaders below for settings/credits to avoid a second generic controller API.
-            UnityEventTools.AddPersistentListener(settings.onClick, OpenSettingsScene);
-            UnityEventTools.AddPersistentListener(credits.onClick, OpenCreditsScene);
-            Object.DestroyImmediate(settingsNav);
             TW08ProductionSceneUtility.Select(eventSystem, campaign);
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene, ModePath);
@@ -343,9 +339,6 @@ namespace TW08.Editor
             new GameObject("Audio Service").AddComponent<AudioService>();
             AssetDatabase.SaveAssets();
         }
-
-        private static void OpenSettingsScene() => SceneManager.LoadScene("TW08_Settings", LoadSceneMode.Single);
-        private static void OpenCreditsScene() => SceneManager.LoadScene("TW08_Credits", LoadSceneMode.Single);
     }
 }
 #endif
