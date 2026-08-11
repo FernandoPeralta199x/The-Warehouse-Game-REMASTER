@@ -9,11 +9,15 @@ namespace TW08.UI
         [SerializeField] private string campaignScene = "TW08_PuzzleSelect";
         [SerializeField] private string raceScene = "TW08_RaceSelect";
         [SerializeField] private string operatorsScene = "TW08_OperatorSelect";
+        [SerializeField] private string settingsScene = "TW08_Settings";
+        [SerializeField] private string creditsScene = "TW08_Credits";
         [SerializeField] private string mainMenuScene = "TW08_MainMenu";
 
         public void OpenCampaign() => Load(campaignScene);
         public void OpenRace() => Load(raceScene);
         public void OpenOperators() => Load(operatorsScene);
+        public void OpenSettings() => Load(settingsScene);
+        public void OpenCredits() => Load(creditsScene);
         public void BackToMainMenu() => Load(mainMenuScene);
 
         private static void Load(string sceneName)
