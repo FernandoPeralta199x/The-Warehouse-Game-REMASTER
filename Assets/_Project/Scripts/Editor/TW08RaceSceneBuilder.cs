@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using TW08.Input;
 using TW08.Presentation;
@@ -16,20 +17,92 @@ namespace TW08.Editor
     internal static class TW08RaceSceneBuilder
     {
         internal const string SceneRoot = "Assets/_Project/Scenes/Production/Race";
+        private const int ExpectedRaceSceneCount = 3;
 
         internal static List<string> BuildAll(TW08ExpansionDataSetup.ExpansionData data)
         {
             TW08ProductionSceneUtility.EnsureFolder("Assets/_Project/Scenes/Production");
             TW08ProductionSceneUtility.EnsureFolder(SceneRoot);
-            List<string> paths = new();
-            foreach (RaceTrackDefinition track in data.RaceTracks)
+
+            List<RaceSceneSpec> specs = LoadBuildSpecs();
+            if (specs.Count != ExpectedRaceSceneCount)
             {
-                if (track == null) continue;
-                string path = SceneRoot + "/" + track.SceneName + ".unity";
-                Build(track, data.ForkliftStats, path);
+                throw new InvalidOperationException(
+                    $"Race scene builder expected {ExpectedRaceSceneCount} stable track specs but resolved {specs.Count}.");
+            }
+
+            List<string> paths = new();
+            foreach (RaceSceneSpec spec in specs)
+            {
+                RaceTrackDefinition track = AssetDatabase.LoadAssetAtPath<RaceTrackDefinition>(spec.TrackAssetPath);
+                ForkliftStats stats = AssetDatabase.LoadAssetAtPath<ForkliftStats>(TW08ExpansionDataSetup.ForkliftStatsPath);
+
+                if (track == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Race scene builder could not reload track asset '{spec.TrackAssetPath}'.");
+                }
+                if (stats == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Race scene builder could not reload forklift stats '{TW08ExpansionDataSetup.ForkliftStatsPath}'.");
+                }
+
+                string path = SceneRoot + "/" + spec.SceneName + ".unity";
+                Build(track, stats, path);
                 paths.Add(path);
             }
+
+            if (paths.Count != ExpectedRaceSceneCount)
+            {
+                throw new InvalidOperationException(
+                    $"Race scene builder produced {paths.Count}/{ExpectedRaceSceneCount} scene paths.");
+            }
+
             return paths;
+        }
+
+        private static List<RaceSceneSpec> LoadBuildSpecs()
+        {
+            RaceCampaignDefinition campaign =
+                AssetDatabase.LoadAssetAtPath<RaceCampaignDefinition>(TW08ExpansionDataSetup.RaceCampaignPath);
+            if (campaign == null)
+            {
+                throw new InvalidOperationException(
+                    $"Race campaign could not be loaded from '{TW08ExpansionDataSetup.RaceCampaignPath}'.");
+            }
+
+            if (campaign.Tracks.Count != ExpectedRaceSceneCount)
+            {
+                throw new InvalidOperationException(
+                    $"Race campaign contains {campaign.Tracks.Count}/{ExpectedRaceSceneCount} tracks.");
+            }
+
+            List<RaceSceneSpec> specs = new(ExpectedRaceSceneCount);
+            for (int i = 0; i < campaign.Tracks.Count; i++)
+            {
+                RaceTrackDefinition track = campaign.Tracks[i];
+                if (track == null)
+                {
+                    throw new InvalidOperationException($"Race campaign track {i + 1:00} is null.");
+                }
+
+                string trackPath = AssetDatabase.GetAssetPath(track);
+                if (string.IsNullOrWhiteSpace(trackPath))
+                {
+                    throw new InvalidOperationException(
+                        $"Race campaign track {i + 1:00} does not resolve to a persistent asset path.");
+                }
+                if (string.IsNullOrWhiteSpace(track.SceneName))
+                {
+                    throw new InvalidOperationException(
+                        $"Race campaign track {i + 1:00} has no scene name.");
+                }
+
+                specs.Add(new RaceSceneSpec(trackPath, track.SceneName));
+            }
+
+            return specs;
         }
 
         private static void Build(RaceTrackDefinition track, ForkliftStats stats, string path)
@@ -57,7 +130,10 @@ namespace TW08.Editor
             EditorUtility.SetDirty(progress);
             EditorUtility.SetDirty(session);
             EditorSceneManager.MarkSceneDirty(scene);
-            EditorSceneManager.SaveScene(scene, path);
+            if (!EditorSceneManager.SaveScene(scene, path))
+            {
+                throw new InvalidOperationException($"Unity failed to save generated race scene '{path}'.");
+            }
         }
 
         private static void BuildTrackVisuals(RaceTrackDefinition track)
@@ -135,8 +211,6 @@ namespace TW08.Editor
         {
             Sprite sprite = TW08ExpansionStarterArt.LoadRaceSprite("Checkpoint");
             List<RaceCheckpoint> result = new();
-            // The player starts behind this narrow gate. Checkpoint 0 is crossed only after GO,
-            // so RaceManager never loses the first trigger during the countdown.
             result.Add(CreateCheckpoint(manager, 0, new Vector2(-6.5f, -4f), new Vector2(1.35f, 0.7f), sprite));
             result.Add(CreateCheckpoint(manager, 1, new Vector2(7.5f, -4f), new Vector2(0.7f, 3f), sprite));
             result.Add(CreateCheckpoint(manager, 2, new Vector2(7.5f, 4f), new Vector2(3f, 0.7f), sprite));
@@ -234,7 +308,7 @@ namespace TW08.Editor
             EditorUtility.SetDirty(hud);
         }
 
-        private static void SetPrivateBool(Object target, string propertyName, bool value)
+        private static void SetPrivateBool(UnityEngine.Object target, string propertyName, bool value)
         {
             SerializedObject serialized = new(target);
             SerializedProperty property = serialized.FindProperty(propertyName);
@@ -244,6 +318,18 @@ namespace TW08.Editor
                 serialized.ApplyModifiedPropertiesWithoutUndo();
             }
             EditorUtility.SetDirty(target);
+        }
+
+        private readonly struct RaceSceneSpec
+        {
+            public RaceSceneSpec(string trackAssetPath, string sceneName)
+            {
+                TrackAssetPath = trackAssetPath;
+                SceneName = sceneName;
+            }
+
+            public string TrackAssetPath { get; }
+            public string SceneName { get; }
         }
     }
 }
