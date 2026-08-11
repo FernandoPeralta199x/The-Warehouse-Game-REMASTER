@@ -24,6 +24,8 @@ namespace TW08.Editor
         public static void UpgradeVerticalSlicePresentation()
         {
             TW08ArtCatalog catalog = TW08ProductionArtSetup.EnsureProductionArtAssets();
+            TW08StarterArtRefinement.Regenerate();
+
             string previouslyOpenScene = SceneManager.GetActiveScene().path;
             int upgraded = 0;
             int skipped = 0;
@@ -60,26 +62,15 @@ namespace TW08.Editor
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            if (!string.IsNullOrWhiteSpace(previouslyOpenScene) && AssetDatabase.LoadAssetAtPath<SceneAsset>(previouslyOpenScene) != null)
-            {
-                EditorSceneManager.OpenScene(previouslyOpenScene, OpenSceneMode.Single);
-            }
-            else
-            {
-                string menuPath = "Assets/_Project/Scenes/VerticalSlice/TW08_MainMenu.unity";
-                if (AssetDatabase.LoadAssetAtPath<SceneAsset>(menuPath) != null)
-                {
-                    EditorSceneManager.OpenScene(menuPath, OpenSceneMode.Single);
-                }
-            }
+            RestorePreviousScene(previouslyOpenScene);
 
             EditorUtility.DisplayDialog(
                 "The Warehouse Nº 08 — Production",
                 "Presentation upgrade concluído.\n\n" +
                 "Fases atualizadas: " + upgraded + "\n" +
                 "Fases ignoradas: " + skipped + "\n\n" +
-                "Starter pixel-art N-8 aplicado quando o catálogo possui sprite. " +
-                "O movimento lógico continua determinístico por célula; animação e interpolação permanecem apenas na apresentação.",
+                "O upgrade agora é idempotente: pode ser executado novamente após cada refinamento do starter sem depender do PrototypeSpriteRenderer. " +
+                "O estado lógico do puzzle continua separado da apresentação.",
                 "OK");
         }
 
@@ -126,7 +117,7 @@ namespace TW08.Editor
                 john.transform.localScale = Vector3.one;
                 renderer.sprite = starterJohn;
                 renderer.color = Color.white;
-                renderer.sortingOrder = 5;
+                renderer.sortingOrder = 30;
             }
 
             EditorUtility.SetDirty(renderer);
@@ -136,15 +127,17 @@ namespace TW08.Editor
 
         private static void ApplyEnvironmentSkin(TW08ArtCatalog catalog)
         {
-            PrototypeSpriteRenderer[] prototypes = UnityEngine.Object.FindObjectsByType<PrototypeSpriteRenderer>(FindObjectsSortMode.None);
-            foreach (PrototypeSpriteRenderer prototype in prototypes)
+            // Iterate every scene object, not only objects that still have PrototypeSpriteRenderer.
+            // This makes the upgrade safe to repeat after generated art changes.
+            Transform[] sceneObjects = UnityEngine.Object.FindObjectsByType<Transform>(FindObjectsSortMode.None);
+            foreach (Transform transform in sceneObjects)
             {
-                if (prototype == null)
+                if (transform == null)
                 {
                     continue;
                 }
 
-                GameObject target = prototype.gameObject;
+                GameObject target = transform.gameObject;
                 Sprite sprite = ResolveProductionSprite(target, catalog, out int sortingOrder);
                 if (sprite == null)
                 {
@@ -157,7 +150,7 @@ namespace TW08.Editor
                     renderer = target.AddComponent<SpriteRenderer>();
                 }
 
-                UnityEngine.Object.DestroyImmediate(prototype);
+                RemovePrototypeRenderer(target);
                 target.transform.localScale = Vector3.one;
                 renderer.sprite = sprite;
                 renderer.color = Color.white;
@@ -173,26 +166,26 @@ namespace TW08.Editor
 
             if (objectName.StartsWith("Floor ", StringComparison.Ordinal))
             {
-                sortingOrder = -2;
+                sortingOrder = -20;
                 return IsEvenFloorCell(objectName) ? catalog.FloorPrimary : catalog.FloorSecondary;
             }
 
             if (objectName.StartsWith("Wall ", StringComparison.Ordinal))
             {
-                sortingOrder = 1;
+                sortingOrder = 10;
                 return catalog.Wall;
             }
 
             if (objectName.StartsWith("Goal ", StringComparison.Ordinal))
             {
-                sortingOrder = 2;
+                sortingOrder = 5;
                 return catalog.Goal;
             }
 
             PuzzleEntityView entity = target.GetComponent<PuzzleEntityView>();
             if (entity != null && entity.Kind == PuzzleEntityKind.Crate)
             {
-                sortingOrder = 4;
+                sortingOrder = 20;
                 return catalog.CrateDefault;
             }
 
@@ -217,6 +210,21 @@ namespace TW08.Editor
             if (prototype != null)
             {
                 UnityEngine.Object.DestroyImmediate(prototype);
+            }
+        }
+
+        private static void RestorePreviousScene(string previouslyOpenScene)
+        {
+            if (!string.IsNullOrWhiteSpace(previouslyOpenScene) && AssetDatabase.LoadAssetAtPath<SceneAsset>(previouslyOpenScene) != null)
+            {
+                EditorSceneManager.OpenScene(previouslyOpenScene, OpenSceneMode.Single);
+                return;
+            }
+
+            string menuPath = "Assets/_Project/Scenes/VerticalSlice/TW08_MainMenu.unity";
+            if (AssetDatabase.LoadAssetAtPath<SceneAsset>(menuPath) != null)
+            {
+                EditorSceneManager.OpenScene(menuPath, OpenSceneMode.Single);
             }
         }
     }
