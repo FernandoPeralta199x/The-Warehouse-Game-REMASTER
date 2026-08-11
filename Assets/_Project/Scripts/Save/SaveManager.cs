@@ -28,7 +28,7 @@ namespace TW08.Save
             Data = service.Load();
             Data.EnsureDefaults();
             CharacterSelectionState.Select(Data.selectedCharacterId);
-            AudioListener.volume = Data.masterVolume;
+            ApplyAudioSettingsToRuntime();
         }
 
         public void SelectCharacter(string characterId)
@@ -65,7 +65,7 @@ namespace TW08.Save
             Data.masterVolume = Mathf.Clamp01(master);
             Data.musicVolume = Mathf.Clamp01(music);
             Data.sfxVolume = Mathf.Clamp01(sfx);
-            AudioListener.volume = Data.masterVolume;
+            ApplyAudioSettingsToRuntime();
             Save();
         }
 
@@ -74,6 +74,15 @@ namespace TW08.Save
             if (Data == null) return;
             Data.EnsureDefaults();
             service?.Save(Data);
+        }
+
+        private void ApplyAudioSettingsToRuntime()
+        {
+            AudioListener.volume = Data.masterVolume;
+            PlayerPrefs.SetFloat("tw08.audio.master", Data.masterVolume);
+            PlayerPrefs.SetFloat("tw08.audio.music", Data.musicVolume);
+            PlayerPrefs.SetFloat("tw08.audio.sfx", Data.sfxVolume);
+            PlayerPrefs.Save();
         }
     }
 }
