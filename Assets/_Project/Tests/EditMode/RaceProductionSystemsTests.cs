@@ -13,8 +13,9 @@ namespace TW08.Tests.EditMode
         [TearDown]
         public void TearDown()
         {
-            foreach (GameObject go in objects)
+            for (int i = objects.Count - 1; i >= 0; i--)
             {
+                GameObject go = objects[i];
                 if (go != null)
                 {
                     Object.DestroyImmediate(go);
