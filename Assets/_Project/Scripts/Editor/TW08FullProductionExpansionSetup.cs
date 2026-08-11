@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using TW08.Audio;
+using TW08.Data;
 using TW08.Presentation;
+using TW08.Puzzle;
+using TW08.Race;
 using TW08.UI;
 using UnityEditor;
 using UnityEditor.Events;
@@ -23,11 +26,23 @@ namespace TW08.Editor
                 EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Validando dados base...", 0.05f);
                 TW08BasePuzzleDataRecovery.EnsureBaseLevels();
 
-                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando dados, personagens, campanhas e áudio...", 0.16f);
-                TW08ExpansionDataSetup.ExpansionData data = TW08ExpansionDataSetup.EnsureAll();
-                TW08ArtCatalog catalog = TW08ProductionArtSetup.EnsureProductionArtAssets();
+                // Any pipeline that writes/imports PNG/WAV files may call AssetDatabase.Refresh(),
+                // which can replace native UnityEngine.Object instances held by local variables.
+                // Finish all refresh-heavy generation before capturing campaign references.
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Gerando arte e áudio starter...", 0.12f);
+                TW08ProductionArtSetup.EnsureProductionArtAssets();
                 TW08ExpansionStarterArt.EnsureAll();
-                TW08AudioCatalog audioCatalog = TW08StarterAudioSetup.EnsureAll();
+                TW08StarterAudioSetup.EnsureAll();
+
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando dados, personagens e campanhas...", 0.20f);
+                TW08ExpansionDataSetup.EnsureAll();
+                AssetDatabase.SaveAssets();
+
+                // EnsureAll and the art pipeline may refresh the AssetDatabase. Never continue with
+                // references captured before those refreshes; reload the serialized assets by path.
+                TW08ExpansionDataSetup.ExpansionData data = ReloadStableExpansionData();
+                TW08ArtCatalog catalog = RequireAsset<TW08ArtCatalog>(TW08ProductionArtSetup.CatalogPath);
+                TW08AudioCatalog audioCatalog = RequireAsset<TW08AudioCatalog>(TW08StarterAudioSetup.CatalogPath);
 
                 EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando hub e menus...", 0.32f);
                 List<string> menuPaths = TW08MenuSceneBuilder.BuildAll(data);
@@ -84,6 +99,56 @@ namespace TW08.Editor
             {
                 EditorUtility.ClearProgressBar();
             }
+        }
+
+        private static TW08ExpansionDataSetup.ExpansionData ReloadStableExpansionData()
+        {
+            CharacterRoster roster = RequireAsset<CharacterRoster>(TW08ExpansionDataSetup.RosterPath);
+            PuzzleCampaignDefinition puzzleCampaign = RequireAsset<PuzzleCampaignDefinition>(TW08ExpansionDataSetup.PuzzleCampaignPath);
+            RaceCampaignDefinition raceCampaign = RequireAsset<RaceCampaignDefinition>(TW08ExpansionDataSetup.RaceCampaignPath);
+            ForkliftStats forkliftStats = RequireAsset<ForkliftStats>(TW08ExpansionDataSetup.ForkliftStatsPath);
+
+            List<PuzzleLevelDefinition> puzzleLevels = puzzleCampaign.Levels
+                .Where(entry => entry != null && entry.Level != null)
+                .Select(entry => entry.Level)
+                .ToList();
+            List<RaceTrackDefinition> raceTracks = raceCampaign.Tracks
+                .Where(track => track != null)
+                .ToList();
+
+            if (puzzleLevels.Count != 9)
+            {
+                throw new System.InvalidOperationException(
+                    $"Campanha puzzle deveria conter 9 fases válidas após recarregar o AssetDatabase, mas contém {puzzleLevels.Count}.");
+            }
+
+            if (raceTracks.Count != 3)
+            {
+                throw new System.InvalidOperationException(
+                    $"Campanha de corrida deveria conter 3 pistas válidas após recarregar o AssetDatabase, mas contém {raceTracks.Count}.");
+            }
+
+            return new TW08ExpansionDataSetup.ExpansionData
+            {
+                Roster = roster,
+                PuzzleCampaign = puzzleCampaign,
+                RaceCampaign = raceCampaign,
+                ForkliftStats = forkliftStats,
+                PuzzleLevels = puzzleLevels,
+                RaceTracks = raceTracks
+            };
+        }
+
+        private static T RequireAsset<T>(string path) where T : UnityEngine.Object
+        {
+            T asset = AssetDatabase.LoadAssetAtPath<T>(path);
+            if (asset == null)
+            {
+                throw new System.InvalidOperationException(
+                    $"Asset obrigatório não pôde ser recarregado após o refresh: {path} ({typeof(T).Name}).");
+            }
+
+            return asset;
         }
 
         private static void FixModeSelectNavigation()
