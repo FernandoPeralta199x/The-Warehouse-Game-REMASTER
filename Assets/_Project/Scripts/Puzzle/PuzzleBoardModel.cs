@@ -143,9 +143,19 @@ namespace TW08.Puzzle
             return cell.X >= 0 && cell.Y >= 0 && cell.X < Width && cell.Y < Height;
         }
 
+        public bool IsWall(GridCoordinate cell)
+        {
+            return walls.Contains(cell);
+        }
+
+        public bool IsGoal(GridCoordinate cell)
+        {
+            return goals.Contains(cell);
+        }
+
         public bool IsFree(GridCoordinate cell)
         {
-            return IsInside(cell) && !walls.Contains(cell) && !crateByPosition.ContainsKey(cell);
+            return IsInside(cell) && !IsWall(cell) && !crateByPosition.ContainsKey(cell);
         }
 
         public bool TryGetCratePosition(string crateId, out GridCoordinate position)
