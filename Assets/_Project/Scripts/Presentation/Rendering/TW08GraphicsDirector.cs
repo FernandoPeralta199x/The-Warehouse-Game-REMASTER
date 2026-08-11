@@ -20,7 +20,10 @@ namespace TW08.Presentation
         {
             profile = graphicsProfile;
             persistAcrossScenes = persist;
-            ApplyProfile();
+            if (Application.isPlaying)
+            {
+                ApplyProfile();
+            }
 #if UNITY_EDITOR
             if (!Application.isPlaying) UnityEditor.EditorUtility.SetDirty(this);
 #endif
