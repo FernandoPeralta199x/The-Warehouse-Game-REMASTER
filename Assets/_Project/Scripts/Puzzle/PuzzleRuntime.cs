@@ -21,6 +21,7 @@ namespace TW08.Puzzle
         public int UndoCount => history.UndoCount;
         public int RedoCount => history.RedoCount;
 
+        public event Action Initialized;
         public event Action<PuzzleMove> MoveApplied;
         public event Action<PuzzleMove> MoveUndone;
         public event Action<PuzzleMove> MoveRedone;
@@ -50,6 +51,7 @@ namespace TW08.Puzzle
             {
                 Board = null;
                 history.Clear();
+                crateViewById.Clear();
                 Debug.LogError("Puzzle level is invalid:\n- " + string.Join("\n- ", validationErrors), level);
                 return;
             }
@@ -61,6 +63,7 @@ namespace TW08.Puzzle
                 .GroupBy(view => view.EntityId)
                 .ToDictionary(group => group.Key, group => group.First());
             SyncViews();
+            Initialized?.Invoke();
         }
 
         public bool TryMove(GridCoordinate direction)
