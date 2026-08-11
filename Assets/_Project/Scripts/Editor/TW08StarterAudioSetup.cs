@@ -64,7 +64,6 @@ namespace TW08.Editor
             s.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(catalog);
             AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
             return catalog;
         }
 
@@ -79,7 +78,7 @@ namespace TW08.Editor
             string path = AudioRoot + "/" + fileName;
             int count = Mathf.Max(64, Mathf.RoundToInt(duration * SampleRate));
             float[] samples = new float[count];
-            System.Random random = new(fileName.GetHashCode());
+            System.Random random = new(StableSeed(fileName));
             double phase = 0d;
             for (int i = 0; i < count; i++)
             {
@@ -96,8 +95,8 @@ namespace TW08.Editor
                 }
                 samples[i] = Mathf.Clamp(signal * envelope, -1f, 1f);
             }
-            WriteWave(path, samples);
-            return AssetDatabase.LoadAssetAtPath<AudioClip>(path);
+
+            return EnsureImportedClip(path, samples);
         }
 
         private static AudioClip EnsureMusic(string fileName, float rootFrequency, float amplitude, float bpm)
@@ -118,8 +117,28 @@ namespace TW08.Editor
                 float texture = Mathf.Sign(Mathf.Sin(2f * Mathf.PI * rootFrequency * 0.5f * time)) * 0.08f;
                 samples[i] = Mathf.Clamp((bass + fifth + octave + texture) * amplitude * pulse, -0.75f, 0.75f);
             }
-            WriteWave(path, samples);
-            return AssetDatabase.LoadAssetAtPath<AudioClip>(path);
+
+            return EnsureImportedClip(path, samples);
+        }
+
+        private static AudioClip EnsureImportedClip(string assetPath, float[] samples)
+        {
+            bool changed = WriteWaveIfChanged(assetPath, samples);
+            AudioClip clip = AssetDatabase.LoadAssetAtPath<AudioClip>(assetPath);
+            if (changed || clip == null)
+            {
+                // The WAV file is fully closed before Unity/FMOD sees it. Do not ForceUpdate here:
+                // it can create a reimport loop when the SourceAssetDB timestamp is still settling.
+                AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceSynchronousImport);
+                clip = AssetDatabase.LoadAssetAtPath<AudioClip>(assetPath);
+            }
+
+            if (clip == null)
+            {
+                Debug.LogWarning($"TW08 starter audio could not be imported: {assetPath}. The expansion can continue without this clip.");
+            }
+
+            return clip;
         }
 
         private static AudioEvent EnsureEvent(string id, AudioClip clip, float volume, float pitchMin, float pitchMax)
@@ -171,11 +190,27 @@ namespace TW08.Editor
             if (property != null) property.objectReferenceValue = value;
         }
 
-        private static void WriteWave(string assetPath, float[] samples)
+        private static bool WriteWaveIfChanged(string assetPath, float[] samples)
         {
             string absolute = ToAbsoluteAssetPath(assetPath);
             Directory.CreateDirectory(Path.GetDirectoryName(absolute) ?? Application.dataPath);
-            using FileStream stream = File.Create(absolute);
+            byte[] bytes = BuildWaveBytes(samples);
+
+            if (File.Exists(absolute))
+            {
+                byte[] existing = File.ReadAllBytes(absolute);
+                if (ByteArraysEqual(existing, bytes)) return false;
+            }
+
+            // File.WriteAllBytes closes the file before returning, so Unity/FMOD never imports a
+            // WAV that is still open for writing.
+            File.WriteAllBytes(absolute, bytes);
+            return true;
+        }
+
+        private static byte[] BuildWaveBytes(float[] samples)
+        {
+            using MemoryStream stream = new();
             using BinaryWriter writer = new(stream);
             int dataLength = samples.Length * 2;
             writer.Write(new[] { 'R', 'I', 'F', 'F' });
@@ -197,7 +232,34 @@ namespace TW08.Editor
                 writer.Write(pcm);
             }
             writer.Flush();
-            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
+            return stream.ToArray();
+        }
+
+        private static bool ByteArraysEqual(byte[] left, byte[] right)
+        {
+            if (ReferenceEquals(left, right)) return true;
+            if (left == null || right == null || left.Length != right.Length) return false;
+            for (int i = 0; i < left.Length; i++)
+            {
+                if (left[i] != right[i]) return false;
+            }
+            return true;
+        }
+
+        private static int StableSeed(string value)
+        {
+            unchecked
+            {
+                const int offset = unchecked((int)2166136261);
+                const int prime = 16777619;
+                int hash = offset;
+                for (int i = 0; i < value.Length; i++)
+                {
+                    hash ^= value[i];
+                    hash *= prime;
+                }
+                return hash;
+            }
         }
 
         private static string ToAbsoluteAssetPath(string assetPath)
