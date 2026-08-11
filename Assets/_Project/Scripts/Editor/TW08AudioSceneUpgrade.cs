@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using TW08.Audio;
 using TW08.Puzzle;
@@ -18,63 +19,101 @@ namespace TW08.Editor
             IEnumerable<string> puzzlePaths,
             IEnumerable<string> racePaths)
         {
-            if (catalog == null) return;
+            // The caller may hold a catalog reference across scene saves/import callbacks. Treat it as
+            // an existence hint only; always reload a live catalog before mutating each generated scene.
+            if (catalog == null && LoadCatalog() == null) return;
+
             if (menuPaths != null)
             {
-                foreach (string path in menuPaths) AttachMusic(path, catalog.MenuMusic);
+                foreach (string path in menuPaths)
+                {
+                    TW08AudioCatalog liveCatalog = RequireCatalog();
+                    AttachMusic(path, liveCatalog.MenuMusic);
+                }
             }
             if (puzzlePaths != null)
             {
-                foreach (string path in puzzlePaths) AttachPuzzle(path, catalog);
+                foreach (string path in puzzlePaths)
+                {
+                    AttachPuzzle(path, RequireCatalog());
+                }
             }
             if (racePaths != null)
             {
-                foreach (string path in racePaths) AttachRace(path, catalog);
+                foreach (string path in racePaths)
+                {
+                    AttachRace(path, RequireCatalog());
+                }
             }
+        }
+
+        private static TW08AudioCatalog LoadCatalog()
+        {
+            return AssetDatabase.LoadAssetAtPath<TW08AudioCatalog>(TW08StarterAudioSetup.CatalogPath);
+        }
+
+        private static TW08AudioCatalog RequireCatalog()
+        {
+            TW08AudioCatalog catalog = LoadCatalog();
+            if (catalog == null)
+            {
+                throw new InvalidOperationException(
+                    $"TW08 audio catalog could not be reloaded from '{TW08StarterAudioSetup.CatalogPath}' during scene upgrade.");
+            }
+            return catalog;
         }
 
         private static void AttachMusic(string path, MusicTrack track)
         {
             if (AssetDatabase.LoadAssetAtPath<SceneAsset>(path) == null) return;
             Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
-            SceneMusicPresenter presenter = Object.FindFirstObjectByType<SceneMusicPresenter>()
+            SceneMusicPresenter presenter = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>()
                 ?? new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
             presenter.Configure(track);
             EditorUtility.SetDirty(presenter);
             EditorSceneManager.MarkSceneDirty(scene);
-            EditorSceneManager.SaveScene(scene, path);
+            if (!EditorSceneManager.SaveScene(scene, path))
+            {
+                throw new InvalidOperationException($"Unity failed to save menu audio upgrade for '{path}'.");
+            }
         }
 
         private static void AttachPuzzle(string path, TW08AudioCatalog catalog)
         {
             if (AssetDatabase.LoadAssetAtPath<SceneAsset>(path) == null) return;
             Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
-            PuzzleRuntime runtime = Object.FindFirstObjectByType<PuzzleRuntime>();
+            PuzzleRuntime runtime = UnityEngine.Object.FindFirstObjectByType<PuzzleRuntime>();
             if (runtime == null) return;
             PuzzleAudioFeedback feedback = runtime.GetComponent<PuzzleAudioFeedback>() ?? runtime.gameObject.AddComponent<PuzzleAudioFeedback>();
             feedback.Configure(runtime, catalog);
-            SceneMusicPresenter music = Object.FindFirstObjectByType<SceneMusicPresenter>() ?? new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
+            SceneMusicPresenter music = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>() ?? new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
             music.Configure(catalog.PuzzleMusic);
             EditorUtility.SetDirty(feedback);
             EditorUtility.SetDirty(music);
             EditorSceneManager.MarkSceneDirty(scene);
-            EditorSceneManager.SaveScene(scene, path);
+            if (!EditorSceneManager.SaveScene(scene, path))
+            {
+                throw new InvalidOperationException($"Unity failed to save puzzle audio upgrade for '{path}'.");
+            }
         }
 
         private static void AttachRace(string path, TW08AudioCatalog catalog)
         {
             if (AssetDatabase.LoadAssetAtPath<SceneAsset>(path) == null) return;
             Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
-            RaceSessionController session = Object.FindFirstObjectByType<RaceSessionController>();
+            RaceSessionController session = UnityEngine.Object.FindFirstObjectByType<RaceSessionController>();
             if (session == null) return;
             RaceAudioFeedback feedback = session.GetComponent<RaceAudioFeedback>() ?? session.gameObject.AddComponent<RaceAudioFeedback>();
             feedback.Configure(session, catalog);
-            SceneMusicPresenter music = Object.FindFirstObjectByType<SceneMusicPresenter>() ?? new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
+            SceneMusicPresenter music = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>() ?? new GameObject("Scene Music").AddComponent<SceneMusicPresenter>();
             music.Configure(catalog.RaceMusic);
             EditorUtility.SetDirty(feedback);
             EditorUtility.SetDirty(music);
             EditorSceneManager.MarkSceneDirty(scene);
-            EditorSceneManager.SaveScene(scene, path);
+            if (!EditorSceneManager.SaveScene(scene, path))
+            {
+                throw new InvalidOperationException($"Unity failed to save race audio upgrade for '{path}'.");
+            }
         }
     }
 }
