@@ -41,6 +41,13 @@ namespace TW08.Puzzle
         {
             input = gameInput;
             runtime = puzzleRuntime;
+
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+#endif
         }
 
         private void OnMove(GridCoordinate direction) => runtime.TryMove(direction);
