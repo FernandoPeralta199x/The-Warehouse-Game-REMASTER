@@ -8,10 +8,7 @@ namespace TW08.Race
         [SerializeField] private string trackId = "receiving-loop";
         [SerializeField] private string displayName = "Receiving Loop";
         [SerializeField] private string sceneName = "TW08_Race01_ReceivingLoop";
-        [SerializeField, Min(1)] private int laps = 3;
-        [SerializeField, Min(1f)] private float bronzeTimeSeconds = 75f;
-        [SerializeField, Min(1f)] private float silverTimeSeconds = 62f;
-        [SerializeField, Min(1f)] private float goldTimeSeconds = 52f;
+        [SerializeField] private RaceDefinition raceRules;
         [SerializeField, TextArea(2, 5)] private string briefing = string.Empty;
         [SerializeField] private Sprite previewImage;
         [SerializeField, Range(0.15f, 1f)] private float surfaceGrip = 1f;
@@ -19,42 +16,21 @@ namespace TW08.Race
         public string TrackId => string.IsNullOrWhiteSpace(trackId) ? name : trackId;
         public string DisplayName => string.IsNullOrWhiteSpace(displayName) ? name : displayName;
         public string SceneName => sceneName;
-        public int Laps => Mathf.Max(1, laps);
-        public float BronzeTimeSeconds => bronzeTimeSeconds;
-        public float SilverTimeSeconds => silverTimeSeconds;
-        public float GoldTimeSeconds => goldTimeSeconds;
+        public RaceDefinition RaceRules => raceRules;
+        public int Laps => raceRules != null ? raceRules.Laps : 3;
         public string Briefing => briefing;
         public Sprite PreviewImage => previewImage;
         public float SurfaceGrip => Mathf.Clamp(surfaceGrip, 0.15f, 1f);
 
-        public int GetMedal(float elapsedSeconds)
+        public int GetMedal(float elapsedSeconds, float cargoDamage = 0f)
         {
-            if (elapsedSeconds <= goldTimeSeconds)
-            {
-                return 3;
-            }
-
-            if (elapsedSeconds <= silverTimeSeconds)
-            {
-                return 2;
-            }
-
-            if (elapsedSeconds <= bronzeTimeSeconds)
-            {
-                return 1;
-            }
-
-            return 0;
+            return raceRules != null ? raceRules.EvaluateMedal(elapsedSeconds, cargoDamage) : 0;
         }
 
         private void OnValidate()
         {
             trackId = string.IsNullOrWhiteSpace(trackId) ? name.ToLowerInvariant() : trackId.Trim().ToLowerInvariant();
             displayName = string.IsNullOrWhiteSpace(displayName) ? name : displayName.Trim();
-            laps = Mathf.Max(1, laps);
-            goldTimeSeconds = Mathf.Max(1f, goldTimeSeconds);
-            silverTimeSeconds = Mathf.Max(goldTimeSeconds, silverTimeSeconds);
-            bronzeTimeSeconds = Mathf.Max(silverTimeSeconds, bronzeTimeSeconds);
             surfaceGrip = Mathf.Clamp(surfaceGrip, 0.15f, 1f);
         }
     }
