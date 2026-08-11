@@ -21,6 +21,7 @@ namespace TW08.Puzzle
 
             IReadOnlyList<GridCoordinate> walls = level.Walls ?? Array.Empty<GridCoordinate>();
             IReadOnlyList<GridCoordinate> goalsSource = level.Goals ?? Array.Empty<GridCoordinate>();
+            IReadOnlyList<PuzzleGoalRequirementDefinition> goalRequirements = level.GoalRequirements ?? Array.Empty<PuzzleGoalRequirementDefinition>();
             IReadOnlyList<PuzzleCrateDefinition> crates = level.Crates ?? Array.Empty<PuzzleCrateDefinition>();
             IReadOnlyList<GridCoordinate> costlyCells = level.CostlyCells ?? Array.Empty<GridCoordinate>();
             IReadOnlyList<PuzzleSwitchGroupDefinition> switchGroups = level.SwitchGroups ?? Array.Empty<PuzzleSwitchGroupDefinition>();
@@ -123,9 +124,46 @@ namespace TW08.Puzzle
                 errors.Add("Standard puzzle levels require the same number of crates and goals.");
             }
 
+            ValidateGoalRequirements(level, goalRequirements, goals, errors);
             ValidateCostlyCells(level, costlyCells, wallCells, errors);
             ValidateSwitchGroups(level, switchGroups, wallCells, errors);
             return errors;
+        }
+
+        private static void ValidateGoalRequirements(
+            PuzzleLevelDefinition level,
+            IReadOnlyList<PuzzleGoalRequirementDefinition> requirements,
+            HashSet<GridCoordinate> goals,
+            List<string> errors)
+        {
+            HashSet<GridCoordinate> unique = new();
+            foreach (PuzzleGoalRequirementDefinition requirement in requirements)
+            {
+                if (requirement == null)
+                {
+                    errors.Add("Level contains a null goal requirement.");
+                    continue;
+                }
+
+                if (!IsInside(level, requirement.Position))
+                {
+                    errors.Add($"Goal requirement {requirement.Position} is outside the board.");
+                }
+                else if (!goals.Contains(requirement.Position))
+                {
+                    errors.Add($"Goal requirement {requirement.Position} does not reference a goal.");
+                }
+
+                if (requirement.RequiredKind == PuzzleEntityKind.Player)
+                {
+                    errors.Add($"Goal requirement {requirement.Position} cannot require the Player kind.");
+                }
+
+                if (!unique.Add(requirement.Position))
+                {
+                    errors.Add($"Duplicate goal requirement at {requirement.Position}.");
+                }
+            }
         }
 
         private static void ValidateCostlyCells(
