@@ -48,6 +48,8 @@ namespace TW08.Puzzle
             IReadOnlyList<string> validationErrors = PuzzleLevelValidator.Validate(level);
             if (validationErrors.Count > 0)
             {
+                Board = null;
+                history.Clear();
                 Debug.LogError("Puzzle level is invalid:\n- " + string.Join("\n- ", validationErrors), level);
                 return;
             }
@@ -71,16 +73,7 @@ namespace TW08.Puzzle
             history.Record(move);
             SyncViews();
             MoveApplied?.Invoke(move);
-
-            if (Board.IsComplete)
-            {
-                LevelCompleted?.Invoke();
-            }
-            else if (SimpleDeadlockDetector.HasStaticCornerDeadlock(Board))
-            {
-                StaticDeadlockDetected?.Invoke();
-            }
-
+            EvaluateBoardState();
             return true;
         }
 
@@ -120,13 +113,34 @@ namespace TW08.Puzzle
             history.RestoreUndo(repeated);
             SyncViews();
             MoveRedone?.Invoke(repeated);
+            EvaluateBoardState();
             return true;
         }
 
         public void Restart()
         {
             Initialize();
-            LevelRestarted?.Invoke();
+            if (Board != null)
+            {
+                LevelRestarted?.Invoke();
+            }
+        }
+
+        private void EvaluateBoardState()
+        {
+            if (Board == null)
+            {
+                return;
+            }
+
+            if (Board.IsComplete)
+            {
+                LevelCompleted?.Invoke();
+            }
+            else if (SimpleDeadlockDetector.HasStaticCornerDeadlock(Board))
+            {
+                StaticDeadlockDetected?.Invoke();
+            }
         }
 
         private void SyncViews()
