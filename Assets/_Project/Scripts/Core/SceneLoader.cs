@@ -9,9 +9,14 @@ namespace TW08.Core
     [DisallowMultipleComponent]
     public sealed class SceneLoader : MonoBehaviour
     {
+        private static bool runtimeTransitionActive;
+
+        [SerializeField] private bool destroyAfterLoad;
+
         public bool IsLoading { get; private set; }
         public event Action<float> ProgressChanged;
         public event Action<string> SceneLoaded;
+        public event Action<string> SceneLoadFailed;
 
         public static bool TryLoadImmediate(string sceneName, string context = "scene")
         {
@@ -24,6 +29,11 @@ namespace TW08.Core
             Time.timeScale = 1f;
             if (Application.CanStreamedLevelBeLoaded(sceneName))
             {
+                if (Application.isPlaying)
+                {
+                    return BeginRuntimeAsyncLoad(sceneName, context);
+                }
+
                 SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
                 return true;
             }
@@ -67,6 +77,25 @@ namespace TW08.Core
             StartCoroutine(LoadRoutine(sceneName));
         }
 
+        private static bool BeginRuntimeAsyncLoad(string sceneName, string context)
+        {
+            if (runtimeTransitionActive)
+            {
+                Debug.LogWarning($"TW08 ignored duplicate {context} load request for '{sceneName}' because a transition is already running.");
+                return false;
+            }
+
+            runtimeTransitionActive = true;
+            GameObject host = new("TW08 Runtime Scene Loader");
+            DontDestroyOnLoad(host);
+            SceneLoader loader = host.AddComponent<SceneLoader>();
+            loader.destroyAfterLoad = true;
+            loader.SceneLoaded += _ => runtimeTransitionActive = false;
+            loader.SceneLoadFailed += _ => runtimeTransitionActive = false;
+            loader.Load(sceneName);
+            return true;
+        }
+
         private IEnumerator LoadRoutine(string sceneName)
         {
             IsLoading = true;
@@ -80,22 +109,18 @@ namespace TW08.Core
                     UnityEditor.SceneManagement.EditorSceneManager.LoadSceneInPlayMode(
                         editorPath,
                         new LoadSceneParameters(LoadSceneMode.Single));
-                    IsLoading = false;
-                    ProgressChanged?.Invoke(1f);
-                    SceneLoaded?.Invoke(sceneName);
+                    CompleteSuccess(sceneName);
                     yield break;
                 }
 #endif
-                IsLoading = false;
-                Debug.LogError($"Unable to start loading scene '{sceneName}' because it is not registered for the player.");
+                CompleteFailure(sceneName, $"Unable to start loading scene '{sceneName}' because it is not registered for the player.");
                 yield break;
             }
 
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
             if (operation == null)
             {
-                IsLoading = false;
-                Debug.LogError($"Unable to start loading scene '{sceneName}'.");
+                CompleteFailure(sceneName, $"Unable to start loading scene '{sceneName}'.");
                 yield break;
             }
 
@@ -106,9 +131,29 @@ namespace TW08.Core
                 yield return null;
             }
 
+            CompleteSuccess(sceneName);
+        }
+
+        private void CompleteSuccess(string sceneName)
+        {
             IsLoading = false;
             ProgressChanged?.Invoke(1f);
             SceneLoaded?.Invoke(sceneName);
+            if (destroyAfterLoad)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        private void CompleteFailure(string sceneName, string message)
+        {
+            IsLoading = false;
+            Debug.LogError(message);
+            SceneLoadFailed?.Invoke(sceneName);
+            if (destroyAfterLoad)
+            {
+                Destroy(gameObject);
+            }
         }
 
 #if UNITY_EDITOR
