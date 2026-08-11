@@ -3,7 +3,7 @@
   "rootNamespace": "TW08",
   "references": [
     "Unity.InputSystem",
-    "Unity.ugui"
+    "UnityEngine.UI"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
