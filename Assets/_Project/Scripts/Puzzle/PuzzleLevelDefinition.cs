@@ -21,6 +21,7 @@ namespace TW08.Puzzle
         [SerializeField] private GridCoordinate playerStart = new(1, 1);
         [SerializeField] private List<GridCoordinate> walls = new();
         [SerializeField] private List<GridCoordinate> goals = new();
+        [SerializeField] private List<PuzzleGoalRequirementDefinition> goalRequirements = new();
         [SerializeField] private List<PuzzleCrateDefinition> crates = new();
 
         [Header("Mechanics")]
@@ -46,6 +47,7 @@ namespace TW08.Puzzle
         public GridCoordinate PlayerStart => playerStart;
         public IReadOnlyList<GridCoordinate> Walls => walls;
         public IReadOnlyList<GridCoordinate> Goals => goals;
+        public IReadOnlyList<PuzzleGoalRequirementDefinition> GoalRequirements => goalRequirements;
         public IReadOnlyList<PuzzleCrateDefinition> Crates => crates;
         public IReadOnlyList<GridCoordinate> CostlyCells => costlyCells;
         public IReadOnlyList<PuzzleSwitchGroupDefinition> SwitchGroups => switchGroups;
