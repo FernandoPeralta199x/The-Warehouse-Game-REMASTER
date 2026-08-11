@@ -1,5 +1,6 @@
 using System;
 using TW08.Core;
+using TW08.Save;
 using UnityEngine;
 
 namespace TW08.Race
@@ -42,10 +43,7 @@ namespace TW08.Race
             playerProgress = progress;
 
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
-            {
-                UnityEditor.EditorUtility.SetDirty(this);
-            }
+            if (!Application.isPlaying) UnityEditor.EditorUtility.SetDirty(this);
 #endif
         }
 
@@ -56,7 +54,6 @@ namespace TW08.Race
                 countdown.Tick += OnCountdownTick;
                 countdown.Completed += OnCountdownCompleted;
             }
-
             if (raceManager != null)
             {
                 raceManager.RaceStarted += OnRaceStarted;
@@ -66,23 +63,10 @@ namespace TW08.Race
 
         private void Start()
         {
-            if (playerVehicle != null)
-            {
-                playerVehicle.ControlsEnabled = false;
-            }
-
-            float seconds = track != null && track.RaceRules != null
-                ? track.RaceRules.CountdownSeconds
-                : 3f;
-
-            if (countdown != null)
-            {
-                countdown.Begin(seconds);
-            }
-            else
-            {
-                OnCountdownCompleted();
-            }
+            if (playerVehicle != null) playerVehicle.ControlsEnabled = false;
+            float seconds = track != null && track.RaceRules != null ? track.RaceRules.CountdownSeconds : 3f;
+            if (countdown != null) countdown.Begin(seconds);
+            else OnCountdownCompleted();
         }
 
         private void OnDisable()
@@ -92,7 +76,6 @@ namespace TW08.Race
                 countdown.Tick -= OnCountdownTick;
                 countdown.Completed -= OnCountdownCompleted;
             }
-
             if (raceManager != null)
             {
                 raceManager.RaceStarted -= OnRaceStarted;
@@ -111,33 +94,21 @@ namespace TW08.Race
         {
             countdownValue = 0;
             raceManager?.StartRace();
-            if (playerVehicle != null)
-            {
-                playerVehicle.ControlsEnabled = true;
-            }
+            if (playerVehicle != null) playerVehicle.ControlsEnabled = true;
             StateChanged?.Invoke();
         }
 
-        private void OnRaceStarted()
-        {
-            StateChanged?.Invoke();
-        }
+        private void OnRaceStarted() => StateChanged?.Invoke();
 
         private void OnRacerFinished(RacerProgress racer)
         {
-            if (racer == null || racer != playerProgress)
-            {
-                return;
-            }
-
-            if (playerVehicle != null)
-            {
-                playerVehicle.ControlsEnabled = false;
-            }
+            if (racer == null || racer != playerProgress) return;
+            if (playerVehicle != null) playerVehicle.ControlsEnabled = false;
 
             float finishTime = racer.FinishTime;
             int medal = track != null ? track.GetMedal(finishTime) : 0;
             RaceProgressStore.Record(track, finishTime);
+            Object.FindFirstObjectByType<SaveManager>()?.RecordRaceCompletion(track, finishTime);
             PlayerFinished?.Invoke(finishTime, medal);
             StateChanged?.Invoke();
         }
