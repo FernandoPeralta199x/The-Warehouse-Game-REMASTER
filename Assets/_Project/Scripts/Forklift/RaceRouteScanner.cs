@@ -20,7 +20,7 @@ namespace TW08.Race
         {
             raceManager = manager;
             progress = racerProgress;
-            EnsureRenderer();
+            EnsureRenderer(createRuntimeMaterial: false);
 #if UNITY_EDITOR
             if (!Application.isPlaying) UnityEditor.EditorUtility.SetDirty(this);
 #endif
@@ -29,7 +29,7 @@ namespace TW08.Race
         private void Awake()
         {
             if (progress == null) progress = GetComponent<RacerProgress>();
-            EnsureRenderer();
+            EnsureRenderer(createRuntimeMaterial: true);
             SetVisible(false);
         }
 
@@ -52,17 +52,15 @@ namespace TW08.Race
             SetVisible(true);
         }
 
-        private void EnsureRenderer()
+        private void EnsureRenderer(bool createRuntimeMaterial)
         {
-            if (line != null)
-            {
-                return;
-            }
-
-            line = GetComponent<LineRenderer>();
             if (line == null)
             {
-                line = gameObject.AddComponent<LineRenderer>();
+                line = GetComponent<LineRenderer>();
+                if (line == null)
+                {
+                    line = gameObject.AddComponent<LineRenderer>();
+                }
             }
 
             line.positionCount = 2;
@@ -73,17 +71,24 @@ namespace TW08.Race
             line.endColor = new Color(routeColor.r, routeColor.g, routeColor.b, 0.08f);
             line.sortingOrder = 50;
 
-            if (line.sharedMaterial == null)
+            if (!createRuntimeMaterial || line.sharedMaterial != null)
             {
-                Shader shader = Shader.Find("Sprites/Default") ?? Shader.Find("Unlit/Color");
-                if (shader != null)
+                return;
+            }
+
+            Shader shader = Shader.Find("Sprites/Default");
+            if (shader == null)
+            {
+                shader = Shader.Find("Unlit/Color");
+            }
+
+            if (shader != null)
+            {
+                runtimeMaterial = new Material(shader)
                 {
-                    runtimeMaterial = new Material(shader)
-                    {
-                        name = "TW08 Route Scanner Runtime"
-                    };
-                    line.sharedMaterial = runtimeMaterial;
-                }
+                    name = "TW08 Route Scanner Runtime"
+                };
+                line.sharedMaterial = runtimeMaterial;
             }
         }
 
