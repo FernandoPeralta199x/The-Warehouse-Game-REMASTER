@@ -4,7 +4,6 @@ using TW08.Core;
 using TW08.Data;
 using TW08.Save;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TW08.UI
@@ -104,10 +103,7 @@ namespace TW08.UI
 
         public void Back()
         {
-            if (!string.IsNullOrWhiteSpace(backScene))
-            {
-                SceneManager.LoadScene(backScene, LoadSceneMode.Single);
-            }
+            SceneLoader.TryLoadImmediate(backScene, "menu de modos");
         }
 
         private void BuildList()
