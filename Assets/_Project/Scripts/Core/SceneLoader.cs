@@ -114,7 +114,33 @@ namespace TW08.Core
 #if UNITY_EDITOR
         private static string FindEditorScenePath(string sceneName)
         {
-            string[] guids = UnityEditor.AssetDatabase.FindAssets(sceneName + " t:Scene", new[] { "Assets/_Project/Scenes" });
+            if (string.IsNullOrWhiteSpace(sceneName))
+            {
+                return null;
+            }
+
+            // Generated TW08 scenes live in three deterministic roots. Resolve those first so editor
+            // playtests do not depend on AssetDatabase search indexing being up-to-date.
+            string[] candidatePaths =
+            {
+                $"Assets/_Project/Scenes/VerticalSlice/{sceneName}.unity",
+                $"Assets/_Project/Scenes/Production/Race/{sceneName}.unity",
+                $"Assets/_Project/Scenes/Production/Menus/{sceneName}.unity"
+            };
+
+            foreach (string candidate in candidatePaths)
+            {
+                if (UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(candidate) != null)
+                {
+                    return candidate;
+                }
+            }
+
+            // AssetDatabase type filters use class names. Scene files are represented by SceneAsset;
+            // using t:Scene can return no results even when the .unity file exists.
+            string[] guids = UnityEditor.AssetDatabase.FindAssets(
+                sceneName + " t:SceneAsset",
+                new[] { "Assets/_Project/Scenes" });
             foreach (string guid in guids)
             {
                 string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
