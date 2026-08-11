@@ -58,6 +58,10 @@ namespace TW08.Editor
                 TW08FeedbackSceneUpgrade.Apply(puzzlePaths, racePaths);
                 TW08AudioSceneUpgrade.Apply(audioCatalog, menuPaths, puzzlePaths, racePaths);
 
+                // Scene authoring and import callbacks can still cause Unity to recreate native asset
+                // handles. Validate against freshly loaded campaign assets, never stale local handles.
+                data = ReloadStableExpansionData();
+
                 EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Validando conteúdo e Build Settings...", 0.92f);
                 IReadOnlyList<string> validationErrors = TW08ProductionExpansionValidator.Validate(data, menuPaths, puzzlePaths, racePaths);
                 if (validationErrors.Count > 0)
