@@ -45,7 +45,7 @@ namespace TW08.Editor
             manager.Configure(checkpoints, track.Laps);
             EditorUtility.SetDirty(manager);
 
-            GameObject vehicle = CreateVehicle(input, manager, stats, track, out ArcadeForkliftController2D controller, out RacerProgress progress);
+            CreateVehicle(input, manager, stats, track, out ArcadeForkliftController2D controller, out RacerProgress progress);
             RaceSessionController session = new GameObject("Race Session").AddComponent<RaceSessionController>();
             session.Configure(track, manager, countdown, controller, progress);
 
@@ -83,7 +83,6 @@ namespace TW08.Editor
                 CreateBarrier(new Vector2(10, y), barrier);
             }
 
-            // Central warehouse island creates a readable ring instead of an empty rectangle.
             for (int y = -2; y <= 2; y++)
             for (int x = -5; x <= 5; x++)
                 CreateBarrier(new Vector2(x, y), barrier);
@@ -136,7 +135,9 @@ namespace TW08.Editor
         {
             Sprite sprite = TW08ExpansionStarterArt.LoadRaceSprite("Checkpoint");
             List<RaceCheckpoint> result = new();
-            result.Add(CreateCheckpoint(manager, 0, new Vector2(-7f, -4f), new Vector2(3f, 0.7f), sprite));
+            // The player starts behind this narrow gate. Checkpoint 0 is crossed only after GO,
+            // so RaceManager never loses the first trigger during the countdown.
+            result.Add(CreateCheckpoint(manager, 0, new Vector2(-6.5f, -4f), new Vector2(1.35f, 0.7f), sprite));
             result.Add(CreateCheckpoint(manager, 1, new Vector2(7.5f, -4f), new Vector2(0.7f, 3f), sprite));
             result.Add(CreateCheckpoint(manager, 2, new Vector2(7.5f, 4f), new Vector2(3f, 0.7f), sprite));
             result.Add(CreateCheckpoint(manager, 3, new Vector2(-7.5f, 4f), new Vector2(0.7f, 3f), sprite));
@@ -163,7 +164,7 @@ namespace TW08.Editor
         {
             Sprite john = TW08ExpansionStarterArt.LoadRaceSprite("Forklift_John");
             Sprite duda = TW08ExpansionStarterArt.LoadRaceSprite("Forklift_Duda");
-            GameObject go = TW08ProductionSceneUtility.CreateSprite("Player Forklift", new Vector3(-7f, -4f, 0f), john, 30, Color.white);
+            GameObject go = TW08ProductionSceneUtility.CreateSprite("Player Forklift", new Vector3(-8.15f, -4f, 0f), john, 30, Color.white);
             go.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
 
             Rigidbody2D body = go.AddComponent<Rigidbody2D>();
