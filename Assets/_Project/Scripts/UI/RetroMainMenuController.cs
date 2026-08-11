@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,8 +9,16 @@ namespace TW08.UI
     public sealed class RetroMainMenuController : MonoBehaviour
     {
         [SerializeField] private string firstLevelScene = "TW08_Level01_FirstShift";
+        [SerializeField] private Button firstSelectedButton;
         [SerializeField] private Button continueButton;
         [SerializeField] private Text versionText;
+
+        public void Configure(Button firstSelected, Button continueControl, Text versionLabel = null)
+        {
+            firstSelectedButton = firstSelected;
+            continueButton = continueControl;
+            versionText = versionLabel;
+        }
 
         private void Awake()
         {
@@ -21,6 +30,19 @@ namespace TW08.UI
             if (versionText != null)
             {
                 versionText.text = $"BUILD {Application.version} // UNITY 6.3 LTS";
+            }
+        }
+
+        private void Start()
+        {
+            SelectInitialButton();
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (hasFocus && EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
+            {
+                SelectInitialButton();
             }
         }
 
@@ -47,6 +69,17 @@ namespace TW08.UI
 #else
             Application.Quit();
 #endif
+        }
+
+        private void SelectInitialButton()
+        {
+            if (firstSelectedButton == null || EventSystem.current == null)
+            {
+                return;
+            }
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstSelectedButton.gameObject);
         }
     }
 }
