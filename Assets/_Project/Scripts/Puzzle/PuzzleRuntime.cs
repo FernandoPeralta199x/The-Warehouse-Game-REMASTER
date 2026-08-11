@@ -176,21 +176,44 @@ namespace TW08.Puzzle
                     continue;
                 }
 
+                IReadOnlyList<GridCoordinate> doors = group.Doors ?? Array.Empty<GridCoordinate>();
                 bool requestedOpen = group.Sensors != null
                     && group.Sensors.Count > 0
                     && group.Sensors.All(sensor => Board.Crates.ContainsKey(sensor));
 
-                foreach (GridCoordinate door in group.Doors ?? Array.Empty<GridCoordinate>())
-                {
-                    Board.SetDynamicBlocked(door, !requestedOpen);
-                }
-
                 bool effectiveOpen = requestedOpen;
-                if (!requestedOpen && group.Doors != null && group.Doors.Count > 0)
+                if (requestedOpen)
                 {
-                    // A closing door never crushes the player or a crate. If a door cell is occupied,
-                    // SetDynamicBlocked refuses to close it and presentation follows that safe state.
-                    effectiveOpen = group.Doors.Any(door => !Board.DynamicBlockedCells.Contains(door));
+                    foreach (GridCoordinate door in doors)
+                    {
+                        Board.SetDynamicBlocked(door, false);
+                    }
+                }
+                else
+                {
+                    bool allClosed = true;
+                    foreach (GridCoordinate door in doors)
+                    {
+                        if (!Board.SetDynamicBlocked(door, true) && !Board.DynamicBlockedCells.Contains(door))
+                        {
+                            allClosed = false;
+                        }
+                    }
+
+                    if (!allClosed)
+                    {
+                        // Door groups transition atomically: if one panel cannot close because the player
+                        // or cargo occupies the cell, keep every panel in the group open.
+                        foreach (GridCoordinate door in doors)
+                        {
+                            Board.SetDynamicBlocked(door, false);
+                        }
+                        effectiveOpen = true;
+                    }
+                    else
+                    {
+                        effectiveOpen = false;
+                    }
                 }
 
                 bool changed = !switchStates.TryGetValue(group.Id, out bool previous) || previous != effectiveOpen;
