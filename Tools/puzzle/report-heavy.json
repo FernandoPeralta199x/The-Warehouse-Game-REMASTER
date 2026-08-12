@@ -1,0 +1,102 @@
+{
+  "levels": [
+    {
+      "id": "TW08_Level25_DeadWeight",
+      "displayName": "Peso Morto",
+      "board": "10x7",
+      "crates": 5,
+      "goals": 5,
+      "solvable": true,
+      "optimalCost": 46,
+      "pushes": 21,
+      "solution": "DRRRLLLUURRRLLDRRRRRLLLLLLDRLDRRRLULURRRR",
+      "states": 599996,
+      "replayOk": true,
+      "replayCost": 46
+    },
+    {
+      "id": "TW08_Level29_LockdownN8",
+      "displayName": "Lockdown N-8",
+      "board": "10x7",
+      "crates": 5,
+      "goals": 5,
+      "solvable": true,
+      "optimalCost": 48,
+      "pushes": 22,
+      "solution": "DRRRLLLUURRRLLDRRRRRLLLLLLDRLDRRRRLLULURRRR",
+      "states": 375393,
+      "replayOk": true,
+      "replayCost": 48
+    },
+    {
+      "id": "TW08_Level30_LogisticsCore",
+      "displayName": "Nucleo Logistico",
+      "board": "10x7",
+      "crates": 6,
+      "goals": 6,
+      "solvable": true,
+      "optimalCost": 56,
+      "pushes": 25,
+      "solution": "DRRDRRRLLLURLLLUURRRLLDRRRRRLLLLLLDRLDRRRRLLULURRRR",
+      "states": 1762650,
+      "replayOk": true,
+      "replayCost": 56
+    },
+    {
+      "id": "TW08_Secret04_EliasRoute",
+      "displayName": "Rota do Elias",
+      "board": "10x7",
+      "crates": 5,
+      "goals": 5,
+      "solvable": true,
+      "optimalCost": 44,
+      "pushes": 21,
+      "solution": "DRRRLLLUURRRLLDRRRRRLLLLLLDRRLLDRRRULURRR",
+      "states": 636286,
+      "replayOk": true,
+      "replayCost": 44
+    },
+    {
+      "id": "TW08_Secret08_LeftoverMap",
+      "displayName": "O Mapa que Sobrou",
+      "board": "10x7",
+      "crates": 5,
+      "goals": 5,
+      "solvable": true,
+      "optimalCost": 39,
+      "pushes": 19,
+      "solution": "DRRRLLLUURRRLDRRRRLLLLDLDRRLULLURRRRR",
+      "states": 179757,
+      "replayOk": true,
+      "replayCost": 39
+    },
+    {
+      "id": "TW08_Secret09_EliasLastShift",
+      "displayName": "Ultimo Turno do Elias",
+      "board": "10x7",
+      "crates": 5,
+      "goals": 5,
+      "solvable": true,
+      "optimalCost": 40,
+      "pushes": 19,
+      "solution": "RLDRRLLDRRRRLLULULURRRLDRLDLDRRLURURRR",
+      "states": 400070,
+      "replayOk": true,
+      "replayCost": 40
+    },
+    {
+      "id": "TW08_Secret10_DudasPath",
+      "displayName": "O Caminho da Duda",
+      "board": "10x7",
+      "crates": 6,
+      "goals": 6,
+      "solvable": true,
+      "optimalCost": 56,
+      "pushes": 25,
+      "solution": "DRRDRRRLLLURLLLUURRRLLDRRRRRLLLLLLDRLDRRRRLLULURRRR",
+      "states": 938491,
+      "replayOk": true,
+      "replayCost": 56
+    }
+  ]
+}

@@ -1,0 +1,6829 @@
+{
+  "levels": [
+    {
+      "id": "TW08_Level11_IcedFloor",
+      "displayName": "Piso Gelado",
+      "sectorId": "S03",
+      "briefing": "Na câmara fria a caixa não para onde você empurra. Pense contra qual parede ela vai parar.",
+      "gimmickTags": [
+        "ice_floor",
+        "brake_wall"
+      ],
+      "kind": "main",
+      "specIndex": 11,
+      "width": 9,
+      "height": 7,
+      "player": {
+        "x": 2,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 4
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 5
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [],
+      "optimalCost": 21,
+      "optimalPushes": 8,
+      "goldMoveLimit": 28,
+      "platinumMoveLimit": 21,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level12_ColdCorridor",
+      "displayName": "Frio no Corredor",
+      "sectorId": "S03",
+      "briefing": "Gelo e corredor apertado ao mesmo tempo. Um empurrão contra a parede errada custa toda a manobra.",
+      "gimmickTags": [
+        "ice_floor",
+        "narrow_corridor"
+      ],
+      "kind": "main",
+      "specIndex": 12,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 7,
+          "y": 4
+        }
+      ],
+      "costly": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 3
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [],
+      "optimalCost": 39,
+      "optimalPushes": 13,
+      "goldMoveLimit": 51,
+      "platinumMoveLimit": 39,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level14_FrozenSensor",
+      "displayName": "Sensor Congelado",
+      "sectorId": "S03",
+      "briefing": "Uma caixa precisa frear a outra no gelo antes de qualquer entrega. Só depois o sensor abre a porta.",
+      "gimmickTags": [
+        "weight_sensor",
+        "ice_floor",
+        "door",
+        "tool_crate"
+      ],
+      "kind": "main",
+      "specIndex": 14,
+      "width": 10,
+      "height": 6,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        }
+      ],
+      "goals": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "costly": [
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 4,
+              "y": 1
+            }
+          ],
+          "doors": [
+            {
+              "x": 5,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 40,
+      "optimalPushes": 15,
+      "goldMoveLimit": 52,
+      "platinumMoveLimit": 40,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level15_Chamber08C",
+      "displayName": "Câmara 08-C",
+      "sectorId": "S03",
+      "briefing": "Câmara 08-C se resolve em três camadas: abrir a porta, criar área de manobra e só então entregar na ordem correta.\nDuda: “Se o caminho escorrega demais, pare de empurrar força. Use o que já está parado.”",
+      "gimmickTags": [
+        "ice_floor",
+        "weight_sensor",
+        "door",
+        "isolated_goal",
+        "narrative"
+      ],
+      "kind": "main",
+      "specIndex": 15,
+      "width": 11,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ],
+          "doors": [
+            {
+              "x": 7,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 46,
+      "optimalPushes": 20,
+      "goldMoveLimit": 60,
+      "platinumMoveLimit": 46,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level16_ConveyorOnline",
+      "displayName": "Esteira Ligada",
+      "sectorId": "S04",
+      "briefing": "A esteira move carga sozinha. Bloqueie a ponta dela com uma caixa e use o movimento automático a seu favor.",
+      "gimmickTags": [
+        "conveyor",
+        "tool_crate"
+      ],
+      "kind": "main",
+      "specIndex": 16,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 4
+        }
+      ],
+      "costly": [],
+      "crates": [
+        {
+          "x": 3,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [],
+      "optimalCost": 13,
+      "optimalPushes": 6,
+      "goldMoveLimit": 17,
+      "platinumMoveLimit": 13,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level17_AutomaticRoute",
+      "displayName": "Rota Automática",
+      "sectorId": "S04",
+      "briefing": "Duas esteiras e um botão que inverte a direção. Trocar cedo demais joga uma caixa para fora do alcance.",
+      "gimmickTags": [
+        "conveyor",
+        "direction_button"
+      ],
+      "kind": "main",
+      "specIndex": 17,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 2
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "costly": [],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [],
+      "optimalCost": 23,
+      "optimalPushes": 8,
+      "goldMoveLimit": 30,
+      "platinumMoveLimit": 23,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level18_CleaningRobot",
+      "displayName": "Robô de Limpeza",
+      "sectorId": "S04",
+      "briefing": "O robô de limpeza anda por turno, não em tempo real. Conte os passos e planeje onde ele vai estar.",
+      "gimmickTags": [
+        "turn_robot",
+        "timing_sync"
+      ],
+      "kind": "main",
+      "specIndex": 18,
+      "width": 11,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 7,
+          "y": 4
+        }
+      ],
+      "costly": [],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [],
+      "optimalCost": 34,
+      "optimalPushes": 17,
+      "goldMoveLimit": 45,
+      "platinumMoveLimit": 34,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level19_FalseSensor",
+      "displayName": "Sensor Falso",
+      "sectorId": "S04",
+      "briefing": "Dois sensores, e um deles fecha a passagem crítica. O terminal recomenda justamente o errado.\nDuda: “Se o sistema insiste em uma rota, pergunte por que ele quer tanto que você vá por ali.”",
+      "gimmickTags": [
+        "fake_sensor",
+        "false_route",
+        "terminal",
+        "narrative"
+      ],
+      "kind": "main",
+      "specIndex": 19,
+      "width": 11,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ],
+          "doors": [
+            {
+              "x": 7,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 48,
+      "optimalPushes": 22,
+      "goldMoveLimit": 63,
+      "platinumMoveLimit": 48,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level20_ProductionLine",
+      "displayName": "Linha de Produção",
+      "sectorId": "S04",
+      "briefing": "Linha de produção ligada: cinco caixas para quatro alvos. Uma delas fica no sensor e uma micro-entrega de empilhadeira liga as duas docas.",
+      "gimmickTags": [
+        "hybrid",
+        "conveyor",
+        "weight_sensor",
+        "timed_door"
+      ],
+      "kind": "main",
+      "specIndex": 20,
+      "width": 12,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 1
+        },
+        {
+          "x": 11,
+          "y": 2
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 11,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 2
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ],
+          "doors": [
+            {
+              "x": 8,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 62,
+      "optimalPushes": 26,
+      "goldMoveLimit": 81,
+      "platinumMoveLimit": 62,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level21_LockedWorkshop",
+      "displayName": "Oficina Travada",
+      "sectorId": "S05",
+      "briefing": "A porta da Oficina N-8 é manual e a área central está tomada. A caixa pesada dita o ritmo da sala.\nRobert: “Essa porta sempre travou. A diferença é que antes ela tinha vergonha.”",
+      "gimmickTags": [
+        "heavy_crate",
+        "manual_door",
+        "blocked_corridor"
+      ],
+      "kind": "main",
+      "specIndex": 21,
+      "width": 10,
+      "height": 6,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 6,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [],
+      "optimalCost": 47,
+      "optimalPushes": 18,
+      "goldMoveLimit": 62,
+      "platinumMoveLimit": 47,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level22_JackN8",
+      "displayName": "Macaco N-8",
+      "sectorId": "S05",
+      "briefing": "Uma caixa está presa de propósito. O Macaco N-8 resolve, mas marca a tentativa como Assistida no ranking.\nSistema: “Ferramenta pesada usada. Tentativa marcada como Assistida.”",
+      "gimmickTags": [
+        "n8_jack",
+        "stuck_crate",
+        "tutorial"
+      ],
+      "kind": "main",
+      "specIndex": 22,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 3
+        }
+      ],
+      "costly": [],
+      "crates": [
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [],
+      "optimalCost": 33,
+      "optimalPushes": 17,
+      "goldMoveLimit": 43,
+      "platinumMoveLimit": 33,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level24_OldGenerator",
+      "displayName": "Gerador Antigo",
+      "sectorId": "S05",
+      "briefing": "Religue o gerador da Oficina N-8: libere o acesso, leve a bateria pesada de empilhadeira e trave a porta enquanto Robert trabalha.\nRobert: “Eu abri aquela porta para ela, John. Achei que era só mais uma teimosia da Duda. Não era.”",
+      "gimmickTags": [
+        "hybrid",
+        "heavy_battery",
+        "locked_door",
+        "tool_crate",
+        "narrative"
+      ],
+      "kind": "main",
+      "specIndex": 24,
+      "width": 11,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 9,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 9,
+          "y": 3,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ],
+          "doors": [
+            {
+              "x": 7,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 44,
+      "optimalPushes": 20,
+      "goldMoveLimit": 58,
+      "platinumMoveLimit": 44,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level25_DeadWeight",
+      "displayName": "Peso Morto",
+      "sectorId": "S05",
+      "briefing": "Cinco cargas, duas pesadas demais para improviso. Use o peso como âncora e libere o corredor central na ordem exata.",
+      "gimmickTags": [
+        "heavy_crate",
+        "weight_sensor",
+        "tool_crate",
+        "move_order"
+      ],
+      "kind": "main",
+      "specIndex": 25,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 5,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 5,
+              "y": 4
+            },
+            {
+              "x": 5,
+              "y": 2
+            }
+          ],
+          "doors": [
+            {
+              "x": 6,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 46,
+      "optimalPushes": 21,
+      "goldMoveLimit": 60,
+      "platinumMoveLimit": 46,
+      "allowPowerUps": false
+    },
+    {
+      "id": "TW08_Level26_DeadArchive",
+      "displayName": "Arquivo Morto",
+      "sectorId": "S06",
+      "briefing": "O mapa oficial mente: existem paredes que não estão lá e áreas apagadas do registro. Os terminais revelam o que sobrou.\nTerminal: “Operador anterior: inexistente.”  John: “Inexistente, claro. Eles estão apagando gente agora.”",
+      "gimmickTags": [
+        "partial_map",
+        "terminal",
+        "fake_wall",
+        "marked_crate",
+        "narrative"
+      ],
+      "kind": "main",
+      "specIndex": 26,
+      "width": 11,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 6,
+              "y": 2
+            }
+          ],
+          "doors": [
+            {
+              "x": 7,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 48,
+      "optimalPushes": 22,
+      "goldMoveLimit": 63,
+      "platinumMoveLimit": 48,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Level27_GhostRoute",
+      "displayName": "Rota Fantasma",
+      "sectorId": "S06",
+      "briefing": "Você enxerga apenas um pedaço do setor. Ative os sensores, leia as marcas do chão e confie mais na memória do que no mapa.\nDuda: “Se o mapa falhar, lembra do chão.”",
+      "gimmickTags": [
+        "partial_map",
+        "spatial_memory",
+        "marked_crate"
+      ],
+      "kind": "main",
+      "specIndex": 27,
+      "width": 12,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 5
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 1
+        },
+        {
+          "x": 11,
+          "y": 2
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 11,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "costly": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [],
+      "optimalCost": 57,
+      "optimalPushes": 26,
+      "goldMoveLimit": 75,
+      "platinumMoveLimit": 57,
+      "allowPowerUps": false
+    },
+    {
+      "id": "TW08_Level28_CargoWithoutOrigin",
+      "displayName": "Carga Sem Origem",
+      "sectorId": "S06",
+      "briefing": "Quatro cargas marcadas para quatro alvos, mas qualquer caixa em qualquer alvo abre uma rota falsa. A ordem é a mensagem.\nTerminal: “Origem: apagada. Destino: Setor 08.”  Duda: “Não deixei nomes nos arquivos. Deixei nas rotas.”",
+      "gimmickTags": [
+        "marked_crate",
+        "ordered_goals",
+        "false_route",
+        "final_terminal",
+        "narrative"
+      ],
+      "kind": "main",
+      "specIndex": 28,
+      "width": 11,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 2
+        }
+      ],
+      "costly": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ],
+          "doors": [
+            {
+              "x": 7,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 45,
+      "optimalPushes": 19,
+      "goldMoveLimit": 59,
+      "platinumMoveLimit": 45,
+      "allowPowerUps": false
+    },
+    {
+      "id": "TW08_Level29_LockdownN8",
+      "displayName": "Lockdown N-8",
+      "sectorId": "S06",
+      "briefing": "Lockdown em curso: resolva o puzzle para abrir a garagem, transporte a carga pesada e volte para ativar os sensores antes que os portões fechem.",
+      "gimmickTags": [
+        "hybrid",
+        "weight_sensor",
+        "timed_gate"
+      ],
+      "kind": "main",
+      "specIndex": 29,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 5,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 5,
+              "y": 4
+            },
+            {
+              "x": 5,
+              "y": 2
+            }
+          ],
+          "doors": [
+            {
+              "x": 5,
+              "y": 3
+            },
+            {
+              "x": 6,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 48,
+      "optimalPushes": 22,
+      "goldMoveLimit": 63,
+      "platinumMoveLimit": 48,
+      "allowPowerUps": false
+    },
+    {
+      "id": "TW08_Level30_LogisticsCore",
+      "displayName": "Nucleo Logistico",
+      "sectorId": "S06",
+      "briefing": "Núcleo logístico do Setor 08: todas as mecânicas do turno reunidas em blocos organizados. Leia a sala inteira antes do primeiro empurrão.\nDuda: “Eles não esconderam os dados em arquivos. Esconderam nas rotas.”",
+      "gimmickTags": [
+        "weight_sensor",
+        "door",
+        "false_route",
+        "final_terminal",
+        "narrative",
+        "finale"
+      ],
+      "kind": "main",
+      "specIndex": 30,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 1,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 5,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 5,
+              "y": 4
+            },
+            {
+              "x": 5,
+              "y": 2
+            }
+          ],
+          "doors": [
+            {
+              "x": 6,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 56,
+      "optimalPushes": 25,
+      "goldMoveLimit": 73,
+      "platinumMoveLimit": 56,
+      "allowPowerUps": false
+    },
+    {
+      "id": "TW08_Secret01_OffRecordCrate",
+      "displayName": "Caixa Fora do Registro",
+      "sectorId": "SEC",
+      "briefing": "Há uma caixa a mais do que alvos nesta sala. Ela não é erro de registro: é a chave de uma parede falsa.",
+      "gimmickTags": [
+        "secret",
+        "fake_wall",
+        "extra_crate"
+      ],
+      "kind": "secret",
+      "specIndex": 31,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 3
+        }
+      ],
+      "costly": [],
+      "crates": [
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [],
+      "optimalCost": 43,
+      "optimalPushes": 21,
+      "goldMoveLimit": 56,
+      "platinumMoveLimit": 43,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Secret02_RobertsRoom",
+      "displayName": "Sala do Robert",
+      "sectorId": "SEC",
+      "briefing": "A sala que Robert nunca quis abrir: caixas pesadas, portas manuais e um corredor sem folga nenhuma.",
+      "gimmickTags": [
+        "secret",
+        "heavy_crate",
+        "old_tools",
+        "narrow_corridor"
+      ],
+      "kind": "secret",
+      "specIndex": 32,
+      "width": 10,
+      "height": 6,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 4
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 7,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [],
+      "optimalCost": 48,
+      "optimalPushes": 18,
+      "goldMoveLimit": 63,
+      "platinumMoveLimit": 48,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Secret03_DudasShift",
+      "displayName": "Turno da Duda",
+      "sectorId": "SEC",
+      "briefing": "Poucas caixas e mensagens demais. A ordem correta está escrita nos logs do turno, não no chão.",
+      "gimmickTags": [
+        "secret",
+        "narrative",
+        "hidden_goals"
+      ],
+      "kind": "secret",
+      "specIndex": 33,
+      "width": 11,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ],
+          "doors": [
+            {
+              "x": 6,
+              "y": 3
+            },
+            {
+              "x": 7,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 46,
+      "optimalPushes": 20,
+      "goldMoveLimit": 60,
+      "platinumMoveLimit": 46,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Secret04_EliasRoute",
+      "displayName": "Rota do Elias",
+      "sectorId": "SEC",
+      "briefing": "Três salas encadeadas: um empurrão errado na primeira só cobra o preço lá na terceira.",
+      "gimmickTags": [
+        "secret",
+        "three_rooms",
+        "single_path"
+      ],
+      "kind": "secret",
+      "specIndex": 34,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 5,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 5,
+              "y": 4
+            },
+            {
+              "x": 5,
+              "y": 2
+            }
+          ],
+          "doors": [
+            {
+              "x": 6,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 44,
+      "optimalPushes": 21,
+      "goldMoveLimit": 58,
+      "platinumMoveLimit": 44,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Secret05_DarkWorkshop",
+      "displayName": "Oficina Sem Luz",
+      "sectorId": "SEC",
+      "briefing": "A oficina está sem luz. Você só enxerga o que está ao seu lado: memória e cautela valem mais que velocidade.",
+      "gimmickTags": [
+        "secret",
+        "dark_map",
+        "limited_vision",
+        "spatial_memory"
+      ],
+      "kind": "secret",
+      "specIndex": 35,
+      "width": 9,
+      "height": 8,
+      "player": {
+        "x": 1,
+        "y": 4
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 7
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 7
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 5
+        }
+      ],
+      "costly": [],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 5,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [],
+      "optimalCost": 50,
+      "optimalPushes": 24,
+      "goldMoveLimit": 65,
+      "platinumMoveLimit": 50,
+      "allowPowerUps": true
+    },
+    {
+      "id": "TW08_Secret07_Sector08B",
+      "displayName": "08-B",
+      "sectorId": "SEC",
+      "briefing": "Sala 08-B: quatro caixas, quatro alvos e quase nenhum espaço. Cada movimento é definitivo.",
+      "gimmickTags": [
+        "secret",
+        "tight_space",
+        "precision",
+        "move_order"
+      ],
+      "kind": "secret",
+      "specIndex": 37,
+      "width": 12,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 1
+        },
+        {
+          "x": 11,
+          "y": 2
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 11,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 2
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "kind": "Crate"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ],
+          "doors": [
+            {
+              "x": 8,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 66,
+      "optimalPushes": 26,
+      "goldMoveLimit": 86,
+      "platinumMoveLimit": 66,
+      "allowPowerUps": false
+    },
+    {
+      "id": "TW08_Secret08_LeftoverMap",
+      "displayName": "O Mapa que Sobrou",
+      "sectorId": "SEC",
+      "briefing": "O layout parece impossível de propósito. Uma caixa precisa virar parede por um tempo e ser resgatada por outro caminho.",
+      "gimmickTags": [
+        "secret",
+        "tool_crate",
+        "temporary_block",
+        "reverse_planning"
+      ],
+      "kind": "secret",
+      "specIndex": 38,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 5,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 5,
+              "y": 4
+            },
+            {
+              "x": 5,
+              "y": 2
+            }
+          ],
+          "doors": [
+            {
+              "x": 6,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 39,
+      "optimalPushes": 19,
+      "goldMoveLimit": 51,
+      "platinumMoveLimit": 39,
+      "allowPowerUps": false
+    },
+    {
+      "id": "TW08_Secret09_EliasLastShift",
+      "displayName": "Ultimo Turno do Elias",
+      "sectorId": "SEC",
+      "briefing": "O último turno de Elias em três salas: o erro cometido na primeira só aparece na terceira.",
+      "gimmickTags": [
+        "secret",
+        "three_rooms",
+        "marked_crate",
+        "weight_sensor",
+        "false_route"
+      ],
+      "kind": "secret",
+      "specIndex": 39,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 5,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 5,
+              "y": 4
+            },
+            {
+              "x": 5,
+              "y": 2
+            }
+          ],
+          "doors": [
+            {
+              "x": 6,
+              "y": 3
+            },
+            {
+              "x": 7,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 40,
+      "optimalPushes": 19,
+      "goldMoveLimit": 52,
+      "platinumMoveLimit": 40,
+      "allowPowerUps": false
+    },
+    {
+      "id": "TW08_Secret10_DudasPath",
+      "displayName": "O Caminho da Duda",
+      "sectorId": "SEC",
+      "briefing": "Sem dicas, sem Power Ups e sem margem de erro: reconstrua a rota que Duda deixou marcada pelo armazém inteiro.",
+      "gimmickTags": [
+        "secret",
+        "no_hints",
+        "no_powerups",
+        "weight_sensor",
+        "ice_floor",
+        "finale"
+      ],
+      "kind": "secret",
+      "specIndex": 40,
+      "width": 10,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "costly": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "crates": [
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 4,
+          "y": 1,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [
+        {
+          "x": 5,
+          "y": 2,
+          "kind": "HeavyCrate"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "kind": "HeavyCrate"
+        }
+      ],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 5,
+              "y": 4
+            },
+            {
+              "x": 5,
+              "y": 2
+            }
+          ],
+          "doors": [
+            {
+              "x": 5,
+              "y": 3
+            },
+            {
+              "x": 6,
+              "y": 3
+            }
+          ]
+        }
+      ],
+      "optimalCost": 56,
+      "optimalPushes": 25,
+      "goldMoveLimit": 73,
+      "platinumMoveLimit": 56,
+      "allowPowerUps": false
+    }
+  ]
+}
