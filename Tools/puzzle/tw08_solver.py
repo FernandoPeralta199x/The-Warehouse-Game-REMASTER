@@ -361,12 +361,59 @@ def corner_deadlock(level: Level, crates):
     return False
 
 
-def solve(level: Level, max_states=2_000_000):
+def compute_live_cells(level: Level) -> frozenset:
+    """Células onde uma caixa ainda pode alcançar ALGUM goal (análise estática).
+
+    Fecho reverso de empurrões ignorando outras caixas; portas tratadas como
+    abertas (podem abrir). Sobre-aproximação segura: caixa em célula morta
+    jamais termina em goal, e toda caixa precisa terminar em goal
+    (EvaluateCompletion exige len(goals) == len(crates)).
+    """
+    def floor(c):
+        x, y = c
+        return 0 <= x < level.width and 0 <= y < level.height and c not in level.walls
+
+    live = {g for g in level.goals if floor(g)}
+    frontier = list(live)
+    while frontier:
+        x, y = frontier.pop()
+        for dx, dy in DIRS.values():
+            src = (x - dx, y - dy)        # caixa vinha daqui
+            psrc = (x - 2 * dx, y - 2 * dy)  # jogador empurrava daqui
+            if src not in live and floor(src) and floor(psrc):
+                live.add(src)
+                frontier.append(src)
+    return frozenset(live)
+
+
+def solve(level: Level, max_states=3_000_000):
     start_crates = dict(level.crates)
     if is_complete(level, start_crates):
         return {"solvable": True, "optimalCost": 0, "pushes": 0, "solution": "", "states": 0}
     if len(level.goals) != len(start_crates):
         return {"solvable": False, "reason": f"goals={len(level.goals)} != crates={len(start_crates)}", "states": 0}
+
+    live = compute_live_cells(level)
+    dead_start = [p for p in start_crates if p not in live]
+    if dead_start:
+        return {"solvable": False, "reason": f"caixa inicial em célula morta: {dead_start}", "states": 0}
+
+    # A*: h = soma das distâncias Manhattan de cada caixa ao goal compatível
+    # mais próximo. Admissível (cada empurrão custa >= 1 e aproxima 1 caixa em
+    # <= 1 célula) e consistente -> primeiro pop de estado completo é o ótimo.
+    goals_by_kind: dict = {}
+    for kind in set(start_crates.values()):
+        compat = [g for g in level.goals
+                  if level.goal_req.get(g) is None or level.goal_req.get(g) == kind]
+        if not compat:
+            return {"solvable": False, "reason": f"nenhum goal compatível com kind={kind}", "states": 0}
+        goals_by_kind[kind] = compat
+
+    def heuristic(crates):
+        total = 0
+        for (cx, cy), kind in crates.items():
+            total += min(abs(cx - gx) + abs(cy - gy) for gx, gy in goals_by_kind[kind])
+        return total
 
     def key(player, crates):
         return (player, tuple(sorted((p, k) for p, k in crates.items())))
@@ -374,15 +421,33 @@ def solve(level: Level, max_states=2_000_000):
     start_key = key(level.player, start_crates)
     dist = {start_key: 0}
     prev = {}
-    heap = [(0, 0, start_key, level.player, tuple(sorted((p, k) for p, k in start_crates.items())))]
+    heap = [(heuristic(start_crates), 0, 0, start_key, level.player,
+             tuple(sorted((p, k) for p, k in start_crates.items())))]
     counter = 0
     expanded = 0
 
     while heap:
-        cost, _, k, player, crates_t = heapq.heappop(heap)
+        _, cost, _, k, player, crates_t = heapq.heappop(heap)
         if dist.get(k, 1 << 60) < cost:
             continue
         crates = dict(crates_t)
+        if is_complete(level, crates):
+            moves = []
+            pushes = 0
+            cur = k
+            while cur != start_key:
+                pk, dn, pu = prev[cur]
+                moves.append(dn)
+                pushes += 1 if pu else 0
+                cur = pk
+            moves.reverse()
+            return {
+                "solvable": True,
+                "optimalCost": cost,
+                "pushes": pushes,
+                "solution": "".join(moves),
+                "states": expanded,
+            }
         expanded += 1
         if expanded > max_states:
             return {"solvable": False, "reason": "state-limit", "states": expanded}
@@ -406,6 +471,8 @@ def solve(level: Level, max_states=2_000_000):
                     continue
                 if cpos in level.walls or cpos in closed_doors or cpos in crates:
                     continue
+                if cpos not in live:
+                    continue  # célula morta: caixa nunca mais alcança goal
                 new_crates = dict(crates)
                 new_crates[cpos] = new_crates.pop(npos)
                 pushed = True
@@ -416,26 +483,8 @@ def solve(level: Level, max_states=2_000_000):
             if ncost < dist.get(nk, 1 << 60):
                 dist[nk] = ncost
                 prev[nk] = (k, dname, pushed)
-                if is_complete(level, new_crates):
-                    # reconstruir
-                    moves = []
-                    pushes = 0
-                    cur = nk
-                    while cur != start_key:
-                        pk, dn, pu = prev[cur]
-                        moves.append(dn)
-                        pushes += 1 if pu else 0
-                        cur = pk
-                    moves.reverse()
-                    return {
-                        "solvable": True,
-                        "optimalCost": ncost,
-                        "pushes": pushes,
-                        "solution": "".join(moves),
-                        "states": expanded,
-                    }
                 counter += 1
-                heapq.heappush(heap, (ncost, counter, nk, npos,
+                heapq.heappush(heap, (ncost + heuristic(new_crates), ncost, counter, nk, npos,
                                       tuple(sorted((p, kk) for p, kk in new_crates.items()))))
 
     return {"solvable": False, "reason": "exhausted", "states": expanded}
