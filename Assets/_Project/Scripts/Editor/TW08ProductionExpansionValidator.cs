@@ -34,7 +34,7 @@ namespace TW08.Editor
             }
             else
             {
-                if (data.PuzzleLevels.Count != 9) errors.Add($"Expected 9 puzzle levels, found {data.PuzzleLevels.Count}.");
+                if (data.PuzzleLevels.Count < 9) errors.Add($"Expected at least the 9 stable puzzle levels, found {data.PuzzleLevels.Count}.");
                 foreach (PuzzleLevelDefinition level in data.PuzzleLevels)
                 {
                     // UnityEngine.Object can be a live CLR reference while Unity considers the native
@@ -54,16 +54,16 @@ namespace TW08.Editor
                 }
             }
 
-            if (data.PuzzleCampaign == null || data.PuzzleCampaign.Levels.Count != 9) errors.Add("Puzzle campaign must expose 9 entries.");
+            if (data.PuzzleCampaign == null || data.PuzzleCampaign.Levels.Count < 9) errors.Add("Puzzle campaign must expose at least the 9 stable entries.");
             if (data.RaceTracks == null)
             {
                 errors.Add("Race track collection is null.");
             }
-            else if (data.RaceTracks.Count != 3)
+            else if (data.RaceTracks.Count < 3)
             {
-                errors.Add($"Expected 3 race tracks, found {data.RaceTracks.Count}.");
+                errors.Add($"Expected at least 3 race tracks, found {data.RaceTracks.Count}.");
             }
-            if (data.RaceCampaign == null || data.RaceCampaign.Tracks.Count != 3) errors.Add("Race campaign must expose 3 tracks.");
+            if (data.RaceCampaign == null || data.RaceCampaign.Tracks.Count < 3) errors.Add("Race campaign must expose at least 3 tracks.");
             if (data.ForkliftStats == null) errors.Add("Forklift stats are missing.");
 
             if (data.RaceTracks != null)

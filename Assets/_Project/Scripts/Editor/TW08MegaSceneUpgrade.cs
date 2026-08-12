@@ -103,10 +103,10 @@ namespace TW08.Editor
             }
 
             IReadOnlyList<RaceTrackDefinition> campaignTracks = campaign.Tracks;
-            if (campaignTracks == null || campaignTracks.Count != 3)
+            if (campaignTracks == null || campaignTracks.Count < 3)
             {
                 throw new InvalidOperationException(
-                    $"TW08 mega race upgrade expected 3 canonical tracks after repair, but found {campaignTracks?.Count ?? 0}.");
+                    $"TW08 mega race upgrade expected at least the 3 base canonical tracks after repair, but found {campaignTracks?.Count ?? 0}.");
             }
 
             // Never keep RaceTrackDefinition references across scene saves. Unity editor authoring can

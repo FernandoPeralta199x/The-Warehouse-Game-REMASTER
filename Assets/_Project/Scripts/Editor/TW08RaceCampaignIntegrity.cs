@@ -17,7 +17,7 @@ namespace TW08.Editor
     [InitializeOnLoad]
     public static class TW08RaceCampaignIntegrity
     {
-        private const int ExpectedTrackCount = 3;
+        private static int ExpectedTrackCount => Specs.Length;
 
         private static readonly TrackSpec[] Specs =
         {
@@ -50,7 +50,18 @@ namespace TW08.Editor
                 95f,
                 84f,
                 76f,
-                0.45f)
+                0.45f),
+            new(
+                "ghost-route",
+                "Ghost Route",
+                "TW08_Race04_GhostRoute",
+                "Rota fantasma do Setor 08: a empilhadeira sem operador registrada nos logs. " +
+                "Aderência mínima, sem margem de erro — carga frágil a bordo.",
+                125f,
+                108f,
+                95f,
+                86f,
+                0.3f)
         };
 
         static TW08RaceCampaignIntegrity()
@@ -80,7 +91,8 @@ namespace TW08.Editor
                     "Campanha de corrida reparada e validada.\n\n" +
                     "01 — Receiving Loop\n" +
                     "02 — Industrial Corridor\n" +
-                    "03 — Frozen Route\n\n" +
+                    "03 — Frozen Route\n" +
+                    "04 — Ghost Route\n\n" +
                     "Nenhum AssetDatabase.Refresh foi executado pelo reparo.",
                     "OK");
             }

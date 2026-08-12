@@ -60,13 +60,17 @@ namespace TW08.Editor
             DirectionalSpriteSet johnSprites = AssetDatabase.LoadAssetAtPath<DirectionalSpriteSet>(TW08ProductionArtSetup.JohnSpriteSetPath);
             DirectionalSpriteSet dudaSprites = TW08ExpansionStarterArt.EnsureDudaSpriteSet();
 
+            // Arte fatiada da REFERENCIA (quando presente) sobrescreve a starter.
+            // Precisa rodar DEPOIS de EnsureDudaSpriteSet, que força frames starter.
+            TW08ReferenceGameArt.WireAll();
+
             CharacterProfile john = EnsureCharacter(
                 CharacterRoot + "/John_Miller.asset",
                 "john",
                 "John Miller",
                 "Operador Manual",
                 "Operador veterano do N-8. Especialista em rotas, carga e recuperação manual de armazém.",
-                TW08ExpansionStarterArt.LoadPortrait("john"),
+                ReferenceOrStarterPortrait("john"),
                 johnSprites,
                 new Color(0.94f, 0.61f, 0.12f, 1f),
                 true,
@@ -79,7 +83,7 @@ namespace TW08.Editor
                 "Maria Eduarda — Duda",
                 "Sistemas & Segurança",
                 "Analista de sistemas logísticos do N-8. Lê rotas, sensores e terminais com precisão operacional.",
-                TW08ExpansionStarterArt.LoadPortrait("duda"),
+                ReferenceOrStarterPortrait("duda"),
                 dudaSprites,
                 new Color(0.18f, 0.78f, 0.82f, 1f),
                 true,
@@ -92,8 +96,8 @@ namespace TW08.Editor
                 "Robert — Big Rob — Hayes",
                 "Mecânico da Oficina N-8",
                 "Mecânico e mentor da garagem. Dá suporte às empilhadeiras e briefings de manutenção.",
-                TW08ExpansionStarterArt.LoadPortrait("robert"),
-                null,
+                ReferenceOrStarterPortrait("robert"),
+                LoadRobertSpritesIfAvailable(),
                 new Color(0.78f, 0.43f, 0.12f, 1f),
                 false,
                 false,
@@ -119,6 +123,20 @@ namespace TW08.Editor
                 PuzzleLevels = puzzleLevels,
                 RaceTracks = raceTracks
             };
+        }
+
+        private static Sprite ReferenceOrStarterPortrait(string characterId)
+        {
+            Sprite reference = TW08ReferenceGameArt.LoadPortrait(characterId);
+            return reference != null ? reference : TW08ExpansionStarterArt.LoadPortrait(characterId);
+        }
+
+        private static DirectionalSpriteSet LoadRobertSpritesIfAvailable()
+        {
+            // Robert é NPC; ganha sprites de puzzle apenas quando a arte de
+            // referência existe (o starter nunca gerou frames para ele).
+            return AssetDatabase.LoadAssetAtPath<DirectionalSpriteSet>(
+                TW08ReferenceGameArt.RobertSpriteSetPath);
         }
 
         private static CharacterProfile EnsureCharacter(
@@ -354,7 +372,23 @@ namespace TW08.Editor
             PuzzleCampaignDefinition campaign = LoadOrCreate<PuzzleCampaignDefinition>(PuzzleCampaignPath);
             SerializedObject s = new(campaign);
             SerializedProperty list = s.FindProperty("levels");
-            list.arraySize = levels.Count;
+
+            // Preserva fases registradas por outras pipelines (ex.: importador da
+            // expansão de campanha) — as 9 estáveis ocupam as primeiras posições,
+            // qualquer entrada extra válida é mantida em ordem depois delas.
+            var stableSet = new HashSet<PuzzleLevelDefinition>(levels);
+            List<(PuzzleLevelDefinition level, string sceneName)> extras = new();
+            for (int i = 0; i < list.arraySize; i++)
+            {
+                SerializedProperty item = list.GetArrayElementAtIndex(i);
+                var existing = item.FindPropertyRelative("level").objectReferenceValue as PuzzleLevelDefinition;
+                if (existing != null && !stableSet.Contains(existing))
+                {
+                    extras.Add((existing, item.FindPropertyRelative("sceneName").stringValue));
+                }
+            }
+
+            list.arraySize = levels.Count + extras.Count;
             for (int i = 0; i < levels.Count; i++)
             {
                 PuzzleLevelDefinition level = levels[i];
@@ -363,6 +397,15 @@ namespace TW08.Editor
                 item.FindPropertyRelative("sceneName").stringValue = SceneNameForLevel(level, i + 1);
                 item.FindPropertyRelative("unlockedByDefault").boolValue = i == 0;
             }
+
+            for (int i = 0; i < extras.Count; i++)
+            {
+                SerializedProperty item = list.GetArrayElementAtIndex(levels.Count + i);
+                item.FindPropertyRelative("level").objectReferenceValue = extras[i].level;
+                item.FindPropertyRelative("sceneName").stringValue = extras[i].sceneName;
+                item.FindPropertyRelative("unlockedByDefault").boolValue = false;
+            }
+
             s.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(campaign);
             return campaign;

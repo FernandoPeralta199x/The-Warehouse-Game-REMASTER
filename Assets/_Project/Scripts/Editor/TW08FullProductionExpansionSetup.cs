@@ -51,10 +51,10 @@ namespace TW08.Editor
                 List<string> menuPaths = TW08MenuSceneBuilder.BuildAll(data);
                 FixModeSelectNavigation();
 
-                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando 9 fases de puzzle...", 0.52f);
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando cenas de puzzle da campanha...", 0.52f);
                 List<string> puzzlePaths = TW08PuzzleSceneBuilder.BuildAll(data, catalog);
 
-                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando 3 pistas de corrida...", 0.72f);
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Criando pistas de corrida...", 0.72f);
                 List<string> racePaths = TW08RaceSceneBuilder.BuildAll(data);
 
                 EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Injetando VFX e áudio...", 0.82f);
@@ -208,16 +208,16 @@ namespace TW08.Editor
                 .Where(track => track != null)
                 .ToList();
 
-            if (puzzleLevels.Count != 9)
+            if (puzzleLevels.Count < 9)
             {
                 throw new InvalidOperationException(
-                    $"Campanha puzzle deveria conter 9 fases válidas após recarregar o AssetDatabase, mas contém {puzzleLevels.Count}.");
+                    $"Campanha puzzle deveria conter ao menos as 9 fases estáveis após recarregar o AssetDatabase, mas contém {puzzleLevels.Count}.");
             }
 
-            if (raceTracks.Count != 3)
+            if (raceTracks.Count < 3)
             {
                 throw new InvalidOperationException(
-                    $"Campanha de corrida deveria conter 3 pistas válidas após recarregar o AssetDatabase, mas contém {raceTracks.Count}.");
+                    $"Campanha de corrida deveria conter ao menos as 3 pistas base após recarregar o AssetDatabase, mas contém {raceTracks.Count}.");
             }
 
             return new TW08ExpansionDataSetup.ExpansionData
