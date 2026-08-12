@@ -289,6 +289,9 @@ def parse_layout(obj: dict) -> Level:
         crates[(c["x"], c["y"])] = KIND_IDS.get(c.get("kind", "Crate"), 1)
     for c in obj.get("extraCostly", []):
         costly.add((c["x"], c["y"]))
+    for c in obj.get("extraGoals", []):
+        # Permite alvo sobre célula de sensor/porta (chars não sobrepõem).
+        goals.add((c["x"], c["y"]))
 
     if player is None:
         raise ValueError(f"{obj.get('id')}: layout sem jogador (@)")
@@ -471,6 +474,7 @@ def main():
     ap.add_argument("--assets", help="diretório com .asset PuzzleLevelDefinition")
     ap.add_argument("--layouts", help="arquivo layouts.json")
     ap.add_argument("--out", help="arquivo de saída (JSON)")
+    ap.add_argument("--only", help="filtra por substring do id (separar múltiplos por vírgula)")
     args = ap.parse_args()
 
     levels: list[Level] = []
@@ -483,6 +487,10 @@ def main():
         data = json.loads(Path(args.layouts).read_text(encoding="utf-8"))
         for obj in data["levels"]:
             levels.append(parse_layout(obj))
+
+    if args.only:
+        keys = [k.strip() for k in args.only.split(",") if k.strip()]
+        levels = [lv for lv in levels if any(k in lv.level_id for k in keys)]
 
     report = []
     for lv in levels:
