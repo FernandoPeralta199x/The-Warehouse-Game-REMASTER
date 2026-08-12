@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6028ca1cdbf8e3d49922bb9935d0eae7, type: 3}
+  m_Name: TW08_Level18_CleaningRobot
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Puzzle.PuzzleLevelDefinition
+  levelId: TW08_Level18_CleaningRobot
+  displayName: "Rob\xF4 de Limpeza"
+  sectorId: S04
+  briefing: "O rob\xF4 de limpeza anda por turno, n\xE3o em tempo real. Conte os
+    passos e planeje onde ele vai estar."
+  previewImage: {fileID: 0}
+  gimmickTags:
+  - turn_robot
+  - timing_sync
+  width: 11
+  height: 7
+  cellSize: 1
+  playerStart:
+    x: 1
+    y: 3
+  walls:
+  - x: 0
+    y: 0
+  - x: 0
+    y: 1
+  - x: 0
+    y: 2
+  - x: 0
+    y: 3
+  - x: 0
+    y: 4
+  - x: 0
+    y: 5
+  - x: 0
+    y: 6
+  - x: 1
+    y: 0
+  - x: 1
+    y: 6
+  - x: 2
+    y: 0
+  - x: 2
+    y: 6
+  - x: 3
+    y: 0
+  - x: 3
+    y: 6
+  - x: 4
+    y: 0
+  - x: 4
+    y: 6
+  - x: 5
+    y: 0
+  - x: 5
+    y: 6
+  - x: 6
+    y: 0
+  - x: 6
+    y: 3
+  - x: 6
+    y: 6
+  - x: 7
+    y: 0
+  - x: 7
+    y: 6
+  - x: 8
+    y: 0
+  - x: 8
+    y: 6
+  - x: 9
+    y: 0
+  - x: 9
+    y: 6
+  - x: 10
+    y: 0
+  - x: 10
+    y: 1
+  - x: 10
+    y: 2
+  - x: 10
+    y: 3
+  - x: 10
+    y: 4
+  - x: 10
+    y: 5
+  - x: 10
+    y: 6
+  goals:
+  - x: 7
+    y: 2
+  - x: 7
+    y: 3
+  - x: 7
+    y: 4
+  goalRequirements: []
+  crates:
+  - id: crate-01
+    kind: 1
+    position:
+      x: 2
+      y: 2
+  - id: crate-02
+    kind: 1
+    position:
+      x: 2
+      y: 3
+  - id: crate-03
+    kind: 1
+    position:
+      x: 2
+      y: 4
+  costlyCells: []
+  switchGroups: []
+  goldMoveLimit: 45
+  platinumMoveLimit: 34
+  allowPowerUps: 1

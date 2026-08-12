@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6028ca1cdbf8e3d49922bb9935d0eae7, type: 3}
+  m_Name: TW08_Level21_LockedWorkshop
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Puzzle.PuzzleLevelDefinition
+  levelId: TW08_Level21_LockedWorkshop
+  displayName: Oficina Travada
+  sectorId: S05
+  briefing: "A porta da Oficina N-8 \xE9 manual e a \xE1rea central est\xE1 tomada.
+    A caixa pesada dita o ritmo da sala.\nRobert: \u201CEssa porta sempre travou.
+    A diferen\xE7a \xE9 que antes ela tinha vergonha.\u201D"
+  previewImage: {fileID: 0}
+  gimmickTags:
+  - heavy_crate
+  - manual_door
+  - blocked_corridor
+  width: 10
+  height: 6
+  cellSize: 1
+  playerStart:
+    x: 1
+    y: 3
+  walls:
+  - x: 0
+    y: 0
+  - x: 0
+    y: 1
+  - x: 0
+    y: 2
+  - x: 0
+    y: 3
+  - x: 0
+    y: 4
+  - x: 0
+    y: 5
+  - x: 1
+    y: 0
+  - x: 1
+    y: 5
+  - x: 2
+    y: 0
+  - x: 2
+    y: 5
+  - x: 3
+    y: 0
+  - x: 3
+    y: 5
+  - x: 4
+    y: 0
+  - x: 4
+    y: 5
+  - x: 5
+    y: 0
+  - x: 5
+    y: 5
+  - x: 6
+    y: 0
+  - x: 6
+    y: 5
+  - x: 7
+    y: 0
+  - x: 7
+    y: 5
+  - x: 8
+    y: 0
+  - x: 8
+    y: 5
+  - x: 9
+    y: 0
+  - x: 9
+    y: 1
+  - x: 9
+    y: 2
+  - x: 9
+    y: 3
+  - x: 9
+    y: 4
+  - x: 9
+    y: 5
+  goals:
+  - x: 6
+    y: 2
+  - x: 6
+    y: 4
+  - x: 7
+    y: 1
+  - x: 7
+    y: 3
+  goalRequirements:
+  - position:
+      x: 6
+      y: 2
+    requiredKind: 2
+  - position:
+      x: 6
+      y: 4
+    requiredKind: 2
+  crates:
+  - id: crate-01
+    kind: 1
+    position:
+      x: 2
+      y: 1
+  - id: crate-02
+    kind: 2
+    position:
+      x: 2
+      y: 2
+  - id: crate-03
+    kind: 1
+    position:
+      x: 2
+      y: 3
+  - id: crate-04
+    kind: 2
+    position:
+      x: 2
+      y: 4
+  costlyCells:
+  - x: 4
+    y: 1
+  - x: 4
+    y: 2
+  - x: 4
+    y: 3
+  - x: 4
+    y: 4
+  - x: 5
+    y: 1
+  - x: 5
+    y: 2
+  - x: 5
+    y: 3
+  - x: 5
+    y: 4
+  switchGroups: []
+  goldMoveLimit: 62
+  platinumMoveLimit: 47
+  allowPowerUps: 1

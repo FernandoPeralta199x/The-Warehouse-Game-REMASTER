@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9fc3a9f69d2bc4899862bbb65f32b0, type: 3}
+  m_Name: Track_ghost-route
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Race.RaceTrackDefinition
+  trackId: ghost-route
+  displayName: Ghost Route
+  sceneName: TW08_Race04_GhostRoute
+  raceRules: {fileID: 11400000, guid: 2df051a43573dcd4ba48d75daf349c26, type: 2}
+  briefing: "Rota fantasma do Setor 08: a empilhadeira sem operador registrada nos
+    logs. Ader\xEAncia m\xEDnima, sem margem de erro \u2014 carga fr\xE1gil a bordo."
+  previewImage: {fileID: 0}
+  surfaceGrip: 0.3

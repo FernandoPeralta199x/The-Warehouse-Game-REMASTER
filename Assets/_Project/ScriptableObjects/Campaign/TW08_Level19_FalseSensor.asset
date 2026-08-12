@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6028ca1cdbf8e3d49922bb9935d0eae7, type: 3}
+  m_Name: TW08_Level19_FalseSensor
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Puzzle.PuzzleLevelDefinition
+  levelId: TW08_Level19_FalseSensor
+  displayName: Sensor Falso
+  sectorId: S04
+  briefing: "Dois sensores, e um deles fecha a passagem cr\xEDtica. O terminal recomenda
+    justamente o errado.\nDuda: \u201CSe o sistema insiste em uma rota, pergunte
+    por que ele quer tanto que voc\xEA v\xE1 por ali.\u201D"
+  previewImage: {fileID: 0}
+  gimmickTags:
+  - fake_sensor
+  - false_route
+  - terminal
+  - narrative
+  width: 11
+  height: 7
+  cellSize: 1
+  playerStart:
+    x: 1
+    y: 3
+  walls:
+  - x: 0
+    y: 0
+  - x: 0
+    y: 1
+  - x: 0
+    y: 2
+  - x: 0
+    y: 3
+  - x: 0
+    y: 4
+  - x: 0
+    y: 5
+  - x: 0
+    y: 6
+  - x: 1
+    y: 0
+  - x: 1
+    y: 6
+  - x: 2
+    y: 0
+  - x: 2
+    y: 6
+  - x: 3
+    y: 0
+  - x: 3
+    y: 6
+  - x: 4
+    y: 0
+  - x: 4
+    y: 6
+  - x: 5
+    y: 0
+  - x: 5
+    y: 1
+  - x: 5
+    y: 5
+  - x: 5
+    y: 6
+  - x: 6
+    y: 0
+  - x: 6
+    y: 1
+  - x: 6
+    y: 5
+  - x: 6
+    y: 6
+  - x: 7
+    y: 0
+  - x: 7
+    y: 1
+  - x: 7
+    y: 5
+  - x: 7
+    y: 6
+  - x: 8
+    y: 0
+  - x: 8
+    y: 1
+  - x: 8
+    y: 5
+  - x: 8
+    y: 6
+  - x: 9
+    y: 0
+  - x: 9
+    y: 1
+  - x: 9
+    y: 5
+  - x: 9
+    y: 6
+  - x: 10
+    y: 0
+  - x: 10
+    y: 1
+  - x: 10
+    y: 2
+  - x: 10
+    y: 3
+  - x: 10
+    y: 4
+  - x: 10
+    y: 5
+  - x: 10
+    y: 6
+  goals:
+  - x: 6
+    y: 4
+  - x: 7
+    y: 2
+  - x: 8
+    y: 3
+  - x: 9
+    y: 3
+  goalRequirements: []
+  crates:
+  - id: crate-01
+    kind: 1
+    position:
+      x: 2
+      y: 2
+  - id: crate-02
+    kind: 1
+    position:
+      x: 2
+      y: 4
+  - id: crate-03
+    kind: 1
+    position:
+      x: 3
+      y: 2
+  - id: crate-04
+    kind: 1
+    position:
+      x: 3
+      y: 4
+  costlyCells:
+  - x: 3
+    y: 3
+  - x: 4
+    y: 3
+  switchGroups:
+  - id: sg-a
+    sensors:
+    - x: 6
+      y: 4
+    doors:
+    - x: 7
+      y: 3
+  goldMoveLimit: 63
+  platinumMoveLimit: 48
+  allowPowerUps: 1

@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using TW08.Audio;
 using TW08.Core;
@@ -156,6 +157,14 @@ namespace TW08.Editor
 
         private static void BuildPuzzleSelect(PuzzleCampaignDefinition campaign)
         {
+            // Mesma proteção do BuildRaceSelect: re-resolve o asset pelo caminho.
+            PuzzleCampaignDefinition reloaded = AssetDatabase.LoadAssetAtPath<PuzzleCampaignDefinition>(
+                TW08ExpansionDataSetup.PuzzleCampaignPath);
+            if (reloaded != null)
+            {
+                campaign = reloaded;
+            }
+
             PuzzleCampaignDefinition secretCampaign =
                 AssetDatabase.LoadAssetAtPath<PuzzleCampaignDefinition>(
                     TW08CampaignExpansionImporter.SecretCampaignPath);
@@ -188,7 +197,28 @@ namespace TW08.Editor
             string backSceneName,
             string secretSceneName)
         {
+            // Captura o caminho ANTES de criar a cena (NewScene invalida wrappers
+            // nativos) e re-resolve o asset logo depois do shell.
+            string campaignPath = campaign != null ? AssetDatabase.GetAssetPath(campaign) : null;
+
             Scene scene = CreateMenuShell(title, subtitle, out Transform shell, out EventSystem eventSystem);
+
+            if (!string.IsNullOrEmpty(campaignPath))
+            {
+                PuzzleCampaignDefinition reloadedCampaign =
+                    AssetDatabase.LoadAssetAtPath<PuzzleCampaignDefinition>(campaignPath);
+                if (reloadedCampaign != null)
+                {
+                    campaign = reloadedCampaign;
+                }
+            }
+
+            if (campaign == null)
+            {
+                throw new InvalidOperationException(
+                    $"BuildLevelGridSelect: campanha de puzzle indisponível após reload ({scenePath}).");
+            }
+
             Text operatorText = TW08ProductionSceneUtility.CreateText(shell, "Operator", "OPERADOR // JOHN", 16, TW08ProductionSceneUtility.Amber, TextAnchor.MiddleRight);
             TW08ProductionSceneUtility.SetRect(operatorText.rectTransform, new Vector2(1f, 1f), new Vector2(470f, 40f), new Vector2(-58f, -118f));
 
@@ -264,6 +294,21 @@ namespace TW08.Editor
         private static void BuildRaceSelect(RaceCampaignDefinition campaign)
         {
             Scene scene = CreateMenuShell("N-8 LOGISTICS RUSH", "SELEÇÃO DE PISTA", out Transform shell, out EventSystem eventSystem);
+
+            // CreateMenuShell (NewScene) invalida objetos nativos capturados antes;
+            // re-resolve a campanha do AssetDatabase DEPOIS de criar a cena.
+            RaceCampaignDefinition reloaded = AssetDatabase.LoadAssetAtPath<RaceCampaignDefinition>(
+                TW08ExpansionDataSetup.RaceCampaignPath);
+            if (reloaded != null)
+            {
+                campaign = reloaded;
+            }
+
+            if (campaign == null || campaign.Tracks.Count == 0)
+            {
+                throw new InvalidOperationException(
+                    "BuildRaceSelect: campanha de corrida indisponível ou sem pistas após reload.");
+            }
             Text pilot = TW08ProductionSceneUtility.CreateText(shell, "Pilot", "PILOTO // JOHN", 16, TW08ProductionSceneUtility.Amber, TextAnchor.MiddleRight);
             TW08ProductionSceneUtility.SetRect(pilot.rectTransform, new Vector2(1f, 1f), new Vector2(470f, 40f), new Vector2(-58f, -118f));
             List<Button> buttons = new();

@@ -17,8 +17,8 @@ MonoBehaviour:
   role: "Mec\xE2nico da Oficina N-8"
   description: "Mec\xE2nico e mentor da garagem. D\xE1 suporte \xE0s empilhadeiras
     e briefings de manuten\xE7\xE3o."
-  portrait: {fileID: 21300000, guid: 5ac4ae8e06cebe741a66c23d06714288, type: 3}
-  puzzleSprites: {fileID: 0}
+  portrait: {fileID: 21300000, guid: 4997a21e0d43a0d438d0c5fa89e18c6c, type: 3}
+  puzzleSprites: {fileID: 11400000, guid: 27090d4cbb11f4b4a97151e3815fc3f8, type: 2}
   uiAccent: {r: 0.78, g: 0.43, b: 0.12, a: 1}
   puzzleEnabled: 0
   raceEnabled: 0

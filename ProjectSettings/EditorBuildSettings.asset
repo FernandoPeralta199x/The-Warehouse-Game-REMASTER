@@ -54,6 +54,87 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/VerticalSlice/TW08_Level09_CrossDispatch.unity
     guid: 94a1cde8298f0b34dbea3a7d89c0664d
   - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level11_IcedFloor.unity
+    guid: 6caba2ecfec96254a86b50c2ec8ea4bd
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level12_ColdCorridor.unity
+    guid: b4e2c3a5f6396514cbb4c9294614a83b
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level14_FrozenSensor.unity
+    guid: 537b87c8ec0807b4a8ad8a804ccd33cd
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level15_Chamber08C.unity
+    guid: 1095147466507eb4e8b0d84ee133f382
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level16_ConveyorOnline.unity
+    guid: c27380c982a1dde4893784ee56f69cf8
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level17_AutomaticRoute.unity
+    guid: 7eb66559c79183e49879ddda992d9768
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level18_CleaningRobot.unity
+    guid: 223dc0df78e41e647b5ef11b93f633a1
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level19_FalseSensor.unity
+    guid: b32ec6d01f18027459653248bc2c8a35
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level20_ProductionLine.unity
+    guid: 604060287f59c394891f5ea3f43708da
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level21_LockedWorkshop.unity
+    guid: 774fd6ce572500449ad4008f22f5d9f6
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level22_JackN8.unity
+    guid: 6051c8fa84f8a1d4ab6437b4b2402309
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level24_OldGenerator.unity
+    guid: a6ef0f684784fb14eb6e584e47a8937a
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level25_DeadWeight.unity
+    guid: a37b6a1b6174e0549be30d67c7bf6fbd
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level26_DeadArchive.unity
+    guid: 34fcd1535f11da346bb84f9c6973aea4
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level27_GhostRoute.unity
+    guid: acee7b7657c070e419c1fa88b5962084
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level28_CargoWithoutOrigin.unity
+    guid: 8e4903f5b82024a4e87d2f46fc89d628
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level29_LockdownN8.unity
+    guid: 3d6023c3cf17a82418e240d1246b92a0
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level30_LogisticsCore.unity
+    guid: 2fbfab0723f49cd4cb2628d7d0e3c2c8
+  - enabled: 1
+    path: Assets/_Project/Scenes/Secret/TW08_Secret01_OffRecordCrate.unity
+    guid: 534847a0df371e74c845d2c092c67177
+  - enabled: 1
+    path: Assets/_Project/Scenes/Secret/TW08_Secret02_RobertsRoom.unity
+    guid: ba7ccf84f8678d247b1977d2acd004a2
+  - enabled: 1
+    path: Assets/_Project/Scenes/Secret/TW08_Secret03_DudasShift.unity
+    guid: a0a3a29b9f879f44985bd56fd878cb1a
+  - enabled: 1
+    path: Assets/_Project/Scenes/Secret/TW08_Secret04_EliasRoute.unity
+    guid: cde397125c7e56c4a93aaee445d68e56
+  - enabled: 1
+    path: Assets/_Project/Scenes/Secret/TW08_Secret05_DarkWorkshop.unity
+    guid: 281e451b49acf0f4eb2b9d5374d7dcdf
+  - enabled: 1
+    path: Assets/_Project/Scenes/Secret/TW08_Secret07_Sector08B.unity
+    guid: 255079c2f4cb8bb4a955c144c9d7e66f
+  - enabled: 1
+    path: Assets/_Project/Scenes/Secret/TW08_Secret08_LeftoverMap.unity
+    guid: 34e207da45b44b449a023162036772d1
+  - enabled: 1
+    path: Assets/_Project/Scenes/Secret/TW08_Secret09_EliasLastShift.unity
+    guid: b7696c01c604e4d4dbebb5968890e0e3
+  - enabled: 1
+    path: Assets/_Project/Scenes/Secret/TW08_Secret10_DudasPath.unity
+    guid: 4f434dd2efaf92741bf6a3c4b5550b5a
+  - enabled: 1
     path: Assets/_Project/Scenes/Production/Race/TW08_Race01_ReceivingLoop.unity
     guid: 8a1b89d6d2c7ed24f99508fd14e645c9
   - enabled: 1
@@ -62,6 +143,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Production/Race/TW08_Race03_FrozenRoute.unity
     guid: 2f6e6f29681e6104a9999d5fae37066e
+  - enabled: 1
+    path: Assets/_Project/Scenes/Production/Race/TW08_Race04_GhostRoute.unity
+    guid: d5d1f579ec2d52148ad4cd2627efc2ee
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 858d13055b3b2f94ab22867d7d71b473, type: 2}
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}

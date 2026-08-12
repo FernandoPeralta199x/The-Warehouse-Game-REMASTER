@@ -12,24 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4954f5a8b4247164ab01e4262a0895ba, type: 3}
   m_Name: John_DirectionalSpriteSet
   m_EditorClassIdentifier: TW08.Runtime::TW08.Presentation.DirectionalSpriteSet
-  idleDown: {fileID: 21300000, guid: de20fae7f4b309c40b4f8a646e3f404a, type: 3}
-  idleUp: {fileID: 21300000, guid: 43c2321efff7f7948b758c54dd8ec918, type: 3}
-  idleLeft: {fileID: 21300000, guid: fb1b041f29a6a1a40852326a5219bdc3, type: 3}
-  idleRight: {fileID: 21300000, guid: 84206b462c56e8846befb088813a7ba1, type: 3}
+  idleDown: {fileID: 21300000, guid: 54c9523395dc9dd4690265d536c568ab, type: 3}
+  idleUp: {fileID: 21300000, guid: 8694964f8c38e7944a426e22ebaf4042, type: 3}
+  idleLeft: {fileID: 21300000, guid: b5a05ce39787fe649b69fea68f7cc427, type: 3}
+  idleRight: {fileID: 21300000, guid: 7291ae5b9a452c24d92a26a7af98ebd0, type: 3}
   walkDown:
-  - {fileID: 21300000, guid: 0951d6e129f540b4ebaadcffc75237ed, type: 3}
-  - {fileID: 21300000, guid: 0e3c853f69a02f743b6458f9324cc332, type: 3}
-  - {fileID: 21300000, guid: 69c21b0ddc912f148830571adfaa7291, type: 3}
+  - {fileID: 21300000, guid: b3aed04ba96005a4095111bfda550ac3, type: 3}
+  - {fileID: 21300000, guid: 9e4d9a1719bb8114ca82e8484567b966, type: 3}
+  - {fileID: 21300000, guid: 2b69a92f73a8d7e478acc2f249bc4739, type: 3}
   walkUp:
-  - {fileID: 21300000, guid: 7a9649dcb7104bb4cb7569b4b960d863, type: 3}
-  - {fileID: 21300000, guid: 512244f52d42e7c479df9f0c32d89b97, type: 3}
-  - {fileID: 21300000, guid: 0b0bd2ce82140ee498fc7787815a4d52, type: 3}
+  - {fileID: 21300000, guid: ea8c180adf340d84eb10ea88a639c0e4, type: 3}
+  - {fileID: 21300000, guid: cd1987cdce0ee0a408df1391300cc7c0, type: 3}
+  - {fileID: 21300000, guid: dfc4509280564b14ba465c72e0cd17f4, type: 3}
   walkLeft:
-  - {fileID: 21300000, guid: 71f6af0a4fa8d604fb21a9727f17c3f5, type: 3}
-  - {fileID: 21300000, guid: c890e987cebf3314481014cdea30bd21, type: 3}
-  - {fileID: 21300000, guid: f5a6d66c34d2ca7419eb41d1530a8824, type: 3}
+  - {fileID: 21300000, guid: 428576cde93585b48add0ee1c2fa0644, type: 3}
+  - {fileID: 21300000, guid: 64170ae92d4a45f488e9e49152ddb55e, type: 3}
+  - {fileID: 21300000, guid: c6833e2a4a09b78428d3ed8768d31d35, type: 3}
   walkRight:
-  - {fileID: 21300000, guid: 35bfdd8f9e1d94a4fb3a30ef08a0160d, type: 3}
-  - {fileID: 21300000, guid: 7c9f01b1bf8eef84ba79ee7361d77001, type: 3}
-  - {fileID: 21300000, guid: f723d012ad4b2004ab97bca9381807ee, type: 3}
+  - {fileID: 21300000, guid: 73683f4b20d9ec940b8f14b1f3d4b554, type: 3}
+  - {fileID: 21300000, guid: d83cd20be306bbd4badfdb0578bf8acf, type: 3}
+  - {fileID: 21300000, guid: 7aa8201a69b19794ba586cfbddc465d3, type: 3}
   framesPerSecond: 8

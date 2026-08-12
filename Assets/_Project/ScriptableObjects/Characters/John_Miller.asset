@@ -17,7 +17,7 @@ MonoBehaviour:
   role: Operador Manual
   description: "Operador veterano do N-8. Especialista em rotas, carga e recupera\xE7\xE3o
     manual de armaz\xE9m."
-  portrait: {fileID: 21300000, guid: 660b9b54633c49a4db7d053b4327fb32, type: 3}
+  portrait: {fileID: 21300000, guid: 52c6bf8df6b6e194792fad984739ce6d, type: 3}
   puzzleSprites: {fileID: 11400000, guid: f5da979ce165d0643bd885765898b831, type: 2}
   uiAccent: {r: 0.94, g: 0.61, b: 0.12, a: 1}
   puzzleEnabled: 1

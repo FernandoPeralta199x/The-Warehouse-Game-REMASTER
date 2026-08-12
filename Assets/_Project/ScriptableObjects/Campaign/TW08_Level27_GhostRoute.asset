@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6028ca1cdbf8e3d49922bb9935d0eae7, type: 3}
+  m_Name: TW08_Level27_GhostRoute
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Puzzle.PuzzleLevelDefinition
+  levelId: TW08_Level27_GhostRoute
+  displayName: Rota Fantasma
+  sectorId: S06
+  briefing: "Voc\xEA enxerga apenas um peda\xE7o do setor. Ative os sensores, leia
+    as marcas do ch\xE3o e confie mais na mem\xF3ria do que no mapa.\nDuda: \u201CSe
+    o mapa falhar, lembra do ch\xE3o.\u201D"
+  previewImage: {fileID: 0}
+  gimmickTags:
+  - partial_map
+  - spatial_memory
+  - marked_crate
+  width: 12
+  height: 7
+  cellSize: 1
+  playerStart:
+    x: 1
+    y: 5
+  walls:
+  - x: 0
+    y: 0
+  - x: 0
+    y: 1
+  - x: 0
+    y: 2
+  - x: 0
+    y: 3
+  - x: 0
+    y: 4
+  - x: 0
+    y: 5
+  - x: 0
+    y: 6
+  - x: 1
+    y: 0
+  - x: 1
+    y: 6
+  - x: 2
+    y: 0
+  - x: 2
+    y: 6
+  - x: 3
+    y: 0
+  - x: 3
+    y: 1
+  - x: 3
+    y: 6
+  - x: 4
+    y: 0
+  - x: 4
+    y: 1
+  - x: 4
+    y: 6
+  - x: 5
+    y: 0
+  - x: 5
+    y: 1
+  - x: 5
+    y: 5
+  - x: 5
+    y: 6
+  - x: 6
+    y: 0
+  - x: 6
+    y: 1
+  - x: 6
+    y: 5
+  - x: 6
+    y: 6
+  - x: 7
+    y: 0
+  - x: 7
+    y: 1
+  - x: 7
+    y: 5
+  - x: 7
+    y: 6
+  - x: 8
+    y: 0
+  - x: 8
+    y: 1
+  - x: 8
+    y: 5
+  - x: 8
+    y: 6
+  - x: 9
+    y: 0
+  - x: 9
+    y: 1
+  - x: 9
+    y: 3
+  - x: 9
+    y: 4
+  - x: 9
+    y: 5
+  - x: 9
+    y: 6
+  - x: 10
+    y: 0
+  - x: 10
+    y: 1
+  - x: 10
+    y: 2
+  - x: 10
+    y: 3
+  - x: 10
+    y: 4
+  - x: 10
+    y: 5
+  - x: 10
+    y: 6
+  - x: 11
+    y: 0
+  - x: 11
+    y: 1
+  - x: 11
+    y: 2
+  - x: 11
+    y: 3
+  - x: 11
+    y: 4
+  - x: 11
+    y: 5
+  - x: 11
+    y: 6
+  goals:
+  - x: 6
+    y: 4
+  - x: 7
+    y: 2
+  - x: 7
+    y: 4
+  - x: 8
+    y: 2
+  - x: 8
+    y: 4
+  goalRequirements: []
+  crates:
+  - id: crate-01
+    kind: 1
+    position:
+      x: 2
+      y: 2
+  - id: crate-02
+    kind: 1
+    position:
+      x: 2
+      y: 4
+  - id: crate-03
+    kind: 1
+    position:
+      x: 3
+      y: 2
+  - id: crate-04
+    kind: 1
+    position:
+      x: 3
+      y: 4
+  - id: crate-05
+    kind: 1
+    position:
+      x: 4
+      y: 4
+  costlyCells:
+  - x: 3
+    y: 3
+  - x: 4
+    y: 3
+  switchGroups: []
+  goldMoveLimit: 75
+  platinumMoveLimit: 57
+  allowPowerUps: 0
