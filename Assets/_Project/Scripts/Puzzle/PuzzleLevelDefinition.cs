@@ -33,6 +33,13 @@ namespace TW08.Puzzle
         [SerializeField] private List<GridCoordinate> iceCells = new();
         [Tooltip("Conveyors carry whoever enters them along their own fixed direction.")]
         [SerializeField] private List<PuzzleConveyorDefinition> conveyors = new();
+        [Tooltip("Free cells drawn as walls until the player gets close. Presentation only: the board always treats them as open.")]
+        [SerializeField] private List<GridCoordinate> fakeWalls = new();
+        [Tooltip("Fog of war mode. Hides information without changing what is solvable.")]
+        [SerializeField] private PuzzleFogMode fogMode = PuzzleFogMode.None;
+        [SerializeField, Min(1)] private int fogRadius = 2;
+        [Tooltip("Cleaning robots. Each advances one step along its route per player command.")]
+        [SerializeField] private List<PuzzlePatrolDefinition> patrols = new();
 
         [Header("Scoring")]
         [SerializeField, Min(0)] private int goldMoveLimit = 30;
@@ -57,6 +64,10 @@ namespace TW08.Puzzle
         public IReadOnlyList<PuzzleSwitchGroupDefinition> SwitchGroups => switchGroups;
         public IReadOnlyList<GridCoordinate> IceCells => iceCells;
         public IReadOnlyList<PuzzleConveyorDefinition> Conveyors => conveyors;
+        public IReadOnlyList<GridCoordinate> FakeWalls => fakeWalls;
+        public PuzzleFogMode FogMode => fogMode;
+        public int FogRadius => Mathf.Max(1, fogRadius);
+        public IReadOnlyList<PuzzlePatrolDefinition> Patrols => patrols;
         public int GoldMoveLimit => goldMoveLimit;
         public int PlatinumMoveLimit => platinumMoveLimit;
         public bool AllowPowerUps => allowPowerUps;

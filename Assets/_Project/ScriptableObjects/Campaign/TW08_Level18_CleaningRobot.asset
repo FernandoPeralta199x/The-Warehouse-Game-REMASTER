@@ -122,6 +122,28 @@ MonoBehaviour:
   switchGroups: []
   iceCells: []
   conveyors: []
-  goldMoveLimit: 45
-  platinumMoveLimit: 34
+  fakeWalls: []
+  fogMode: 0
+  fogRadius: 2
+  patrols:
+  - patrolId: cleaner-01
+    route:
+    - x: 5
+      y: 1
+    - x: 5
+      y: 2
+    - x: 5
+      y: 3
+    - x: 5
+      y: 4
+    - x: 5
+      y: 5
+    - x: 5
+      y: 4
+    - x: 5
+      y: 3
+    - x: 5
+      y: 2
+  goldMoveLimit: 47
+  platinumMoveLimit: 36
   allowPowerUps: 1

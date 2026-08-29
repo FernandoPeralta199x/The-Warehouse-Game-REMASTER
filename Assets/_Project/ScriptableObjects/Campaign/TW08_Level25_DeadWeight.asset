@@ -175,6 +175,10 @@ MonoBehaviour:
       y: 3
   iceCells: []
   conveyors: []
+  fakeWalls: []
+  fogMode: 0
+  fogRadius: 2
+  patrols: []
   goldMoveLimit: 60
   platinumMoveLimit: 46
   allowPowerUps: 0

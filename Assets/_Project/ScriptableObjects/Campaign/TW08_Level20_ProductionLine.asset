@@ -194,6 +194,10 @@ MonoBehaviour:
       x: 7
       y: 2
     direction: 3
+  fakeWalls: []
+  fogMode: 0
+  fogRadius: 2
+  patrols: []
   goldMoveLimit: 60
   platinumMoveLimit: 46
   allowPowerUps: 1

@@ -85,21 +85,72 @@ O visual distingue as duas camadas: gelo é mais claro e mais opaco que piso fri
 e a esteira mostra uma seta — sem indicador de direção a mecânica só seria
 descoberta por tentativa e erro.
 
+## Névoa de guerra (`dark_map`, `limited_vision`, `partial_map`)
+
+Dois modos:
+
+- **Lanterna** (`Flashlight`) — só o raio ao redor do operador aparece; o resto
+  volta a escurecer. Usada em S05 Oficina Sem Luz.
+- **Memória** (`Memory`) — o que já foi visto continua visível, mais apagado.
+  É o mapa parcial de L26 Arquivo Morto e L27 Rota Fantasma.
+
+**Não altera solvabilidade.** Esconder informação muda a dificuldade percebida,
+não o que é possível — por isso as fases com névoa continuam valendo as mesmas
+provas, sem reprova.
+
+A escuridão é tinta nos renderizadores, e não objetos desligados: carga e alvo
+precisam continuar recebendo suas animações mesmo fora do alcance da luz. O raio
+usa distância de Chebyshev, e não Manhattan — a lanterna ilumina um quadrado, e
+com losango os cantos ficariam escuros e o jogador leria isso como parede.
+
+## Parede falsa (`fake_wall`)
+
+Célula **livre** desenhada como parede até o operador chegar ao lado. A mentira é
+só visual: no tabuleiro sempre foi passagem, e é por isso que estas fases também
+não precisaram de reprova.
+
+Regra que guiou a escolha das células: parede falsa vai onde o piso **já era
+livre**. Transformar parede real em passagem abriria atalho novo e obrigaria a
+reprovar a fase — nesse caso seria outro trabalho, não este.
+
+Revela por proximidade, não ao atravessar: o jogador precisa poder descobrir o
+segredo olhando, sem ter que tentar andar contra cada parede do setor. Reiniciar
+a fase esconde de novo, porque a descoberta faz parte do desafio.
+
+## Robô de limpeza (`turn_robot`, `timing_sync`)
+
+Percorre uma rota fixa, **um passo por comando do jogador**, e volta ao início ao
+terminar. É obstáculo sólido: nem o operador nem a carga podem terminar o
+movimento onde o robô vai estar.
+
+**A posição é função apenas do número de comandos.** Isso é o que mantém a fase
+determinística e permite ao solver prová-la: bastam a rota e um contador, sem
+simulação paralela. Toda validação usa a posição **futura** do robô — ele avança
+junto com o comando, então validar contra a posição atual deixaria o jogador
+terminar o passo dentro dele.
+
+O estado do solver passou a carregar a fase do ciclo. Sem isso ele encontraria
+"soluções" que dependem de o robô estar em dois lugares ao mesmo tempo.
+
+Em L18 Robô de Limpeza a rota varre a coluna que liga as cargas aos alvos: vira
+uma porta que abre e fecha sozinha. O primeiro traçado que testei patrulhava uma
+faixa que a solução ótima nem usava — o custo ficou idêntico ao de antes, prova
+de que o robô não estava atrapalhando nada. Movido para o corredor certo, o custo
+subiu de 34 para 36.
+
 ## O que continua sendo só etiqueta
 
 Estas tags descrevem o desenho da fase e não pedem código: `narrow_corridor`,
 `three_rooms`, `false_route`, `move_order`, `precision`, `reverse_planning`,
 `isolated_goal`, `marked_crate`, `tool_crate` e afins. Estão corretas como estão.
 
-Continuam **não implementadas** como mecânica, e seguem sendo etiqueta apesar de
-sugerirem comportamento:
+Continuam **não implementadas** como mecânica:
 
-- `turn_robot` e `timing_sync` (L18) — exigem uma entidade que se move sozinha
-  por turno, o que muda o espaço de estados do solver.
-- `direction_button` (L17) — esteira que troca de sentido; a fase funciona hoje
-  com correias fixas.
-- `dark_map`, `limited_vision`, `partial_map` (S05, L26, L27) — névoa de guerra.
-  Não afeta solvabilidade, é apresentação.
-- `fake_wall` (L26, S01), `temporary_block` (S08) — parede que se revela.
+- `direction_button` (L17) — esteira que troca de sentido. A fase funciona com
+  correias fixas e está provada assim; um botão que inverte tudo dobra o estado
+  do solver, e o ganho de design não pagou esse custo agora.
+- `temporary_block` (S08) — bloqueio que some sozinho. Uma porta por contagem de
+  comandos colocaria o relógio no estado do solver, como o robô, mas na fase de
+  hoje a carga-ferramenta já cumpre o papel de bloqueio provisório.
 - `n8_jack` (L22) — o Macaco N-8 é ferramenta de loja, e a bíblia de design o
-  exclui do MVP.
+  exclui do MVP. A etiqueta está certa como está.

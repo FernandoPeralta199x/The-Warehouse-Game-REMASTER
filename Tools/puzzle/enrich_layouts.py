@@ -84,6 +84,10 @@ def main() -> int:
             "goals": [{"x": x, "y": y} for (x, y) in sorted(lv.goals)],
             "costly": [{"x": x, "y": y} for (x, y) in sorted(lv.costly)],
             "ice": [{"x": x, "y": y} for (x, y) in sorted(lv.ice)],
+            "fakeWalls": obj.get("fakeWalls", []),
+            "patrols": obj.get("patrols", []),
+            "fogMode": obj.get("fogMode", "None"),
+            "fogRadius": obj.get("fogRadius", 2),
             "conveyors": [
                 {"x": x, "y": y, "dir": DIR_NAMES[step]}
                 for (x, y), step in sorted(lv.conveyors.items())

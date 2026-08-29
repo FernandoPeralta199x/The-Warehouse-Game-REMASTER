@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import heapq
 import json
+import math
 import re
 import sys
 from dataclasses import dataclass, field
@@ -52,7 +53,19 @@ class Level:
     groups: list = field(default_factory=list)
     ice: frozenset = frozenset()          # células de gelo
     conveyors: dict = field(default_factory=dict)  # (x,y) -> (dx,dy)
+    patrols: tuple = ()   # tupla de rotas; cada rota é uma tupla de células
     display_name: str = ""
+
+    @property
+    def patrol_period(self):
+        """Passos até todos os robôs voltarem à posição inicial (mmc das rotas)."""
+        period = 1
+        for route in self.patrols:
+            period = period * len(route) // math.gcd(period, len(route))
+        return period
+
+    def patrol_cells(self, step):
+        return frozenset(route[step % len(route)] for route in self.patrols)
 
 
 # ---------------------------------------------------------------- Unity YAML --
@@ -264,6 +277,10 @@ def parse_layout(obj: dict) -> Level:
                 costly.add((x, y))
             elif ch == "%":
                 ice.add((x, y))
+            elif ch == "?":
+                # Parede falsa: o tabuleiro sempre a tratou como passagem livre,
+                # a mentira é só visual. Nada a registrar aqui.
+                pass
             elif ch in CONVEYOR_CHARS:
                 conveyors[(x, y)] = CONVEYOR_CHARS[ch]
             elif ch == ":":
@@ -324,13 +341,17 @@ def parse_layout(obj: dict) -> Level:
         groups=groups,
         ice=frozenset(ice),
         conveyors=conveyors,
+        patrols=tuple(
+            tuple((c["x"], c["y"]) for c in patrol["route"])
+            for patrol in obj.get("patrols", []) if patrol.get("route")
+        ),
         display_name=obj.get("displayName", ""),
     )
 
 
 # ------------------------------------------------------------------- Solver --
 
-def slide(level: Level, start, direction, crates, closed_doors, vacated=None):
+def slide(level: Level, start, direction, crates, closed_doors, vacated=None, robots=frozenset()):
     """Espelha PuzzleBoardModel.Slide.
 
     Gelo mantém a direção de entrada; esteira impõe a própria. Segue até pisar
@@ -355,6 +376,8 @@ def slide(level: Level, start, direction, crates, closed_doors, vacated=None):
         if nxt in level.walls or nxt in closed_doors:
             return current
         if nxt != vacated and nxt in crates:
+            return current
+        if nxt in robots:
             return current
 
         current = nxt
@@ -481,19 +504,24 @@ def solve(level: Level, max_states=3_000_000):
             total += min(abs(cx - gx) + abs(cy - gy) for gx, gy in goals_by_kind[kind])
         return total
 
-    def key(player, crates):
-        return (player, tuple(sorted((p, k) for p, k in crates.items())))
+    # Com robôs, a posição deles é função do número de comandos: o estado
+    # precisa carregar a fase, senão o solver acharia soluções que dependem de
+    # o robô estar em dois lugares ao mesmo tempo.
+    period = level.patrol_period if level.patrols else 1
 
-    start_key = key(level.player, start_crates)
+    def key(player, crates, phase=0):
+        return (player, tuple(sorted((p, k) for p, k in crates.items())), phase)
+
+    start_key = key(level.player, start_crates, 0)
     dist = {start_key: 0}
     prev = {}
     heap = [(heuristic(start_crates), 0, 0, start_key, level.player,
-             tuple(sorted((p, k) for p, k in start_crates.items())))]
+             tuple(sorted((p, k) for p, k in start_crates.items())), 0)]
     counter = 0
     expanded = 0
 
     while heap:
-        _, cost, _, k, player, crates_t = heapq.heappop(heap)
+        _, cost, _, k, player, crates_t, phase = heapq.heappop(heap)
         if dist.get(k, 1 << 60) < cost:
             continue
         crates = dict(crates_t)
@@ -519,13 +547,15 @@ def solve(level: Level, max_states=3_000_000):
             return {"solvable": False, "reason": "state-limit", "states": expanded}
 
         closed_doors = door_state(level, player, crates)
+        next_phase = (phase + 1) % period
+        robots = level.patrol_cells(phase + 1) if level.patrols else frozenset()
 
         for dname, (dx, dy) in DIRS.items():
             nx, ny = player[0] + dx, player[1] + dy
             npos = (nx, ny)
             if not (0 <= nx < level.width and 0 <= ny < level.height):
                 continue
-            if npos in level.walls or npos in closed_doors:
+            if npos in level.walls or npos in closed_doors or npos in robots:
                 continue
             step_cost = 2 if npos in level.costly else 1
             pushed = False
@@ -535,11 +565,13 @@ def solve(level: Level, max_states=3_000_000):
                 cpos = (cx, cy)
                 if not (0 <= cx < level.width and 0 <= cy < level.height):
                     continue
-                if cpos in level.walls or cpos in closed_doors or cpos in crates:
+                if cpos in level.walls or cpos in closed_doors or cpos in crates or cpos in robots:
                     continue
                 # A carga desliza antes de o jogador entrar; a célula que ela
                 # deixou conta como livre durante o próprio deslize.
-                cfinal = slide(level, cpos, (dx, dy), crates, closed_doors, vacated=npos)
+                cfinal = slide(level, cpos, (dx, dy), crates, closed_doors, vacated=npos, robots=robots)
+                if cfinal in robots:
+                    continue
                 if cfinal not in live:
                     continue  # célula morta: caixa nunca mais alcança goal
                 new_crates = dict(crates)
@@ -548,19 +580,22 @@ def solve(level: Level, max_states=3_000_000):
                 pushed = True
                 if corner_deadlock(level, new_crates):
                     continue
-                pfinal = slide(level, npos, (dx, dy), new_crates, closed_doors)
+                pfinal = slide(level, npos, (dx, dy), new_crates, closed_doors, robots=robots)
             else:
-                pfinal = slide(level, npos, (dx, dy), crates, closed_doors)
+                pfinal = slide(level, npos, (dx, dy), crates, closed_doors, robots=robots)
+
+            if pfinal in robots:
+                continue
 
             npos = pfinal
-            nk = key(npos, new_crates)
+            nk = key(npos, new_crates, next_phase)
             ncost = cost + step_cost
             if ncost < dist.get(nk, 1 << 60):
                 dist[nk] = ncost
                 prev[nk] = (k, dname, pushed)
                 counter += 1
                 heapq.heappush(heap, (ncost + heuristic(new_crates), ncost, counter, nk, npos,
-                                      tuple(sorted((p, kk) for p, kk in new_crates.items()))))
+                                      tuple(sorted((p, kk) for p, kk in new_crates.items())), next_phase))
 
     return {"solvable": False, "reason": "exhausted", "states": expanded}
 
@@ -570,28 +605,41 @@ def replay(level: Level, solution: str):
     player = level.player
     crates = dict(level.crates)
     cost = 0
+    commands = 0
     for ch in solution:
         dx, dy = DIRS[ch]
         closed = door_state(level, player, crates)
+        commands += 1
+        robots = level.patrol_cells(commands) if level.patrols else frozenset()
         npos = (player[0] + dx, player[1] + dy)
         if not (0 <= npos[0] < level.width and 0 <= npos[1] < level.height):
             return False, f"fora do tabuleiro em {npos}"
         if npos in level.walls or npos in closed:
             return False, f"bloqueado em {npos}"
+        if npos in robots:
+            return False, f"robô ocupa {npos}"
         if npos in crates:
             cpos = (npos[0] + dx, npos[1] + dy)
             if (cpos in level.walls or cpos in closed or cpos in crates
                     or not (0 <= cpos[0] < level.width and 0 <= cpos[1] < level.height)):
                 return False, f"empurrão inválido para {cpos}"
-            cfinal = slide(level, cpos, (dx, dy), crates, closed, vacated=npos)
+            if cpos in robots:
+                return False, f"robô bloqueia a carga em {cpos}"
+            cfinal = slide(level, cpos, (dx, dy), crates, closed, vacated=npos, robots=robots)
+            if cfinal in robots:
+                return False, f"carga pararia sobre robô em {cfinal}"
             crate_kind = crates.pop(npos)
             crates[cfinal] = crate_kind
             cost += 2 if npos in level.costly else 1
-            player = slide(level, npos, (dx, dy), crates, closed)
+            player = slide(level, npos, (dx, dy), crates, closed, robots=robots)
+            if player in robots:
+                return False, f"jogador pararia sobre robô em {player}"
             continue
 
         cost += 2 if npos in level.costly else 1
-        player = slide(level, npos, (dx, dy), crates, closed)
+        player = slide(level, npos, (dx, dy), crates, closed, robots=robots)
+        if player in robots:
+            return False, f"jogador pararia sobre robô em {player}"
     if not is_complete(level, crates):
         return False, "solução não completa o nível"
     return True, cost

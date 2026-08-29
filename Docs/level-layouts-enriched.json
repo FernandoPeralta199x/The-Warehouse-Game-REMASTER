@@ -184,6 +184,10 @@
           "y": 5
         }
       ],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -397,6 +401,10 @@
           "y": 3
         }
       ],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -604,6 +612,10 @@
           "y": 4
         }
       ],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -873,6 +885,10 @@
           "y": 3
         }
       ],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -1087,6 +1103,10 @@
       ],
       "costly": [],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [
         {
           "x": 4,
@@ -1292,6 +1312,10 @@
       ],
       "costly": [],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [
         {
           "x": 2,
@@ -1516,6 +1540,48 @@
       ],
       "costly": [],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [
+        {
+          "id": "cleaner-01",
+          "route": [
+            {
+              "x": 5,
+              "y": 1
+            },
+            {
+              "x": 5,
+              "y": 2
+            },
+            {
+              "x": 5,
+              "y": 3
+            },
+            {
+              "x": 5,
+              "y": 4
+            },
+            {
+              "x": 5,
+              "y": 5
+            },
+            {
+              "x": 5,
+              "y": 4
+            },
+            {
+              "x": 5,
+              "y": 3
+            },
+            {
+              "x": 5,
+              "y": 2
+            }
+          ]
+        }
+      ],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -1536,10 +1602,10 @@
       ],
       "goalRequirements": [],
       "switchGroups": [],
-      "optimalCost": 34,
+      "optimalCost": 36,
       "optimalPushes": 17,
-      "goldMoveLimit": 45,
-      "platinumMoveLimit": 34,
+      "goldMoveLimit": 47,
+      "platinumMoveLimit": 36,
       "allowPowerUps": true
     },
     {
@@ -1760,6 +1826,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -2060,6 +2130,10 @@
       ],
       "costly": [],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [
         {
           "x": 3,
@@ -2313,6 +2387,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -2523,6 +2601,10 @@
       ],
       "costly": [],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -2788,6 +2870,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -3064,6 +3150,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -3350,6 +3440,19 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 5
+        }
+      ],
+      "patrols": [],
+      "fogMode": "Memory",
+      "fogRadius": 3,
       "conveyors": [],
       "crates": [
         {
@@ -3662,6 +3765,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "Memory",
+      "fogRadius": 3,
       "conveyors": [],
       "crates": [
         {
@@ -3925,6 +4032,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -4189,6 +4300,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -4480,6 +4595,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -4724,6 +4843,19 @@
       ],
       "costly": [],
       "ice": [],
+      "fakeWalls": [
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -4941,6 +5073,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -5208,6 +5344,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -5468,6 +5608,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -5704,6 +5848,10 @@
       ],
       "costly": [],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "Flashlight",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -6013,6 +6161,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -6274,6 +6426,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -6556,6 +6712,10 @@
         }
       ],
       "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {
@@ -6847,6 +7007,10 @@
           "y": 4
         }
       ],
+      "fakeWalls": [],
+      "patrols": [],
+      "fogMode": "None",
+      "fogRadius": 2,
       "conveyors": [],
       "crates": [
         {

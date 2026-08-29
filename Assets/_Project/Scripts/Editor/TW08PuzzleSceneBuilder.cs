@@ -224,6 +224,49 @@ namespace TW08.Editor
             controller.Configure(input, runtime);
             mechanicView.Configure(runtime);
 
+            // Paredes falsas e névoa são desenhadas em DrawBoard, antes de o
+            // runtime existir; só agora dá para ligá-las a ele.
+            PuzzleFakeWallView fakeWallView = UnityEngine.Object.FindFirstObjectByType<PuzzleFakeWallView>();
+            if (fakeWallView != null)
+            {
+                fakeWallView.Configure(runtime, level.FakeWalls, CollectFakeWallRenderers(level));
+                EditorUtility.SetDirty(fakeWallView);
+            }
+
+            // Robôs de limpeza: um sprite por rota, posicionado pela vista a
+            // partir do relógio do tabuleiro.
+            if (level.Patrols != null && level.Patrols.Count > 0)
+            {
+                List<Transform> robotTransforms = new();
+                foreach (PuzzlePatrolDefinition patrol in level.Patrols)
+                {
+                    if (patrol == null || patrol.Route.Count == 0) continue;
+
+                    GameObject robot = TW08ProductionSceneUtility.CreateSprite(
+                        "Cleaning Robot " + patrol.PatrolId,
+                        patrol.PositionAt(0).ToWorld(level.CellSize),
+                        catalog.Wall, 8,
+                        new Color(0.96f, 0.28f, 0.22f, 0.92f),
+                        Vector3.one * 0.62f);
+                    robotTransforms.Add(robot.transform);
+                }
+
+                if (robotTransforms.Count > 0)
+                {
+                    PuzzlePatrolView patrolView = new GameObject("Patrol View")
+                        .AddComponent<PuzzlePatrolView>();
+                    patrolView.Configure(runtime, robotTransforms, level.CellSize);
+                    EditorUtility.SetDirty(patrolView);
+                }
+            }
+
+            if (level.FogMode != PuzzleFogMode.None)
+            {
+                PuzzleFogOfWar fog = new GameObject("Fog Of War").AddComponent<PuzzleFogOfWar>();
+                fog.Configure(runtime, level.FogMode, level.FogRadius, level.CellSize);
+                EditorUtility.SetDirty(fog);
+            }
+
             CreateCamera(level);
             CreateHud(level, runtime, nextScene);
 
@@ -238,6 +281,26 @@ namespace TW08.Editor
             {
                 throw new InvalidOperationException($"Unity failed to save generated puzzle scene '{path}'.");
             }
+        }
+
+        /// <summary>
+        /// Recupera os disfarces de parede falsa pela ordem em que foram criados.
+        /// A busca é por nome porque DrawBoard roda antes do runtime e não pode
+        /// devolver as referências pelo caminho normal.
+        /// </summary>
+        private static List<SpriteRenderer> CollectFakeWallRenderers(PuzzleLevelDefinition level)
+        {
+            List<SpriteRenderer> renderers = new();
+            foreach (GridCoordinate fake in level.FakeWalls ?? Array.Empty<GridCoordinate>())
+            {
+                GameObject found = GameObject.Find("Fake Wall " + fake);
+                if (found != null && found.TryGetComponent(out SpriteRenderer renderer))
+                {
+                    renderers.Add(renderer);
+                }
+            }
+
+            return renderers;
         }
 
         private static void DrawBoard(PuzzleLevelDefinition level, TW08ArtCatalog catalog, out PuzzleMechanicView mechanicView)
@@ -285,6 +348,30 @@ namespace TW08.Editor
 
             GameObject mechanics = new("Puzzle Mechanics");
             mechanicView = mechanics.AddComponent<PuzzleMechanicView>();
+
+            // Paredes falsas: desenhadas por cima do piso livre. O disfarce é
+            // um sprite de parede que some quando o operador chega perto.
+            List<GridCoordinate> fakeCells = new();
+            List<SpriteRenderer> fakeDisguises = new();
+            foreach (GridCoordinate fake in level.FakeWalls ?? Array.Empty<GridCoordinate>())
+            {
+                GameObject disguise = TW08ProductionSceneUtility.CreateSprite(
+                    "Fake Wall " + fake, fake.ToWorld(level.CellSize), catalog.Wall, 9, Color.white);
+                disguise.transform.SetParent(mechanics.transform);
+
+                SpriteRenderer renderer = disguise.GetComponent<SpriteRenderer>();
+                if (renderer != null)
+                {
+                    fakeCells.Add(fake);
+                    fakeDisguises.Add(renderer);
+                }
+            }
+
+            if (fakeCells.Count > 0)
+            {
+                GameObject fakeHost = new("Fake Walls");
+                fakeHost.AddComponent<PuzzleFakeWallView>();
+            }
 
             // Esteiras: a seta indica para onde a correia leva. Sem o indicador
             // de direção a mecânica só seria descoberta por tentativa e erro.

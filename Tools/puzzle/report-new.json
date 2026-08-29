@@ -91,12 +91,12 @@
       "crates": 3,
       "goals": 3,
       "solvable": true,
-      "optimalCost": 34,
+      "optimalCost": 36,
       "pushes": 17,
-      "solution": "RRRLLLURRRRRURDLLLDLLLDRRRRRLULURR",
-      "states": 38801,
+      "solution": "DRRRRRDRULLLLLLURLURRRRRLLLDLDRRUDRR",
+      "states": 117768,
       "replayOk": true,
-      "replayCost": 34
+      "replayCost": 36
     },
     {
       "id": "TW08_Level19_FalseSensor",

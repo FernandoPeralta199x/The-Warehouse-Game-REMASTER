@@ -13,6 +13,7 @@ namespace TW08.Puzzle
         private readonly HashSet<GridCoordinate> iceCells;
         private readonly Dictionary<GridCoordinate, GridCoordinate> conveyors;
         private readonly HashSet<GridCoordinate> dynamicBlockedCells = new();
+        private readonly List<PuzzlePatrolDefinition> patrols;
         private readonly Dictionary<GridCoordinate, PuzzleEntityKind> goalRequirements;
         private readonly Dictionary<GridCoordinate, string> crateByPosition;
         private readonly Dictionary<string, PuzzleEntityKind> crateKinds;
@@ -26,6 +27,10 @@ namespace TW08.Puzzle
         public IReadOnlyCollection<GridCoordinate> CostlyCells => costlyCells;
         public IReadOnlyCollection<GridCoordinate> IceCells => iceCells;
         public IReadOnlyDictionary<GridCoordinate, GridCoordinate> Conveyors => conveyors;
+        public IReadOnlyList<PuzzlePatrolDefinition> Patrols => patrols;
+
+        /// <summary>Comandos executados. É o relógio que move os robôs.</summary>
+        public int CommandCount { get; private set; }
         public IReadOnlyCollection<GridCoordinate> DynamicBlockedCells => dynamicBlockedCells;
         public IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> GoalRequirements => goalRequirements;
         public IReadOnlyDictionary<GridCoordinate, string> Crates => crateByPosition;
@@ -47,7 +52,8 @@ namespace TW08.Puzzle
                 level.IceCells,
                 level.Conveyors
                     .Where(conveyor => conveyor != null)
-                    .ToDictionary(conveyor => conveyor.Position, conveyor => conveyor.Step))
+                    .ToDictionary(conveyor => conveyor.Position, conveyor => conveyor.Step),
+                level.Patrols)
         {
         }
 
@@ -62,7 +68,8 @@ namespace TW08.Puzzle
             IEnumerable<GridCoordinate> costlyCells = null,
             IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> goalRequirements = null,
             IEnumerable<GridCoordinate> iceCells = null,
-            IReadOnlyDictionary<GridCoordinate, GridCoordinate> conveyors = null)
+            IReadOnlyDictionary<GridCoordinate, GridCoordinate> conveyors = null,
+            IEnumerable<PuzzlePatrolDefinition> patrols = null)
         {
             Width = Guard.Positive(width, nameof(width));
             Height = Guard.Positive(height, nameof(height));
@@ -73,6 +80,8 @@ namespace TW08.Puzzle
             this.conveyors = conveyors != null
                 ? new Dictionary<GridCoordinate, GridCoordinate>(conveyors)
                 : new Dictionary<GridCoordinate, GridCoordinate>();
+            this.patrols = new List<PuzzlePatrolDefinition>(
+                (patrols ?? Array.Empty<PuzzlePatrolDefinition>()).Where(patrol => patrol != null && patrol.Route.Count > 0));
             this.goalRequirements = goalRequirements != null
                 ? new Dictionary<GridCoordinate, PuzzleEntityKind>(goalRequirements)
                 : new Dictionary<GridCoordinate, PuzzleEntityKind>();
@@ -123,36 +132,77 @@ namespace TW08.Puzzle
             GridCoordinate previousPlayer = PlayerPosition;
             int moveCost = GetMoveCost(destination);
 
+            // Os robôs avançam junto com este comando, então tudo é validado
+            // contra onde eles VÃO estar, nunca contra onde estão agora — senão
+            // o jogador poderia terminar o passo dentro de um deles.
+            HashSet<GridCoordinate> robots = GetPatrolCells(CommandCount + 1);
+            if (robots.Contains(destination))
+            {
+                return false;
+            }
+
             if (!crateByPosition.TryGetValue(destination, out string crateId))
             {
-                PlayerPosition = Slide(destination, direction, null);
+                GridCoordinate landing = Slide(destination, direction, null, robots);
+                if (robots.Contains(landing))
+                {
+                    return false;
+                }
+
+                PlayerPosition = landing;
                 MoveCount += moveCost;
+                CommandCount++;
                 move = new PuzzleMove(previousPlayer, PlayerPosition, moveCost);
                 return true;
             }
 
             GridCoordinate crateDestination = destination + direction;
 
-            if (!IsFree(crateDestination))
+            if (!IsFree(crateDestination) || robots.Contains(crateDestination))
             {
                 return false;
             }
 
             // A carga desliza primeiro e só então o jogador entra: sem essa
             // ordem o jogador ocuparia a célula que a carga ainda vai cruzar.
-            GridCoordinate crateFinal = Slide(crateDestination, direction, destination);
+            GridCoordinate crateFinal = Slide(crateDestination, direction, destination, robots);
+            if (robots.Contains(crateFinal))
+            {
+                return false;
+            }
 
             crateByPosition.Remove(destination);
             crateByPosition.Add(crateFinal, crateId);
 
             // O jogador para antes da carga — ele não a atravessa nem a empurra
             // uma segunda vez no mesmo comando.
-            GridCoordinate playerFinal = Slide(destination, direction, null);
+            GridCoordinate playerFinal = Slide(destination, direction, null, robots);
+
+            if (robots.Contains(playerFinal))
+            {
+                // Desfaz o empurrão: o comando inteiro é recusado.
+                crateByPosition.Remove(crateFinal);
+                crateByPosition.Add(destination, crateId);
+                return false;
+            }
 
             PlayerPosition = playerFinal;
             MoveCount += moveCost;
+            CommandCount++;
             move = new PuzzleMove(previousPlayer, PlayerPosition, crateId, destination, crateFinal, moveCost);
             return true;
+        }
+
+        /// <summary>Células ocupadas pelos robôs após <paramref name="step"/> comandos.</summary>
+        public HashSet<GridCoordinate> GetPatrolCells(int step)
+        {
+            HashSet<GridCoordinate> cells = new();
+            foreach (PuzzlePatrolDefinition patrol in patrols)
+            {
+                cells.Add(patrol.PositionAt(step));
+            }
+
+            return cells;
         }
 
         /// <summary>
@@ -168,7 +218,11 @@ namespace TW08.Puzzle
         /// O teto de iterações protege contra esteiras em circuito fechado: sem
         /// ele um anel de esteiras giraria para sempre.
         /// </summary>
-        private GridCoordinate Slide(GridCoordinate start, GridCoordinate direction, GridCoordinate? vacated)
+        private GridCoordinate Slide(
+            GridCoordinate start,
+            GridCoordinate direction,
+            GridCoordinate? vacated,
+            HashSet<GridCoordinate> robots = null)
         {
             GridCoordinate current = start;
             int guard = Width * Height;
@@ -190,7 +244,7 @@ namespace TW08.Puzzle
                 }
 
                 GridCoordinate next = current + step;
-                if (!IsSlideTargetFree(next, vacated))
+                if (!IsSlideTargetFree(next, vacated) || (robots != null && robots.Contains(next)))
                 {
                     return current;
                 }
@@ -245,6 +299,7 @@ namespace TW08.Puzzle
 
             PlayerPosition = move.PlayerFrom;
             MoveCount = Math.Max(0, MoveCount - Math.Max(1, move.MoveCost));
+            CommandCount = Math.Max(0, CommandCount - 1);
             return true;
         }
 

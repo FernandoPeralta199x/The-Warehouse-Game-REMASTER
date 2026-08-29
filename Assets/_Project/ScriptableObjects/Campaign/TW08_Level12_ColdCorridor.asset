@@ -129,6 +129,10 @@ MonoBehaviour:
   - x: 6
     y: 3
   conveyors: []
+  fakeWalls: []
+  fogMode: 0
+  fogRadius: 2
+  patrols: []
   goldMoveLimit: 33
   platinumMoveLimit: 25
   allowPowerUps: 1

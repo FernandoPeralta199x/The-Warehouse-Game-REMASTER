@@ -37,6 +37,9 @@ namespace TW08.Editor
         private sealed class ConveyorDto { public int x; public int y; public string dir; }
 
         [Serializable]
+        private sealed class PatrolDto { public string id; public List<CoordDto> route; }
+
+        [Serializable]
         private sealed class SwitchGroupDto
         {
             public string id;
@@ -62,6 +65,10 @@ namespace TW08.Editor
             public List<CoordDto> costly;
             public List<CoordDto> ice;
             public List<ConveyorDto> conveyors;
+            public List<CoordDto> fakeWalls;
+            public List<PatrolDto> patrols;
+            public string fogMode;
+            public int fogRadius;
             public List<CrateDto> crates;
             public List<GoalReqDto> goalRequirements;
             public List<SwitchGroupDto> switchGroups;
@@ -163,6 +170,20 @@ namespace TW08.Editor
             WriteCoordList(so.FindProperty("goals"), dto.goals);
             WriteCoordList(so.FindProperty("costlyCells"), dto.costly);
             WriteCoordList(so.FindProperty("iceCells"), dto.ice);
+            WriteCoordList(so.FindProperty("fakeWalls"), dto.fakeWalls);
+            so.FindProperty("fogMode").enumValueIndex = (int)ParseFog(dto.fogMode);
+            so.FindProperty("fogRadius").intValue = Mathf.Max(1, dto.fogRadius);
+
+            SerializedProperty patrolList = so.FindProperty("patrols");
+            patrolList.arraySize = dto.patrols?.Count ?? 0;
+            for (int i = 0; i < patrolList.arraySize; i++)
+            {
+                PatrolDto patrol = dto.patrols[i];
+                SerializedProperty element = patrolList.GetArrayElementAtIndex(i);
+                element.FindPropertyRelative("patrolId").stringValue =
+                    string.IsNullOrWhiteSpace(patrol.id) ? $"patrol-{i + 1:00}" : patrol.id;
+                WriteCoordList(element.FindPropertyRelative("route"), patrol.route);
+            }
 
             SerializedProperty conveyorList = so.FindProperty("conveyors");
             conveyorList.arraySize = dto.conveyors?.Count ?? 0;
@@ -209,6 +230,11 @@ namespace TW08.Editor
             so.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(level);
             return level;
+        }
+
+        private static PuzzleFogMode ParseFog(string fog)
+        {
+            return Enum.TryParse(fog, out PuzzleFogMode parsed) ? parsed : PuzzleFogMode.None;
         }
 
         private static ConveyorDirection ParseDirection(string direction)

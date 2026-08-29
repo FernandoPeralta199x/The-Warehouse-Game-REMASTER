@@ -156,6 +156,39 @@ namespace TW08.Motion
                 });
         }
 
+        /// <summary>
+        /// Fade de um sprite do mundo. Existe porque SpriteRenderer não é
+        /// Graphic: o tabuleiro é desenhado com sprites, não com UI.
+        /// </summary>
+        public static MotionHandle FadeTo(
+            SpriteRenderer renderer, float alpha, float duration, Ease ease = Ease.OutQuad, float delay = 0f)
+        {
+            if (renderer == null)
+            {
+                return Completed();
+            }
+
+            Color from = renderer.color;
+            return Play(
+                duration,
+                delay,
+                ease,
+                t =>
+                {
+                    if (renderer == null) return;
+                    Color c = from;
+                    c.a = Mathf.LerpUnclamped(from.a, alpha, t);
+                    renderer.color = c;
+                },
+                () =>
+                {
+                    if (renderer == null) return;
+                    Color c = renderer.color;
+                    c.a = alpha;
+                    renderer.color = c;
+                });
+        }
+
         public static MotionHandle ColorTo(
             Graphic graphic, Color target, float duration, Ease ease = Ease.OutQuad, float delay = 0f)
         {
