@@ -76,3 +76,21 @@ MonoBehaviour:
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
+  - speakerId: john
+    text: "A escala do turno ainda est\xE1 pregada na parede?"
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: "Est\xE1. Com dois nomes."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: O meu e o seu.
+    tone: 1
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 

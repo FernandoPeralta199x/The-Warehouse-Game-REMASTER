@@ -10,7 +10,11 @@
       "type": "Puzzle puro",
       "difficulty": "Facil",
       "difficultyRaw": "Fácil",
-      "mechanics": ["caixa normal", "alvo simples", "parede"],
+      "mechanics": [
+        "caixa normal",
+        "alvo simples",
+        "parede"
+      ],
       "character": "John",
       "powerUps": "bloqueados",
       "objective": "Ensinar o jogador a empurrar caixas para alvos.",
@@ -20,14 +24,26 @@
       "boardHint": "corredores largos, sem risco real de travamento, terminal no final",
       "briefing": "Primeiro turno no armazém Nº 08. Empurre a caixa até o alvo e libere o terminal no fim do corredor.",
       "narrative": [
-        { "speaker": "Sistema", "line": "Operador manual detectado." },
-        { "speaker": "John", "line": "Ótimo. Até o sistema sabe que precisa de gente." }
+        {
+          "speaker": "Sistema",
+          "line": "Operador manual detectado."
+        },
+        {
+          "speaker": "John",
+          "line": "Ótimo. Até o sistema sabe que precisa de gente."
+        }
       ],
-      "medals": { "silver": 25, "gold": 18, "platinum": 14 },
+      "medals": {
+        "silver": 25,
+        "gold": 18,
+        "platinum": 14
+      },
       "medalUnit": "moves",
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["tutorial"]
+      "gimmickTags": [
+        "tutorial"
+      ]
     },
     {
       "index": 2,
@@ -39,7 +55,11 @@
       "type": "Puzzle puro",
       "difficulty": "Facil",
       "difficultyRaw": "Fácil/Média",
-      "mechanics": ["corredor estreito", "caixa normal", "alvo simples"],
+      "mechanics": [
+        "corredor estreito",
+        "caixa normal",
+        "alvo simples"
+      ],
       "character": "John",
       "powerUps": "liberados",
       "objective": "Ensinar que caixa não pode ser puxada.",
@@ -49,13 +69,19 @@
       "boardHint": "corredor em L, uma caixa pode ser empurrada para canto sem volta",
       "briefing": "O corredor em L não perdoa. Mova primeiro a caixa mais distante: aqui não existe puxar.",
       "narrative": [
-        { "speaker": "John", "line": "Se entrou apertado, sai pior. Melhor pensar antes." }
+        {
+          "speaker": "John",
+          "line": "Se entrou apertado, sai pior. Melhor pensar antes."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["narrow_corridor", "corner_deadlock"]
+      "gimmickTags": [
+        "narrow_corridor",
+        "corner_deadlock"
+      ]
     },
     {
       "index": 3,
@@ -67,7 +93,11 @@
       "type": "Puzzle puro",
       "difficulty": "Medio",
       "difficultyRaw": "Média",
-      "mechanics": ["3 caixas", "layout em cruz", "área de manobra"],
+      "mechanics": [
+        "3 caixas",
+        "layout em cruz",
+        "área de manobra"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Ensinar ordem de movimentação.",
@@ -81,7 +111,11 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["cross_layout", "move_order", "maneuver_space"]
+      "gimmickTags": [
+        "cross_layout",
+        "move_order",
+        "maneuver_space"
+      ]
     },
     {
       "index": 4,
@@ -93,7 +127,11 @@
       "type": "Puzzle narrativo",
       "difficulty": "Medio",
       "difficultyRaw": "Média",
-      "mechanics": ["caixa marcada", "alvo especial", "terminal"],
+      "mechanics": [
+        "caixa marcada",
+        "alvo especial",
+        "terminal"
+      ],
       "character": "Duda",
       "powerUps": "liberados",
       "objective": "Introduzir pistas de Duda.",
@@ -103,13 +141,21 @@
       "boardHint": "2 caixas normais, 1 caixa marcada N-8, 1 alvo especial, 1 terminal bloqueado atrás de caixas",
       "briefing": "Uma etiqueta N-8 não combina com o resto da carga. Antes de entregá-la, use-a para abrir passagem até o terminal.",
       "narrative": [
-        { "speaker": "Duda", "line": "Se uma etiqueta parece fora do lugar, talvez ela esteja exatamente onde deveria." }
+        {
+          "speaker": "Duda",
+          "line": "Se uma etiqueta parece fora do lugar, talvez ela esteja exatamente onde deveria."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": "Primeiro log parcial de Duda.",
-      "gimmickTags": ["marked_crate", "special_goal", "terminal", "narrative"]
+      "gimmickTags": [
+        "marked_crate",
+        "special_goal",
+        "terminal",
+        "narrative"
+      ]
     },
     {
       "index": 5,
@@ -121,7 +167,12 @@
       "type": "Puzzle de setor",
       "difficulty": "Medio",
       "difficultyRaw": "Média/Difícil",
-      "mechanics": ["4 caixas", "4 alvos", "duas rotas", "deadlock leve"],
+      "mechanics": [
+        "4 caixas",
+        "4 alvos",
+        "duas rotas",
+        "deadlock leve"
+      ],
       "character": "Robert",
       "powerUps": "liberados",
       "objective": "Primeira fase com planejamento real.",
@@ -131,13 +182,20 @@
       "boardHint": "duas rotas aparentes, rota curta prende uma caixa, rota longa resolve",
       "briefing": "Doca de recebimento liberada. Duas rotas parecem servir, mas só a mais longa entrega as quatro cargas.",
       "narrative": [
-        { "speaker": "Robert", "line": "Doca limpa demais sempre me deixa desconfiado." }
+        {
+          "speaker": "Robert",
+          "line": "Doca limpa demais sempre me deixa desconfiado."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["two_routes", "false_route", "deadlock_light"]
+      "gimmickTags": [
+        "two_routes",
+        "false_route",
+        "deadlock_light"
+      ]
     },
     {
       "index": 6,
@@ -149,7 +207,11 @@
       "type": "Puzzle com sensor",
       "difficulty": "Medio",
       "difficultyRaw": "Média",
-      "mechanics": ["sensor de peso", "porta", "caixa-ferramenta"],
+      "mechanics": [
+        "sensor de peso",
+        "porta",
+        "caixa-ferramenta"
+      ],
       "character": "Duda",
       "powerUps": "liberados",
       "objective": "Ensinar sensor de peso.",
@@ -159,13 +221,20 @@
       "boardHint": "1 sensor, 1 porta, 1 caixa precisa ficar temporariamente no sensor",
       "briefing": "A porta só abre com peso sobre o sensor. Aceite que uma das caixas vira ferramenta antes de virar entrega.",
       "narrative": [
-        { "speaker": "Duda", "line": "Nem toda carga parada está esperando destino. Algumas estão segurando caminho." }
+        {
+          "speaker": "Duda",
+          "line": "Nem toda carga parada está esperando destino. Algumas estão segurando caminho."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["weight_sensor", "door", "tool_crate"]
+      "gimmickTags": [
+        "weight_sensor",
+        "door",
+        "tool_crate"
+      ]
     },
     {
       "index": 7,
@@ -177,7 +246,11 @@
       "type": "Puzzle puro",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["fila de caixas", "corredor único", "alvos laterais"],
+      "mechanics": [
+        "fila de caixas",
+        "corredor único",
+        "alvos laterais"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Ensinar ordem inversa.",
@@ -191,7 +264,11 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["crate_queue", "single_corridor", "reverse_order"]
+      "gimmickTags": [
+        "crate_queue",
+        "single_corridor",
+        "reverse_order"
+      ]
     },
     {
       "index": 8,
@@ -203,7 +280,11 @@
       "type": "Puzzle narrativo",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["rota falsa", "terminal enganoso", "caixas normais"],
+      "mechanics": [
+        "rota falsa",
+        "terminal enganoso",
+        "caixas normais"
+      ],
       "character": "Duda",
       "powerUps": "liberados",
       "objective": "Introduzir sistema mentindo.",
@@ -213,14 +294,24 @@
       "boardHint": "1 rota aberta e óbvia, 1 rota longa e desconfortável, rota óbvia leva a deadlock, terminal do sistema sugere rota errada",
       "briefing": "O sistema recomenda a doca B-12 com insistência demais. A rota óbvia termina em travamento.",
       "narrative": [
-        { "speaker": "Sistema", "line": "Rota ideal: B-12." },
-        { "speaker": "Duda", "line": "Se o sistema insiste demais em uma rota, pergunte por quê." }
+        {
+          "speaker": "Sistema",
+          "line": "Rota ideal: B-12."
+        },
+        {
+          "speaker": "Duda",
+          "line": "Se o sistema insiste demais em uma rota, pergunte por quê."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["false_route", "deceptive_terminal", "narrative"]
+      "gimmickTags": [
+        "false_route",
+        "deceptive_terminal",
+        "narrative"
+      ]
     },
     {
       "index": 9,
@@ -232,7 +323,11 @@
       "type": "Puzzle espacial",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["3 caixas", "alvos em canto", "espaço pequeno"],
+      "mechanics": [
+        "3 caixas",
+        "alvos em canto",
+        "espaço pequeno"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Ensinar criação de área de manobra.",
@@ -246,7 +341,11 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["corner_goals", "tight_space", "maneuver_space"]
+      "gimmickTags": [
+        "corner_goals",
+        "tight_space",
+        "maneuver_space"
+      ]
     },
     {
       "index": 10,
@@ -258,7 +357,12 @@
       "type": "Forklift Shift Race",
       "difficulty": "Medio",
       "difficultyRaw": "Média",
-      "mechanics": ["empilhadeira Standard", "caixa média", "cones", "doca A"],
+      "mechanics": [
+        "empilhadeira Standard",
+        "caixa média",
+        "cones",
+        "doca A"
+      ],
       "character": "Robert",
       "powerUps": "liberados",
       "objective": "Primeira fase de empilhadeira.",
@@ -268,13 +372,25 @@
       "boardHint": "pegar 1 caixa, contornar cones, frear em zona marcada, entregar na doca A",
       "briefing": "Prova prática de operador Classe C. Pegue a carga, contorne os cones e pare exatamente na zona marcada da doca A.",
       "narrative": [
-        { "speaker": "Robert", "line": "Antes de correr, aprende a parar. Metade dos operadores ruins só descobre isso na parede." }
+        {
+          "speaker": "Robert",
+          "line": "Antes de correr, aprende a parar. Metade dos operadores ruins só descobre isso na parede."
+        }
       ],
-      "medals": { "silver": 90, "gold": 70, "platinum": 60 },
+      "medals": {
+        "silver": 90,
+        "gold": 70,
+        "platinum": 60
+      },
       "medalUnit": "seconds",
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["forklift_race", "forklift_standard", "cones", "dock_delivery"]
+      "gimmickTags": [
+        "forklift_race",
+        "forklift_standard",
+        "cones",
+        "dock_delivery"
+      ]
     },
     {
       "index": 11,
@@ -286,7 +402,11 @@
       "type": "Puzzle com gelo",
       "difficulty": "Medio",
       "difficultyRaw": "Média/Difícil",
-      "mechanics": ["piso escorregadio", "caixa normal", "parede-freio"],
+      "mechanics": [
+        "piso escorregadio",
+        "caixa normal",
+        "parede-freio"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Ensinar deslizamento.",
@@ -300,7 +420,10 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["ice_floor", "brake_wall"]
+      "gimmickTags": [
+        "ice_floor",
+        "brake_wall"
+      ]
     },
     {
       "index": 12,
@@ -312,7 +435,11 @@
       "type": "Puzzle com gelo",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["gelo", "corredor estreito", "alvo lateral"],
+      "mechanics": [
+        "gelo",
+        "corredor estreito",
+        "alvo lateral"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Combinar gelo e falta de espaço.",
@@ -326,7 +453,10 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["ice_floor", "narrow_corridor"]
+      "gimmickTags": [
+        "ice_floor",
+        "narrow_corridor"
+      ]
     },
     {
       "index": 13,
@@ -338,7 +468,12 @@
       "type": "Forklift Shift Race",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["empilhadeira Cold Storage", "carga refrigerada", "piso escorregadio", "tempo"],
+      "mechanics": [
+        "empilhadeira Cold Storage",
+        "carga refrigerada",
+        "piso escorregadio",
+        "tempo"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Entregar carga refrigerada antes do tempo.",
@@ -348,11 +483,21 @@
       "boardHint": "1 carga refrigerada, piso escorregadio parcial, curvas amplas, zona de entrega fria, atalho arriscado",
       "briefing": "Carga refrigerada com prazo curto. O atalho é rápido e escorregadio: tempo, dano e estabilidade contam juntos.",
       "narrative": [],
-      "medals": { "silver": 120, "gold": 95, "platinum": 80 },
+      "medals": {
+        "silver": 120,
+        "gold": 95,
+        "platinum": 80
+      },
       "medalUnit": "seconds",
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["forklift_race", "forklift_cold", "refrigerated_cargo", "ice_floor", "timer"]
+      "gimmickTags": [
+        "forklift_race",
+        "forklift_cold",
+        "refrigerated_cargo",
+        "ice_floor",
+        "timer"
+      ]
     },
     {
       "index": 14,
@@ -364,7 +509,12 @@
       "type": "Puzzle com sensor e gelo",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["sensor de peso", "gelo", "porta", "caixa-ferramenta"],
+      "mechanics": [
+        "sensor de peso",
+        "gelo",
+        "porta",
+        "caixa-ferramenta"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Usar caixa como bloqueio antes de usar como entrega.",
@@ -378,7 +528,12 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["weight_sensor", "ice_floor", "door", "tool_crate"]
+      "gimmickTags": [
+        "weight_sensor",
+        "ice_floor",
+        "door",
+        "tool_crate"
+      ]
     },
     {
       "index": 15,
@@ -390,7 +545,13 @@
       "type": "Puzzle de setor",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["gelo", "sensor", "porta", "4 caixas", "alvo isolado"],
+      "mechanics": [
+        "gelo",
+        "sensor",
+        "porta",
+        "4 caixas",
+        "alvo isolado"
+      ],
       "character": "Duda",
       "powerUps": "liberados",
       "objective": "Primeira fase realmente cerebral.",
@@ -400,13 +561,22 @@
       "boardHint": "1 sensor, 1 porta, 1 alvo isolado atrás de porta, gelo em duas linhas",
       "briefing": "Câmara 08-C se resolve em três camadas: abrir a porta, criar área de manobra e só então entregar na ordem correta.",
       "narrative": [
-        { "speaker": "Duda", "line": "Se o caminho escorrega demais, pare de empurrar força. Use o que já está parado." }
+        {
+          "speaker": "Duda",
+          "line": "Se o caminho escorrega demais, pare de empurrar força. Use o que já está parado."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["ice_floor", "weight_sensor", "door", "isolated_goal", "narrative"]
+      "gimmickTags": [
+        "ice_floor",
+        "weight_sensor",
+        "door",
+        "isolated_goal",
+        "narrative"
+      ]
     },
     {
       "index": 16,
@@ -418,7 +588,11 @@
       "type": "Puzzle com esteira",
       "difficulty": "Medio",
       "difficultyRaw": "Média/Difícil",
-      "mechanics": ["esteira", "caixa-ferramenta", "alvo simples"],
+      "mechanics": [
+        "esteira",
+        "caixa-ferramenta",
+        "alvo simples"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Introduzir esteiras.",
@@ -432,7 +606,10 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["conveyor", "tool_crate"]
+      "gimmickTags": [
+        "conveyor",
+        "tool_crate"
+      ]
     },
     {
       "index": 17,
@@ -444,7 +621,11 @@
       "type": "Puzzle com esteira múltipla",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["duas esteiras", "botão de direção", "3 caixas"],
+      "mechanics": [
+        "duas esteiras",
+        "botão de direção",
+        "3 caixas"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Alternar esteira na hora certa.",
@@ -458,7 +639,10 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["conveyor", "direction_button"]
+      "gimmickTags": [
+        "conveyor",
+        "direction_button"
+      ]
     },
     {
       "index": 18,
@@ -470,7 +654,11 @@
       "type": "Puzzle com obstáculo por turno",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["robô por turno", "caixas", "sincronização"],
+      "mechanics": [
+        "robô por turno",
+        "caixas",
+        "sincronização"
+      ],
       "character": null,
       "powerUps": "liberados",
       "objective": "Usar timing sem virar jogo de reflexo.",
@@ -484,7 +672,10 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["turn_robot", "timing_sync"]
+      "gimmickTags": [
+        "turn_robot",
+        "timing_sync"
+      ]
     },
     {
       "index": 19,
@@ -496,7 +687,12 @@
       "type": "Puzzle narrativo",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["sensor falso", "porta correta", "rota enganosa", "terminal"],
+      "mechanics": [
+        "sensor falso",
+        "porta correta",
+        "rota enganosa",
+        "terminal"
+      ],
       "character": "Duda",
       "powerUps": "liberados",
       "objective": "Mostrar que o sistema tenta enganar.",
@@ -506,13 +702,21 @@
       "boardHint": "2 sensores, 1 sensor abre porta correta, 1 sensor fecha passagem crítica, terminal recomenda sensor errado",
       "briefing": "Dois sensores, e um deles fecha a passagem crítica. O terminal recomenda justamente o errado.",
       "narrative": [
-        { "speaker": "Duda", "line": "Se o sistema insiste em uma rota, pergunte por que ele quer tanto que você vá por ali." }
+        {
+          "speaker": "Duda",
+          "line": "Se o sistema insiste em uma rota, pergunte por que ele quer tanto que você vá por ali."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["fake_sensor", "false_route", "terminal", "narrative"]
+      "gimmickTags": [
+        "fake_sensor",
+        "false_route",
+        "terminal",
+        "narrative"
+      ]
     },
     {
       "index": 20,
@@ -524,7 +728,12 @@
       "type": "Fase híbrida leve",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["esteiras", "sensor", "porta temporizada", "empilhadeira curta"],
+      "mechanics": [
+        "esteiras",
+        "sensor",
+        "porta temporizada",
+        "empilhadeira curta"
+      ],
       "character": null,
       "powerUps": "liberados (ouro e platina exigem sem Power Ups)",
       "objective": "Combinar puzzle com uma micro-entrega de empilhadeira.",
@@ -538,7 +747,13 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["hybrid", "conveyor", "weight_sensor", "timed_door", "forklift_segment"]
+      "gimmickTags": [
+        "hybrid",
+        "conveyor",
+        "weight_sensor",
+        "timed_door",
+        "forklift_segment"
+      ]
     },
     {
       "index": 21,
@@ -550,7 +765,11 @@
       "type": "Puzzle de desbloqueio",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["caixa pesada", "porta manual", "corredor bloqueado"],
+      "mechanics": [
+        "caixa pesada",
+        "porta manual",
+        "corredor bloqueado"
+      ],
       "character": "Robert",
       "powerUps": "liberados",
       "objective": "Desbloquear parcialmente a Oficina N-8.",
@@ -560,13 +779,20 @@
       "boardHint": "1 caixa pesada, 3 caixas normais, 2 alvos, 1 porta manual, área central bloqueada",
       "briefing": "A porta da Oficina N-8 é manual e a área central está tomada. A caixa pesada dita o ritmo da sala.",
       "narrative": [
-        { "speaker": "Robert", "line": "Essa porta sempre travou. A diferença é que antes ela tinha vergonha." }
+        {
+          "speaker": "Robert",
+          "line": "Essa porta sempre travou. A diferença é que antes ela tinha vergonha."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["heavy_crate", "manual_door", "blocked_corridor"]
+      "gimmickTags": [
+        "heavy_crate",
+        "manual_door",
+        "blocked_corridor"
+      ]
     },
     {
       "index": 22,
@@ -578,7 +804,11 @@
       "type": "Puzzle tutorial de ferramenta",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["Macaco N-8", "caixa presa", "ranking assistido"],
+      "mechanics": [
+        "Macaco N-8",
+        "caixa presa",
+        "ranking assistido"
+      ],
       "character": "Robert",
       "powerUps": "liberados (Macaco N-8 marca a tentativa como Assistida)",
       "objective": "Ensinar uso do Macaco N-8.",
@@ -588,13 +818,21 @@
       "boardHint": "1 caixa obrigatoriamente presa, 1 uso controlado do Macaco N-8, 2 caixas normais, 2 alvos",
       "briefing": "Uma caixa está presa de propósito. O Macaco N-8 resolve, mas marca a tentativa como Assistida no ranking.",
       "narrative": [
-        { "speaker": "Sistema", "line": "Ferramenta pesada usada. Tentativa marcada como Assistida." }
+        {
+          "speaker": "Sistema",
+          "line": "Ferramenta pesada usada. Tentativa marcada como Assistida."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["n8_jack", "stuck_crate", "assisted_ranking", "tutorial"]
+      "gimmickTags": [
+        "n8_jack",
+        "stuck_crate",
+        "assisted_ranking",
+        "tutorial"
+      ]
     },
     {
       "index": 23,
@@ -606,7 +844,13 @@
       "type": "Forklift Shift Race",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["N-8 Heavy", "carga pesada", "rampa", "dano", "curva lenta"],
+      "mechanics": [
+        "N-8 Heavy",
+        "carga pesada",
+        "rampa",
+        "dano",
+        "curva lenta"
+      ],
       "character": "Robert",
       "powerUps": "liberados",
       "objective": "Usar empilhadeira pesada para entregar carga lenta e crítica.",
@@ -616,11 +860,22 @@
       "boardHint": "1 carga pesada, 1 rampa, 2 curvas fechadas, 1 portão temporizado, 1 zona de entrega elevada",
       "briefing": "N-8 Heavy carregada, rampa pela frente e portão temporizado no meio. Frear antes vale mais que acelerar.",
       "narrative": [],
-      "medals": { "silver": 140, "gold": 115, "platinum": 100 },
+      "medals": {
+        "silver": 140,
+        "gold": 115,
+        "platinum": 100
+      },
       "medalUnit": "seconds",
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["forklift_race", "forklift_heavy", "heavy_cargo", "ramp", "timed_gate", "damage"]
+      "gimmickTags": [
+        "forklift_race",
+        "forklift_heavy",
+        "heavy_cargo",
+        "ramp",
+        "timed_gate",
+        "damage"
+      ]
     },
     {
       "index": 24,
@@ -632,7 +887,12 @@
       "type": "Fase híbrida puzzle + empilhadeira",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["bateria pesada", "painéis manuais", "porta travada", "empilhadeira Heavy"],
+      "mechanics": [
+        "bateria pesada",
+        "painéis manuais",
+        "porta travada",
+        "empilhadeira Heavy"
+      ],
       "character": "Robert",
       "powerUps": "liberados",
       "objective": "Religar gerador antigo da Oficina N-8.",
@@ -642,13 +902,24 @@
       "boardHint": "mover caixas para liberar acesso, levar bateria pesada com empilhadeira, ativar 3 painéis manuais, usar caixa para travar porta, proteger Robert enquanto ele conserta o gerador",
       "briefing": "Religue o gerador da Oficina N-8: libere o acesso, leve a bateria pesada de empilhadeira e trave a porta enquanto Robert trabalha.",
       "narrative": [
-        { "speaker": "Robert", "line": "Eu abri aquela porta para ela, John. Achei que era só mais uma teimosia da Duda. Não era." }
+        {
+          "speaker": "Robert",
+          "line": "Religa esse gerador, John. Depois eu preciso te contar uma coisa."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": "Oficina N-8 completa, N-8 Heavy, Macaco N-8 e rotas manuais antigas.",
-      "gimmickTags": ["hybrid", "forklift_heavy", "heavy_battery", "manual_panels", "locked_door", "tool_crate", "narrative"]
+      "gimmickTags": [
+        "hybrid",
+        "forklift_heavy",
+        "heavy_battery",
+        "manual_panels",
+        "locked_door",
+        "tool_crate",
+        "narrative"
+      ]
     },
     {
       "index": 25,
@@ -660,7 +931,12 @@
       "type": "Puzzle mega difícil",
       "difficulty": "MegaDificil",
       "difficultyRaw": "Mega difícil",
-      "mechanics": ["caixas pesadas", "sensores", "corredor central", "caixa-ferramenta"],
+      "mechanics": [
+        "caixas pesadas",
+        "sensores",
+        "corredor central",
+        "caixa-ferramenta"
+      ],
       "character": null,
       "powerUps": "Power Ups fortes bloqueados; Scanner permitido; Macaco N-8 bloqueado para medalha ouro",
       "objective": "Resolver um puzzle pesado de ordem e espaço.",
@@ -674,7 +950,13 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["heavy_crate", "weight_sensor", "tool_crate", "central_corridor", "move_order"]
+      "gimmickTags": [
+        "heavy_crate",
+        "weight_sensor",
+        "tool_crate",
+        "central_corridor",
+        "move_order"
+      ]
     },
     {
       "index": 26,
@@ -686,7 +968,12 @@
       "type": "Puzzle narrativo",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["mapa parcial", "terminal", "paredes falsas", "caixas marcadas"],
+      "mechanics": [
+        "mapa parcial",
+        "terminal",
+        "paredes falsas",
+        "caixas marcadas"
+      ],
       "character": "John",
       "powerUps": "liberados",
       "objective": "Introduzir setores apagados.",
@@ -696,14 +983,26 @@
       "boardHint": "partes do mapa começam ocultas, terminais revelam áreas, algumas paredes oficiais não existem fisicamente, 2 caixas marcadas indicam rota",
       "briefing": "O mapa oficial mente: existem paredes que não estão lá e áreas apagadas do registro. Os terminais revelam o que sobrou.",
       "narrative": [
-        { "speaker": "Terminal", "line": "Operador anterior: inexistente." },
-        { "speaker": "John", "line": "Inexistente, claro. Eles estão apagando gente agora." }
+        {
+          "speaker": "Terminal",
+          "line": "Operador anterior: inexistente."
+        },
+        {
+          "speaker": "John",
+          "line": "Inexistente, claro. Eles estão apagando gente agora."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["partial_map", "terminal", "fake_wall", "marked_crate", "narrative"]
+      "gimmickTags": [
+        "partial_map",
+        "terminal",
+        "fake_wall",
+        "marked_crate",
+        "narrative"
+      ]
     },
     {
       "index": 27,
@@ -715,7 +1014,11 @@
       "type": "Puzzle mega difícil",
       "difficulty": "MegaDificil",
       "difficultyRaw": "Mega difícil",
-      "mechanics": ["mapa incompleto", "memória espacial", "caixas marcadas"],
+      "mechanics": [
+        "mapa incompleto",
+        "memória espacial",
+        "caixas marcadas"
+      ],
       "character": "Duda",
       "powerUps": "Power Ups fortes bloqueados",
       "objective": "Resolver com informação incompleta.",
@@ -725,13 +1028,21 @@
       "boardHint": "jogador vê apenas parte da fase, algumas áreas aparecem após ativar sensores, caixas marcadas indicam caminho",
       "briefing": "Você enxerga apenas um pedaço do setor. Ative os sensores, leia as marcas do chão e confie mais na memória do que no mapa.",
       "narrative": [
-        { "speaker": "Duda", "line": "Se o mapa falhar, lembra do chão." }
+        {
+          "speaker": "Duda",
+          "line": "Se o mapa falhar, lembra do chão."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["partial_map", "spatial_memory", "marked_crate", "sensor_reveal"]
+      "gimmickTags": [
+        "partial_map",
+        "spatial_memory",
+        "marked_crate",
+        "sensor_reveal"
+      ]
     },
     {
       "index": 28,
@@ -743,7 +1054,12 @@
       "type": "Puzzle mega difícil narrativo",
       "difficulty": "MegaDificil",
       "difficultyRaw": "Mega difícil",
-      "mechanics": ["caixas marcadas", "alvos ordenados", "rota falsa", "terminal final"],
+      "mechanics": [
+        "caixas marcadas",
+        "alvos ordenados",
+        "rota falsa",
+        "terminal final"
+      ],
       "character": "Duda",
       "powerUps": "Power Ups fortes bloqueados",
       "objective": "Descobrir que a ordem das caixas importa.",
@@ -753,14 +1069,26 @@
       "boardHint": "4 caixas marcadas, 4 alvos, ordem correta importa, colocar caixas em alvos errados abre caminho falso",
       "briefing": "Quatro cargas marcadas para quatro alvos, mas qualquer caixa em qualquer alvo abre uma rota falsa. A ordem é a mensagem.",
       "narrative": [
-        { "speaker": "Terminal", "line": "Origem: apagada. Destino: Setor 08." },
-        { "speaker": "Duda", "line": "Não deixei nomes nos arquivos. Deixei nas rotas." }
+        {
+          "speaker": "Terminal",
+          "line": "Origem: apagada. Destino: Setor 08."
+        },
+        {
+          "speaker": "Duda",
+          "line": "Não deixei nomes nos arquivos. Deixei nas rotas."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["marked_crate", "ordered_goals", "false_route", "final_terminal", "narrative"]
+      "gimmickTags": [
+        "marked_crate",
+        "ordered_goals",
+        "false_route",
+        "final_terminal",
+        "narrative"
+      ]
     },
     {
       "index": 29,
@@ -772,7 +1100,12 @@
       "type": "Fase híbrida final",
       "difficulty": "MegaDificil",
       "difficultyRaw": "Mega difícil",
-      "mechanics": ["puzzle", "empilhadeira", "sensores", "corrida curta"],
+      "mechanics": [
+        "puzzle",
+        "empilhadeira",
+        "sensores",
+        "corrida curta"
+      ],
       "character": null,
       "powerUps": "Power Ups fortes bloqueados (ouro e platina exigem sem Power Ups)",
       "objective": "Abrir caminho para o Setor 08.",
@@ -786,7 +1119,13 @@
       "medalUnit": null,
       "unlock": null,
       "reward": null,
-      "gimmickTags": ["hybrid", "forklift_heavy", "weight_sensor", "timed_gate", "short_race"]
+      "gimmickTags": [
+        "hybrid",
+        "forklift_heavy",
+        "weight_sensor",
+        "timed_gate",
+        "short_race"
+      ]
     },
     {
       "index": 30,
@@ -798,7 +1137,14 @@
       "type": "Puzzle final",
       "difficulty": "MegaDificil",
       "difficultyRaw": "Mega difícil/final",
-      "mechanics": ["caixas", "sensores", "portas", "esteiras", "rota falsa", "terminal final"],
+      "mechanics": [
+        "caixas",
+        "sensores",
+        "portas",
+        "esteiras",
+        "rota falsa",
+        "terminal final"
+      ],
       "character": "John, Duda, Robert",
       "powerUps": "Power Ups fortes bloqueados",
       "objective": "Revelar a verdade do Setor 08.",
@@ -808,13 +1154,24 @@
       "boardHint": "6 caixas, 6 alvos, 2 sensores, 2 portas, 2 esteiras, 1 rota falsa, 1 terminal final, 1 área de retorno limitada",
       "briefing": "Núcleo logístico do Setor 08: todas as mecânicas do turno reunidas em blocos organizados. Leia a sala inteira antes do primeiro empurrão.",
       "narrative": [
-        { "speaker": "Duda", "line": "Eles não esconderam os dados em arquivos. Esconderam nas rotas." }
+        {
+          "speaker": "Duda",
+          "line": "Eles não esconderam os dados em arquivos. Esconderam nas rotas."
+        }
       ],
       "medals": null,
       "medalUnit": null,
       "unlock": null,
       "reward": "Libera o final conforme logs encontrados, fases secretas concluídas, Robert salvo na Oficina, corridas completadas, uso de Power Ups no Setor 08 e registros de Elias recuperados.",
-      "gimmickTags": ["weight_sensor", "door", "conveyor", "false_route", "final_terminal", "narrative", "finale"]
+      "gimmickTags": [
+        "weight_sensor",
+        "door",
+        "conveyor",
+        "false_route",
+        "final_terminal",
+        "narrative",
+        "finale"
+      ]
     },
     {
       "index": 31,
@@ -826,7 +1183,12 @@
       "type": "Puzzle secreto",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["caixa extra sem alvo aparente", "caixas normais", "parede falsa", "terminal opcional"],
+      "mechanics": [
+        "caixa extra sem alvo aparente",
+        "caixas normais",
+        "parede falsa",
+        "terminal opcional"
+      ],
       "character": "Duda",
       "powerUps": "liberados",
       "objective": "Usar a caixa extra para abrir uma parede falsa em vez de procurar alvo para ela.",
@@ -840,7 +1202,12 @@
       "medalUnit": null,
       "unlock": "encontrar 3 etiquetas N-8 escondidas",
       "reward": "Log oculto de Duda.",
-      "gimmickTags": ["secret", "fake_wall", "extra_crate", "optional_terminal"]
+      "gimmickTags": [
+        "secret",
+        "fake_wall",
+        "extra_crate",
+        "optional_terminal"
+      ]
     },
     {
       "index": 32,
@@ -852,7 +1219,12 @@
       "type": "Puzzle secreto de manutenção",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["caixas pesadas", "portas manuais", "ferramentas antigas", "corredor apertado"],
+      "mechanics": [
+        "caixas pesadas",
+        "portas manuais",
+        "ferramentas antigas",
+        "corredor apertado"
+      ],
       "character": "Robert",
       "powerUps": "liberados",
       "objective": "Abrir a sala pessoal de Robert dentro da Oficina N-8.",
@@ -866,7 +1238,13 @@
       "medalUnit": null,
       "unlock": "concluir Gerador Antigo",
       "reward": "Skin Robert \"Velha Guarda\" e upgrade Bateria Reserva.",
-      "gimmickTags": ["secret", "heavy_crate", "manual_door", "old_tools", "narrow_corridor"]
+      "gimmickTags": [
+        "secret",
+        "heavy_crate",
+        "manual_door",
+        "old_tools",
+        "narrow_corridor"
+      ]
     },
     {
       "index": 33,
@@ -878,7 +1256,12 @@
       "type": "Puzzle lógico narrativo",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["poucas caixas", "muitas mensagens", "ordem deduzida por texto", "alvos não óbvios"],
+      "mechanics": [
+        "poucas caixas",
+        "muitas mensagens",
+        "ordem deduzida por texto",
+        "alvos não óbvios"
+      ],
       "character": "Duda",
       "powerUps": "liberados",
       "objective": "Resolver pela interpretação das mensagens.",
@@ -892,7 +1275,12 @@
       "medalUnit": null,
       "unlock": "ler todos os logs do Setor 03",
       "reward": "Mensagem emocional de Duda para John.",
-      "gimmickTags": ["secret", "narrative", "text_deduced_order", "hidden_goals"]
+      "gimmickTags": [
+        "secret",
+        "narrative",
+        "text_deduced_order",
+        "hidden_goals"
+      ]
     },
     {
       "index": 34,
@@ -904,7 +1292,11 @@
       "type": "Puzzle de caminho único",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["3 salas conectadas", "erro encadeado entre salas", "caixas usadas como pontes lógicas"],
+      "mechanics": [
+        "3 salas conectadas",
+        "erro encadeado entre salas",
+        "caixas usadas como pontes lógicas"
+      ],
       "character": "Elias",
       "powerUps": "liberados",
       "objective": "Percorrer a rota deixada por Elias sem travar as salas seguintes.",
@@ -918,7 +1310,12 @@
       "medalUnit": null,
       "unlock": "encontrar 4 registros apagados",
       "reward": "Último acesso de Elias.",
-      "gimmickTags": ["secret", "three_rooms", "single_path", "logic_bridges"]
+      "gimmickTags": [
+        "secret",
+        "three_rooms",
+        "single_path",
+        "logic_bridges"
+      ]
     },
     {
       "index": 35,
@@ -930,7 +1327,12 @@
       "type": "Puzzle em baixa visibilidade",
       "difficulty": "Dificil",
       "difficultyRaw": "Difícil",
-      "mechanics": ["visão limitada", "mapa escuro", "caixas visíveis apenas perto do jogador", "som e ícones de apoio"],
+      "mechanics": [
+        "visão limitada",
+        "mapa escuro",
+        "caixas visíveis apenas perto do jogador",
+        "som e ícones de apoio"
+      ],
       "character": "John",
       "powerUps": "liberados",
       "objective": "Resolver de memória, com visibilidade reduzida.",
@@ -944,7 +1346,12 @@
       "medalUnit": null,
       "unlock": "completar uma fase de setor sem usar Scanner",
       "reward": "Skin John \"Operador Noturno\".",
-      "gimmickTags": ["secret", "dark_map", "limited_vision", "spatial_memory"]
+      "gimmickTags": [
+        "secret",
+        "dark_map",
+        "limited_vision",
+        "spatial_memory"
+      ]
     },
     {
       "index": 36,
@@ -956,7 +1363,12 @@
       "type": "Forklift Shift Race secreta",
       "difficulty": "MuitoDificil",
       "difficultyRaw": "Muito difícil",
-      "mechanics": ["pista escura", "rota muda durante a corrida", "carga frágil", "sem colisão para platina"],
+      "mechanics": [
+        "pista escura",
+        "rota muda durante a corrida",
+        "carga frágil",
+        "sem colisão para platina"
+      ],
       "character": "Robert",
       "powerUps": "liberados",
       "objective": "Completar a corrida secreta com rota instável e carga frágil.",
@@ -970,7 +1382,13 @@
       "medalUnit": null,
       "unlock": "ouro em todas as corridas normais",
       "reward": "Skin N-8 Prototype.",
-      "gimmickTags": ["secret", "forklift_race", "dark_track", "shifting_route", "fragile_cargo"]
+      "gimmickTags": [
+        "secret",
+        "forklift_race",
+        "dark_track",
+        "shifting_route",
+        "fragile_cargo"
+      ]
     },
     {
       "index": 37,
@@ -982,7 +1400,13 @@
       "type": "Puzzle compacto extremo",
       "difficulty": "MegaDificil",
       "difficultyRaw": "Mega difícil",
-      "mechanics": ["fase pequena", "4 caixas", "4 alvos", "área de manobra mínima", "cada movimento importa"],
+      "mechanics": [
+        "fase pequena",
+        "4 caixas",
+        "4 alvos",
+        "área de manobra mínima",
+        "cada movimento importa"
+      ],
       "character": null,
       "powerUps": "Power Ups fortes bloqueados",
       "objective": "Exigir precisão absoluta em espaço mínimo.",
@@ -996,7 +1420,12 @@
       "medalUnit": null,
       "unlock": "colocar caixas marcadas em ordem correta em fases anteriores",
       "reward": "Código parcial do Setor 08.",
-      "gimmickTags": ["secret", "tight_space", "precision", "move_order"]
+      "gimmickTags": [
+        "secret",
+        "tight_space",
+        "precision",
+        "move_order"
+      ]
     },
     {
       "index": 38,
@@ -1008,7 +1437,11 @@
       "type": "Puzzle mega difícil",
       "difficulty": "MegaDificil",
       "difficultyRaw": "Mega difícil",
-      "mechanics": ["layout aparentemente impossível", "caixa como bloqueio temporário", "liberação por rota alternativa"],
+      "mechanics": [
+        "layout aparentemente impossível",
+        "caixa como bloqueio temporário",
+        "liberação por rota alternativa"
+      ],
       "character": null,
       "powerUps": "Power Ups fortes bloqueados",
       "objective": "Transformar uma caixa em bloqueio temporário e libertá-la depois por outra rota.",
@@ -1022,7 +1455,12 @@
       "medalUnit": null,
       "unlock": "completar Setor 06 sem Power Ups",
       "reward": "Final alternativo parcial.",
-      "gimmickTags": ["secret", "tool_crate", "temporary_block", "reverse_planning"]
+      "gimmickTags": [
+        "secret",
+        "tool_crate",
+        "temporary_block",
+        "reverse_planning"
+      ]
     },
     {
       "index": 39,
@@ -1034,7 +1472,12 @@
       "type": "Puzzle longo de três salas",
       "difficulty": "MegaDificil",
       "difficultyRaw": "Mega difícil",
-      "mechanics": ["3 salas conectadas", "caixas marcadas", "sensor permanente", "rota falsa"],
+      "mechanics": [
+        "3 salas conectadas",
+        "caixas marcadas",
+        "sensor permanente",
+        "rota falsa"
+      ],
       "character": "Elias",
       "powerUps": "Power Ups fortes bloqueados",
       "objective": "Exigir planejamento longo em três salas encadeadas.",
@@ -1048,7 +1491,14 @@
       "medalUnit": null,
       "unlock": "encontrar todos os registros de Elias",
       "reward": "Verdade sobre Elias.",
-      "gimmickTags": ["secret", "three_rooms", "marked_crate", "weight_sensor", "false_route", "long_planning"]
+      "gimmickTags": [
+        "secret",
+        "three_rooms",
+        "marked_crate",
+        "weight_sensor",
+        "false_route",
+        "long_planning"
+      ]
     },
     {
       "index": 40,
@@ -1060,7 +1510,17 @@
       "type": "Fase secreta extrema",
       "difficulty": "MegaDificil",
       "difficultyRaw": "Extrema",
-      "mechanics": ["sem dicas", "sem Power Ups", "caixas marcadas", "sensores", "esteiras", "gelo", "mapa incompleto", "terminal final", "trecho curto de empilhadeira"],
+      "mechanics": [
+        "sem dicas",
+        "sem Power Ups",
+        "caixas marcadas",
+        "sensores",
+        "esteiras",
+        "gelo",
+        "mapa incompleto",
+        "terminal final",
+        "trecho curto de empilhadeira"
+      ],
       "character": "Duda",
       "powerUps": "bloqueados",
       "objective": "Reconstruir a rota deixada por Duda.",
@@ -1074,7 +1534,19 @@
       "medalUnit": null,
       "unlock": "concluir todas as fases secretas anteriores",
       "reward": "Final secreto ou cena emocional com John e Duda.",
-      "gimmickTags": ["secret", "no_hints", "no_powerups", "marked_crate", "weight_sensor", "conveyor", "ice_floor", "partial_map", "final_terminal", "forklift_segment", "finale"]
+      "gimmickTags": [
+        "secret",
+        "no_hints",
+        "no_powerups",
+        "marked_crate",
+        "weight_sensor",
+        "conveyor",
+        "ice_floor",
+        "partial_map",
+        "final_terminal",
+        "forklift_segment",
+        "finale"
+      ]
     }
   ]
 }

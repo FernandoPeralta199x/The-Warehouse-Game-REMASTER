@@ -40,20 +40,32 @@ MonoBehaviour:
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: john
-    text: Rodam vazias para quem olha o mapa.
+    text: "Vazias no mapa. Algu\xE9m devia conferir se est\xE3o vazias no ch\xE3o."
     tone: 0
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
+  - speakerId: robert
+    text: "As aut\xF4nomas nunca entram no corredor C. Contornam. Sempre contornaram."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "M\xE1quina n\xE3o tem medo. M\xE1quina tem instru\xE7\xE3o."
+    tone: 2
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
   - speakerId: duda
-    text: "Se o sistema insiste em uma rota, pergunte por que ele quer tanto que
-      voc\xEA v\xE1 por ali."
+    text: "Erro n\xE3o se repete com esse capricho. Isso n\xE3o \xE9 falha, \xE9
+      padr\xE3o."
     tone: 4
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: john
-    text: Estou perguntando, Duda. Tarde, mas estou.
+    text: "Padr\xE3o. Ela falava essa palavra que nem quem reza."
     tone: 0
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45

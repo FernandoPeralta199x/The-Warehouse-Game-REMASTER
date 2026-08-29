@@ -33,32 +33,32 @@ MonoBehaviour:
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
-  - speakerId: duda
-    text: "Se o sistema insiste demais em uma rota, pergunte por qu\xEA."
-    tone: 4
-    charactersPerSecond: 0
-    minimumDisplaySeconds: 0.45
-    voiceEventId: 
   - speakerId: john
-    text: "Ela deixou isso num terminal de expedi\xE7\xE3o."
+    text: B-12.
     tone: 0
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: john
-    text: "Ningu\xE9m l\xEA terminal de expedi\xE7\xE3o."
-    tone: 1
+    text: A B-12 foi lacrada em dois mil e dezenove. Eu ajudei a lacrar.
+    tone: 2
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Ela deixou num terminal de expedi\xE7\xE3o."
+    tone: 0
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: robert
-    text: "Ningu\xE9m, n\xE3o. Voc\xEA l\xEA."
+    text: "Lugar que ningu\xE9m olha."
     tone: 0
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: john
-    text: Agora eu leio.
+    text: Ela sabia que eu olho.
     tone: 0
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45

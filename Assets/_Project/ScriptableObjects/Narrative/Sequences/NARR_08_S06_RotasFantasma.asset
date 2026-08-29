@@ -40,8 +40,20 @@ MonoBehaviour:
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: john
-    text: "Inexistente. Eles est\xE3o apagando gente agora."
+    text: Inexistente.
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Tinha um Elias nesse turno. Cauteloso. Anotava tudo \xE0 m\xE3o."
     tone: 2
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Agora ele \xE9 um campo vazio."
+    tone: 1
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
@@ -58,7 +70,7 @@ MonoBehaviour:
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: john
-    text: "Ler ch\xE3o \xE9 a \xFAnica coisa que eu sei fazer direito."
+    text: "Ch\xE3o eu leio. Foi pra isso que me chamaram."
     tone: 0
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45

@@ -16,9 +16,8 @@ MonoBehaviour:
   displayName: Gerador Antigo
   sectorId: S05
   briefing: "Religue o gerador da Oficina N-8: libere o acesso, leve a bateria pesada
-    de empilhadeira e trave a porta enquanto Robert trabalha.\nRobert: \u201CEu abri
-    aquela porta para ela, John. Achei que era s\xF3 mais uma teimosia da Duda. N\xE3o
-    era.\u201D"
+    de empilhadeira e trave a porta enquanto Robert trabalha.\nRobert: \u201CReliga
+    esse gerador, John. Depois eu preciso te contar uma coisa.\u201D"
   previewImage: {fileID: 0}
   gimmickTags:
   - hybrid

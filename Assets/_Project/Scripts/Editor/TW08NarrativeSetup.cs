@@ -225,7 +225,10 @@ namespace TW08.Editor
                         John("Só me diga que ainda temos energia."),
                         Robert("Temos algo parecido com energia. Não recomendo elogiar."),
                         John("Me abre o Recebimento. Eu empurro o resto."),
-                        Robert("Já tá aberto. Foi a única porta que o sistema não teve coragem de trancar.")
+                        Robert("Já tá aberto. Foi a única porta que o sistema não teve coragem de trancar."),
+                        John("A escala do turno ainda está pregada na parede?"),
+                        Robert("Está. Com dois nomes."),
+                        Robert("O meu e o seu.", NarrativeTone.Seco)
                     },
                     priority: 10),
 
@@ -277,11 +280,11 @@ namespace TW08.Editor
                     {
                         Automacao("Rota ideal recalculada. Prioridade de saída: doca B-12."),
                         John("Ele repete B-12 desde que eu entrei no setor."),
-                        Duda("Se o sistema insiste demais em uma rota, pergunte por quê."),
-                        John("Ela deixou isso num terminal de expedição."),
-                        John("Ninguém lê terminal de expedição.", NarrativeTone.Seco),
-                        Robert("Ninguém, não. Você lê."),
-                        John("Agora eu leio.")
+                        John("B-12."),
+                        John("A B-12 foi lacrada em dois mil e dezenove. Eu ajudei a lacrar.", NarrativeTone.Tenso),
+                        John("Ela deixou num terminal de expedição."),
+                        Robert("Lugar que ninguém olha."),
+                        John("Ela sabia que eu olho.")
                     }),
 
                 // ------------------------------------- Setor 03 — entrada --
@@ -315,9 +318,11 @@ namespace TW08.Editor
                         Automacao("Bem-vindo ao setor de automação. Eficiência operacional: 99,4%."),
                         John("Noventa e nove vírgula quatro. E o armazém inteiro travado.", NarrativeTone.Seco),
                         Robert("Essas esteiras ligam sozinhas de madrugada. Rodam vazias e desligam."),
-                        John("Rodam vazias para quem olha o mapa."),
-                        Duda("Se o sistema insiste em uma rota, pergunte por que ele quer tanto que você vá por ali."),
-                        John("Estou perguntando, Duda. Tarde, mas estou.")
+                        John("Vazias no mapa. Alguém devia conferir se estão vazias no chão."),
+                        Robert("As autônomas nunca entram no corredor C. Contornam. Sempre contornaram."),
+                        John("Máquina não tem medo. Máquina tem instrução.", NarrativeTone.Tenso),
+                        Duda("Erro não se repete com esse capricho. Isso não é falha, é padrão."),
+                        John("Padrão. Ela falava essa palavra que nem quem reza.")
                     }),
 
                 // ------------------------------------- Setor 05 — entrada --
@@ -372,10 +377,12 @@ namespace TW08.Editor
                         Automacao("Setor não consta no mapa oficial. Retorne à rota autorizada."),
                         John("O mapa oficial mente desde a primeira caixa.", NarrativeTone.Seco),
                         Terminal("Origem: apagada. Destino: Setor 08. Operador anterior: inexistente."),
-                        John("Inexistente. Eles estão apagando gente agora.", NarrativeTone.Tenso),
+                        John("Inexistente."),
+                        John("Tinha um Elias nesse turno. Cauteloso. Anotava tudo à mão.", NarrativeTone.Tenso),
+                        John("Agora ele é um campo vazio.", NarrativeTone.Seco),
                         Duda("Não deixei nomes nos arquivos. Deixei nas rotas."),
                         John("Então me leva pela rota, Duda."),
-                        John("Ler chão é a única coisa que eu sei fazer direito.")
+                        John("Chão eu leio. Foi pra isso que me chamaram.")
                     }),
 
                 // --------------------------------------------- Desfecho --
@@ -389,14 +396,16 @@ namespace TW08.Editor
                     new[]
                     {
                         Automacao("Núcleo logístico restaurado. Rotas consolidadas."),
-                        Automacao("Registro histórico: um arquivo recuperado."),
+                        Automacao("Registro histórico recuperado: escala do turno da noite."),
+                        Terminal("Hayes, R.  —  Miller, J.  —  Rocha, M. E.  —  Elias."),
+                        John("Quatro nomes."),
+                        John("De manhã tinha dois.", NarrativeTone.Tenso),
                         Duda("Eles não esconderam os dados em arquivos. Esconderam nas rotas."),
-                        Duda("Se você chegou até aqui, é porque leu o armazém inteiro."),
-                        Duda("Eu sabia que você ia demorar. Também sabia que ia chegar."),
+                        Duda("Eu sabia que você ia demorar."),
+                        Duda("Você nunca deixou um turno pela metade. Nem quando devia."),
                         John("Demorei, Duda. Demorei demais.", NarrativeTone.Tenso),
                         Robert("A oficina está com energia, John. O que você quiser abrir daqui, abre."),
                         John("Modo manual."),
-                        John("Neste armazém, a partir de hoje, quem move carga é gente."),
                         Automacao("Comando não reconhecido."),
                         John("Vai reconhecer.", NarrativeTone.Seco)
                     },

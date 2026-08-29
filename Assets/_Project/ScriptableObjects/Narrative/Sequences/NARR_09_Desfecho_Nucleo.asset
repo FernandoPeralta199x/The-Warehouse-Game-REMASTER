@@ -28,8 +28,26 @@ MonoBehaviour:
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: sistema
-    text: "Registro hist\xF3rico: um arquivo recuperado."
+    text: "Registro hist\xF3rico recuperado: escala do turno da noite."
     tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: terminal
+    text: "Hayes, R.  \u2014  Miller, J.  \u2014  Rocha, M. E.  \u2014  Elias."
+    tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Quatro nomes.
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "De manh\xE3 tinha dois."
+    tone: 2
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
@@ -40,13 +58,13 @@ MonoBehaviour:
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: duda
-    text: "Se voc\xEA chegou at\xE9 aqui, \xE9 porque leu o armaz\xE9m inteiro."
+    text: "Eu sabia que voc\xEA ia demorar."
     tone: 4
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
     voiceEventId: 
   - speakerId: duda
-    text: "Eu sabia que voc\xEA ia demorar. Tamb\xE9m sabia que ia chegar."
+    text: "Voc\xEA nunca deixou um turno pela metade. Nem quando devia."
     tone: 4
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
@@ -66,12 +84,6 @@ MonoBehaviour:
     voiceEventId: 
   - speakerId: john
     text: Modo manual.
-    tone: 0
-    charactersPerSecond: 0
-    minimumDisplaySeconds: 0.45
-    voiceEventId: 
-  - speakerId: john
-    text: "Neste armaz\xE9m, a partir de hoje, quem move carga \xE9 gente."
     tone: 0
     charactersPerSecond: 0
     minimumDisplaySeconds: 0.45
