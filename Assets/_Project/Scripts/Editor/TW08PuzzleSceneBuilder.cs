@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TW08.Audio;
 using TW08.Data;
 using TW08.Economy;
 using TW08.Input;
@@ -547,6 +548,19 @@ namespace TW08.Editor
 
             PuzzleToolService service = new GameObject("Puzzle Tool Service").AddComponent<PuzzleToolService>();
             service.Configure(runtime, catalog, null);
+
+            // Áudio da fase: assina os eventos do runtime e das ferramentas.
+            // Resolvido do AssetDatabase aqui, e não recebido por parâmetro,
+            // porque a geração de áudio faz Refresh e invalida wrappers.
+            TW08AudioCatalog audioCatalog = AssetDatabase.LoadAssetAtPath<TW08AudioCatalog>(
+                TW08StarterAudioSetup.CatalogPath);
+            if (audioCatalog != null)
+            {
+                PuzzleAudioDirector audioDirector = new GameObject("Puzzle Audio Director")
+                    .AddComponent<PuzzleAudioDirector>();
+                audioDirector.Configure(runtime, service, audioCatalog);
+                EditorUtility.SetDirty(audioDirector);
+            }
 
             PuzzleToolBarController toolBar = new GameObject("Puzzle Tool Bar")
                 .AddComponent<PuzzleToolBarController>();

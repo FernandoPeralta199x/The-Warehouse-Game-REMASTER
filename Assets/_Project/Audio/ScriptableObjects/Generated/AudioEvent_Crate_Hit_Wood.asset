@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58225a777f59d0949be1e2c413b3cf86, type: 3}
+  m_Name: AudioEvent_Crate_Hit_Wood
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Audio.AudioEvent
+  eventId: Crate_Hit_Wood
+  clips:
+  - {fileID: 8300000, guid: 3b7f069fa230ffb4a80be9ae20236de6, type: 3}
+  - {fileID: 8300000, guid: 3cda8039b2c9ce343a5fa39c8deb78a7, type: 3}
+  - {fileID: 8300000, guid: 755798148301dc34783bf5ac557af941, type: 3}
+  mixerGroup: {fileID: 0}
+  volumeRange: {x: 0.75200003, y: 0.8}
+  pitchRange: {x: 0.9, y: 1.1}
+  spatialBlend: 0
+  loop: 0

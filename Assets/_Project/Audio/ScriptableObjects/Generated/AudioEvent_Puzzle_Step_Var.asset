@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58225a777f59d0949be1e2c413b3cf86, type: 3}
+  m_Name: AudioEvent_Puzzle_Step_Var
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Audio.AudioEvent
+  eventId: Puzzle_Step_Var
+  clips:
+  - {fileID: 8300000, guid: 855957598f2268548a637af4f2266de4, type: 3}
+  - {fileID: 8300000, guid: a7a5ce74272227d47ac186e99413ffc9, type: 3}
+  - {fileID: 8300000, guid: 5e24d3d42c80cf94982aec8aac2fed66, type: 3}
+  mixerGroup: {fileID: 0}
+  volumeRange: {x: 0.4888, y: 0.52}
+  pitchRange: {x: 0.92, y: 1.08}
+  spatialBlend: 0
+  loop: 0

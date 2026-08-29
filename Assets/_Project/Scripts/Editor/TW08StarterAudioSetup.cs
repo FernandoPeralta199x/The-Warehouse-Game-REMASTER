@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System;
+using System.Collections.Generic;
 using System.IO;
 using TW08.Audio;
 using UnityEditor;
@@ -61,10 +62,38 @@ namespace TW08.Editor
             SetObject(s, "menuMusic", menuMusic);
             SetObject(s, "puzzleMusic", puzzleMusic);
             SetObject(s, "raceMusic", raceMusic);
+
+            // Banco completo (P0 + P1 da lista de sound design). Os sete sons
+            // acima são a base histórica do protótipo e continuam válidos; o
+            // banco cobre carga, portas, sensores, ferramentas, medalhas,
+            // empilhadeira, ambiência e marcadores de fala.
+            Dictionary<string, AudioEvent> bank = TW08SoundBank.EnsureAll();
+            foreach (KeyValuePair<string, AudioEvent> entry in bank)
+            {
+                // SetObject ignora chave que não é campo do catálogo, então as
+                // duas entradas de variação abaixo passam batido aqui de propósito.
+                SetObject(s, entry.Key, entry.Value);
+            }
+
+            // Passo e empurrão trocam a amostra única do protótipo pelas versões
+            // com variação: são os sons de repetição mais alta do jogo.
+            SetObject(s, "puzzleStep", PickFrom(bank, "puzzleStepVariants", stepEvent));
+            SetObject(s, "puzzlePush", PickFrom(bank, "cratePushWood", pushEvent));
+
             s.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(catalog);
             AssetDatabase.SaveAssets();
             return catalog;
+        }
+
+        /// <summary>
+        /// Usa o evento do banco quando ele existe, senão mantém o do protótipo.
+        /// O catálogo nunca deve ficar com um campo vazio por falha de geração.
+        /// </summary>
+        private static AudioEvent PickFrom(
+            Dictionary<string, AudioEvent> bank, string key, AudioEvent fallback)
+        {
+            return bank.TryGetValue(key, out AudioEvent fromBank) && fromBank != null ? fromBank : fallback;
         }
 
         private static AudioClip EnsureTone(
@@ -121,7 +150,7 @@ namespace TW08.Editor
             return EnsureImportedClip(path, samples);
         }
 
-        private static AudioClip EnsureImportedClip(string assetPath, float[] samples)
+        internal static AudioClip EnsureImportedClip(string assetPath, float[] samples)
         {
             bool changed = WriteWaveIfChanged(assetPath, samples);
             AudioClip clip = AssetDatabase.LoadAssetAtPath<AudioClip>(assetPath);
@@ -141,7 +170,7 @@ namespace TW08.Editor
             return clip;
         }
 
-        private static AudioEvent EnsureEvent(string id, AudioClip clip, float volume, float pitchMin, float pitchMax)
+        internal static AudioEvent EnsureEvent(string id, AudioClip clip, float volume, float pitchMin, float pitchMax)
         {
             string path = DataRoot + "/AudioEvent_" + id + ".asset";
             AudioEvent audioEvent = AssetDatabase.LoadAssetAtPath<AudioEvent>(path);
@@ -184,7 +213,7 @@ namespace TW08.Editor
             return track;
         }
 
-        private static void SetObject(SerializedObject serialized, string propertyName, UnityEngine.Object value)
+        internal static void SetObject(SerializedObject serialized, string propertyName, UnityEngine.Object value)
         {
             SerializedProperty property = serialized.FindProperty(propertyName);
             if (property != null) property.objectReferenceValue = value;

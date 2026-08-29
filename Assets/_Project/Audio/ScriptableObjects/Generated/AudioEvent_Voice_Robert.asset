@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58225a777f59d0949be1e2c413b3cf86, type: 3}
+  m_Name: AudioEvent_Voice_Robert
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Audio.AudioEvent
+  eventId: Voice_Robert
+  clips:
+  - {fileID: 8300000, guid: 61e2a8b9e3ac2b74586c6b1d72f7e0be, type: 3}
+  mixerGroup: {fileID: 0}
+  volumeRange: {x: 0.31960002, y: 0.34}
+  pitchRange: {x: 0.96, y: 1.05}
+  spatialBlend: 0
+  loop: 0

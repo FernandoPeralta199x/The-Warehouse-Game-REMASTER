@@ -13,12 +13,42 @@ MonoBehaviour:
   m_Name: TW08_AudioCatalog
   m_EditorClassIdentifier: TW08.Runtime::TW08.Audio.TW08AudioCatalog
   uiConfirm: {fileID: 11400000, guid: a27cb594e08328143ae031cd8f9ddb81, type: 2}
-  puzzleStep: {fileID: 11400000, guid: f5555b5e06e49f24f9adfceff96775e2, type: 2}
-  puzzlePush: {fileID: 11400000, guid: dfc87b3ebc779d2469fbf73c7996e44b, type: 2}
+  uiBack: {fileID: 11400000, guid: 1bd5006fc93ad9544812cd57e2d4b137, type: 2}
+  uiFocus: {fileID: 11400000, guid: b2ebc59f861c89e4db61064761b1f551, type: 2}
+  uiDenied: {fileID: 11400000, guid: 1286247baa47c2d468e1b92152ed1112, type: 2}
+  terminalBoot: {fileID: 11400000, guid: 5d7a302946de47648905e8539e842fef, type: 2}
+  puzzleStep: {fileID: 11400000, guid: 12a4f08631a4cf34a8e3ce70c8862e60, type: 2}
+  puzzlePush: {fileID: 11400000, guid: 66c0f68d76a6a6c4a827da4642165c6b, type: 2}
   puzzleSuccess: {fileID: 11400000, guid: 9df37127cc7731d46be6046198498143, type: 2}
   puzzleError: {fileID: 11400000, guid: 923452f7553b22345a629c8796b17baa, type: 2}
+  cratePushHeavy: {fileID: 11400000, guid: a591a4b31b0ba8044ab46559cadfa9df, type: 2}
+  crateHit: {fileID: 11400000, guid: 1ccc8bfdca8ed95489822fc858489761, type: 2}
+  crateOnGoal: {fileID: 11400000, guid: 1b3cf46d21a7bc147a325ac3f116cdd4, type: 2}
+  doorOpen: {fileID: 11400000, guid: a4d320ad2dcd3734abf24fce73d78a8e, type: 2}
+  doorClose: {fileID: 11400000, guid: 07e17f66f85785b4abc67de37003b1ec, type: 2}
+  sensorOn: {fileID: 11400000, guid: 3b527b9d8e5a5d1459856127c4804d45, type: 2}
+  sensorOff: {fileID: 11400000, guid: 085791eaa5a75974f9512ecbc31d2ab1, type: 2}
+  conveyorLoop: {fileID: 11400000, guid: 8ac77fc3d8951f74695a6e07712530ab, type: 2}
+  lockdownAlarm: {fileID: 11400000, guid: 7454adb2f2140dc48980e2be8d843b74, type: 2}
+  toolRewind: {fileID: 11400000, guid: 72a62671eb89dc0418e6334f41b49719, type: 2}
+  toolScanner: {fileID: 11400000, guid: f66add79cb3e5144b805e0e9085c4540, type: 2}
+  toolAssistant: {fileID: 11400000, guid: 2f8d1cd2836c4ab4ea850aed92f872b8, type: 2}
+  toolMarker: {fileID: 11400000, guid: c4ce5452273a1854988cadc3be811e20, type: 2}
+  shopPurchase: {fileID: 11400000, guid: 4e3da803c62f6954894cd6b6b8506114, type: 2}
+  creditsTick: {fileID: 11400000, guid: aec2414276417034e8fd33befd7db207, type: 2}
+  medalBronze: {fileID: 11400000, guid: 75f74e694a2bc84479b5bf42e5b46653, type: 2}
+  medalGold: {fileID: 11400000, guid: 178fcf7179144764e876aecd98046698, type: 2}
+  medalPlatinum: {fileID: 11400000, guid: 1f5007dec32cc344baadd03be5ddc3d2, type: 2}
+  voiceJohn: {fileID: 11400000, guid: 26bae7b13b66ade499eeb2e436f5d7ba, type: 2}
+  voiceDuda: {fileID: 11400000, guid: b7de68338a4469f428a5ea236f99fd53, type: 2}
+  voiceRobert: {fileID: 11400000, guid: 11aa847f8025ea944b7eaff4d635b582, type: 2}
   raceCountdown: {fileID: 11400000, guid: a5d22667fa1c4bc4d82bfae076bcf1c7, type: 2}
   raceFinish: {fileID: 11400000, guid: 7936a2f20fe69e748ba0ca06b38cb58c, type: 2}
+  forkliftEngine: {fileID: 11400000, guid: 616d7fbe626d8784dba36b6cb1e648fb, type: 2}
+  forkliftReverse: {fileID: 11400000, guid: 067dd942eafb4aa4b9998a010216c8a6, type: 2}
+  forkliftImpact: {fileID: 11400000, guid: 6c5c0856886d91845b69ee7778dfd559, type: 2}
+  warehouseAmbience: {fileID: 11400000, guid: 0214dec802a7bc441a745c43fe5aace8, type: 2}
+  freezerAmbience: {fileID: 11400000, guid: f863c40fb49f45549a812e29ac647a8a, type: 2}
   menuMusic: {fileID: 11400000, guid: c493d17d3622ba541bdba1f753626c51, type: 2}
   puzzleMusic: {fileID: 11400000, guid: 68bdadf1c9cfc1b43b1db69839ac1a66, type: 2}
   raceMusic: {fileID: 11400000, guid: b3e75f45ecb765840bdf60fea45aa813, type: 2}
