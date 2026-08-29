@@ -18,5 +18,7 @@ MonoBehaviour:
   wall: {fileID: 21300000, guid: e1755898231983a47aeff11892bd850a, type: 3}
   goal: {fileID: 21300000, guid: fa6adf2313f3f2f41bb09b4d3ca0be66, type: 3}
   crateDefault: {fileID: 21300000, guid: 3d2c0df676749e14a8564f6bee00f4e0, type: 3}
+  directionArrow: {fileID: 21300000, guid: 12c5bb2a497e446408abc92b77ed7077, type: 3}
+  neutralBlock: {fileID: 21300000, guid: bbab52deeb3ee89479042ac182e738fb, type: 3}
   terminalFrame: {fileID: 0}
   warningIcon: {fileID: 0}

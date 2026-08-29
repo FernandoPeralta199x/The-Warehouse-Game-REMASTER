@@ -208,10 +208,17 @@ namespace TW08.Editor
             List<PuzzleEntityView> crateViews = new();
             foreach (PuzzleCrateDefinition crate in level.Crates)
             {
+                // A carga comum fica na madeira, que já é a cor certa. Pesada e
+                // frágil partem do bloco neutro: tinta no Unity é multiplicativa,
+                // e azul sobre madeira alaranjada não dá azul, dá oliva.
+                Sprite crateSprite = crate.Kind == PuzzleEntityKind.Crate
+                    ? catalog.CrateDefault
+                    : catalog.NeutralBlock;
+
                 GameObject crateObject = TW08ProductionSceneUtility.CreateSprite(
                     crate.Id,
                     crate.Position.ToWorld(level.CellSize),
-                    catalog.CrateDefault,
+                    crateSprite,
                     20,
                     TW08ProductionSceneUtility.CrateTint(crate.Kind));
                 PuzzleEntityView view = crateObject.AddComponent<PuzzleEntityView>();
@@ -238,8 +245,9 @@ namespace TW08.Editor
             foreach (GridCoordinate button in level.DirectionButtons ?? Array.Empty<GridCoordinate>())
             {
                 TW08ProductionSceneUtility.CreateSprite(
-                    "Direction Button " + button, button.ToWorld(level.CellSize), catalog.Goal, 6,
-                    new Color(1f, 0.63f, 0.12f, 0.9f), Vector3.one * 0.55f);
+                    "Direction Button " + button, button.ToWorld(level.CellSize),
+                    catalog.NeutralBlock, 6,
+                    new Color(1f, 0.63f, 0.12f, 0.95f), Vector3.one * 0.5f);
             }
 
             // Portões temporizados: a vista os apaga quando o prazo vence.
@@ -252,7 +260,7 @@ namespace TW08.Editor
 
                     GameObject gate = TW08ProductionSceneUtility.CreateSprite(
                         "Timed Gate " + block.Position, block.Position.ToWorld(level.CellSize),
-                        catalog.Wall, 9, new Color(0.96f, 0.42f, 0.36f, 0.85f));
+                        catalog.NeutralBlock, 13, new Color(0.96f, 0.42f, 0.36f, 0.9f));
                     if (gate.TryGetComponent(out SpriteRenderer gateRenderer))
                     {
                         gateRenderers.Add(gateRenderer);
@@ -280,8 +288,8 @@ namespace TW08.Editor
                     GameObject robot = TW08ProductionSceneUtility.CreateSprite(
                         "Cleaning Robot " + patrol.PatrolId,
                         patrol.PositionAt(0).ToWorld(level.CellSize),
-                        catalog.Wall, 8,
-                        new Color(0.96f, 0.28f, 0.22f, 0.92f),
+                        catalog.NeutralBlock, 14,
+                        new Color(0.96f, 0.28f, 0.22f, 1f),
                         Vector3.one * 0.62f);
                     robotTransforms.Add(robot.transform);
                 }
@@ -421,8 +429,8 @@ namespace TW08.Editor
                 belt.transform.SetParent(mechanics.transform);
 
                 GameObject arrow = TW08ProductionSceneUtility.CreateSprite(
-                    $"Conveyor Arrow {conveyor.Position}", world, catalog.Goal, 5,
-                    new Color(1f, 0.63f, 0.12f, 0.85f), Vector3.one * 0.45f);
+                    $"Conveyor Arrow {conveyor.Position}", world, catalog.DirectionArrow, 5,
+                    new Color(1f, 0.78f, 0.32f, 0.95f), Vector3.one * 0.55f);
                 arrow.transform.SetParent(mechanics.transform);
                 arrow.transform.localRotation = Quaternion.Euler(0f, 0f, conveyor.Direction switch
                 {
@@ -460,11 +468,15 @@ namespace TW08.Editor
             PuzzleGoalRequirementDefinition requirement = level.GoalRequirements
                 .FirstOrDefault(item => item != null && item.Position == goal);
             if (requirement == null) return Color.white;
+
+            // O sprite de alvo é verde, e a tinta multiplica: qualquer matiz
+            // aplicado nele volta puxado para verde. Compensa-se saturando o
+            // canal que precisa sobreviver e derrubando o verde.
             return requirement.RequiredKind switch
             {
-                PuzzleEntityKind.HeavyCrate => new Color(0.45f, 0.78f, 1f, 1f),
-                PuzzleEntityKind.FragileCrate => new Color(1f, 0.48f, 0.34f, 1f),
-                _ => new Color(0.58f, 1f, 0.72f, 1f)
+                PuzzleEntityKind.HeavyCrate => new Color(0.55f, 0.62f, 1f, 1f),
+                PuzzleEntityKind.FragileCrate => new Color(1f, 0.34f, 0.22f, 1f),
+                _ => Color.white
             };
         }
 

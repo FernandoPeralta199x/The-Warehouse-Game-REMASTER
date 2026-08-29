@@ -14,6 +14,10 @@ namespace TW08.Presentation
         [SerializeField] private Sprite wall;
         [SerializeField] private Sprite goal;
         [SerializeField] private Sprite crateDefault;
+        [Tooltip("Seta assimétrica. Rotacionar o sprite de alvo não indicava direção alguma.")]
+        [SerializeField] private Sprite directionArrow;
+        [Tooltip("Bloco cinza. Base de tudo que recebe tinta — tinta é multiplicativa.")]
+        [SerializeField] private Sprite neutralBlock;
 
         [Header("UI")]
         [SerializeField] private Sprite terminalFrame;
@@ -25,6 +29,12 @@ namespace TW08.Presentation
         public Sprite Wall => wall;
         public Sprite Goal => goal;
         public Sprite CrateDefault => crateDefault;
+
+        /// <summary>Seta de direção; volta ao alvo se a arte ainda não existir.</summary>
+        public Sprite DirectionArrow => directionArrow != null ? directionArrow : goal;
+
+        /// <summary>Bloco neutro para tingir; volta à parede se ainda não existir.</summary>
+        public Sprite NeutralBlock => neutralBlock != null ? neutralBlock : wall;
         public Sprite TerminalFrame => terminalFrame;
         public Sprite WarningIcon => warningIcon;
     }

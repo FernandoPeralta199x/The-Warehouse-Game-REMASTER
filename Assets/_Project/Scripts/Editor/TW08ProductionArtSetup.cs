@@ -115,6 +115,18 @@ namespace TW08.Editor
                 32,
                 DrawCrate,
                 new Vector2(0.5f, 0.5f));
+            string arrow = EnsureSprite(
+                GeneratedRoot + "/Interactive/Arrow_N8.png",
+                32,
+                32,
+                DrawArrow,
+                new Vector2(0.5f, 0.5f));
+            string neutral = EnsureSprite(
+                GeneratedRoot + "/Interactive/Block_Neutral.png",
+                32,
+                32,
+                DrawNeutralBlock,
+                new Vector2(0.5f, 0.5f));
 
             Dictionary<FacingDirection, string> idle = new();
             Dictionary<FacingDirection, string[]> walk = new();
@@ -137,6 +149,8 @@ namespace TW08.Editor
             AssignCatalogSpriteIfEmpty(catalog, "wall", wall);
             AssignCatalogSpriteIfEmpty(catalog, "goal", goal);
             AssignCatalogSpriteIfEmpty(catalog, "crateDefault", crate);
+            AssignCatalogSpriteIfEmpty(catalog, "directionArrow", arrow);
+            AssignCatalogSpriteIfEmpty(catalog, "neutralBlock", neutral);
 
             SerializedObject serializedJohn = new(john);
             AssignSpriteIfEmpty(serializedJohn.FindProperty("idleDown"), idle[FacingDirection.Down]);
@@ -308,6 +322,59 @@ namespace TW08.Editor
             Fill(texture, 26, 20, 2, 8, green);
             Fill(texture, 14, 10, 4, 12, green);
             Fill(texture, 10, 14, 12, 4, green);
+        }
+
+        /// <summary>
+        /// Seta que aponta para CIMA, com assimetria real.
+        ///
+        /// O sprite de alvo era usado para isto, mas ele tem simetria de quatro
+        /// dobras: rotacioná-lo em múltiplos de 90° não muda um pixel, e as
+        /// quatro direções da esteira saíam idênticas na tela. A mecânica ficava
+        /// só na documentação.
+        /// </summary>
+        private static void DrawArrow(Texture2D texture)
+        {
+            Color body = Rgb(255, 161, 31);
+            Color edge = Rgb(120, 66, 8);
+
+            // Ponta: triângulo cheio no topo.
+            for (int row = 0; row < 11; row++)
+            {
+                int y = 26 - row;
+                int half = row + 1;
+                Fill(texture, 16 - half, y, half * 2, 1, body);
+            }
+
+            // Haste, mais estreita que a ponta para a direção ser lida de longe.
+            Fill(texture, 12, 5, 8, 12, body);
+
+            // Contorno escuro só na base: dá peso e separa a seta do piso.
+            Fill(texture, 12, 4, 8, 1, edge);
+            Fill(texture, 11, 5, 1, 12, edge);
+            Fill(texture, 20, 5, 1, 12, edge);
+        }
+
+        /// <summary>
+        /// Bloco cinza neutro para elementos que recebem tinta.
+        ///
+        /// A tinta do Unity é multiplicativa: pintar de azul um sprite de
+        /// madeira alaranjada não dá azul, dá oliva. Todo elemento cuja cor
+        /// carrega significado — carga por tipo, porta, portão, robô — precisa
+        /// partir de cinza para a tinta chegar limpa.
+        /// </summary>
+        private static void DrawNeutralBlock(Texture2D texture)
+        {
+            Color outline = Rgb(38, 42, 44);
+            Color body = Rgb(138, 146, 150);
+            Color light = Rgb(178, 186, 190);
+            Color shade = Rgb(104, 112, 116);
+
+            Fill(texture, 2, 2, 28, 28, outline);
+            Fill(texture, 4, 4, 24, 24, body);
+            Fill(texture, 4, 26, 24, 2, light);
+            Fill(texture, 4, 4, 24, 2, shade);
+            Fill(texture, 4, 4, 2, 24, shade);
+            Fill(texture, 26, 4, 2, 24, light);
         }
 
         private static void DrawCrate(Texture2D texture)
