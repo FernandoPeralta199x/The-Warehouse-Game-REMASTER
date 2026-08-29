@@ -43,6 +43,12 @@ namespace TW08.Editor
                 TW08ExpansionDataSetup.EnsureAll();
                 AssetDatabase.SaveAssets();
 
+                // Antes do reload: EnsureCatalog chama AssetDatabase.Refresh(), e
+                // ReloadStableExpansionData é o que devolve referências estáveis
+                // depois de toda geração pesada.
+                EditorUtility.DisplayProgressBar("The Warehouse Nº 08", "Gerando narrativa...", 0.24f);
+                TW08NarrativeSetup.EnsureCatalog();
+
                 TW08ExpansionDataSetup.ExpansionData data = ReloadStableExpansionData();
                 TW08ArtCatalog catalog = RequireAsset<TW08ArtCatalog>(TW08ProductionArtSetup.CatalogPath);
                 TW08AudioCatalog audioCatalog = RequireAsset<TW08AudioCatalog>(TW08StarterAudioSetup.CatalogPath);

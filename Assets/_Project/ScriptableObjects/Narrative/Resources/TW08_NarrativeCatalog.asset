@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1787f2b5e50f6a4bb4698bceea32d43, type: 3}
+  m_Name: TW08_NarrativeCatalog
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Narrative.NarrativeCatalog
+  roster: {fileID: 11400000, guid: 4c8fc9ea43a576140a16a2174591ce1b, type: 2}
+  autoInstallInScenes: 1
+  sequences:
+  - {fileID: 11400000, guid: 281676034557e7646a6d80698e6bb41b, type: 2}
+  - {fileID: 11400000, guid: 3b68f1c3a355a9f41866e9ccaf7902d3, type: 2}
+  - {fileID: 11400000, guid: b9fd7b397af4349468d8c953a47d94a6, type: 2}
+  - {fileID: 11400000, guid: bebca4b6c36445a4caddb086a737a304, type: 2}
+  - {fileID: 11400000, guid: 3ae8dc7ece68e5940acf747f10cc174c, type: 2}
+  - {fileID: 11400000, guid: d4f9496a48d36bf4fbd238ffdaae532e, type: 2}
+  - {fileID: 11400000, guid: 0345a7ae434f81046a01400d8ece34a2, type: 2}
+  - {fileID: 11400000, guid: fd87545c2deb0ce4e8a9d02474bf4acf, type: 2}
+  - {fileID: 11400000, guid: 540351f2eae7eb445aa1efa29fa97dc7, type: 2}
+  - {fileID: 11400000, guid: 98c4536a955ab8f49b66e8603dd22562, type: 2}

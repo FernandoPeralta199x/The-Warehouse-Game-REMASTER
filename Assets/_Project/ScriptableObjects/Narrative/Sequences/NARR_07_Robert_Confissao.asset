@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1a559031194924283ac8701b8b04cf, type: 3}
+  m_Name: NARR_07_Robert_Confissao
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Narrative.NarrativeSequence
+  sequenceId: narr-robert-confissao
+  title: A porta que Robert abriu
+  trigger: 4
+  sectorId: 
+  levelId: TW08_Level24_OldGenerator
+  priority: 0
+  playOnce: 1
+  defaultCharactersPerSecond: 38
+  lines:
+  - speakerId: robert
+    text: Desliga o gerador um minuto, John. Eu falo melhor no escuro.
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: "Eu abri aquela porta para ela. Achei que era s\xF3 mais uma teimosia da
+      Duda."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: "N\xE3o era."
+    tone: 2
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Quanto tempo depois?
+    tone: 2
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: Onze minutos. Depois o nome dela sumiu da escala do turno.
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: Como se ela nunca tivesse batido ponto aqui.
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Voc\xEA carregou isso sozinho esse tempo todo."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: "Eu carrego peso, John. \xC9 o que eu fa\xE7o."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Esse n\xE3o. Esse a gente divide."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 

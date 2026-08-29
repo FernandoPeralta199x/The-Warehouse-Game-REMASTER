@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1a559031194924283ac8701b8b04cf, type: 3}
+  m_Name: NARR_03_S02_Expedicao
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Narrative.NarrativeSequence
+  sequenceId: narr-setor-s02
+  title: "Setor 02 \u2014 Expedi\xE7\xE3o"
+  trigger: 2
+  sectorId: S02
+  levelId: 
+  priority: 0
+  playOnce: 1
+  defaultCharactersPerSecond: 38
+  lines:
+  - speakerId: sistema
+    text: "Rota ideal recalculada. Prioridade de sa\xEDda: doca B-12."
+    tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Ele repete B-12 desde que eu entrei no setor.
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: duda
+    text: "Se o sistema insiste demais em uma rota, pergunte por qu\xEA."
+    tone: 4
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Ela deixou isso num terminal de expedi\xE7\xE3o."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Ningu\xE9m l\xEA terminal de expedi\xE7\xE3o."
+    tone: 1
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: "Ningu\xE9m, n\xE3o. Voc\xEA l\xEA."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Agora eu leio.
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 

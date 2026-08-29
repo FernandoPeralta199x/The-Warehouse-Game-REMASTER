@@ -1,4 +1,4 @@
-using TW08.Core;
+using TW08.UI.Menus;
 using UnityEngine;
 
 namespace TW08.UI
@@ -10,10 +10,12 @@ namespace TW08.UI
     public sealed class SceneNavButton : MonoBehaviour
     {
         [SerializeField] private string sceneName = string.Empty;
+        [SerializeField] private string context = string.Empty;
 
-        public void Configure(string targetSceneName)
+        public void Configure(string targetSceneName, string contextLabel = null)
         {
             sceneName = targetSceneName;
+            context = string.IsNullOrWhiteSpace(contextLabel) ? targetSceneName : contextLabel;
         }
 
         public void Navigate()
@@ -24,7 +26,8 @@ namespace TW08.UI
                 return;
             }
 
-            SceneLoader.TryLoadImmediate(sceneName, sceneName);
+            MenuFeedback.Click(this);
+            MenuTransition.Go(sceneName, string.IsNullOrWhiteSpace(context) ? sceneName : context);
         }
     }
 }

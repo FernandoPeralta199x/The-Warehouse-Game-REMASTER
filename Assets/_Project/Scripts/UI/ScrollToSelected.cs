@@ -5,16 +5,49 @@ using UnityEngine.UI;
 namespace TW08.UI
 {
     /// <summary>
-    /// Mantém o item selecionado (teclado/gamepad) visível dentro de um ScrollRect.
-    /// Necessário nas telas de seleção com mais fases do que cabe na viewport.
+    /// Mantém o item selecionado (teclado/gamepad) visível dentro de um ScrollRect,
+    /// com rolagem suave e uma margem de folga para o cartão nunca encostar na borda.
+    ///
+    /// O amortecimento é exponencial em tempo não-escalado: a velocidade percebida
+    /// não muda com o frame rate nem com o jogo pausado.
     /// </summary>
     [RequireComponent(typeof(ScrollRect))]
     public sealed class ScrollToSelected : MonoBehaviour
     {
-        [SerializeField, Min(1f)] private float scrollSpeed = 14f;
+        [SerializeField, Min(1f)] private float scrollSpeed = 15f;
+        [SerializeField, Min(0f)] private float edgeMargin = 26f;
 
         private ScrollRect scrollRect;
         private GameObject lastSelected;
+
+        /// <summary>
+        /// Topo desejado da viewport para deixar o item inteiro visível.
+        /// Devolve <paramref name="viewTop"/> quando já está enquadrado. Regra pura.
+        /// </summary>
+        public static float ComputeDesiredTop(
+            float itemCenter, float itemHalf, float viewTop, float viewHeight, float margin)
+        {
+            float itemTop = itemCenter - itemHalf - margin;
+            float itemBottom = itemCenter + itemHalf + margin;
+
+            if (itemTop < viewTop)
+            {
+                return itemTop;
+            }
+
+            if (itemBottom > viewTop + viewHeight)
+            {
+                return itemBottom - viewHeight;
+            }
+
+            return viewTop;
+        }
+
+        /// <summary>Converte um topo em pixels para a posição normalizada do ScrollRect.</summary>
+        public static float NormalizedFromTop(float desiredTop, float scrollable)
+        {
+            return 1f - Mathf.Clamp01(desiredTop / Mathf.Max(1f, scrollable));
+        }
 
         private void Awake()
         {
@@ -32,6 +65,7 @@ namespace TW08.UI
             GameObject selected = eventSystem.currentSelectedGameObject;
             if (selected == null || !selected.transform.IsChildOf(scrollRect.content))
             {
+                lastSelected = null;
                 return;
             }
 
@@ -49,27 +83,25 @@ namespace TW08.UI
             float scrollable = Mathf.Max(1f, contentHeight - viewHeight);
 
             float viewTop = (1f - scrollRect.verticalNormalizedPosition) * scrollable;
-            float viewBottom = viewTop + viewHeight;
+            float desiredTop = ComputeDesiredTop(itemCenterY, itemHalf, viewTop, viewHeight, edgeMargin);
 
-            float desiredTop = viewTop;
-            if (itemCenterY - itemHalf < viewTop)
+            if (Mathf.Approximately(desiredTop, viewTop) && selected == lastSelected)
             {
-                desiredTop = itemCenterY - itemHalf;
-            }
-            else if (itemCenterY + itemHalf > viewBottom)
-            {
-                desiredTop = itemCenterY + itemHalf - viewHeight;
+                lastSelected = selected;
+                return;
             }
 
-            if (!Mathf.Approximately(desiredTop, viewTop) || selected != lastSelected)
+            float targetNormalized = NormalizedFromTop(desiredTop, scrollable);
+            float k = 1f - Mathf.Exp(-scrollSpeed * Time.unscaledDeltaTime);
+            float next = Mathf.Lerp(scrollRect.verticalNormalizedPosition, targetNormalized, k);
+
+            // Encostar no valor final evita ficar rolando frações de pixel para sempre.
+            if (Mathf.Abs(next - targetNormalized) < 0.0008f)
             {
-                float targetNormalized = 1f - Mathf.Clamp01(desiredTop / scrollable);
-                scrollRect.verticalNormalizedPosition = Mathf.Lerp(
-                    scrollRect.verticalNormalizedPosition,
-                    targetNormalized,
-                    Time.unscaledDeltaTime * scrollSpeed);
+                next = targetNormalized;
             }
 
+            scrollRect.verticalNormalizedPosition = next;
             lastSelected = selected;
         }
     }

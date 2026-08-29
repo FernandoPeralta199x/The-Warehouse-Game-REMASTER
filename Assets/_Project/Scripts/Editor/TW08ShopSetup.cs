@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TW08.Economy;
 using TW08.Save;
 using TW08.UI;
+using TW08.UI.Menus;
 using UnityEditor;
 using UnityEditor.Events;
 using UnityEditor.SceneManagement;
@@ -264,7 +265,8 @@ namespace TW08.Editor
                     nameText = name,
                     detailText = detail,
                     buyButton = buy,
-                    equipButton = equip
+                    equipButton = equip,
+                    rowRoot = rowPanel.rectTransform
                 });
             }
 
@@ -283,12 +285,72 @@ namespace TW08.Editor
             controller.Configure(catalog, rows, credits, slots, feedback, back, "TW08_ModeSelect");
             UnityEventTools.AddPersistentListener(back.onClick, controller.GoBack);
 
+            ApplyShopMotion(canvas, shell, eyebrow, title, credits, slots, rows, feedback, back);
+
             EnsureSaveManager();
             TW08ProductionSceneUtility.Select(eventSystem, rows.Count > 0 ? rows[0].buyButton : back);
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene, ShopScenePath);
             return ShopScenePath;
+        }
+
+        /// <summary>
+        /// Dá à Oficina a mesma linguagem de movimento das outras telas:
+        /// cabeçalho digitado, linhas entrando em cascata, foco deslizante e
+        /// pulso de confirmação nos botões.
+        ///
+        /// A cascata usa as linhas inteiras, e não os botões: a vitrine se lê
+        /// por produto, então a unidade que entra em cena é a linha.
+        /// </summary>
+        private static void ApplyShopMotion(
+            Canvas canvas,
+            Transform shell,
+            Text eyebrow,
+            Text title,
+            Text credits,
+            Text slots,
+            List<ShopRow> rows,
+            Text feedback,
+            Button back)
+        {
+            Color accent = TW08ProductionSceneUtility.Green;
+
+            Image marker = TW08ProductionSceneUtility.CreatePanel(
+                shell, "Focus Marker", new Color(accent.r, accent.g, accent.b, 0.18f));
+            marker.raycastTarget = false;
+            TW08ProductionSceneUtility.SetRect(
+                marker.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(250f, 60f), Vector2.zero);
+            marker.rectTransform.SetAsFirstSibling();
+
+            MenuFocusAnimator focus = shell.gameObject.AddComponent<MenuFocusAnimator>();
+            focus.Configure(shell, marker.rectTransform, marker, new Color(accent.r, accent.g, accent.b, 0.22f));
+
+            List<Component> cascade = new() { credits, slots };
+            foreach (ShopRow row in rows)
+            {
+                if (row?.rowRoot != null)
+                {
+                    cascade.Add(row.rowRoot);
+                }
+            }
+
+            cascade.Add(feedback);
+            cascade.Add(back);
+
+            MenuScreenAnimator entrance = shell.gameObject.AddComponent<MenuScreenAnimator>();
+            entrance.Configure(eyebrow, title, null, cascade);
+
+            foreach (Button button in canvas.GetComponentsInChildren<Button>(true))
+            {
+                if (button != null && button.GetComponent<MenuPressFeedback>() == null)
+                {
+                    button.gameObject.AddComponent<MenuPressFeedback>();
+                }
+            }
+
+            EditorUtility.SetDirty(focus);
+            EditorUtility.SetDirty(entrance);
         }
 
         /// <summary>

@@ -5,9 +5,11 @@ using System.Linq;
 using TW08.Data;
 using TW08.Economy;
 using TW08.Input;
+using TW08.Motion;
 using TW08.Presentation;
 using TW08.Puzzle;
 using TW08.UI;
+using TW08.UI.Hud;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -21,6 +23,12 @@ namespace TW08.Editor
     {
         internal const string SceneRoot = "Assets/_Project/Scenes/VerticalSlice";
         internal const string SecretSceneRoot = "Assets/_Project/Scenes/Secret";
+
+        /// <summary>
+        /// Linhas fixas do extrato na tela de conclusão. O extrato máximo da
+        /// economia tem seis bônus mais a linha de teto por fase.
+        /// </summary>
+        private const int ShiftReportLineSlots = 7;
 
         internal static List<string> BuildAll(TW08ExpansionDataSetup.ExpansionData data, TW08ArtCatalog catalog)
         {
@@ -323,8 +331,16 @@ namespace TW08.Editor
             Text levelText = TW08ProductionSceneUtility.CreateText(top.transform, "Level", level.DisplayName.ToUpperInvariant(), 24, TW08ProductionSceneUtility.TextPrimary, TextAnchor.MiddleLeft);
             TW08ProductionSceneUtility.SetRect(levelText.rectTransform, new Vector2(0f, 0.5f), new Vector2(520f, 40f), new Vector2(26f, 24f));
 
-            Text moves = TW08ProductionSceneUtility.CreateText(top.transform, "Moves", "MOVIMENTOS 000   UNDO 00   REDO 00", 16, TW08ProductionSceneUtility.Green, TextAnchor.MiddleLeft);
-            TW08ProductionSceneUtility.SetRect(moves.rectTransform, new Vector2(0f, 0.5f), new Vector2(620f, 34f), new Vector2(26f, -22f));
+            // Contador dedicado: CountTo reescreve o rótulo inteiro a cada frame,
+            // então o número animado não pode dividir o texto com undo/redo.
+            Text movesValue = TW08ProductionSceneUtility.CreateText(top.transform, "Moves Value", "MOVIMENTOS 000", 20, TW08ProductionSceneUtility.Green, TextAnchor.MiddleLeft);
+            TW08ProductionSceneUtility.SetRect(movesValue.rectTransform, new Vector2(0f, 0.5f), new Vector2(280f, 34f), new Vector2(26f, -22f));
+
+            Text moves = TW08ProductionSceneUtility.CreateText(top.transform, "Moves", "UNDO 00   REDO 00", 15, TW08ProductionSceneUtility.TextMuted, TextAnchor.MiddleLeft);
+            TW08ProductionSceneUtility.SetRect(moves.rectTransform, new Vector2(0f, 0.5f), new Vector2(320f, 30f), new Vector2(318f, -22f));
+
+            Text ranking = TW08ProductionSceneUtility.CreateText(top.transform, "Ranking Chip", "TURNO LIMPO", 14, TW08ProductionSceneUtility.Green, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(ranking.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(260f, 30f), new Vector2(0f, 24f));
 
             Text operatorText = TW08ProductionSceneUtility.CreateText(top.transform, "Operator", "OPERADOR // JOHN", 16, TW08ProductionSceneUtility.Amber, TextAnchor.MiddleRight);
             TW08ProductionSceneUtility.SetRect(operatorText.rectTransform, new Vector2(1f, 0.5f), new Vector2(420f, 34f), new Vector2(-28f, 24f));
@@ -350,6 +366,8 @@ namespace TW08.Editor
             TW08ProductionSceneUtility.DisableNavigation(undo);
             TW08ProductionSceneUtility.DisableNavigation(redo);
 
+            PuzzleShiftReportPanel report = CreateShiftReportPanel(canvas);
+
             PuzzleHudController hud = new GameObject("Puzzle HUD Controller").AddComponent<PuzzleHudController>();
             hud.Configure(runtime, levelText, moves, status, undo, redo, action);
             hud.ConfigureExtendedLabels(operatorText, targetText);
@@ -357,8 +375,110 @@ namespace TW08.Editor
 
             CreateToolBar(canvas, runtime);
 
+            // A cortina precisa ser o último filho do Canvas para cobrir tudo,
+            // então só é criada depois da barra de ferramentas.
+            ScreenFader fader = CreateScreenFader(canvas);
+            hud.ConfigureMotion(movesValue, ranking, bottom.rectTransform, report, fader);
+
+            // Cascata de abertura: topo e base entram em sequência, cada painel
+            // escalonando os próprios filhos.
+            AddEntrance(top.gameObject, EntranceStyle.SlideDown, 0.05f, 42f);
+            AddEntrance(bottom.gameObject, EntranceStyle.SlideUp, 0.16f, 42f);
+
             TW08ProductionSceneUtility.Select(eventSystem, action);
             EditorUtility.SetDirty(hud);
+        }
+
+        /// <summary>
+        /// Tela de conclusão de turno. Nasce desativada: o HUD a liga quando o
+        /// <c>SaveManager</c> devolve o extrato de Créditos de Turno.
+        /// </summary>
+        private static PuzzleShiftReportPanel CreateShiftReportPanel(Canvas canvas)
+        {
+            Image panel = TW08ProductionSceneUtility.CreatePanel(
+                canvas.transform, "Shift Report", TW08ProductionSceneUtility.PanelLight);
+            TW08ProductionSceneUtility.SetRect(
+                panel.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(720f, 470f), new Vector2(0f, 24f));
+
+            CanvasGroup group = panel.gameObject.AddComponent<CanvasGroup>();
+            group.alpha = 0f;
+            group.blocksRaycasts = false;
+
+            Text title = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Report Title", "TURNO ENCERRADO", 22,
+                TW08ProductionSceneUtility.TextPrimary, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                title.rectTransform, new Vector2(0.5f, 1f), new Vector2(660f, 36f), new Vector2(0f, -28f));
+
+            Text medal = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Report Medal", "MEDALHA OURO", 30,
+                TW08ProductionSceneUtility.Amber, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                medal.rectTransform, new Vector2(0.5f, 1f), new Vector2(660f, 46f), new Vector2(0f, -78f));
+
+            Text ranking = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Report Ranking", "TURNO LIMPO // RANKING VALIDADO", 15,
+                TW08ProductionSceneUtility.Green, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                ranking.rectTransform, new Vector2(0.5f, 1f), new Vector2(660f, 28f), new Vector2(0f, -124f));
+
+            List<Text> lines = new();
+            for (int i = 0; i < ShiftReportLineSlots; i++)
+            {
+                Text line = TW08ProductionSceneUtility.CreateText(
+                    panel.transform, $"Report Line {i + 1}", string.Empty, 16,
+                    TW08ProductionSceneUtility.TextPrimary, TextAnchor.MiddleCenter);
+                TW08ProductionSceneUtility.SetRect(
+                    line.rectTransform, new Vector2(0.5f, 1f), new Vector2(600f, 26f),
+                    new Vector2(0f, -166f - i * 30f));
+                lines.Add(line);
+            }
+
+            Text total = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Report Total", "+0 CRÉDITOS", 26,
+                TW08ProductionSceneUtility.Green, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                total.rectTransform, new Vector2(0.5f, 0f), new Vector2(660f, 40f), new Vector2(0f, 76f));
+
+            Text balance = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Report Balance", "SALDO 0 CR", 15,
+                TW08ProductionSceneUtility.TextMuted, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                balance.rectTransform, new Vector2(0.5f, 0f), new Vector2(660f, 26f), new Vector2(0f, 40f));
+
+            PuzzleShiftReportPanel controller = panel.gameObject.AddComponent<PuzzleShiftReportPanel>();
+            controller.Configure(group, panel.rectTransform, title, medal, ranking, total, balance, lines);
+            EditorUtility.SetDirty(controller);
+
+            panel.gameObject.SetActive(false);
+            return controller;
+        }
+
+        /// <summary>Cortina de transição. Fica sempre por último para cobrir todo o HUD.</summary>
+        private static ScreenFader CreateScreenFader(Canvas canvas)
+        {
+            Image cover = TW08ProductionSceneUtility.CreatePanel(canvas.transform, "Screen Fader", Color.black);
+            TW08ProductionSceneUtility.Stretch(cover.rectTransform);
+            cover.color = new Color(0f, 0f, 0f, 0f);
+            cover.raycastTarget = false;
+            cover.rectTransform.SetAsLastSibling();
+
+            ScreenFader fader = cover.gameObject.AddComponent<ScreenFader>();
+            fader.Configure(cover, 0.42f);
+            EditorUtility.SetDirty(fader);
+            return fader;
+        }
+
+        private static void AddEntrance(GameObject target, EntranceStyle style, float delay, float distance)
+        {
+            UIEntranceAnimator animator = target.GetComponent<UIEntranceAnimator>();
+            if (animator == null)
+            {
+                animator = target.AddComponent<UIEntranceAnimator>();
+            }
+
+            animator.Configure(style, 0.42f, delay, true, 0.06f, distance);
+            EditorUtility.SetDirty(animator);
         }
 
         /// <summary>
@@ -378,6 +498,8 @@ namespace TW08.Editor
                 new Vector2(18f, 118f), new Vector2(430f, 178f));
 
             List<Button> slots = new();
+            List<Text> slotLabels = new();
+            List<Text> counters = new();
             for (int i = 0; i < slotCount; i++)
             {
                 Button slot = TW08ProductionSceneUtility.CreateButton(
@@ -388,6 +510,27 @@ namespace TW08.Editor
                 TW08ProductionSceneUtility.DisableNavigation(slot);
                 slot.interactable = false;
                 slots.Add(slot);
+
+                // O rótulo principal ocupa a esquerda do slot para o contador de
+                // usos poder animar sozinho, sem reescrever o nome da ferramenta.
+                Text label = slot.GetComponentInChildren<Text>();
+                if (label != null)
+                {
+                    label.alignment = TextAnchor.MiddleLeft;
+                    TW08ProductionSceneUtility.SetRect(
+                        label.rectTransform, new Vector2(0f, 0f), new Vector2(1f, 1f),
+                        new Vector2(12f, 0f), new Vector2(-46f, 0f));
+                }
+
+                slotLabels.Add(label);
+
+                Text counter = TW08ProductionSceneUtility.CreateText(
+                    slot.transform, "Uses", string.Empty, 13,
+                    TW08ProductionSceneUtility.Amber, TextAnchor.MiddleRight);
+                TW08ProductionSceneUtility.SetRect(
+                    counter.rectTransform, new Vector2(1f, 0.5f), new Vector2(42f, 24f), new Vector2(-10f, 0f));
+                counter.raycastTarget = false;
+                counters.Add(counter);
             }
 
             Text mode = TW08ProductionSceneUtility.CreateText(
@@ -408,6 +551,9 @@ namespace TW08.Editor
             PuzzleToolBarController toolBar = new GameObject("Puzzle Tool Bar")
                 .AddComponent<PuzzleToolBarController>();
             toolBar.Configure(service, runtime, slots, message, mode);
+            toolBar.ConfigureSlotDisplays(slotLabels, counters);
+
+            AddEntrance(bar.gameObject, EntranceStyle.SlideLeft, 0.28f, 56f);
 
             EditorUtility.SetDirty(service);
             EditorUtility.SetDirty(toolBar);

@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1a559031194924283ac8701b8b04cf, type: 3}
+  m_Name: NARR_09_Desfecho_Nucleo
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Narrative.NarrativeSequence
+  sequenceId: narr-desfecho-nucleo
+  title: "N\xFAcleo Log\xEDstico"
+  trigger: 5
+  sectorId: 
+  levelId: TW08_Level30_LogisticsCore
+  priority: 10
+  playOnce: 1
+  defaultCharactersPerSecond: 38
+  lines:
+  - speakerId: sistema
+    text: "N\xFAcleo log\xEDstico restaurado. Rotas consolidadas."
+    tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: sistema
+    text: "Registro hist\xF3rico: um arquivo recuperado."
+    tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: duda
+    text: "Eles n\xE3o esconderam os dados em arquivos. Esconderam nas rotas."
+    tone: 4
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: duda
+    text: "Se voc\xEA chegou at\xE9 aqui, \xE9 porque leu o armaz\xE9m inteiro."
+    tone: 4
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: duda
+    text: "Eu sabia que voc\xEA ia demorar. Tamb\xE9m sabia que ia chegar."
+    tone: 4
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Demorei, Duda. Demorei demais.
+    tone: 2
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: "A oficina est\xE1 com energia, John. O que voc\xEA quiser abrir daqui,
+      abre."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Modo manual.
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Neste armaz\xE9m, a partir de hoje, quem move carga \xE9 gente."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: sistema
+    text: "Comando n\xE3o reconhecido."
+    tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Vai reconhecer.
+    tone: 1
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 

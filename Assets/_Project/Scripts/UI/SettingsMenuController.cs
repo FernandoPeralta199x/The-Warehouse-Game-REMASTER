@@ -1,6 +1,6 @@
 using TW08.Save;
+using TW08.UI.Menus;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TW08.UI
@@ -16,8 +16,24 @@ namespace TW08.UI
         [SerializeField] private Text sfxValue;
         [SerializeField] private Button backButton;
         [SerializeField] private string backScene = "TW08_ModeSelect";
+        [SerializeField, Min(0.5f)] private float pulseDecay = 3.2f;
 
+        private sealed class ValuePulse
+        {
+            public Text Label;
+            public Vector3 BaseScale;
+            public Color BaseColor;
+            public float Amount;
+        }
+
+        private readonly ValuePulse[] pulses = new ValuePulse[3];
         private SaveManager saveManager;
+
+        /// <summary>Rótulo de porcentagem dos sliders. Regra pura, testável.</summary>
+        public static string FormatPercent(float value)
+        {
+            return Mathf.RoundToInt(Mathf.Clamp01(value) * 100f) + "%";
+        }
 
         public void Configure(
             Slider master,
@@ -45,24 +61,75 @@ namespace TW08.UI
         private void OnEnable()
         {
             saveManager = Object.FindFirstObjectByType<SaveManager>();
-            masterSlider?.onValueChanged.AddListener(OnChanged);
-            musicSlider?.onValueChanged.AddListener(OnChanged);
-            sfxSlider?.onValueChanged.AddListener(OnChanged);
+            masterSlider?.onValueChanged.AddListener(OnMasterChanged);
+            musicSlider?.onValueChanged.AddListener(OnMusicChanged);
+            sfxSlider?.onValueChanged.AddListener(OnSfxChanged);
             backButton?.onClick.AddListener(Back);
+
+            pulses[0] = CreatePulse(masterValue);
+            pulses[1] = CreatePulse(musicValue);
+            pulses[2] = CreatePulse(sfxValue);
+
             LoadValues();
         }
 
         private void OnDisable()
         {
-            masterSlider?.onValueChanged.RemoveListener(OnChanged);
-            musicSlider?.onValueChanged.RemoveListener(OnChanged);
-            sfxSlider?.onValueChanged.RemoveListener(OnChanged);
+            masterSlider?.onValueChanged.RemoveListener(OnMasterChanged);
+            musicSlider?.onValueChanged.RemoveListener(OnMusicChanged);
+            sfxSlider?.onValueChanged.RemoveListener(OnSfxChanged);
             backButton?.onClick.RemoveListener(Back);
+
+            // Um rótulo salvo no meio do pulso ficaria maior e mais claro para sempre.
+            foreach (ValuePulse pulse in pulses)
+            {
+                if (pulse?.Label == null)
+                {
+                    continue;
+                }
+
+                pulse.Label.rectTransform.localScale = pulse.BaseScale;
+                pulse.Label.color = pulse.BaseColor;
+                pulse.Amount = 0f;
+            }
+        }
+
+        private void Update()
+        {
+            float decay = Time.unscaledDeltaTime * pulseDecay;
+
+            foreach (ValuePulse pulse in pulses)
+            {
+                if (pulse?.Label == null || pulse.Amount <= 0f)
+                {
+                    continue;
+                }
+
+                pulse.Amount = Mathf.Max(0f, pulse.Amount - decay);
+                pulse.Label.rectTransform.localScale = pulse.BaseScale * (1f + 0.10f * pulse.Amount);
+                pulse.Label.color = Color.Lerp(pulse.BaseColor, Color.white, 0.55f * pulse.Amount);
+            }
         }
 
         public void Back()
         {
-            if (!string.IsNullOrWhiteSpace(backScene)) SceneManager.LoadScene(backScene, LoadSceneMode.Single);
+            MenuTransition.Go(backScene, "menu de modos");
+        }
+
+        private static ValuePulse CreatePulse(Text label)
+        {
+            if (label == null)
+            {
+                return null;
+            }
+
+            return new ValuePulse
+            {
+                Label = label,
+                BaseScale = label.rectTransform.localScale,
+                BaseColor = label.color,
+                Amount = 0f
+            };
         }
 
         private void LoadValues()
@@ -76,8 +143,19 @@ namespace TW08.UI
             Apply(master, music, sfx, false);
         }
 
-        private void OnChanged(float _)
+        private void OnMasterChanged(float _) => Changed(0);
+
+        private void OnMusicChanged(float _) => Changed(1);
+
+        private void OnSfxChanged(float _) => Changed(2);
+
+        private void Changed(int index)
         {
+            if (index >= 0 && index < pulses.Length && pulses[index] != null)
+            {
+                pulses[index].Amount = 1f;
+            }
+
             Apply(
                 masterSlider != null ? masterSlider.value : 1f,
                 musicSlider != null ? musicSlider.value : 0.8f,
@@ -91,9 +169,9 @@ namespace TW08.UI
             music = Mathf.Clamp01(music);
             sfx = Mathf.Clamp01(sfx);
             AudioListener.volume = master;
-            if (masterValue != null) masterValue.text = Mathf.RoundToInt(master * 100f) + "%";
-            if (musicValue != null) musicValue.text = Mathf.RoundToInt(music * 100f) + "%";
-            if (sfxValue != null) sfxValue.text = Mathf.RoundToInt(sfx * 100f) + "%";
+            if (masterValue != null) masterValue.text = FormatPercent(master);
+            if (musicValue != null) musicValue.text = FormatPercent(music);
+            if (sfxValue != null) sfxValue.text = FormatPercent(sfx);
             if (!persist) return;
 
             PlayerPrefs.SetFloat("tw08.audio.master", master);

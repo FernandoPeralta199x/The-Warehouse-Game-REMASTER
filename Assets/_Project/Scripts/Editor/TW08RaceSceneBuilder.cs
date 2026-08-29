@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using TW08.Input;
+using TW08.Motion;
 using TW08.Presentation;
 using TW08.Race;
 using TW08.UI;
+using TW08.UI.Hud;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -117,7 +119,7 @@ namespace TW08.Editor
             session.Configure(track, manager, countdown, controller, progress);
 
             CreateCamera();
-            CreateHud(track, session);
+            CreateHud(track, session, controller);
 
             EditorUtility.SetDirty(input);
             EditorUtility.SetDirty(controller);
@@ -266,7 +268,10 @@ namespace TW08.Editor
             camera.backgroundColor = new Color(0.011f, 0.016f, 0.018f, 1f);
         }
 
-        private static void CreateHud(RaceTrackDefinition track, RaceSessionController session)
+        private static void CreateHud(
+            RaceTrackDefinition track,
+            RaceSessionController session,
+            ArcadeForkliftController2D playerVehicle)
         {
             Canvas canvas = TW08ProductionSceneUtility.CreateCanvas();
             EventSystem eventSystem = TW08ProductionSceneUtility.CreateEventSystem();
@@ -284,8 +289,23 @@ namespace TW08.Editor
             Text best = TW08ProductionSceneUtility.CreateText(top.transform, "Best", "BEST --:--.---", 14, TW08ProductionSceneUtility.TextMuted, TextAnchor.MiddleRight);
             TW08ProductionSceneUtility.SetRect(best.rectTransform, new Vector2(1f, 0.5f), new Vector2(380f, 32f), new Vector2(-28f, -20f));
 
+            // Velocímetro fica colado ao painel superior: é lido de canto de olho
+            // durante a corrida, então não pode competir com a contagem central.
+            Text speed = TW08ProductionSceneUtility.CreateText(top.transform, "Speed", "VEL 000", 20, TW08ProductionSceneUtility.Cyan, TextAnchor.MiddleLeft);
+            TW08ProductionSceneUtility.SetRect(speed.rectTransform, new Vector2(0f, 0.5f), new Vector2(260f, 32f), new Vector2(26f, -26f));
+
             Text status = TW08ProductionSceneUtility.CreateText(canvas.transform, "Race Status", "3", 46, TW08ProductionSceneUtility.Green, TextAnchor.MiddleCenter);
             TW08ProductionSceneUtility.SetRect(status.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(580f, 80f), new Vector2(0f, 180f));
+
+            Text lastLap = TW08ProductionSceneUtility.CreateText(canvas.transform, "Last Lap", "ÚLTIMA VOLTA", 30, TW08ProductionSceneUtility.Amber, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(lastLap.rectTransform, new Vector2(0.5f, 1f), new Vector2(560f, 44f), new Vector2(0f, -150f));
+            lastLap.color = new Color(TW08ProductionSceneUtility.Amber.r, TW08ProductionSceneUtility.Amber.g, TW08ProductionSceneUtility.Amber.b, 0f);
+            lastLap.raycastTarget = false;
+
+            Text checkpoint = TW08ProductionSceneUtility.CreateText(canvas.transform, "Checkpoint Flash", "CHECKPOINT", 22, TW08ProductionSceneUtility.Green, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(checkpoint.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(420f, 34f), new Vector2(0f, 96f));
+            checkpoint.color = new Color(TW08ProductionSceneUtility.Green.r, TW08ProductionSceneUtility.Green.g, TW08ProductionSceneUtility.Green.b, 0f);
+            checkpoint.raycastTarget = false;
 
             Image bottom = TW08ProductionSceneUtility.CreatePanel(canvas.transform, "Race HUD Bottom", TW08ProductionSceneUtility.Panel);
             TW08ProductionSceneUtility.SetRect(bottom.rectTransform, new Vector2(0f, 0f), new Vector2(1f, 0f), new Vector2(18f, 18f), new Vector2(-18f, 92f));
@@ -296,10 +316,99 @@ namespace TW08.Editor
             TW08ProductionSceneUtility.SetRect((RectTransform)restart.transform, new Vector2(1f, 0.5f), new Vector2(170f, 48f), new Vector2(-280f, 0f));
             TW08ProductionSceneUtility.SetRect((RectTransform)exit.transform, new Vector2(1f, 0.5f), new Vector2(150f, 48f), new Vector2(-90f, 0f));
 
+            RaceResultPanel result = CreateRaceResultPanel(canvas);
+            ScreenFader fader = CreateRaceScreenFader(canvas);
+
             RaceHudController hud = new GameObject("Race HUD Controller").AddComponent<RaceHudController>();
             hud.Configure(session, trackText, timer, lap, best, pilot, status, restart, exit, "TW08_RaceSelect");
+            hud.ConfigureMotion(playerVehicle, speed, lastLap, checkpoint, result, fader);
+
+            AddRaceEntrance(top.gameObject, EntranceStyle.SlideDown, 0.05f);
+            AddRaceEntrance(bottom.gameObject, EntranceStyle.SlideUp, 0.16f);
+
             TW08ProductionSceneUtility.Select(eventSystem, restart);
             EditorUtility.SetDirty(hud);
+        }
+
+        /// <summary>
+        /// Tela de resultado da corrida. Nasce desativada e só aparece quando o
+        /// piloto cruza a linha final.
+        /// </summary>
+        private static RaceResultPanel CreateRaceResultPanel(Canvas canvas)
+        {
+            Image panel = TW08ProductionSceneUtility.CreatePanel(
+                canvas.transform, "Race Result", TW08ProductionSceneUtility.PanelLight);
+            // Abaixo do centro de propósito: a faixa de contagem/estado vive em
+            // +180 e não pode ficar por cima da tela de resultado.
+            TW08ProductionSceneUtility.SetRect(
+                panel.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(660f, 320f), new Vector2(0f, -30f));
+
+            CanvasGroup group = panel.gameObject.AddComponent<CanvasGroup>();
+            group.alpha = 0f;
+            group.blocksRaycasts = false;
+
+            Text title = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Result Title", "CORRIDA ENCERRADA", 22,
+                TW08ProductionSceneUtility.TextPrimary, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                title.rectTransform, new Vector2(0.5f, 1f), new Vector2(600f, 34f), new Vector2(0f, -26f));
+
+            Text medal = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Result Medal", "MEDALHA OURO", 30,
+                TW08ProductionSceneUtility.Amber, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                medal.rectTransform, new Vector2(0.5f, 1f), new Vector2(600f, 44f), new Vector2(0f, -76f));
+
+            Text time = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Result Time", "00:00.000", 40,
+                TW08ProductionSceneUtility.Green, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                time.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(600f, 54f), new Vector2(0f, -6f));
+
+            Text best = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Result Best", "BEST --:--.---", 16,
+                TW08ProductionSceneUtility.TextMuted, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                best.rectTransform, new Vector2(0.5f, 0f), new Vector2(600f, 28f), new Vector2(0f, 74f));
+
+            Text cargo = TW08ProductionSceneUtility.CreateText(
+                panel.transform, "Result Cargo", "CARGA // --", 16,
+                TW08ProductionSceneUtility.Cyan, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                cargo.rectTransform, new Vector2(0.5f, 0f), new Vector2(600f, 28f), new Vector2(0f, 40f));
+
+            RaceResultPanel controller = panel.gameObject.AddComponent<RaceResultPanel>();
+            controller.Configure(group, panel.rectTransform, title, medal, time, best, cargo);
+            EditorUtility.SetDirty(controller);
+
+            panel.gameObject.SetActive(false);
+            return controller;
+        }
+
+        private static ScreenFader CreateRaceScreenFader(Canvas canvas)
+        {
+            Image cover = TW08ProductionSceneUtility.CreatePanel(canvas.transform, "Screen Fader", Color.black);
+            TW08ProductionSceneUtility.Stretch(cover.rectTransform);
+            cover.color = new Color(0f, 0f, 0f, 0f);
+            cover.raycastTarget = false;
+            cover.rectTransform.SetAsLastSibling();
+
+            ScreenFader fader = cover.gameObject.AddComponent<ScreenFader>();
+            fader.Configure(cover, 0.4f);
+            EditorUtility.SetDirty(fader);
+            return fader;
+        }
+
+        private static void AddRaceEntrance(GameObject target, EntranceStyle style, float delay)
+        {
+            UIEntranceAnimator animator = target.GetComponent<UIEntranceAnimator>();
+            if (animator == null)
+            {
+                animator = target.AddComponent<UIEntranceAnimator>();
+            }
+
+            animator.Configure(style, 0.4f, delay, true, 0.055f, 40f);
+            EditorUtility.SetDirty(animator);
         }
 
         private static void SetPrivateBool(UnityEngine.Object target, string propertyName, bool value)

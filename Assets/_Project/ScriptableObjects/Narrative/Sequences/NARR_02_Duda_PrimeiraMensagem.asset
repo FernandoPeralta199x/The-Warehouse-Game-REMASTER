@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1a559031194924283ac8701b8b04cf, type: 3}
+  m_Name: NARR_02_Duda_PrimeiraMensagem
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Narrative.NarrativeSequence
+  sequenceId: narr-duda-primeira-mensagem
+  title: "N\xE3o confie no painel"
+  trigger: 4
+  sectorId: 
+  levelId: TW08_Level01_FirstShift
+  priority: 0
+  playOnce: 1
+  defaultCharactersPerSecond: 38
+  lines:
+  - speakerId: sistema
+    text: 'Terminal manual restaurado. Registro de operador anterior: pendente.'
+    tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: duda
+    text: "John, se voc\xEA est\xE1 ouvindo isso, n\xE3o confie no painel principal."
+    tone: 4
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: duda
+    text: "Ele mostra o armaz\xE9m que a empresa quer que exista."
+    tone: 4
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Duda?
+    tone: 2
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: sistema
+    text: Mensagem sem origem. Descartada.
+    tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Descartada uma ova.
+    tone: 1
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 

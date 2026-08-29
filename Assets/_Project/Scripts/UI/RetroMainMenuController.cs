@@ -1,4 +1,4 @@
-using TW08.Core;
+using TW08.UI.Menus;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -40,12 +40,14 @@ namespace TW08.UI
 
         public void StartNewShift()
         {
-            SceneLoader.TryLoadImmediate(firstLevelScene, "central de operações");
+            MenuTransition.Go(firstLevelScene, "central de operações");
         }
 
         public void ContinueShift()
         {
-            // Reserved for a future direct-resume UX. Progress is already persisted in save v2.
+            // Reservado para retomada direta. Até lá o botão recusa com tremor em
+            // vez de não fazer nada — silêncio parece bug.
+            MenuFeedback.Denied(continueButton);
         }
 
         public void OpenOptions() => Debug.Log("Options shell is reserved for the settings milestone.");

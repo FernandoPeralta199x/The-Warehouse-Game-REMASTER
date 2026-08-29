@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1a559031194924283ac8701b8b04cf, type: 3}
+  m_Name: NARR_08_S06_RotasFantasma
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Narrative.NarrativeSequence
+  sequenceId: narr-setor-s06
+  title: "Setor 06 \u2014 Rotas Fantasma"
+  trigger: 2
+  sectorId: S06
+  levelId: 
+  priority: 0
+  playOnce: 1
+  defaultCharactersPerSecond: 38
+  lines:
+  - speakerId: sistema
+    text: "Setor n\xE3o consta no mapa oficial. Retorne \xE0 rota autorizada."
+    tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: O mapa oficial mente desde a primeira caixa.
+    tone: 1
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: terminal
+    text: 'Origem: apagada. Destino: Setor 08. Operador anterior: inexistente.'
+    tone: 3
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Inexistente. Eles est\xE3o apagando gente agora."
+    tone: 2
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: duda
+    text: "N\xE3o deixei nomes nos arquivos. Deixei nas rotas."
+    tone: 4
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Ent\xE3o me leva pela rota, Duda."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Ler ch\xE3o \xE9 a \xFAnica coisa que eu sei fazer direito."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 

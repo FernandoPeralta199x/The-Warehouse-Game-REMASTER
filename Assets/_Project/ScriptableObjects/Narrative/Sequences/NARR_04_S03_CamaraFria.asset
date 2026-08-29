@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1a559031194924283ac8701b8b04cf, type: 3}
+  m_Name: NARR_04_S03_CamaraFria
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Narrative.NarrativeSequence
+  sequenceId: narr-setor-s03
+  title: "Setor 03 \u2014 C\xE2mara Fria"
+  trigger: 2
+  sectorId: S03
+  levelId: 
+  priority: 0
+  playOnce: 1
+  defaultCharactersPerSecond: 38
+  lines:
+  - speakerId: robert
+    text: "C\xE2mara fria. Veste o casaco e n\xE3o confia no ch\xE3o."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "O gelo n\xE3o \xE9 o problema. O problema \xE9 carga que n\xE3o para onde
+      eu mando."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: robert
+    text: Tem uma coisa esquisita aqui, John. O compressor roda em setor vazio faz
+      seis meses.
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: "Algu\xE9m est\xE1 pagando conta de luz para congelar nada."
+    tone: 0
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: duda
+    text: "Nem toda carga parada est\xE1 esperando destino. Algumas est\xE3o segurando
+      caminho."
+    tone: 4
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 
+  - speakerId: john
+    text: Ou escondendo um.
+    tone: 2
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0.45
+    voiceEventId: 

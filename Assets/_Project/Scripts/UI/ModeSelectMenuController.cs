@@ -1,4 +1,4 @@
-using TW08.Core;
+using TW08.UI.Menus;
 using UnityEngine;
 
 namespace TW08.UI
@@ -24,7 +24,7 @@ namespace TW08.UI
 
         private static void Load(string sceneName, string context)
         {
-            SceneLoader.TryLoadImmediate(sceneName, context);
+            MenuTransition.Go(sceneName, context);
         }
     }
 }

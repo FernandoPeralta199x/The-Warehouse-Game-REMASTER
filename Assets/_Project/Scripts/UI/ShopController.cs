@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using TW08.Core;
 using TW08.Economy;
+using TW08.Motion;
 using TW08.Save;
+using TW08.UI.Menus;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,9 @@ namespace TW08.UI
         public Text detailText;
         public Button buyButton;
         public Button equipButton;
+
+        /// <summary>Painel da linha — alvo do pulso de compra e do tremor de recusa.</summary>
+        public RectTransform rowRoot;
     }
 
     /// <summary>
@@ -30,6 +34,14 @@ namespace TW08.UI
     [DisallowMultipleComponent]
     public sealed class ShopController : MonoBehaviour
     {
+        /// <summary>Formato do saldo. Usado também pelo contador animado.</summary>
+        public const string CreditsFormat = "CRÉDITOS DE TURNO // {0}";
+
+        public static readonly Color EquippedTint = new(0.25f, 0.95f, 0.58f, 1f);
+        public static readonly Color EquipAvailableTint = new(0.26f, 0.84f, 0.92f, 1f);
+        public static readonly Color AffordableTint = new(0.25f, 0.95f, 0.58f, 1f);
+        public static readonly Color UnaffordableTint = new(0.96f, 0.42f, 0.36f, 1f);
+
         [SerializeField] private PuzzleToolCatalog catalog;
         [SerializeField] private SaveManager saveManager;
         [SerializeField] private List<ShopRow> rows = new();
@@ -38,6 +50,36 @@ namespace TW08.UI
         [SerializeField] private Text feedbackText;
         [SerializeField] private Button backButton;
         [SerializeField] private string backSceneName = "TW08_ModeSelect";
+
+        private readonly List<MotionHandle> handles = new();
+        private MotionHandle creditsHandle;
+        private int shownCredits;
+        private bool creditsInitialized;
+
+        // ----------------------------------------------------- Regras puras --
+
+        public static bool CanAfford(int credits, int price) => credits >= price;
+
+        public static int MissingCredits(int credits, int price) => Mathf.Max(0, price - credits);
+
+        public static string FormatCredits(int credits) => string.Format(CreditsFormat, credits);
+
+        public static string FormatSlots(int used, int total) =>
+            $"SLOTS DE FERRAMENTA // {used}/{Mathf.Max(1, total)}";
+
+        public static string EquipLabel(bool equipped) => equipped ? "EQUIPADA" : "EQUIPAR";
+
+        public static string BuyLabel(int price) => $"COMPRAR // {price}";
+
+        public static string DetailLine(string description, int owned, int price) =>
+            $"{description}\nESTOQUE {owned}   PREÇO {price}";
+
+        /// <summary>Equipar exige estoque, ou já estar equipada (para desequipar).</summary>
+        public static bool CanEquipRow(int owned, bool equipped) => owned > 0 || equipped;
+
+        public static bool HasFreeSlot(int equippedCount, int slots) => equippedCount < Mathf.Max(1, slots);
+
+        // ---------------------------------------------------------- Ciclo --
 
         public void Configure(
             PuzzleToolCatalog toolCatalog,
@@ -79,6 +121,7 @@ namespace TW08.UI
             }
 
             backButton?.onClick.AddListener(GoBack);
+            creditsInitialized = false;
             Refresh();
         }
 
@@ -91,6 +134,15 @@ namespace TW08.UI
             }
 
             backButton?.onClick.RemoveListener(GoBack);
+
+            foreach (MotionHandle handle in handles)
+            {
+                handle?.Complete();
+            }
+
+            handles.Clear();
+            creditsHandle?.Complete();
+            creditsHandle = null;
         }
 
         private void Buy(int index)
@@ -103,12 +155,14 @@ namespace TW08.UI
 
             if (!saveManager.TryPurchaseTool(tool))
             {
-                Feedback($"Créditos insuficientes: faltam {tool.Price - saveManager.Data.credits}.");
+                Feedback($"Créditos insuficientes: faltam {MissingCredits(saveManager.Data.credits, tool.Price)}.");
+                DenyRow(index);
                 Refresh();
                 return;
             }
 
             Feedback($"{tool.DisplayName} adquirida.");
+            PunchRow(index);
             Refresh();
         }
 
@@ -134,12 +188,14 @@ namespace TW08.UI
                 if (saveManager.Data.GetToolCount(tool.ToolId) <= 0)
                 {
                     Feedback("Compre a ferramenta antes de equipá-la.");
+                    DenyRow(index);
                     return;
                 }
 
-                if (equipped.Count >= catalog.EquipSlots)
+                if (!HasFreeSlot(equipped.Count, catalog.EquipSlots))
                 {
                     Feedback($"Slots cheios ({catalog.EquipSlots}). Remova uma ferramenta primeiro.");
+                    DenyRow(index);
                     return;
                 }
 
@@ -148,6 +204,7 @@ namespace TW08.UI
             }
 
             saveManager.SetEquippedTools(equipped, catalog.EquipSlots);
+            PunchRow(index);
             Refresh();
         }
 
@@ -156,24 +213,99 @@ namespace TW08.UI
             return index >= 0 && index < rows.Count ? rows[index]?.tool : null;
         }
 
+        private void PunchRow(int index)
+        {
+            if (index < 0 || index >= rows.Count || rows[index] == null)
+            {
+                return;
+            }
+
+            Transform target = rows[index].rowRoot != null
+                ? rows[index].rowRoot
+                : rows[index].buyButton != null ? rows[index].buyButton.transform : null;
+            if (target != null)
+            {
+                Track(UIMotion.Punch(target, 0.05f, 0.3f));
+            }
+        }
+
+        /// <summary>
+        /// Guarda o handle e descarta os que já terminaram. Sem a poda, uma sessão
+        /// longa de loja acumularia handles mortos até sair da cena.
+        /// </summary>
+        private void Track(MotionHandle handle)
+        {
+            handles.RemoveAll(item => item == null || !item.IsPlaying);
+            if (handle != null && handle.IsPlaying)
+            {
+                handles.Add(handle);
+            }
+        }
+
+        private void DenyRow(int index)
+        {
+            if (index < 0 || index >= rows.Count || rows[index] == null)
+            {
+                return;
+            }
+
+            RectTransform target = rows[index].rowRoot;
+            if (target != null)
+            {
+                Track(UIMotion.Shake(target, 11f, 0.34f));
+            }
+            else
+            {
+                MenuFeedback.Denied(rows[index].buyButton);
+            }
+
+            if (creditsText != null)
+            {
+                Track(UIMotion.Shake(creditsText.rectTransform, 7f, 0.3f));
+            }
+        }
+
         private void Refresh()
         {
             SaveGameData data = saveManager?.Data;
+            int credits = data?.credits ?? 0;
+
             if (creditsText != null)
             {
-                creditsText.text = $"CRÉDITOS DE TURNO // {data?.credits ?? 0}";
+                if (!creditsInitialized)
+                {
+                    // Primeira exibição: o saldo sobe do zero, como um mostrador ligando.
+                    creditsInitialized = true;
+                    shownCredits = 0;
+                }
+
+                if (shownCredits != credits)
+                {
+                    creditsHandle?.Complete();
+                    creditsHandle = UIMotion.CountTo(
+                        creditsText, shownCredits, credits, 0.55f, CreditsFormat, Ease.OutCubic);
+                    shownCredits = credits;
+                }
+                else
+                {
+                    creditsText.text = FormatCredits(credits);
+                }
             }
 
             if (slotsText != null && catalog != null)
             {
                 int used = data?.equippedTools?.Count ?? 0;
-                slotsText.text = $"SLOTS DE FERRAMENTA // {used}/{catalog.EquipSlots}";
+                slotsText.text = FormatSlots(used, catalog.EquipSlots);
             }
 
             foreach (ShopRow row in rows)
             {
                 RefreshRow(row, data);
             }
+
+            // O foco guarda a cor base dos rótulos; sem este aviso ele puxaria
+            // "EQUIPADA" de volta para o tom antigo.
+            MenuFocusAnimator.RefreshAll();
         }
 
         private void RefreshRow(ShopRow row, SaveGameData data)
@@ -186,6 +318,7 @@ namespace TW08.UI
             int owned = data?.GetToolCount(row.tool.ToolId) ?? 0;
             bool equipped = data?.equippedTools?.Any(
                 id => string.Equals(id, row.tool.ToolId, System.StringComparison.OrdinalIgnoreCase)) ?? false;
+            bool affordable = data != null && CanAfford(data.credits, row.tool.Price);
 
             if (row.nameText != null)
             {
@@ -194,41 +327,47 @@ namespace TW08.UI
 
             if (row.detailText != null)
             {
-                row.detailText.text = $"{row.tool.Description}\nESTOQUE {owned}   PREÇO {row.tool.Price}";
+                row.detailText.text = DetailLine(row.tool.Description, owned, row.tool.Price);
             }
 
             if (row.buyButton != null)
             {
-                row.buyButton.interactable = data != null && data.credits >= row.tool.Price;
+                row.buyButton.interactable = affordable;
                 Text label = row.buyButton.GetComponentInChildren<Text>();
                 if (label != null)
                 {
-                    label.text = $"COMPRAR // {row.tool.Price}";
+                    label.text = BuyLabel(row.tool.Price);
+                    label.color = affordable ? AffordableTint : UnaffordableTint;
                 }
             }
 
             if (row.equipButton != null)
             {
-                row.equipButton.interactable = owned > 0 || equipped;
+                row.equipButton.interactable = CanEquipRow(owned, equipped);
                 Text label = row.equipButton.GetComponentInChildren<Text>();
                 if (label != null)
                 {
-                    label.text = equipped ? "EQUIPADA" : "EQUIPAR";
+                    // A cor é escrita antes do RefreshAll para o foco adotá-la como
+                    // base. Um flash em cima dela seria absorvido como cor "normal".
+                    label.text = EquipLabel(equipped);
+                    label.color = equipped ? EquippedTint : EquipAvailableTint;
                 }
             }
         }
 
         private void Feedback(string message)
         {
-            if (feedbackText != null)
+            if (feedbackText == null)
             {
-                feedbackText.text = message;
+                return;
             }
+
+            Track(UIMotion.Typewriter(feedbackText, message, 78f));
         }
 
         public void GoBack()
         {
-            SceneLoader.TryLoadImmediate(backSceneName, "central de operações");
+            MenuTransition.Go(backSceneName, "central de operações");
         }
     }
 }
