@@ -40,6 +40,10 @@ namespace TW08.Puzzle
         [SerializeField, Min(1)] private int fogRadius = 2;
         [Tooltip("Cleaning robots. Each advances one step along its route per player command.")]
         [SerializeField] private List<PuzzlePatrolDefinition> patrols = new();
+        [Tooltip("Stepping on one of these flips every conveyor on the board.")]
+        [SerializeField] private List<GridCoordinate> directionButtons = new();
+        [Tooltip("Cells blocked until the shift reaches a given command count.")]
+        [SerializeField] private List<PuzzleTimedBlockDefinition> timedBlocks = new();
 
         [Header("Scoring")]
         [SerializeField, Min(0)] private int goldMoveLimit = 30;
@@ -68,6 +72,8 @@ namespace TW08.Puzzle
         public PuzzleFogMode FogMode => fogMode;
         public int FogRadius => Mathf.Max(1, fogRadius);
         public IReadOnlyList<PuzzlePatrolDefinition> Patrols => patrols;
+        public IReadOnlyList<GridCoordinate> DirectionButtons => directionButtons;
+        public IReadOnlyList<PuzzleTimedBlockDefinition> TimedBlocks => timedBlocks;
         public int GoldMoveLimit => goldMoveLimit;
         public int PlatinumMoveLimit => platinumMoveLimit;
         public bool AllowPowerUps => allowPowerUps;

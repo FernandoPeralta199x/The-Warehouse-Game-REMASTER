@@ -86,6 +86,8 @@ def main() -> int:
             "ice": [{"x": x, "y": y} for (x, y) in sorted(lv.ice)],
             "fakeWalls": obj.get("fakeWalls", []),
             "patrols": obj.get("patrols", []),
+            "directionButtons": obj.get("directionButtons", []),
+            "timedBlocks": obj.get("timedBlocks", []),
             "fogMode": obj.get("fogMode", "None"),
             "fogRadius": obj.get("fogRadius", 2),
             "conveyors": [

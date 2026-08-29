@@ -233,6 +233,41 @@ namespace TW08.Editor
                 EditorUtility.SetDirty(fakeWallView);
             }
 
+            // Botão de direção: marcado em âmbar, a cor que o jogo usa para
+            // "isto muda o maquinário".
+            foreach (GridCoordinate button in level.DirectionButtons ?? Array.Empty<GridCoordinate>())
+            {
+                TW08ProductionSceneUtility.CreateSprite(
+                    "Direction Button " + button, button.ToWorld(level.CellSize), catalog.Goal, 6,
+                    new Color(1f, 0.63f, 0.12f, 0.9f), Vector3.one * 0.55f);
+            }
+
+            // Portões temporizados: a vista os apaga quando o prazo vence.
+            if (level.TimedBlocks != null && level.TimedBlocks.Count > 0)
+            {
+                List<SpriteRenderer> gateRenderers = new();
+                foreach (PuzzleTimedBlockDefinition block in level.TimedBlocks)
+                {
+                    if (block == null) continue;
+
+                    GameObject gate = TW08ProductionSceneUtility.CreateSprite(
+                        "Timed Gate " + block.Position, block.Position.ToWorld(level.CellSize),
+                        catalog.Wall, 9, new Color(0.96f, 0.42f, 0.36f, 0.85f));
+                    if (gate.TryGetComponent(out SpriteRenderer gateRenderer))
+                    {
+                        gateRenderers.Add(gateRenderer);
+                    }
+                }
+
+                if (gateRenderers.Count > 0)
+                {
+                    PuzzleTimedGateView gateView = new GameObject("Timed Gates")
+                        .AddComponent<PuzzleTimedGateView>();
+                    gateView.Configure(runtime, gateRenderers);
+                    EditorUtility.SetDirty(gateView);
+                }
+            }
+
             // Robôs de limpeza: um sprite por rota, posicionado pela vista a
             // partir do relógio do tabuleiro.
             if (level.Patrols != null && level.Patrols.Count > 0)

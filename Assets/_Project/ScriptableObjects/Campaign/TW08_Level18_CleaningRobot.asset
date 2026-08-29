@@ -144,6 +144,8 @@ MonoBehaviour:
       y: 3
     - x: 5
       y: 2
+  directionButtons: []
+  timedBlocks: []
   goldMoveLimit: 47
   platinumMoveLimit: 36
   allowPowerUps: 1

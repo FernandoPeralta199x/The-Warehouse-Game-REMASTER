@@ -185,6 +185,8 @@ MonoBehaviour:
   fogMode: 0
   fogRadius: 2
   patrols: []
+  directionButtons: []
+  timedBlocks: []
   goldMoveLimit: 58
   platinumMoveLimit: 44
   allowPowerUps: 1

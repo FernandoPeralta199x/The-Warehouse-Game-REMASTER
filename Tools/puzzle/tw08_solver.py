@@ -54,6 +54,8 @@ class Level:
     ice: frozenset = frozenset()          # células de gelo
     conveyors: dict = field(default_factory=dict)  # (x,y) -> (dx,dy)
     patrols: tuple = ()   # tupla de rotas; cada rota é uma tupla de células
+    buttons: frozenset = frozenset()   # botões que invertem as esteiras
+    timed: tuple = ()     # ((x,y), abre_apos_comandos), ...)
     display_name: str = ""
 
     @property
@@ -66,6 +68,14 @@ class Level:
 
     def patrol_cells(self, step):
         return frozenset(route[step % len(route)] for route in self.patrols)
+
+    @property
+    def timed_horizon(self):
+        """Maior prazo. Depois dele o relógio não muda mais nada no tabuleiro."""
+        return max((deadline for _, deadline in self.timed), default=0)
+
+    def closed_timed(self, commands):
+        return frozenset(cell for cell, deadline in self.timed if commands < deadline)
 
 
 # ---------------------------------------------------------------- Unity YAML --
@@ -345,13 +355,16 @@ def parse_layout(obj: dict) -> Level:
             tuple((c["x"], c["y"]) for c in patrol["route"])
             for patrol in obj.get("patrols", []) if patrol.get("route")
         ),
+        buttons=frozenset((b["x"], b["y"]) for b in obj.get("directionButtons", [])),
+        timed=tuple(((b["x"], b["y"]), b["opensAfter"]) for b in obj.get("timedBlocks", [])),
         display_name=obj.get("displayName", ""),
     )
 
 
 # ------------------------------------------------------------------- Solver --
 
-def slide(level: Level, start, direction, crates, closed_doors, vacated=None, robots=frozenset()):
+def slide(level: Level, start, direction, crates, closed_doors, vacated=None,
+          robots=frozenset(), inverted=False):
     """Espelha PuzzleBoardModel.Slide.
 
     Gelo mantém a direção de entrada; esteira impõe a própria. Segue até pisar
@@ -365,6 +378,8 @@ def slide(level: Level, start, direction, crates, closed_doors, vacated=None, ro
         guard -= 1
         if current in level.conveyors:
             step = level.conveyors[current]
+            if inverted:
+                step = (-step[0], -step[1])
         elif current in level.ice:
             step = direction
         else:
@@ -509,19 +524,27 @@ def solve(level: Level, max_states=3_000_000):
     # o robô estar em dois lugares ao mesmo tempo.
     period = level.patrol_period if level.patrols else 1
 
-    def key(player, crates, phase=0):
-        return (player, tuple(sorted((p, k) for p, k in crates.items())), phase)
+    # O relógio dos prazos só importa até o último deles: depois disso o
+    # tabuleiro não muda mais, e saturar o contador mantém o estado finito.
+    horizon = level.timed_horizon
 
-    start_key = key(level.player, start_crates, 0)
+    def clock(commands):
+        return commands if commands < horizon else horizon
+
+    def key(player, crates, phase=0, inverted=False, commands=0):
+        return (player, tuple(sorted((p, k) for p, k in crates.items())),
+                phase, inverted, clock(commands))
+
+    start_key = key(level.player, start_crates, 0, False, 0)
     dist = {start_key: 0}
     prev = {}
     heap = [(heuristic(start_crates), 0, 0, start_key, level.player,
-             tuple(sorted((p, k) for p, k in start_crates.items())), 0)]
+             tuple(sorted((p, k) for p, k in start_crates.items())), 0, False, 0)]
     counter = 0
     expanded = 0
 
     while heap:
-        _, cost, _, k, player, crates_t, phase = heapq.heappop(heap)
+        _, cost, _, k, player, crates_t, phase, inverted, commands = heapq.heappop(heap)
         if dist.get(k, 1 << 60) < cost:
             continue
         crates = dict(crates_t)
@@ -549,6 +572,12 @@ def solve(level: Level, max_states=3_000_000):
         closed_doors = door_state(level, player, crates)
         next_phase = (phase + 1) % period
         robots = level.patrol_cells(phase + 1) if level.patrols else frozenset()
+        next_commands = commands + 1
+
+        # Prazos são avaliados com o relógio de ANTES do comando: a célula só
+        # libera no comando seguinte ao vencimento, igual ao IsBlocked do motor.
+        if level.timed:
+            closed_doors = closed_doors | level.closed_timed(commands)
 
         for dname, (dx, dy) in DIRS.items():
             nx, ny = player[0] + dx, player[1] + dy
@@ -569,7 +598,8 @@ def solve(level: Level, max_states=3_000_000):
                     continue
                 # A carga desliza antes de o jogador entrar; a célula que ela
                 # deixou conta como livre durante o próprio deslize.
-                cfinal = slide(level, cpos, (dx, dy), crates, closed_doors, vacated=npos, robots=robots)
+                cfinal = slide(level, cpos, (dx, dy), crates, closed_doors, vacated=npos,
+                               robots=robots, inverted=inverted)
                 if cfinal in robots:
                     continue
                 if cfinal not in live:
@@ -580,22 +610,26 @@ def solve(level: Level, max_states=3_000_000):
                 pushed = True
                 if corner_deadlock(level, new_crates):
                     continue
-                pfinal = slide(level, npos, (dx, dy), new_crates, closed_doors, robots=robots)
+                pfinal = slide(level, npos, (dx, dy), new_crates, closed_doors,
+                               robots=robots, inverted=inverted)
             else:
-                pfinal = slide(level, npos, (dx, dy), crates, closed_doors, robots=robots)
+                pfinal = slide(level, npos, (dx, dy), crates, closed_doors,
+                               robots=robots, inverted=inverted)
 
             if pfinal in robots:
                 continue
 
             npos = pfinal
-            nk = key(npos, new_crates, next_phase)
+            next_inverted = inverted != (npos in level.buttons)
+            nk = key(npos, new_crates, next_phase, next_inverted, next_commands)
             ncost = cost + step_cost
             if ncost < dist.get(nk, 1 << 60):
                 dist[nk] = ncost
                 prev[nk] = (k, dname, pushed)
                 counter += 1
                 heapq.heappush(heap, (ncost + heuristic(new_crates), ncost, counter, nk, npos,
-                                      tuple(sorted((p, kk) for p, kk in new_crates.items())), next_phase))
+                                      tuple(sorted((p, kk) for p, kk in new_crates.items())),
+                                      next_phase, next_inverted, next_commands))
 
     return {"solvable": False, "reason": "exhausted", "states": expanded}
 
@@ -606,9 +640,12 @@ def replay(level: Level, solution: str):
     crates = dict(level.crates)
     cost = 0
     commands = 0
+    inverted = False
     for ch in solution:
         dx, dy = DIRS[ch]
         closed = door_state(level, player, crates)
+        if level.timed:
+            closed = closed | level.closed_timed(commands)
         commands += 1
         robots = level.patrol_cells(commands) if level.patrols else frozenset()
         npos = (player[0] + dx, player[1] + dy)
@@ -625,21 +662,26 @@ def replay(level: Level, solution: str):
                 return False, f"empurrão inválido para {cpos}"
             if cpos in robots:
                 return False, f"robô bloqueia a carga em {cpos}"
-            cfinal = slide(level, cpos, (dx, dy), crates, closed, vacated=npos, robots=robots)
+            cfinal = slide(level, cpos, (dx, dy), crates, closed, vacated=npos,
+                           robots=robots, inverted=inverted)
             if cfinal in robots:
                 return False, f"carga pararia sobre robô em {cfinal}"
             crate_kind = crates.pop(npos)
             crates[cfinal] = crate_kind
             cost += 2 if npos in level.costly else 1
-            player = slide(level, npos, (dx, dy), crates, closed, robots=robots)
+            player = slide(level, npos, (dx, dy), crates, closed, robots=robots, inverted=inverted)
             if player in robots:
                 return False, f"jogador pararia sobre robô em {player}"
+            if player in level.buttons:
+                inverted = not inverted
             continue
 
         cost += 2 if npos in level.costly else 1
-        player = slide(level, npos, (dx, dy), crates, closed, robots=robots)
+        player = slide(level, npos, (dx, dy), crates, closed, robots=robots, inverted=inverted)
         if player in robots:
             return False, f"jogador pararia sobre robô em {player}"
+        if player in level.buttons:
+            inverted = not inverted
     if not is_complete(level, crates):
         return False, "solução não completa o nível"
     return True, cost

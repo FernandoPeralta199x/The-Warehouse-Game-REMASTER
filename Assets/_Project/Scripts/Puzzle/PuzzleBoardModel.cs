@@ -14,6 +14,8 @@ namespace TW08.Puzzle
         private readonly Dictionary<GridCoordinate, GridCoordinate> conveyors;
         private readonly HashSet<GridCoordinate> dynamicBlockedCells = new();
         private readonly List<PuzzlePatrolDefinition> patrols;
+        private readonly HashSet<GridCoordinate> directionButtons;
+        private readonly List<PuzzleTimedBlockDefinition> timedBlocks;
         private readonly Dictionary<GridCoordinate, PuzzleEntityKind> goalRequirements;
         private readonly Dictionary<GridCoordinate, string> crateByPosition;
         private readonly Dictionary<string, PuzzleEntityKind> crateKinds;
@@ -29,8 +31,14 @@ namespace TW08.Puzzle
         public IReadOnlyDictionary<GridCoordinate, GridCoordinate> Conveyors => conveyors;
         public IReadOnlyList<PuzzlePatrolDefinition> Patrols => patrols;
 
-        /// <summary>Comandos executados. É o relógio que move os robôs.</summary>
+        /// <summary>Comandos executados. É o relógio que move os robôs e abre os prazos.</summary>
         public int CommandCount { get; private set; }
+
+        /// <summary>True quando um botão de direção já foi acionado um número ímpar de vezes.</summary>
+        public bool ConveyorsInverted { get; private set; }
+
+        public IReadOnlyCollection<GridCoordinate> DirectionButtons => directionButtons;
+        public IReadOnlyList<PuzzleTimedBlockDefinition> TimedBlocks => timedBlocks;
         public IReadOnlyCollection<GridCoordinate> DynamicBlockedCells => dynamicBlockedCells;
         public IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> GoalRequirements => goalRequirements;
         public IReadOnlyDictionary<GridCoordinate, string> Crates => crateByPosition;
@@ -53,7 +61,9 @@ namespace TW08.Puzzle
                 level.Conveyors
                     .Where(conveyor => conveyor != null)
                     .ToDictionary(conveyor => conveyor.Position, conveyor => conveyor.Step),
-                level.Patrols)
+                level.Patrols,
+                level.DirectionButtons,
+                level.TimedBlocks)
         {
         }
 
@@ -69,7 +79,9 @@ namespace TW08.Puzzle
             IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> goalRequirements = null,
             IEnumerable<GridCoordinate> iceCells = null,
             IReadOnlyDictionary<GridCoordinate, GridCoordinate> conveyors = null,
-            IEnumerable<PuzzlePatrolDefinition> patrols = null)
+            IEnumerable<PuzzlePatrolDefinition> patrols = null,
+            IEnumerable<GridCoordinate> directionButtons = null,
+            IEnumerable<PuzzleTimedBlockDefinition> timedBlocks = null)
         {
             Width = Guard.Positive(width, nameof(width));
             Height = Guard.Positive(height, nameof(height));
@@ -82,6 +94,9 @@ namespace TW08.Puzzle
                 : new Dictionary<GridCoordinate, GridCoordinate>();
             this.patrols = new List<PuzzlePatrolDefinition>(
                 (patrols ?? Array.Empty<PuzzlePatrolDefinition>()).Where(patrol => patrol != null && patrol.Route.Count > 0));
+            this.directionButtons = new HashSet<GridCoordinate>(directionButtons ?? Array.Empty<GridCoordinate>());
+            this.timedBlocks = new List<PuzzleTimedBlockDefinition>(
+                (timedBlocks ?? Array.Empty<PuzzleTimedBlockDefinition>()).Where(block => block != null));
             this.goalRequirements = goalRequirements != null
                 ? new Dictionary<GridCoordinate, PuzzleEntityKind>(goalRequirements)
                 : new Dictionary<GridCoordinate, PuzzleEntityKind>();
@@ -152,6 +167,7 @@ namespace TW08.Puzzle
                 PlayerPosition = landing;
                 MoveCount += moveCost;
                 CommandCount++;
+                ApplyDirectionButton(landing);
                 move = new PuzzleMove(previousPlayer, PlayerPosition, moveCost);
                 return true;
             }
@@ -189,8 +205,22 @@ namespace TW08.Puzzle
             PlayerPosition = playerFinal;
             MoveCount += moveCost;
             CommandCount++;
+            ApplyDirectionButton(playerFinal);
             move = new PuzzleMove(previousPlayer, PlayerPosition, crateId, destination, crateFinal, moveCost);
             return true;
+        }
+
+        /// <summary>
+        /// O botão dispara ao FIM do comando, sobre a célula onde o operador
+        /// parou. Inverter no meio do deslize mudaria a correia enquanto a carga
+        /// ainda a percorre, e o resultado deixaria de ser legível.
+        /// </summary>
+        private void ApplyDirectionButton(GridCoordinate landing)
+        {
+            if (directionButtons.Contains(landing))
+            {
+                ConveyorsInverted = !ConveyorsInverted;
+            }
         }
 
         /// <summary>Células ocupadas pelos robôs após <paramref name="step"/> comandos.</summary>
@@ -232,7 +262,10 @@ namespace TW08.Puzzle
                 GridCoordinate step;
                 if (conveyors.TryGetValue(current, out GridCoordinate conveyorStep))
                 {
-                    step = conveyorStep;
+                    // O botão de direção inverte a correia inteira, não só o trecho.
+                    step = ConveyorsInverted
+                        ? new GridCoordinate(-conveyorStep.X, -conveyorStep.Y)
+                        : conveyorStep;
                 }
                 else if (iceCells.Contains(current))
                 {
@@ -297,6 +330,10 @@ namespace TW08.Puzzle
                 crateByPosition.Add(move.CrateFrom, move.CrateId);
             }
 
+            // O toggle é derivado de onde o comando terminou, então desfazer é
+            // reaplicar a mesma inversão — não é preciso guardá-lo no movimento.
+            ApplyDirectionButton(move.PlayerTo);
+
             PlayerPosition = move.PlayerFrom;
             MoveCount = Math.Max(0, MoveCount - Math.Max(1, move.MoveCost));
             CommandCount = Math.Max(0, CommandCount - 1);
@@ -340,7 +377,20 @@ namespace TW08.Puzzle
 
         public bool IsBlocked(GridCoordinate cell)
         {
-            return walls.Contains(cell) || dynamicBlockedCells.Contains(cell);
+            if (walls.Contains(cell) || dynamicBlockedCells.Contains(cell))
+            {
+                return true;
+            }
+
+            foreach (PuzzleTimedBlockDefinition block in timedBlocks)
+            {
+                if (block.Position == cell && block.IsClosedAt(CommandCount))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public bool IsGoal(GridCoordinate cell)

@@ -74,15 +74,15 @@
       "id": "TW08_Level17_AutomaticRoute",
       "displayName": "Rota Automática",
       "board": "10x7",
-      "crates": 3,
-      "goals": 3,
+      "crates": 2,
+      "goals": 2,
       "solvable": true,
-      "optimalCost": 19,
-      "pushes": 7,
-      "solution": "RUUDRDLDRUUURRRRURD",
-      "states": 5733,
+      "optimalCost": 20,
+      "pushes": 2,
+      "solution": "RRRRRRRLLLLLLLURDLDR",
+      "states": 997,
       "replayOk": true,
-      "replayCost": 19
+      "replayCost": 20
     },
     {
       "id": "TW08_Level18_CleaningRobot",
@@ -343,12 +343,12 @@
       "crates": 5,
       "goals": 5,
       "solvable": true,
-      "optimalCost": 39,
-      "pushes": 19,
-      "solution": "DRRRLLLUURRRLDRRRRLLLLDLDRRLULLURRRRR",
-      "states": 179757,
+      "optimalCost": 41,
+      "pushes": 21,
+      "solution": "DRRRLLLUURDURRLDRRRRLLLLLDLDRRRLULURRRR",
+      "states": 225979,
       "replayOk": true,
-      "replayCost": 39
+      "replayCost": 41
     },
     {
       "id": "TW08_Secret09_EliasLastShift",

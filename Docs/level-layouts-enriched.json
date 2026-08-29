@@ -186,6 +186,8 @@
       ],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -403,6 +405,8 @@
       ],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -614,6 +618,8 @@
       ],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -887,6 +893,8 @@
       ],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -1105,6 +1113,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [
@@ -1164,7 +1174,7 @@
       "height": 7,
       "player": {
         "x": 1,
-        "y": 2
+        "y": 3
       },
       "walls": [
         {
@@ -1225,7 +1235,11 @@
         },
         {
           "x": 4,
-          "y": 3
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 5
         },
         {
           "x": 4,
@@ -1234,6 +1248,14 @@
         {
           "x": 5,
           "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 5
         },
         {
           "x": 5,
@@ -1249,11 +1271,23 @@
         },
         {
           "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
           "y": 6
         },
         {
           "x": 7,
           "y": 0
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 5
         },
         {
           "x": 7,
@@ -1262,6 +1296,14 @@
         {
           "x": 8,
           "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 5
         },
         {
           "x": 8,
@@ -1298,54 +1340,67 @@
       ],
       "goals": [
         {
-          "x": 1,
-          "y": 5
+          "x": 7,
+          "y": 2
         },
         {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 8,
-          "y": 3
+          "x": 7,
+          "y": 4
         }
       ],
       "costly": [],
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [
         {
-          "x": 2,
-          "y": 5,
+          "x": 3,
+          "y": 2,
           "dir": "Left"
         },
         {
           "x": 3,
-          "y": 5,
+          "y": 4,
           "dir": "Left"
         },
         {
           "x": 4,
           "y": 2,
-          "dir": "Right"
+          "dir": "Left"
         },
         {
           "x": 4,
-          "y": 5,
+          "y": 4,
           "dir": "Left"
         },
         {
           "x": 5,
           "y": 2,
-          "dir": "Right"
+          "dir": "Left"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "dir": "Left"
         },
         {
           "x": 6,
           "y": 2,
-          "dir": "Right"
+          "dir": "Left"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "dir": "Left"
         }
       ],
       "crates": [
@@ -1358,19 +1413,14 @@
           "x": 2,
           "y": 4,
           "kind": "Crate"
-        },
-        {
-          "x": 6,
-          "y": 4,
-          "kind": "Crate"
         }
       ],
       "goalRequirements": [],
       "switchGroups": [],
-      "optimalCost": 19,
-      "optimalPushes": 7,
-      "goldMoveLimit": 25,
-      "platinumMoveLimit": 19,
+      "optimalCost": 20,
+      "optimalPushes": 2,
+      "goldMoveLimit": 26,
+      "platinumMoveLimit": 20,
       "allowPowerUps": true
     },
     {
@@ -1580,6 +1630,8 @@
           ]
         }
       ],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -1828,6 +1880,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -2132,6 +2186,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [
@@ -2389,6 +2445,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -2603,6 +2661,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -2872,6 +2932,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -3152,6 +3214,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -3451,6 +3515,8 @@
         }
       ],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "Memory",
       "fogRadius": 3,
       "conveyors": [],
@@ -3767,6 +3833,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "Memory",
       "fogRadius": 3,
       "conveyors": [],
@@ -4034,6 +4102,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -4302,6 +4372,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -4597,6 +4669,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -4854,6 +4928,8 @@
         }
       ],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -5075,6 +5151,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -5346,6 +5424,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -5610,6 +5690,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -5850,6 +5932,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "Flashlight",
       "fogRadius": 2,
       "conveyors": [],
@@ -6163,6 +6247,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -6428,6 +6514,14 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [
+        {
+          "x": 5,
+          "y": 3,
+          "opensAfter": 16
+        }
+      ],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -6491,10 +6585,10 @@
           ]
         }
       ],
-      "optimalCost": 39,
-      "optimalPushes": 19,
-      "goldMoveLimit": 51,
-      "platinumMoveLimit": 39,
+      "optimalCost": 41,
+      "optimalPushes": 21,
+      "goldMoveLimit": 54,
+      "platinumMoveLimit": 41,
       "allowPowerUps": false
     },
     {
@@ -6714,6 +6808,8 @@
       "ice": [],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],
@@ -7009,6 +7105,8 @@
       ],
       "fakeWalls": [],
       "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
       "fogMode": "None",
       "fogRadius": 2,
       "conveyors": [],

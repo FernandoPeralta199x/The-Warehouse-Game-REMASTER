@@ -26,7 +26,7 @@ MonoBehaviour:
   cellSize: 1
   playerStart:
     x: 1
-    y: 2
+    y: 3
   walls:
   - x: 0
     y: 0
@@ -57,11 +57,17 @@ MonoBehaviour:
   - x: 4
     y: 0
   - x: 4
-    y: 3
+    y: 1
+  - x: 4
+    y: 5
   - x: 4
     y: 6
   - x: 5
     y: 0
+  - x: 5
+    y: 1
+  - x: 5
+    y: 5
   - x: 5
     y: 6
   - x: 6
@@ -69,13 +75,23 @@ MonoBehaviour:
   - x: 6
     y: 1
   - x: 6
+    y: 5
+  - x: 6
     y: 6
   - x: 7
     y: 0
+  - x: 7
+    y: 1
+  - x: 7
+    y: 5
   - x: 7
     y: 6
   - x: 8
     y: 0
+  - x: 8
+    y: 1
+  - x: 8
+    y: 5
   - x: 8
     y: 6
   - x: 9
@@ -93,12 +109,10 @@ MonoBehaviour:
   - x: 9
     y: 6
   goals:
-  - x: 1
-    y: 5
-  - x: 4
-    y: 1
-  - x: 8
-    y: 3
+  - x: 7
+    y: 2
+  - x: 7
+    y: 4
   goalRequirements: []
   crates:
   - id: crate-01
@@ -111,43 +125,50 @@ MonoBehaviour:
     position:
       x: 2
       y: 4
-  - id: crate-03
-    kind: 1
-    position:
-      x: 6
-      y: 4
   costlyCells: []
   switchGroups: []
   iceCells: []
   conveyors:
   - position:
-      x: 2
-      y: 5
+      x: 3
+      y: 2
     direction: 2
   - position:
       x: 3
-      y: 5
+      y: 4
     direction: 2
   - position:
       x: 4
       y: 2
-    direction: 3
+    direction: 2
   - position:
       x: 4
-      y: 5
+      y: 4
     direction: 2
   - position:
       x: 5
       y: 2
-    direction: 3
+    direction: 2
+  - position:
+      x: 5
+      y: 4
+    direction: 2
   - position:
       x: 6
       y: 2
-    direction: 3
+    direction: 2
+  - position:
+      x: 6
+      y: 4
+    direction: 2
   fakeWalls: []
   fogMode: 0
   fogRadius: 2
   patrols: []
-  goldMoveLimit: 25
-  platinumMoveLimit: 19
+  directionButtons:
+  - x: 8
+    y: 3
+  timedBlocks: []
+  goldMoveLimit: 26
+  platinumMoveLimit: 20
   allowPowerUps: 1

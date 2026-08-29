@@ -144,13 +144,51 @@ Estas tags descrevem o desenho da fase e não pedem código: `narrow_corridor`,
 `three_rooms`, `false_route`, `move_order`, `precision`, `reverse_planning`,
 `isolated_goal`, `marked_crate`, `tool_crate` e afins. Estão corretas como estão.
 
-Continuam **não implementadas** como mecânica:
+Só uma tag segue sendo etiqueta de propósito:
 
-- `direction_button` (L17) — esteira que troca de sentido. A fase funciona com
-  correias fixas e está provada assim; um botão que inverte tudo dobra o estado
-  do solver, e o ganho de design não pagou esse custo agora.
-- `temporary_block` (S08) — bloqueio que some sozinho. Uma porta por contagem de
-  comandos colocaria o relógio no estado do solver, como o robô, mas na fase de
-  hoje a carga-ferramenta já cumpre o papel de bloqueio provisório.
 - `n8_jack` (L22) — o Macaco N-8 é ferramenta de loja, e a bíblia de design o
   exclui do MVP. A etiqueta está certa como está.
+
+## Botão de direção (`direction_button`)
+
+Pisar no botão **inverte todas as esteiras do tabuleiro**, e não só o trecho sob
+os pés. O disparo acontece ao FIM do comando, sobre a célula onde o operador
+parou: inverter no meio do deslize mudaria a correia enquanto a carga ainda a
+percorre, e o resultado deixaria de ser legível.
+
+Desfazer reaplica a mesma inversão. Como o efeito é derivado de onde o comando
+terminou, não foi preciso guardá-lo no movimento — o `PuzzleMove` continua
+intacto.
+
+L17 foi redesenhada em torno dele: as correias apontam **para longe** dos alvos,
+então empurrar carga no sentido padrão a devolve ao ponto de partida. A solução
+ótima começa com sete passos direto ao botão, antes de qualquer empurrão.
+
+## Portão temporizado (`temporary_block`)
+
+Célula fechada até o turno atingir um número de comandos; a partir daí fica
+aberta para sempre.
+
+Modelado como **prazo, não como duração**, e é isso que mantém o estado finito: o
+solver só precisa saber se o prazo já venceu. O relógio no estado é saturado no
+maior prazo da fase — depois dele o tabuleiro não muda mais, então contar além
+seria multiplicar estados à toa.
+
+Na secreta 08 o portão fecha o corredor central, por onde tudo passa. É o
+"planejamento reverso" que a fase declarava: arrumar o que der antes de o portão
+abrir.
+
+## O padrão que se repetiu quatro vezes
+
+Robô, botão e portão tiveram a mesma história: **a primeira colocação não mudou o
+custo ótimo**. Quando o número não se mexe, o gimmick está decorando a fase, não
+participando dela — ele existe no dado e é irrelevante no jogo.
+
+| Fase | Primeira tentativa | Depois de reposicionar |
+|---|---|---|
+| L18 robô | 34 (igual ao sem robô) | **36** |
+| L17 botão | 19 (igual ao sem botão) | **20** |
+| S08 portão | 39 (igual ao sem portão) | **41** |
+
+O solver virou instrumento de crítica de design, e não só gate de
+solvabilidade: ele diz quando uma mecânica é enfeite.

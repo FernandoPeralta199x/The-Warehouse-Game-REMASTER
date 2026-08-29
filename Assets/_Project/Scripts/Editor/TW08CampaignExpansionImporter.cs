@@ -40,6 +40,9 @@ namespace TW08.Editor
         private sealed class PatrolDto { public string id; public List<CoordDto> route; }
 
         [Serializable]
+        private sealed class TimedBlockDto { public int x; public int y; public int opensAfter; }
+
+        [Serializable]
         private sealed class SwitchGroupDto
         {
             public string id;
@@ -67,6 +70,8 @@ namespace TW08.Editor
             public List<ConveyorDto> conveyors;
             public List<CoordDto> fakeWalls;
             public List<PatrolDto> patrols;
+            public List<CoordDto> directionButtons;
+            public List<TimedBlockDto> timedBlocks;
             public string fogMode;
             public int fogRadius;
             public List<CrateDto> crates;
@@ -173,6 +178,18 @@ namespace TW08.Editor
             WriteCoordList(so.FindProperty("fakeWalls"), dto.fakeWalls);
             so.FindProperty("fogMode").enumValueIndex = (int)ParseFog(dto.fogMode);
             so.FindProperty("fogRadius").intValue = Mathf.Max(1, dto.fogRadius);
+
+            WriteCoordList(so.FindProperty("directionButtons"), dto.directionButtons);
+
+            SerializedProperty timedList = so.FindProperty("timedBlocks");
+            timedList.arraySize = dto.timedBlocks?.Count ?? 0;
+            for (int i = 0; i < timedList.arraySize; i++)
+            {
+                TimedBlockDto block = dto.timedBlocks[i];
+                SerializedProperty element = timedList.GetArrayElementAtIndex(i);
+                WriteCoord(element.FindPropertyRelative("position"), block.x, block.y);
+                element.FindPropertyRelative("opensAfterCommands").intValue = Mathf.Max(1, block.opensAfter);
+            }
 
             SerializedProperty patrolList = so.FindProperty("patrols");
             patrolList.arraySize = dto.patrols?.Count ?? 0;
