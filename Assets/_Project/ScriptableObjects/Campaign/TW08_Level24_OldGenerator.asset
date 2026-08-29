@@ -186,6 +186,6 @@ MonoBehaviour:
   patrols: []
   directionButtons: []
   timedBlocks: []
-  goldMoveLimit: 58
-  platinumMoveLimit: 44
+  goldMoveLimit: 75
+  platinumMoveLimit: 57
   allowPowerUps: 1

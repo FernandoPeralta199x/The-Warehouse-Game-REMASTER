@@ -597,10 +597,17 @@ def solve(level: Level, max_states=3_000_000):
                     continue
                 if cpos in level.walls or cpos in closed_doors or cpos in crates or cpos in robots:
                     continue
-                # A carga desliza antes de o jogador entrar; a célula que ela
-                # deixou conta como livre durante o próprio deslize.
-                cfinal = slide(level, cpos, (dx, dy), crates, closed_doors, vacated=npos,
-                               robots=robots, inverted=inverted)
+                # Carga pesada custa um movimento a mais e não escorrega:
+                # espelha PuzzleBoardModel.TryMove.
+                heavy = crates[npos] == 2
+                if heavy:
+                    step_cost += 1
+                    cfinal = cpos
+                else:
+                    # A carga desliza antes de o jogador entrar; a célula que ela
+                    # deixou conta como livre durante o próprio deslize.
+                    cfinal = slide(level, cpos, (dx, dy), crates, closed_doors, vacated=npos,
+                                   robots=robots, inverted=inverted)
                 if cfinal in robots:
                     continue
                 if cfinal not in live:
@@ -665,13 +672,14 @@ def replay(level: Level, solution: str):
                 return False, f"empurrão inválido para {cpos}"
             if cpos in robots:
                 return False, f"robô bloqueia a carga em {cpos}"
-            cfinal = slide(level, cpos, (dx, dy), crates, closed, vacated=npos,
-                           robots=robots, inverted=inverted)
+            heavy = crates[npos] == 2
+            cfinal = cpos if heavy else slide(level, cpos, (dx, dy), crates, closed, vacated=npos,
+                                              robots=robots, inverted=inverted)
             if cfinal in robots:
                 return False, f"carga pararia sobre robô em {cfinal}"
             crate_kind = crates.pop(npos)
             crates[cfinal] = crate_kind
-            cost += 2 if npos in level.costly else 1
+            cost += (2 if npos in level.costly else 1) + (1 if heavy else 0)
             player = slide(level, npos, (dx, dy), crates, closed, robots=robots, inverted=inverted)
             if player in robots:
                 return False, f"jogador pararia sobre robô em {player}"

@@ -692,6 +692,12 @@ namespace TW08.Editor
                         button.gameObject.AddComponent<MenuPressFeedback>();
                     }
                 }
+
+                // Som ao mudar o foco: navegar em silêncio parece tela travada.
+                if (refs.Canvas.GetComponent<MenuNavigationAudio>() == null)
+                {
+                    refs.Canvas.gameObject.AddComponent<MenuNavigationAudio>();
+                }
             }
 
             EditorUtility.SetDirty(focus);

@@ -2485,10 +2485,10 @@
         }
       ],
       "switchGroups": [],
-      "optimalCost": 47,
+      "optimalCost": 55,
       "optimalPushes": 18,
-      "goldMoveLimit": 62,
-      "platinumMoveLimit": 47,
+      "goldMoveLimit": 72,
+      "platinumMoveLimit": 55,
       "allowPowerUps": true
     },
     {
@@ -2988,10 +2988,10 @@
           ]
         }
       ],
-      "optimalCost": 44,
+      "optimalCost": 57,
       "optimalPushes": 20,
-      "goldMoveLimit": 58,
-      "platinumMoveLimit": 44,
+      "goldMoveLimit": 75,
+      "platinumMoveLimit": 57,
       "allowPowerUps": true
     },
     {
@@ -3279,10 +3279,10 @@
           ]
         }
       ],
-      "optimalCost": 46,
+      "optimalCost": 52,
       "optimalPushes": 21,
-      "goldMoveLimit": 60,
-      "platinumMoveLimit": 46,
+      "goldMoveLimit": 68,
+      "platinumMoveLimit": 52,
       "allowPowerUps": false
     },
     {
@@ -4441,10 +4441,10 @@
           ]
         }
       ],
-      "optimalCost": 48,
+      "optimalCost": 54,
       "optimalPushes": 22,
-      "goldMoveLimit": 63,
-      "platinumMoveLimit": 48,
+      "goldMoveLimit": 71,
+      "platinumMoveLimit": 54,
       "allowPowerUps": false
     },
     {
@@ -4739,10 +4739,10 @@
           ]
         }
       ],
-      "optimalCost": 56,
+      "optimalCost": 62,
       "optimalPushes": 25,
-      "goldMoveLimit": 73,
-      "platinumMoveLimit": 56,
+      "goldMoveLimit": 81,
+      "platinumMoveLimit": 62,
       "allowPowerUps": false
     },
     {
@@ -5191,10 +5191,10 @@
         }
       ],
       "switchGroups": [],
-      "optimalCost": 48,
+      "optimalCost": 58,
       "optimalPushes": 18,
-      "goldMoveLimit": 63,
-      "platinumMoveLimit": 48,
+      "goldMoveLimit": 76,
+      "platinumMoveLimit": 58,
       "allowPowerUps": true
     },
     {
@@ -5755,10 +5755,10 @@
           ]
         }
       ],
-      "optimalCost": 44,
+      "optimalCost": 50,
       "optimalPushes": 21,
-      "goldMoveLimit": 58,
-      "platinumMoveLimit": 44,
+      "goldMoveLimit": 65,
+      "platinumMoveLimit": 50,
       "allowPowerUps": true
     },
     {
@@ -6585,10 +6585,10 @@
           ]
         }
       ],
-      "optimalCost": 41,
+      "optimalCost": 47,
       "optimalPushes": 21,
-      "goldMoveLimit": 54,
-      "platinumMoveLimit": 41,
+      "goldMoveLimit": 62,
+      "platinumMoveLimit": 47,
       "allowPowerUps": false
     },
     {
@@ -6877,10 +6877,10 @@
           ]
         }
       ],
-      "optimalCost": 40,
+      "optimalCost": 46,
       "optimalPushes": 19,
-      "goldMoveLimit": 52,
-      "platinumMoveLimit": 40,
+      "goldMoveLimit": 60,
+      "platinumMoveLimit": 46,
       "allowPowerUps": false
     },
     {
@@ -7179,10 +7179,10 @@
           ]
         }
       ],
-      "optimalCost": 46,
-      "optimalPushes": 21,
-      "goldMoveLimit": 60,
-      "platinumMoveLimit": 46,
+      "optimalCost": 56,
+      "optimalPushes": 23,
+      "goldMoveLimit": 73,
+      "platinumMoveLimit": 56,
       "allowPowerUps": false
     },
     {

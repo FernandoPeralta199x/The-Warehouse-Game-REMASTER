@@ -12,13 +12,18 @@ namespace TW08.Editor
     {
         internal const string AudioRoot = "Assets/_Project/Audio/GeneratedStarter";
         internal const string DataRoot = "Assets/_Project/Audio/ScriptableObjects/Generated";
-        internal const string CatalogPath = DataRoot + "/TW08_AudioCatalog.asset";
+
+        // O catálogo mora em Resources para que menu, loja e narrativa possam
+        // alcançá-lo sem referência serializada — eles não têm campo para isso.
+        internal const string CatalogRoot = "Assets/_Project/Audio/Resources";
+        internal const string CatalogPath = CatalogRoot + "/TW08_AudioCatalog.asset";
         private const int SampleRate = 22050;
 
         internal static TW08AudioCatalog EnsureAll()
         {
             TW08ProductionSceneUtility.EnsureFolder(AudioRoot);
             TW08ProductionSceneUtility.EnsureFolder(DataRoot);
+            TW08ProductionSceneUtility.EnsureFolder(CatalogRoot);
 
             AudioClip ui = EnsureTone("ui_confirm.wav", 0.08f, 660f, 990f, 0.28f, false);
             AudioClip step = EnsureTone("puzzle_step.wav", 0.07f, 110f, 88f, 0.22f, true);

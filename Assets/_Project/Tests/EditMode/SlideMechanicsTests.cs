@@ -283,6 +283,76 @@ namespace TW08.Tests.EditMode
                 "Comando recusado não pode deixar a carga deslocada.");
         }
 
+        // ---------------------------------------------------- Carga pesada --
+
+        [Test]
+        public void HeavyCargoCostsAnExtraMoveToPush()
+        {
+            PuzzleBoardModel heavy = BuildWithKind(PuzzleEntityKind.HeavyCrate);
+            PuzzleBoardModel light = BuildWithKind(PuzzleEntityKind.Crate);
+
+            heavy.TryMove(GridCoordinate.Right, out _);
+            light.TryMove(GridCoordinate.Right, out _);
+
+            // Até esta regra, "pesada" era só uma exigência de doca: a carga se
+            // movia idêntica à comum e o Setor 05 chamava-se Manutenção Pesada
+            // sem nada nele pesar.
+            Assert.AreEqual(light.MoveCount + 1, heavy.MoveCount);
+        }
+
+        [Test]
+        public void HeavyCargoDoesNotSlideOnIce()
+        {
+            PuzzleBoardModel board = BuildWithKind(
+                PuzzleEntityKind.HeavyCrate,
+                ice: new[] { new GridCoordinate(4, 1), new GridCoordinate(5, 1) });
+
+            Assert.IsTrue(board.TryMove(GridCoordinate.Right, out PuzzleMove move));
+
+            // A carga comum correria até o fim do gelo; a pesada para onde foi
+            // posta. É o que faz o peso conversar com as outras mecânicas.
+            Assert.AreEqual(new GridCoordinate(4, 1), move.CrateTo);
+        }
+
+        [Test]
+        public void HeavyCargoIgnoresTheConveyor()
+        {
+            PuzzleBoardModel board = BuildWithKind(
+                PuzzleEntityKind.HeavyCrate,
+                conveyors: new Dictionary<GridCoordinate, GridCoordinate>
+                {
+                    [new GridCoordinate(4, 1)] = GridCoordinate.Right,
+                    [new GridCoordinate(5, 1)] = GridCoordinate.Right
+                });
+
+            Assert.IsTrue(board.TryMove(GridCoordinate.Right, out PuzzleMove move));
+            Assert.AreEqual(new GridCoordinate(4, 1), move.CrateTo, "A correia não carrega peso.");
+        }
+
+        private static PuzzleBoardModel BuildWithKind(
+            PuzzleEntityKind kind,
+            IEnumerable<GridCoordinate> ice = null,
+            IReadOnlyDictionary<GridCoordinate, GridCoordinate> conveyors = null)
+        {
+            List<GridCoordinate> walls = new();
+            for (int x = 0; x < 8; x++)
+            {
+                walls.Add(new GridCoordinate(x, 0));
+                walls.Add(new GridCoordinate(x, 2));
+            }
+
+            walls.Add(new GridCoordinate(0, 1));
+            walls.Add(new GridCoordinate(7, 1));
+
+            return new PuzzleBoardModel(
+                8, 3, walls,
+                new[] { new GridCoordinate(6, 1) },
+                new GridCoordinate(2, 1),
+                new Dictionary<string, GridCoordinate> { ["c1"] = new(3, 1) },
+                new Dictionary<string, PuzzleEntityKind> { ["c1"] = kind },
+                null, null, ice, conveyors);
+        }
+
         [Test]
         public void PlainFloorStillMovesExactlyOneCell()
         {

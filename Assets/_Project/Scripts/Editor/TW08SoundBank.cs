@@ -268,16 +268,16 @@ namespace TW08.Editor
                 "Ambience_Warehouse",
                 "sector_warehouse_ambience_loop",
                 TW08AudioSynth.MakeSeamless(TW08AudioSynth.Mix(
-                    TW08AudioSynth.Noise(4.0f, 0.16f, Env.Looping, "ambience", 0.03f),
-                    TW08AudioSynth.Tone(4.0f, 48f, 48f, 0.10f, Env.Looping))),
+                    TW08AudioSynth.Noise(22f, 0.16f, Env.Looping, "ambience", 0.03f),
+                    TW08AudioSynth.Tone(22f, 48f, 48f, 0.10f, Env.Looping))),
                 volume: 0.26f);
 
             events["freezerAmbience"] = LoopEvent(
                 "Ambience_Freezer",
                 "sector03_freezer_ambience_loop",
                 TW08AudioSynth.MakeSeamless(TW08AudioSynth.Mix(
-                    TW08AudioSynth.Noise(4.0f, 0.22f, Env.Looping, "freezer", 0.10f),
-                    TW08AudioSynth.Tone(4.0f, 116f, 116f, 0.07f, Env.Looping))),
+                    TW08AudioSynth.Noise(22f, 0.22f, Env.Looping, "freezer", 0.10f),
+                    TW08AudioSynth.Tone(22f, 116f, 116f, 0.07f, Env.Looping))),
                 volume: 0.30f);
 
             // Voz de narrativa: o documento pede um marcador de fala por

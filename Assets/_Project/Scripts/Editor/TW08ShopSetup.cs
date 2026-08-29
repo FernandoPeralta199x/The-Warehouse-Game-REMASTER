@@ -349,6 +349,11 @@ namespace TW08.Editor
                 }
             }
 
+            if (canvas.GetComponent<MenuNavigationAudio>() == null)
+            {
+                canvas.gameObject.AddComponent<MenuNavigationAudio>();
+            }
+
             EditorUtility.SetDirty(focus);
             EditorUtility.SetDirty(entrance);
         }

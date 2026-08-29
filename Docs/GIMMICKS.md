@@ -149,6 +149,22 @@ Só uma tag segue sendo etiqueta de propósito:
 - `n8_jack` (L22) — o Macaco N-8 é ferramenta de loja, e a bíblia de design o
   exclui do MVP. A etiqueta está certa como está.
 
+## Carga pesada (`heavy_crate`)
+
+Empurrar carga pesada **custa um movimento a mais**, e ela **não escorrega**: no
+gelo para onde foi posta, e a esteira não a carrega.
+
+Até então `HeavyCrate` se movia exatamente como carga comum — "peso" era só uma
+exigência de doca, e o Setor 05 chamava-se Manutenção Pesada sem nada nele pesar.
+Trocar `h` por `$` não mudava o custo ótimo em 11 de 12 fases.
+
+As duas regras juntas fazem o peso decidir rota: vale a pena levar a pesada pelo
+caminho curto, ou desviar? E o gelo, que era atalho universal, passa a servir só
+à carga comum.
+
+Custou reprovar as 28 fases e recalcular todas as medalhas — é a mudança mais
+cara deste documento, e a única que altera custo em doze fases de uma vez.
+
 ## A caixa-ferramenta, e por que ela não existia
 
 `tool_crate` é o conceito central da bíblia: pôr a carga no sensor para abrir a

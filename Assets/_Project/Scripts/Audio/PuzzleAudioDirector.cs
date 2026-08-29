@@ -145,7 +145,11 @@ namespace TW08.Audio
         {
             // Recusa precisa soar diferente de ação: o jogador tem que saber que
             // o comando chegou e foi negado, não que o jogo travou.
-            Play(catalog.UiDenied);
+            //
+            // Usa o impacto de carga, e não o bipe de recusa do menu: o jogador
+            // esbarra em parede dezenas de vezes por fase, e um bipe de erro
+            // nessa frequência vira irritação. Encostar soa como encostar.
+            Play(catalog.CrateHit);
         }
 
         private void OnMoveUndone(PuzzleMove _)
@@ -197,17 +201,21 @@ namespace TW08.Audio
                 return;
             }
 
+            // O sensor causa a porta. Tocando no mesmo frame o ouvido junta os
+            // dois num evento só; o atraso curto deixa a relação audível.
+            const float DoorDelay = 0.11f;
+
             if (open)
             {
                 openGroups.Add(groupId);
                 Play(catalog.SensorOn);
-                Play(catalog.DoorOpen);
+                PlayDelayed(catalog.DoorOpen, DoorDelay);
                 return;
             }
 
             openGroups.Remove(groupId);
             Play(catalog.SensorOff);
-            Play(catalog.DoorClose);
+            PlayDelayed(catalog.DoorClose, DoorDelay);
         }
 
         private void OnToolUsed(PuzzleToolDefinition tool)
@@ -275,6 +283,14 @@ namespace TW08.Audio
             if (audioEvent != null && AudioService.Instance != null)
             {
                 AudioService.Instance.PlayOneShot(audioEvent);
+            }
+        }
+
+        private static void PlayDelayed(AudioEvent audioEvent, float delay)
+        {
+            if (audioEvent != null && AudioService.Instance != null)
+            {
+                AudioService.Instance.PlayOneShotDelayed(audioEvent, delay);
             }
         }
     }

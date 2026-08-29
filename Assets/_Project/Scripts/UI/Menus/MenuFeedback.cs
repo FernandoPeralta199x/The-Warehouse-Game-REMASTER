@@ -1,4 +1,5 @@
 using TW08.Motion;
+using TW08.Audio;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,9 @@ namespace TW08.UI.Menus
     {
         public static void Click(Component target)
         {
+            // Confirmar precisa soar: navegar em silêncio parece travado.
+            GameAudio.Confirm();
+
             if (target == null)
             {
                 return;
@@ -34,6 +38,8 @@ namespace TW08.UI.Menus
 
         public static void Denied(Component target)
         {
+            GameAudio.Denied();
+
             if (target == null || target.transform is not RectTransform rect)
             {
                 return;

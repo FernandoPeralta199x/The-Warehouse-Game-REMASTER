@@ -74,6 +74,45 @@ tabuleiro não deve saber que áudio existe. O diretor assina os eventos que o
 runtime já publica e decide o que tocar. É instalado nas cenas de fase pelo
 `TW08PuzzleSceneBuilder`.
 
+## Segunda passada: ligar o que estava mudo
+
+O diretor de som mediu os 40 WAVs e apontou que **13 dos 39 eventos não tinham
+nenhum call site**. O banco existia inteiro e metade dele nunca tocava.
+
+Ligados agora:
+
+- **Menus** — som ao mudar o foco (`MenuNavigationAudio`, que escuta o
+  EventSystem em vez de cada botão, porque o foco muda por teclado, gamepad e
+  mouse) e ao confirmar ou recusar.
+- **Oficina N-8** — compra confirmada.
+- **Narrativa** — o marcador de fala por personagem. `VoiceFor` existia, estava
+  correto e nunca era chamado.
+- **Corrida** — motor em loop só com o veículo em movimento, bipe de ré detectado
+  pelo sentido real da velocidade, e impacto na colisão. Antes só a contagem
+  regressiva e a chegada soavam: a empilhadeira era muda enquanto o jogador
+  dirigia, que é o que ele faz o tempo todo.
+
+Para isso o catálogo passou a morar em `Resources`: menu, loja e narrativa não
+têm campo serializado para ele, e exigir um obrigaria a refazer a fiação de todas
+as cenas. `GameAudio` carrega uma vez e nunca lança quando o catálogo falta — som
+é decoração, e um projeto sem áudio gerado precisa continuar jogável.
+
+### Correções de qualidade na mesma passada
+
+**Envelope que gravava silêncio.** `Percussive` combina decay de 0,18 com sustain
+zero: o sinal zerava em 18,4% do arquivo. O impacto de caixa declarava 130 ms e
+tinha 24 ms audíveis. `Impact`, com decaimento exponencial, subiu isso para 78%.
+
+**Sensor e porta tocavam no mesmo frame** e o ouvido lia os dois como um evento
+só. A porta agora entra 110 ms depois, e a relação de causa fica audível.
+
+**Recusa de movimento usa o impacto de carga**, não o bipe de recusa do menu: o
+jogador esbarra em parede dezenas de vezes por fase, e um bipe de erro nessa
+frequência vira irritação. Encostar soa como encostar.
+
+**Ambiência de 3,9 s para 22 s.** Uma volta a cada quatro segundos era percebida
+como repetição, não como ambiente.
+
 ## O que falta
 
 **P2 e P3** — SFX exclusivos por personagem e por setor, camadas dinâmicas por

@@ -263,9 +263,9 @@ namespace TW08.Editor
 
         private static void DrawFloorPrimary(Texture2D texture)
         {
-            Color baseColor = Rgb(29, 35, 38);
-            Color seam = Rgb(56, 65, 68);
-            Color inset = Rgb(37, 43, 46);
+            Color baseColor = Rgb(40, 47, 51);
+            Color seam = Rgb(66, 76, 80);
+            Color inset = Rgb(50, 58, 62);
             Fill(texture, 0, 0, 32, 32, baseColor);
             Fill(texture, 1, 1, 30, 30, inset);
             Fill(texture, 2, 2, 28, 1, seam);
@@ -288,17 +288,28 @@ namespace TW08.Editor
             Fill(texture, 23, 8, 1, 16, plate);
         }
 
+        /// <summary>
+        /// Parede.
+        ///
+        /// O miolo era (35,40,43) contra um piso de (37,43,46): a parede saía
+        /// mais CLARA que o chão, com diferença de luminância perto de zero. O
+        /// que separava os dois era só a faixa âmbar de 4 px na base — a
+        /// estrutura do tabuleiro estava sendo comunicada por um enfeite.
+        ///
+        /// Agora o miolo é bem mais escuro que o piso e a aresta superior bem
+        /// mais clara: a parede lê como volume sólido, de relance.
+        /// </summary>
         private static void DrawWall(Texture2D texture)
         {
-            Color dark = Rgb(17, 21, 23);
-            Color steel = Rgb(57, 64, 67);
-            Color light = Rgb(91, 99, 101);
+            Color dark = Rgb(9, 12, 13);
+            Color steel = Rgb(46, 52, 55);
+            Color light = Rgb(112, 122, 125);
             Color amber = Rgb(222, 139, 22);
             Fill(texture, 0, 0, 32, 32, dark);
             Fill(texture, 1, 3, 30, 27, steel);
-            Fill(texture, 3, 5, 26, 23, Rgb(35, 40, 43));
+            Fill(texture, 3, 5, 26, 23, Rgb(20, 24, 26));
             Fill(texture, 1, 29, 30, 2, light);
-            Fill(texture, 0, 0, 32, 4, Rgb(25, 28, 30));
+            Fill(texture, 0, 0, 32, 4, Rgb(14, 17, 18));
             for (int x = -4; x < 36; x += 8)
             {
                 Fill(texture, x, 0, 4, 4, amber);

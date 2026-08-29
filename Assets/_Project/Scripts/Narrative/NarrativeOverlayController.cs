@@ -1,6 +1,7 @@
 using System;
 using TW08.Data;
 using TW08.Motion;
+using TW08.Audio;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -286,6 +287,10 @@ namespace TW08.Narrative
 
         private void ShowLine(NarrativeLine line)
         {
+            // Marcador de fala: cada personagem tem uma altura própria, então o
+            // jogador reconhece quem fala antes de ler o nome.
+            GameAudio.Voice(line?.SpeakerId);
+
             currentLine = line;
             lineStartedAt = Time.unscaledTime;
 

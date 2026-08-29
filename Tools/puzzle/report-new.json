@@ -133,12 +133,12 @@
       "crates": 4,
       "goals": 4,
       "solvable": true,
-      "optimalCost": 47,
+      "optimalCost": 55,
       "pushes": 18,
       "solution": "RRLLURRRRLLDRRRLLLLLDRRRRLLLLDRRRRR",
-      "states": 296341,
+      "states": 302442,
       "replayOk": true,
-      "replayCost": 47
+      "replayCost": 55
     },
     {
       "id": "TW08_Level22_JackN8",
@@ -161,12 +161,12 @@
       "crates": 4,
       "goals": 4,
       "solvable": true,
-      "optimalCost": 44,
+      "optimalCost": 57,
       "pushes": 20,
       "solution": "URURDRRLLLDRDRRRRRLLLLLDLLURRRRRLLLURRRRR",
-      "states": 123585,
+      "states": 216649,
       "replayOk": true,
-      "replayCost": 44
+      "replayCost": 57
     },
     {
       "id": "TW08_Level25_DeadWeight",
@@ -175,12 +175,12 @@
       "crates": 5,
       "goals": 5,
       "solvable": true,
-      "optimalCost": 46,
+      "optimalCost": 52,
       "pushes": 21,
       "solution": "DRRRLLLUURRRLLDRRRRRLLLLLLDRLDRRRLULURRRR",
-      "states": 599996,
+      "states": 639569,
       "replayOk": true,
-      "replayCost": 46
+      "replayCost": 52
     },
     {
       "id": "TW08_Level26_DeadArchive",
@@ -231,12 +231,12 @@
       "crates": 5,
       "goals": 5,
       "solvable": true,
-      "optimalCost": 48,
+      "optimalCost": 54,
       "pushes": 22,
       "solution": "DRRRLLLUURRRLLDRRRRRLLLLLLDRLDRRRRLLULURRRR",
-      "states": 375393,
+      "states": 396047,
       "replayOk": true,
-      "replayCost": 48
+      "replayCost": 54
     },
     {
       "id": "TW08_Level30_LogisticsCore",
@@ -245,12 +245,12 @@
       "crates": 6,
       "goals": 6,
       "solvable": true,
-      "optimalCost": 56,
+      "optimalCost": 62,
       "pushes": 25,
       "solution": "DRRDRRRLLLURLLLUURRRLLDRRRRRLLLLLLDRLDRRRRLLULURRRR",
-      "states": 1762650,
+      "states": 1650385,
       "replayOk": true,
-      "replayCost": 56
+      "replayCost": 62
     },
     {
       "id": "TW08_Secret01_OffRecordCrate",
@@ -273,12 +273,12 @@
       "crates": 4,
       "goals": 4,
       "solvable": true,
-      "optimalCost": 48,
+      "optimalCost": 58,
       "pushes": 18,
-      "solution": "RRLLURRRRRLLLDRRLLLLDRRLLDRRRRLLURRR",
-      "states": 318126,
+      "solution": "RRLLDDRRRRLLLLURRRRRLLLURRLLLLURRRRR",
+      "states": 334939,
       "replayOk": true,
-      "replayCost": 48
+      "replayCost": 58
     },
     {
       "id": "TW08_Secret03_DudasShift",
@@ -301,12 +301,12 @@
       "crates": 5,
       "goals": 5,
       "solvable": true,
-      "optimalCost": 44,
+      "optimalCost": 50,
       "pushes": 21,
       "solution": "DRRRLLLUURRRLLDRRRRRLLLLLLDRRLLDRRRULURRR",
-      "states": 636286,
+      "states": 673199,
       "replayOk": true,
-      "replayCost": 44
+      "replayCost": 50
     },
     {
       "id": "TW08_Secret05_DarkWorkshop",
@@ -343,12 +343,12 @@
       "crates": 5,
       "goals": 5,
       "solvable": true,
-      "optimalCost": 41,
+      "optimalCost": 47,
       "pushes": 21,
       "solution": "DRRRLLLUURDURRLDRRRRLLLLLDLDRRRLULURRRR",
-      "states": 225979,
+      "states": 275954,
       "replayOk": true,
-      "replayCost": 41
+      "replayCost": 47
     },
     {
       "id": "TW08_Secret09_EliasLastShift",
@@ -357,12 +357,12 @@
       "crates": 5,
       "goals": 5,
       "solvable": true,
-      "optimalCost": 40,
+      "optimalCost": 46,
       "pushes": 19,
-      "solution": "RLDRRLLDRRRRLLULULURRRLDRLDLDRRLURURRR",
-      "states": 400070,
+      "solution": "RLDDRRRRLLLLURRLULURRRLDRLDLDRRLURURRR",
+      "states": 474396,
       "replayOk": true,
-      "replayCost": 40
+      "replayCost": 46
     },
     {
       "id": "TW08_Secret10_DudasPath",
@@ -371,12 +371,12 @@
       "crates": 6,
       "goals": 6,
       "solvable": true,
-      "optimalCost": 46,
-      "pushes": 21,
-      "solution": "URRLLDDRRDRRRLLULLDRRRRRLLLLLDRLDRRRRLLULURRRR",
-      "states": 751086,
+      "optimalCost": 56,
+      "pushes": 23,
+      "solution": "DRRDRRRLLLURLLLUURRRLLDRRRRRLLLLLDRLDRRRRLLULURRRR",
+      "states": 1592103,
       "replayOk": true,
-      "replayCost": 46
+      "replayCost": 56
     },
     {
       "id": "TW08_Level06_WeightGate",

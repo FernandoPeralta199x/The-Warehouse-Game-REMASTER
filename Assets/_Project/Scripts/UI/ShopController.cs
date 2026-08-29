@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TW08.Audio;
 using TW08.Economy;
 using TW08.Motion;
 using TW08.Save;
@@ -162,6 +163,7 @@ namespace TW08.UI
             }
 
             Feedback($"{tool.DisplayName} adquirida.");
+            GameAudio.ShopPurchase();
             PunchRow(index);
             Refresh();
         }

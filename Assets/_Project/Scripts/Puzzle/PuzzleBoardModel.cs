@@ -179,9 +179,24 @@ namespace TW08.Puzzle
                 return false;
             }
 
-            // A carga desliza primeiro e só então o jogador entra: sem essa
-            // ordem o jogador ocuparia a célula que a carga ainda vai cruzar.
-            GridCoordinate crateFinal = Slide(crateDestination, direction, destination, robots);
+            // Peso agora pesa de verdade, em duas frentes.
+            //
+            // Empurrar carga pesada custa um movimento a mais: até aqui
+            // HeavyCrate se movia exatamente como carga comum, e "peso" era só
+            // uma exigência de doca — o Setor 05 chamava-se Manutenção Pesada e
+            // nada nele pesava.
+            bool heavy = GetCrateKind(crateId) == PuzzleEntityKind.HeavyCrate;
+            if (heavy)
+            {
+                moveCost += 1;
+            }
+
+            // E carga pesada não escorrega: no gelo ela para onde foi posta, e a
+            // esteira não a carrega. É o que faz o peso conversar com as outras
+            // mecânicas em vez de conviver ao lado delas.
+            GridCoordinate crateFinal = heavy
+                ? crateDestination
+                : Slide(crateDestination, direction, destination, robots);
             if (robots.Contains(crateFinal))
             {
                 return false;

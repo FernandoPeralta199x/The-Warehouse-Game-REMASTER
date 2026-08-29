@@ -41,6 +41,30 @@ namespace TW08.Audio
             StartCoroutine(ReturnAfter(source, clip.length / Mathf.Max(0.01f, Mathf.Abs(source.pitch))));
         }
 
+        /// <summary>
+        /// Toca depois de um atraso.
+        ///
+        /// Sensor e porta disparavam no mesmo frame e o ouvido lia os dois como
+        /// um evento só; separá-los deixa a relação de causa audível.
+        /// </summary>
+        public void PlayOneShotDelayed(AudioEvent audioEvent, float delaySeconds, Vector3 position = default)
+        {
+            if (audioEvent == null) return;
+            if (delaySeconds <= 0f)
+            {
+                PlayOneShot(audioEvent, position);
+                return;
+            }
+
+            StartCoroutine(PlayAfter(audioEvent, delaySeconds, position));
+        }
+
+        private System.Collections.IEnumerator PlayAfter(AudioEvent audioEvent, float delay, Vector3 position)
+        {
+            yield return new WaitForSeconds(delay);
+            PlayOneShot(audioEvent, position);
+        }
+
         public void StartLoop(AudioEvent audioEvent, Vector3 position = default)
         {
             if (audioEvent == null || loops.ContainsKey(audioEvent.EventId)) return;
