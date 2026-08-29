@@ -24,6 +24,9 @@ namespace TW08.UI
         [SerializeField] private string campaignSelectScene = "TW08_PuzzleSelect";
 
         private bool bound;
+        private bool attemptRegistered;
+        private bool hasReport;
+        private PuzzleShiftReport lastReport;
 
         public void Configure(
             PuzzleRuntime puzzleRuntime,
@@ -139,7 +142,19 @@ namespace TW08.UI
             runtime.Restart();
         }
 
-        private void OnInitialized() => Refresh();
+        private void OnInitialized()
+        {
+            // A tentativa conta uma vez por entrada na fase; um reset no meio do
+            // turno não pode apagar o bônus de primeira tentativa nem inflá-lo.
+            if (!attemptRegistered && runtime?.Level != null)
+            {
+                Object.FindFirstObjectByType<SaveManager>()?.RegisterPuzzleAttempt(runtime.Level.LevelId);
+                attemptRegistered = true;
+            }
+
+            hasReport = false;
+            Refresh();
+        }
         private void OnBoardChanged(PuzzleMove _) => Refresh();
         private void OnRestarted() => Refresh();
         private void OnDeadlock() => Refresh();
@@ -150,8 +165,13 @@ namespace TW08.UI
             if (runtime?.Level != null && runtime.Board != null)
             {
                 PuzzleProgressStore.RecordCompletion(runtime.Level, runtime.Board.MoveCount);
+
                 SaveManager saveManager = Object.FindFirstObjectByType<SaveManager>();
-                saveManager?.RecordPuzzleCompletion(runtime.Level, runtime.Board.MoveCount);
+                if (saveManager != null)
+                {
+                    lastReport = saveManager.CommitPuzzleShift(runtime.Level, runtime.BuildSummary());
+                    hasReport = true;
+                }
             }
 
             Refresh();
@@ -223,7 +243,10 @@ namespace TW08.UI
             if (board.IsComplete)
             {
                 int medal = PuzzleProgressStore.EvaluateMedal(runtime.Level, board.MoveCount);
-                statusText.text = $"ROTA LIBERADA // MEDALHA {medal}";
+                string ranking = runtime.IsAssisted ? "ASSISTIDO" : "LIMPO";
+                statusText.text = hasReport
+                    ? $"ROTA LIBERADA // MEDALHA {medal} // {ranking} // +{lastReport.CreditsEarned} CRÉDITOS"
+                    : $"ROTA LIBERADA // MEDALHA {medal} // {ranking}";
                 return;
             }
 

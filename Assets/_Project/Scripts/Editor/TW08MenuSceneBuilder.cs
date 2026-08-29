@@ -101,14 +101,16 @@ namespace TW08.Editor
         {
             Scene scene = CreateMenuShell("CENTRAL DE OPERAÇÕES", "SELECIONE O MODO DE TRABALHO", out Transform shell, out EventSystem eventSystem);
             ModeSelectMenuController controller = new GameObject("Mode Select Controller").AddComponent<ModeSelectMenuController>();
-            Button campaign = MenuButton(shell, "Campaign", "CAMPANHA // RECUPERAÇÃO MANUAL", TW08ProductionSceneUtility.Green, 120f);
-            Button race = MenuButton(shell, "Race", "N-8 LOGISTICS RUSH // CORRIDA", TW08ProductionSceneUtility.Amber, 45f);
-            Button operators = MenuButton(shell, "Operators", "OPERADORES", TW08ProductionSceneUtility.Cyan, -30f);
-            Button settings = MenuButton(shell, "Settings", "CONFIGURAÇÕES", TW08ProductionSceneUtility.TextMuted, -105f);
-            Button credits = MenuButton(shell, "Credits", "CRÉDITOS", TW08ProductionSceneUtility.TextMuted, -180f);
-            Button back = MenuButton(shell, "Back", "VOLTAR AO TERMINAL", TW08ProductionSceneUtility.TextMuted, -255f);
+            Button campaign = MenuButton(shell, "Campaign", "CAMPANHA // RECUPERAÇÃO MANUAL", TW08ProductionSceneUtility.Green, 155f);
+            Button race = MenuButton(shell, "Race", "N-8 LOGISTICS RUSH // CORRIDA", TW08ProductionSceneUtility.Amber, 80f);
+            Button shop = MenuButton(shell, "Shop", "OFICINA N-8 // FERRAMENTAS", TW08ProductionSceneUtility.Amber, 5f);
+            Button operators = MenuButton(shell, "Operators", "OPERADORES", TW08ProductionSceneUtility.Cyan, -70f);
+            Button settings = MenuButton(shell, "Settings", "CONFIGURAÇÕES", TW08ProductionSceneUtility.TextMuted, -145f);
+            Button credits = MenuButton(shell, "Credits", "CRÉDITOS", TW08ProductionSceneUtility.TextMuted, -220f);
+            Button back = MenuButton(shell, "Back", "VOLTAR AO TERMINAL", TW08ProductionSceneUtility.TextMuted, -295f);
             UnityEventTools.AddPersistentListener(campaign.onClick, controller.OpenCampaign);
             UnityEventTools.AddPersistentListener(race.onClick, controller.OpenRace);
+            UnityEventTools.AddPersistentListener(shop.onClick, controller.OpenShop);
             UnityEventTools.AddPersistentListener(operators.onClick, controller.OpenOperators);
             UnityEventTools.AddPersistentListener(settings.onClick, controller.OpenSettings);
             UnityEventTools.AddPersistentListener(credits.onClick, controller.OpenCredits);
@@ -456,7 +458,7 @@ namespace TW08.Editor
                 AssetDatabase.CreateAsset(config, GameConfigPath);
             }
             SerializedObject configSerialized = new(config);
-            configSerialized.FindProperty("saveVersion").intValue = 2;
+            configSerialized.FindProperty("saveVersion").intValue = 3;
             configSerialized.FindProperty("mainMenuScene").stringValue = "TW08_MainMenu";
             configSerialized.FindProperty("firstPuzzleScene").stringValue = "TW08_Level01_FirstShift";
             configSerialized.FindProperty("firstRaceScene").stringValue = "TW08_Race01_ReceivingLoop";

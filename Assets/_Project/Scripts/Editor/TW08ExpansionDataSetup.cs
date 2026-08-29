@@ -516,7 +516,7 @@ namespace TW08.Editor
                 GameConfig config = AssetDatabase.LoadAssetAtPath<GameConfig>(path);
                 if (config == null) continue;
                 SerializedObject s = new(config);
-                s.FindProperty("saveVersion").intValue = 2;
+                s.FindProperty("saveVersion").intValue = 3;
                 s.FindProperty("mainMenuScene").stringValue = "TW08_MainMenu";
                 s.FindProperty("firstPuzzleScene").stringValue = "TW08_Level01_FirstShift";
                 s.FindProperty("firstRaceScene").stringValue = "TW08_Race01_ReceivingLoop";

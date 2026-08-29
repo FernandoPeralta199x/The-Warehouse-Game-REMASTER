@@ -5,7 +5,7 @@ namespace TW08.Data
     [CreateAssetMenu(fileName = "GameConfig", menuName = "TW08/Core/Game Config")]
     public sealed class GameConfig : ScriptableObject
     {
-        [SerializeField] private int saveVersion = 2;
+        [SerializeField] private int saveVersion = 3;
         [SerializeField] private string saveFileName = "tw08-save.json";
         [SerializeField] private string mainMenuScene = "TW08_MainMenu";
         [SerializeField] private string firstPuzzleScene = "TW08_Level01_FirstShift";

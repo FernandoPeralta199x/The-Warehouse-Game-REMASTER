@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a18cc6b34932fd14faac2ab740210629, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: TW08.Runtime::TW08.Data.GameConfig
-  saveVersion: 2
+  saveVersion: 3
   saveFileName: tw08-save.json
   mainMenuScene: TW08_MainMenu
   firstPuzzleScene: TW08_Level01_FirstShift

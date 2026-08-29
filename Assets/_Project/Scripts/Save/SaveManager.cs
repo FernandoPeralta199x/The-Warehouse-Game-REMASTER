@@ -1,11 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TW08.Core;
 using TW08.Data;
+using TW08.Economy;
 using TW08.Puzzle;
 using TW08.Race;
 using UnityEngine;
 
 namespace TW08.Save
 {
+    /// <summary>Resultado consolidado de um turno, pronto para exibição.</summary>
+    public struct PuzzleShiftReport
+    {
+        public PuzzleRunSummary Summary;
+        public int CreditsEarned;
+        public int CreditBalance;
+        public IReadOnlyList<CreditEntry> Statement;
+    }
+
     [DisallowMultipleComponent]
     public sealed class SaveManager : MonoBehaviour
     {
@@ -23,7 +36,11 @@ namespace TW08.Save
                 return;
             }
 
-            SaveMigrationPipeline migrations = new(new ISaveMigration[] { new SaveMigrationV1ToV2() });
+            SaveMigrationPipeline migrations = new(new ISaveMigration[]
+            {
+                new SaveMigrationV1ToV2(),
+                new SaveMigrationV2ToV3()
+            });
             service = new JsonSaveService(config, migrations);
             Data = service.Load();
             Data.EnsureDefaults();
@@ -46,6 +63,104 @@ namespace TW08.Save
             record.completed = true;
             if (record.bestMoves <= 0 || moves < record.bestMoves) record.bestMoves = Mathf.Max(0, moves);
             record.medal = Mathf.Max(record.medal, PuzzleProgressStore.EvaluateMedal(level, moves));
+            Save();
+        }
+
+        /// <summary>
+        /// Registra a entrada numa fase. O contador de tentativas alimenta o
+        /// bônus de "primeira tentativa" e precisa subir antes do turno começar.
+        /// </summary>
+        public int RegisterPuzzleAttempt(string levelId)
+        {
+            if (Data == null || string.IsNullOrWhiteSpace(levelId)) return 0;
+            LevelProgressRecord record = Data.GetOrCreateLevel(levelId);
+            record.attempts = Mathf.Max(0, record.attempts) + 1;
+            Save();
+            return record.attempts;
+        }
+
+        /// <summary>
+        /// Fecha o turno: grava recordes (separando limpo de assistido),
+        /// credita os Créditos de Turno e devolve o extrato para a HUD.
+        /// </summary>
+        public PuzzleShiftReport CommitPuzzleShift(PuzzleLevelDefinition level, PuzzleRunSummary summary)
+        {
+            if (Data == null || level == null)
+            {
+                return default;
+            }
+
+            LevelProgressRecord record = Data.GetOrCreateLevel(level.LevelId);
+            bool personalBest = record.bestMoves <= 0 || summary.Moves < record.bestMoves;
+
+            summary.Medal = PuzzleProgressStore.EvaluateMedal(level, summary.Moves);
+            summary.PersonalBest = personalBest;
+            summary.FirstAttempt = record.attempts <= 1;
+
+            record.completed = true;
+            if (personalBest) record.bestMoves = Mathf.Max(0, summary.Moves);
+            record.medal = Mathf.Max(record.medal, summary.Medal);
+
+            // Ranking competitivo: só turnos sem ferramenta e sem dica entram.
+            if (summary.IsClean)
+            {
+                if (record.bestCleanMoves <= 0 || summary.Moves < record.bestCleanMoves)
+                {
+                    record.bestCleanMoves = Mathf.Max(0, summary.Moves);
+                }
+
+                record.cleanMedal = Mathf.Max(record.cleanMedal, summary.Medal);
+            }
+
+            int earned = ShiftCredits.Evaluate(summary);
+            Data.credits = Mathf.Max(0, Data.credits + earned);
+            Save();
+
+            return new PuzzleShiftReport
+            {
+                Summary = summary,
+                CreditsEarned = earned,
+                CreditBalance = Data.credits,
+                Statement = ShiftCredits.BuildStatement(summary)
+            };
+        }
+
+        /// <summary>Compra uma ferramenta se houver saldo. Devolve false sem gastar nada.</summary>
+        public bool TryPurchaseTool(PuzzleToolDefinition tool)
+        {
+            if (Data == null || tool == null || Data.credits < tool.Price)
+            {
+                return false;
+            }
+
+            Data.credits -= tool.Price;
+            Data.AddToolCount(tool.ToolId, 1);
+            Save();
+            return true;
+        }
+
+        /// <summary>Consome uma unidade do estoque ao acionar a ferramenta numa fase.</summary>
+        public bool TryConsumeTool(string toolId)
+        {
+            if (Data == null || Data.GetToolCount(toolId) <= 0)
+            {
+                return false;
+            }
+
+            Data.AddToolCount(toolId, -1);
+            Save();
+            return true;
+        }
+
+        /// <summary>Define o loadout do próximo turno, respeitando o limite de slots.</summary>
+        public void SetEquippedTools(IEnumerable<string> toolIds, int slots)
+        {
+            if (Data == null) return;
+            Data.equippedTools = (toolIds ?? Array.Empty<string>())
+                .Where(id => !string.IsNullOrWhiteSpace(id))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .Take(Mathf.Max(1, slots))
+                .ToList();
             Save();
         }
 

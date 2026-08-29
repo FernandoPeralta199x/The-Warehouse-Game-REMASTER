@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TW08.Economy;
 using UnityEngine;
 
 namespace TW08.Puzzle
@@ -22,6 +23,18 @@ namespace TW08.Puzzle
         public int UndoCount => history.UndoCount;
         public int RedoCount => history.RedoCount;
 
+        /// <summary>Empurrões de carga no turno atual — zera junto com o tabuleiro.</summary>
+        public int PushCount { get; private set; }
+
+        /// <summary>Ferramentas da Oficina N-8 acionadas no turno atual.</summary>
+        public int ToolsUsed { get; private set; }
+
+        /// <summary>Dicas do Assistente de Turno reveladas no turno atual.</summary>
+        public int HintsUsed { get; private set; }
+
+        /// <summary>Turno assistido perde o direito ao ranking competitivo.</summary>
+        public bool IsAssisted => ToolsUsed > 0 || HintsUsed > 0;
+
         public event Action Initialized;
         public event Action<PuzzleMove> MoveApplied;
         public event Action<PuzzleMove> MoveUndone;
@@ -30,6 +43,9 @@ namespace TW08.Puzzle
         public event Action LevelCompleted;
         public event Action StaticDeadlockDetected;
         public event Action<string, bool> SwitchGroupStateChanged;
+
+        /// <summary>Disparado quando uma ferramenta é acionada — a HUD reage a isso.</summary>
+        public event Action AssistanceUsed;
 
         private void Start()
         {
@@ -73,6 +89,9 @@ namespace TW08.Puzzle
             Board = new PuzzleBoardModel(level);
             history.Clear();
             switchStates.Clear();
+            PushCount = 0;
+            ToolsUsed = 0;
+            HintsUsed = 0;
             crateViewById = crateViews
                 .Where(view => view != null && !string.IsNullOrWhiteSpace(view.EntityId))
                 .GroupBy(view => view.EntityId)
@@ -91,11 +110,46 @@ namespace TW08.Puzzle
             }
 
             history.Record(move);
+            if (move.CrateMoved)
+            {
+                PushCount++;
+            }
+
             ApplySwitchGroups(false);
             SyncViews(true);
             MoveApplied?.Invoke(move);
             EvaluateBoardState();
             return true;
+        }
+
+        /// <summary>
+        /// Contabiliza o uso de uma ferramenta da Oficina N-8. Dicas contam
+        /// separadamente porque a bíblia de design as trata como bônus próprio.
+        /// </summary>
+        public void RegisterAssistance(bool isHint)
+        {
+            if (isHint)
+            {
+                HintsUsed++;
+            }
+            else
+            {
+                ToolsUsed++;
+            }
+
+            AssistanceUsed?.Invoke();
+        }
+
+        /// <summary>Fotografia do turno para o cálculo de Créditos de Turno.</summary>
+        public PuzzleRunSummary BuildSummary()
+        {
+            return new PuzzleRunSummary
+            {
+                Moves = Board?.MoveCount ?? 0,
+                Pushes = PushCount,
+                ToolsUsed = ToolsUsed,
+                HintsUsed = HintsUsed
+            };
         }
 
         public bool Undo()
@@ -112,6 +166,11 @@ namespace TW08.Puzzle
             }
 
             history.PushRedo(move);
+            if (move.CrateMoved)
+            {
+                PushCount = Math.Max(0, PushCount - 1);
+            }
+
             ApplySwitchGroups(false);
             SyncViews(true);
             MoveUndone?.Invoke(move);
@@ -133,6 +192,11 @@ namespace TW08.Puzzle
             }
 
             history.RestoreUndo(repeated);
+            if (repeated.CrateMoved)
+            {
+                PushCount++;
+            }
+
             ApplySwitchGroups(false);
             SyncViews(true);
             MoveRedone?.Invoke(repeated);

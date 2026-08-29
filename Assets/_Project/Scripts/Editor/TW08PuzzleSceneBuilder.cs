@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TW08.Data;
+using TW08.Economy;
 using TW08.Input;
 using TW08.Presentation;
 using TW08.Puzzle;
@@ -353,8 +354,63 @@ namespace TW08.Editor
             hud.Configure(runtime, levelText, moves, status, undo, redo, action);
             hud.ConfigureExtendedLabels(operatorText, targetText);
             hud.ConfigureCampaignFlow(nextScene, "TW08_PuzzleSelect");
+
+            CreateToolBar(canvas, runtime);
+
             TW08ProductionSceneUtility.Select(eventSystem, action);
             EditorUtility.SetDirty(hud);
+        }
+
+        /// <summary>
+        /// Barra da Oficina N-8: um slot por ferramenta equipável mais o aviso de
+        /// turno assistido. Os slots são fixos na cena e o controller os preenche
+        /// em runtime com o que o jogador levou.
+        /// </summary>
+        private static void CreateToolBar(Canvas canvas, PuzzleRuntime runtime)
+        {
+            PuzzleToolCatalog catalog = AssetDatabase.LoadAssetAtPath<PuzzleToolCatalog>(TW08ShopSetup.CatalogPath);
+            int slotCount = catalog != null ? catalog.EquipSlots : 2;
+
+            Image bar = TW08ProductionSceneUtility.CreatePanel(
+                canvas.transform, "HUD Tools", TW08ProductionSceneUtility.PanelLight);
+            TW08ProductionSceneUtility.SetRect(
+                bar.rectTransform, new Vector2(0f, 0f), new Vector2(0f, 0f),
+                new Vector2(18f, 118f), new Vector2(430f, 178f));
+
+            List<Button> slots = new();
+            for (int i = 0; i < slotCount; i++)
+            {
+                Button slot = TW08ProductionSceneUtility.CreateButton(
+                    bar.transform, $"Tool Slot {i + 1}", "SLOT VAZIO", TW08ProductionSceneUtility.Cyan, 13);
+                TW08ProductionSceneUtility.SetRect(
+                    (RectTransform)slot.transform, new Vector2(0f, 0.5f), new Vector2(190f, 44f),
+                    new Vector2(104f + i * 200f, 0f));
+                TW08ProductionSceneUtility.DisableNavigation(slot);
+                slot.interactable = false;
+                slots.Add(slot);
+            }
+
+            Text mode = TW08ProductionSceneUtility.CreateText(
+                canvas.transform, "Ranking Mode", "TURNO LIMPO // RANKING ATIVO", 13,
+                TW08ProductionSceneUtility.Green, TextAnchor.MiddleRight);
+            TW08ProductionSceneUtility.SetRect(
+                mode.rectTransform, new Vector2(1f, 0f), new Vector2(430f, 30f), new Vector2(-40f, 148f));
+
+            Text message = TW08ProductionSceneUtility.CreateText(
+                canvas.transform, "Tool Message", string.Empty, 15,
+                TW08ProductionSceneUtility.Amber, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                message.rectTransform, new Vector2(0.5f, 0f), new Vector2(900f, 32f), new Vector2(0f, 190f));
+
+            PuzzleToolService service = new GameObject("Puzzle Tool Service").AddComponent<PuzzleToolService>();
+            service.Configure(runtime, catalog, null);
+
+            PuzzleToolBarController toolBar = new GameObject("Puzzle Tool Bar")
+                .AddComponent<PuzzleToolBarController>();
+            toolBar.Configure(service, runtime, slots, message, mode);
+
+            EditorUtility.SetDirty(service);
+            EditorUtility.SetDirty(toolBar);
         }
 
         internal static string ResolveSceneName(PuzzleLevelDefinition level, int index)
