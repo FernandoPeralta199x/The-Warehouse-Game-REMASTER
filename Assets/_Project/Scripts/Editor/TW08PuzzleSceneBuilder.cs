@@ -244,6 +244,7 @@ namespace TW08.Editor
         {
             HashSet<GridCoordinate> walls = new(level.Walls);
             HashSet<GridCoordinate> costly = new(level.CostlyCells ?? Array.Empty<GridCoordinate>());
+            HashSet<GridCoordinate> iceFloor = new(level.IceCells ?? Array.Empty<GridCoordinate>());
             Sprite ice = TW08ExpansionStarterArt.LoadRaceSprite("Ice");
 
             for (int y = 0; y < level.Height; y++)
@@ -264,6 +265,15 @@ namespace TW08.Editor
                     {
                         TW08ProductionSceneUtility.CreateSprite("Cold " + cell, world, ice, -10, new Color(0.72f, 0.94f, 1f, 0.62f));
                     }
+
+                    // Gelo é mais claro e mais opaco que o piso frio: as duas
+                    // mecânicas coexistem e o jogador precisa distinguir de longe
+                    // "andar aqui custa caro" de "aqui eu deslizo".
+                    if (iceFloor.Contains(cell) && ice != null)
+                    {
+                        TW08ProductionSceneUtility.CreateSprite(
+                            "Ice " + cell, world, ice, -9, new Color(0.86f, 0.98f, 1f, 0.92f));
+                    }
                 }
             }
 
@@ -275,6 +285,31 @@ namespace TW08.Editor
 
             GameObject mechanics = new("Puzzle Mechanics");
             mechanicView = mechanics.AddComponent<PuzzleMechanicView>();
+
+            // Esteiras: a seta indica para onde a correia leva. Sem o indicador
+            // de direção a mecânica só seria descoberta por tentativa e erro.
+            foreach (PuzzleConveyorDefinition conveyor in level.Conveyors ?? Array.Empty<PuzzleConveyorDefinition>())
+            {
+                if (conveyor == null) continue;
+
+                Vector3 world = conveyor.Position.ToWorld(level.CellSize);
+                GameObject belt = TW08ProductionSceneUtility.CreateSprite(
+                    $"Conveyor {conveyor.Position}", world, catalog.FloorSecondary, -8,
+                    new Color(0.30f, 0.34f, 0.36f, 0.95f));
+                belt.transform.SetParent(mechanics.transform);
+
+                GameObject arrow = TW08ProductionSceneUtility.CreateSprite(
+                    $"Conveyor Arrow {conveyor.Position}", world, catalog.Goal, 5,
+                    new Color(1f, 0.63f, 0.12f, 0.85f), Vector3.one * 0.45f);
+                arrow.transform.SetParent(mechanics.transform);
+                arrow.transform.localRotation = Quaternion.Euler(0f, 0f, conveyor.Direction switch
+                {
+                    ConveyorDirection.Up => 0f,
+                    ConveyorDirection.Down => 180f,
+                    ConveyorDirection.Left => 90f,
+                    _ => -90f
+                });
+            }
 
             foreach (PuzzleSwitchGroupDefinition group in level.SwitchGroups ?? Array.Empty<PuzzleSwitchGroupDefinition>())
             {

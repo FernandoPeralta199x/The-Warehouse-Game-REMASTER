@@ -29,6 +29,10 @@ namespace TW08.Puzzle
         [SerializeField] private List<GridCoordinate> costlyCells = new();
         [Tooltip("Each group opens its doors while every sensor in the group is occupied by a crate.")]
         [SerializeField] private List<PuzzleSwitchGroupDefinition> switchGroups = new();
+        [Tooltip("Ice: whoever enters keeps sliding in the same direction until leaving the ice or hitting something.")]
+        [SerializeField] private List<GridCoordinate> iceCells = new();
+        [Tooltip("Conveyors carry whoever enters them along their own fixed direction.")]
+        [SerializeField] private List<PuzzleConveyorDefinition> conveyors = new();
 
         [Header("Scoring")]
         [SerializeField, Min(0)] private int goldMoveLimit = 30;
@@ -51,6 +55,8 @@ namespace TW08.Puzzle
         public IReadOnlyList<PuzzleCrateDefinition> Crates => crates;
         public IReadOnlyList<GridCoordinate> CostlyCells => costlyCells;
         public IReadOnlyList<PuzzleSwitchGroupDefinition> SwitchGroups => switchGroups;
+        public IReadOnlyList<GridCoordinate> IceCells => iceCells;
+        public IReadOnlyList<PuzzleConveyorDefinition> Conveyors => conveyors;
         public int GoldMoveLimit => goldMoveLimit;
         public int PlatinumMoveLimit => platinumMoveLimit;
         public bool AllowPowerUps => allowPowerUps;

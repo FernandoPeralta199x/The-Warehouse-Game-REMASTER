@@ -7,12 +7,12 @@
       "crates": 2,
       "goals": 2,
       "solvable": true,
-      "optimalCost": 21,
-      "pushes": 8,
-      "solution": "LURRRRLLDLLDRRRR",
-      "states": 1506,
+      "optimalCost": 10,
+      "pushes": 4,
+      "solution": "LURRDLLDRR",
+      "states": 144,
       "replayOk": true,
-      "replayCost": 21
+      "replayCost": 10
     },
     {
       "id": "TW08_Level12_ColdCorridor",
@@ -21,12 +21,12 @@
       "crates": 2,
       "goals": 2,
       "solvable": true,
-      "optimalCost": 39,
-      "pushes": 13,
-      "solution": "DDRULURRRRRDRULLLUULLDLDRRRRR",
-      "states": 2953,
+      "optimalCost": 25,
+      "pushes": 7,
+      "solution": "DDRULURRRDRULLURURRDLLDRR",
+      "states": 3629,
       "replayOk": true,
-      "replayCost": 39
+      "replayCost": 25
     },
     {
       "id": "TW08_Level14_FrozenSensor",
@@ -35,12 +35,12 @@
       "crates": 3,
       "goals": 3,
       "solvable": true,
-      "optimalCost": 40,
-      "pushes": 15,
-      "solution": "DDRRLLUURRRRRRLLLDLDLULURRRRRDRRU",
-      "states": 2904,
+      "optimalCost": 31,
+      "pushes": 11,
+      "solution": "DDRRULLDRRRRRLLLLDDRULURRRRDRRU",
+      "states": 2987,
       "replayOk": true,
-      "replayCost": 40
+      "replayCost": 31
     },
     {
       "id": "TW08_Level15_Chamber08C",
@@ -49,12 +49,12 @@
       "crates": 4,
       "goals": 4,
       "solvable": true,
-      "optimalCost": 46,
-      "pushes": 20,
-      "solution": "UURDRRRLLLLDRRDRRRRRLLLLLDLLURRRRRLLLURRRRR",
-      "states": 111627,
+      "optimalCost": 39,
+      "pushes": 18,
+      "solution": "UURDLDRRRLURRRLLDRRRRRLLLULLDRRRRRLURRR",
+      "states": 147382,
       "replayOk": true,
-      "replayCost": 46
+      "replayCost": 39
     },
     {
       "id": "TW08_Level16_ConveyorOnline",
@@ -63,12 +63,12 @@
       "crates": 2,
       "goals": 2,
       "solvable": true,
-      "optimalCost": 13,
-      "pushes": 6,
-      "solution": "URRRRLLLDDRRR",
-      "states": 303,
+      "optimalCost": 7,
+      "pushes": 2,
+      "solution": "URRLDDR",
+      "states": 32,
       "replayOk": true,
-      "replayCost": 13
+      "replayCost": 7
     },
     {
       "id": "TW08_Level17_AutomaticRoute",
@@ -77,12 +77,12 @@
       "crates": 3,
       "goals": 3,
       "solvable": true,
-      "optimalCost": 23,
-      "pushes": 8,
-      "solution": "RUURULDDRDLDRURRUURRURD",
-      "states": 5860,
+      "optimalCost": 19,
+      "pushes": 7,
+      "solution": "RUUDRDLDRUUURRRRURD",
+      "states": 5733,
       "replayOk": true,
-      "replayCost": 23
+      "replayCost": 19
     },
     {
       "id": "TW08_Level18_CleaningRobot",
@@ -119,12 +119,12 @@
       "crates": 4,
       "goals": 4,
       "solvable": true,
-      "optimalCost": 62,
-      "pushes": 26,
-      "solution": "UURDRRRLLLLDRRRRRRRRLLLLLLLLDDRURRRLLLLURRRRRRRLLLDRRR",
-      "states": 100237,
+      "optimalCost": 46,
+      "pushes": 20,
+      "solution": "DDRULURLUURDRRRLDRRRRRLLLLULLLLDRDRRRLURRRRLDR",
+      "states": 101700,
       "replayOk": true,
-      "replayCost": 62
+      "replayCost": 46
     },
     {
       "id": "TW08_Level21_LockedWorkshop",
@@ -371,12 +371,12 @@
       "crates": 6,
       "goals": 6,
       "solvable": true,
-      "optimalCost": 56,
-      "pushes": 25,
-      "solution": "DRRDRRRLLLURLLLUURRRLLDRRRRRLLLLLLDRLDRRRRLLULURRRR",
-      "states": 938491,
+      "optimalCost": 46,
+      "pushes": 21,
+      "solution": "URRLLDDRRDRRRLLULLDRRRRRLLLLLDRLDRRRRLLULURRRR",
+      "states": 751086,
       "replayOk": true,
-      "replayCost": 56
+      "replayCost": 46
     }
   ]
 }

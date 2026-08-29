@@ -50,6 +50,8 @@ class Level:
     costly: frozenset
     goal_req: dict        # (x,y) -> kind:int
     groups: list = field(default_factory=list)
+    ice: frozenset = frozenset()          # células de gelo
+    conveyors: dict = field(default_factory=dict)  # (x,y) -> (dx,dy)
     display_name: str = ""
 
 
@@ -230,12 +232,17 @@ def parse_unity_asset(path: Path) -> Level | None:
 
 CHAR_KIND = {"$": 1, "*": 1, "h": 2, "H": 2, "f": 3, "F": 3}
 
+# Gelo: "%". Esteiras: seta apontando para onde levam.
+CONVEYOR_CHARS = {"^": (0, 1), "v": (0, -1), "<": (-1, 0), ">": (1, 0)}
+CONVEYOR_NAMES = {"up": (0, 1), "down": (0, -1), "left": (-1, 0), "right": (1, 0)}
+
 
 def parse_layout(obj: dict) -> Level:
     rows = obj["rows"]
     height = len(rows)
     width = max(len(r) for r in rows)
-    walls, goals, costly = set(), set(), set()
+    walls, goals, costly, ice = set(), set(), set(), set()
+    conveyors: dict = {}
     crates: dict = {}
     player = None
     sensors: dict = {}
@@ -255,6 +262,10 @@ def parse_layout(obj: dict) -> Level:
                 goals.add((x, y))
             elif ch == "~":
                 costly.add((x, y))
+            elif ch == "%":
+                ice.add((x, y))
+            elif ch in CONVEYOR_CHARS:
+                conveyors[(x, y)] = CONVEYOR_CHARS[ch]
             elif ch == ":":
                 costly.add((x, y))
                 goals.add((x, y))
@@ -292,6 +303,10 @@ def parse_layout(obj: dict) -> Level:
     for c in obj.get("extraGoals", []):
         # Permite alvo sobre célula de sensor/porta (chars não sobrepõem).
         goals.add((c["x"], c["y"]))
+    for c in obj.get("extraIce", []):
+        ice.add((c["x"], c["y"]))
+    for c in obj.get("extraConveyors", []):
+        conveyors[(c["x"], c["y"])] = CONVEYOR_NAMES[c["dir"]]
 
     if player is None:
         raise ValueError(f"{obj.get('id')}: layout sem jogador (@)")
@@ -307,11 +322,46 @@ def parse_layout(obj: dict) -> Level:
         costly=frozenset(costly),
         goal_req=goal_req,
         groups=groups,
+        ice=frozenset(ice),
+        conveyors=conveyors,
         display_name=obj.get("displayName", ""),
     )
 
 
 # ------------------------------------------------------------------- Solver --
+
+def slide(level: Level, start, direction, crates, closed_doors, vacated=None):
+    """Espelha PuzzleBoardModel.Slide.
+
+    Gelo mantém a direção de entrada; esteira impõe a própria. Segue até pisar
+    em piso comum ou até a próxima célula estar ocupada. O teto de iterações
+    protege contra esteiras em circuito fechado.
+    """
+    current = start
+    guard = level.width * level.height
+
+    while guard > 0:
+        guard -= 1
+        if current in level.conveyors:
+            step = level.conveyors[current]
+        elif current in level.ice:
+            step = direction
+        else:
+            return current
+
+        nxt = (current[0] + step[0], current[1] + step[1])
+        if not (0 <= nxt[0] < level.width and 0 <= nxt[1] < level.height):
+            return current
+        if nxt in level.walls or nxt in closed_doors:
+            return current
+        if nxt != vacated and nxt in crates:
+            return current
+
+        current = nxt
+        direction = step
+
+    return current
+
 
 def door_state(level: Level, player, crates):
     """Retorna frozenset de células de porta FECHADAS (bloqueadas).
@@ -361,6 +411,16 @@ def corner_deadlock(level: Level, crates):
     return False
 
 
+class AllCells:
+    """Aceita qualquer célula. Usado quando a poda estática não se aplica."""
+
+    def __init__(self, level):
+        self.level = level
+
+    def __contains__(self, cell):
+        return True
+
+
 def compute_live_cells(level: Level) -> frozenset:
     """Células onde uma caixa ainda pode alcançar ALGUM goal (análise estática).
 
@@ -393,10 +453,16 @@ def solve(level: Level, max_states=3_000_000):
     if len(level.goals) != len(start_crates):
         return {"solvable": False, "reason": f"goals={len(level.goals)} != crates={len(start_crates)}", "states": 0}
 
-    live = compute_live_cells(level)
-    dead_start = [p for p in start_crates if p not in live]
-    if dead_start:
-        return {"solvable": False, "reason": f"caixa inicial em célula morta: {dead_start}", "states": 0}
+    # A poda de células mortas assume empurrão de uma casa. Com gelo ou esteira
+    # a carga percorre vários passos por comando e alcança células que o fecho
+    # reverso simples marcaria como mortas — a poda descartaria soluções reais.
+    if level.ice or level.conveyors:
+        live = AllCells(level)
+    else:
+        live = compute_live_cells(level)
+        dead_start = [p for p in start_crates if p not in live]
+        if dead_start:
+            return {"solvable": False, "reason": f"caixa inicial em célula morta: {dead_start}", "states": 0}
 
     # A*: h = soma das distâncias Manhattan de cada caixa ao goal compatível
     # mais próximo. Admissível (cada empurrão custa >= 1 e aproxima 1 caixa em
@@ -471,13 +537,22 @@ def solve(level: Level, max_states=3_000_000):
                     continue
                 if cpos in level.walls or cpos in closed_doors or cpos in crates:
                     continue
-                if cpos not in live:
+                # A carga desliza antes de o jogador entrar; a célula que ela
+                # deixou conta como livre durante o próprio deslize.
+                cfinal = slide(level, cpos, (dx, dy), crates, closed_doors, vacated=npos)
+                if cfinal not in live:
                     continue  # célula morta: caixa nunca mais alcança goal
                 new_crates = dict(crates)
-                new_crates[cpos] = new_crates.pop(npos)
+                del new_crates[npos]
+                new_crates[cfinal] = crates[npos]
                 pushed = True
                 if corner_deadlock(level, new_crates):
                     continue
+                pfinal = slide(level, npos, (dx, dy), new_crates, closed_doors)
+            else:
+                pfinal = slide(level, npos, (dx, dy), crates, closed_doors)
+
+            npos = pfinal
             nk = key(npos, new_crates)
             ncost = cost + step_cost
             if ncost < dist.get(nk, 1 << 60):
@@ -508,9 +583,15 @@ def replay(level: Level, solution: str):
             if (cpos in level.walls or cpos in closed or cpos in crates
                     or not (0 <= cpos[0] < level.width and 0 <= cpos[1] < level.height)):
                 return False, f"empurrão inválido para {cpos}"
-            crates[cpos] = crates.pop(npos)
+            cfinal = slide(level, cpos, (dx, dy), crates, closed, vacated=npos)
+            crate_kind = crates.pop(npos)
+            crates[cfinal] = crate_kind
+            cost += 2 if npos in level.costly else 1
+            player = slide(level, npos, (dx, dy), crates, closed)
+            continue
+
         cost += 2 if npos in level.costly else 1
-        player = npos
+        player = slide(level, npos, (dx, dy), crates, closed)
     if not is_complete(level, crates):
         return False, "solução não completa o nível"
     return True, cost

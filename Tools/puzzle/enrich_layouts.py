@@ -24,6 +24,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from tw08_solver import parse_layout, KIND_NAMES  # noqa: E402
 
+DIR_NAMES = {(0, 1): "Up", (0, -1): "Down", (-1, 0): "Left", (1, 0): "Right"}
+
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -81,6 +83,11 @@ def main() -> int:
             "walls": [{"x": x, "y": y} for (x, y) in sorted(lv.walls)],
             "goals": [{"x": x, "y": y} for (x, y) in sorted(lv.goals)],
             "costly": [{"x": x, "y": y} for (x, y) in sorted(lv.costly)],
+            "ice": [{"x": x, "y": y} for (x, y) in sorted(lv.ice)],
+            "conveyors": [
+                {"x": x, "y": y, "dir": DIR_NAMES[step]}
+                for (x, y), step in sorted(lv.conveyors.items())
+            ],
             "crates": [
                 {"x": x, "y": y, "kind": KIND_NAMES[k]}
                 for (x, y), k in sorted(lv.crates.items())

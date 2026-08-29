@@ -113,7 +113,9 @@ MonoBehaviour:
     position:
       x: 2
       y: 4
-  costlyCells:
+  costlyCells: []
+  switchGroups: []
+  iceCells:
   - x: 2
     y: 3
   - x: 3
@@ -126,7 +128,7 @@ MonoBehaviour:
     y: 3
   - x: 6
     y: 3
-  switchGroups: []
-  goldMoveLimit: 51
-  platinumMoveLimit: 39
+  conveyors: []
+  goldMoveLimit: 33
+  platinumMoveLimit: 25
   allowPowerUps: 1

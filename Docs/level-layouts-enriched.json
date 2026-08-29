@@ -141,7 +141,8 @@
           "y": 4
         }
       ],
-      "costly": [
+      "costly": [],
+      "ice": [
         {
           "x": 4,
           "y": 1
@@ -183,6 +184,7 @@
           "y": 5
         }
       ],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -197,10 +199,10 @@
       ],
       "goalRequirements": [],
       "switchGroups": [],
-      "optimalCost": 21,
-      "optimalPushes": 8,
-      "goldMoveLimit": 28,
-      "platinumMoveLimit": 21,
+      "optimalCost": 10,
+      "optimalPushes": 4,
+      "goldMoveLimit": 13,
+      "platinumMoveLimit": 10,
       "allowPowerUps": true
     },
     {
@@ -368,7 +370,8 @@
           "y": 4
         }
       ],
-      "costly": [
+      "costly": [],
+      "ice": [
         {
           "x": 2,
           "y": 3
@@ -394,6 +397,7 @@
           "y": 3
         }
       ],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -408,10 +412,10 @@
       ],
       "goalRequirements": [],
       "switchGroups": [],
-      "optimalCost": 39,
-      "optimalPushes": 13,
-      "goldMoveLimit": 51,
-      "platinumMoveLimit": 39,
+      "optimalCost": 25,
+      "optimalPushes": 7,
+      "goldMoveLimit": 33,
+      "platinumMoveLimit": 25,
       "allowPowerUps": true
     },
     {
@@ -573,7 +577,8 @@
           "y": 4
         }
       ],
-      "costly": [
+      "costly": [],
+      "ice": [
         {
           "x": 3,
           "y": 2
@@ -599,6 +604,7 @@
           "y": 4
         }
       ],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -634,10 +640,10 @@
           ]
         }
       ],
-      "optimalCost": 40,
-      "optimalPushes": 15,
-      "goldMoveLimit": 52,
-      "platinumMoveLimit": 40,
+      "optimalCost": 31,
+      "optimalPushes": 11,
+      "goldMoveLimit": 41,
+      "platinumMoveLimit": 31,
       "allowPowerUps": true
     },
     {
@@ -856,7 +862,8 @@
           "y": 3
         }
       ],
-      "costly": [
+      "costly": [],
+      "ice": [
         {
           "x": 3,
           "y": 3
@@ -866,6 +873,7 @@
           "y": 3
         }
       ],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -906,10 +914,10 @@
           ]
         }
       ],
-      "optimalCost": 46,
-      "optimalPushes": 20,
-      "goldMoveLimit": 60,
-      "platinumMoveLimit": 46,
+      "optimalCost": 39,
+      "optimalPushes": 18,
+      "goldMoveLimit": 51,
+      "platinumMoveLimit": 39,
       "allowPowerUps": true
     },
     {
@@ -1078,6 +1086,29 @@
         }
       ],
       "costly": [],
+      "ice": [],
+      "conveyors": [
+        {
+          "x": 4,
+          "y": 2,
+          "dir": "Right"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "dir": "Right"
+        },
+        {
+          "x": 5,
+          "y": 2,
+          "dir": "Right"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "dir": "Right"
+        }
+      ],
       "crates": [
         {
           "x": 3,
@@ -1092,10 +1123,10 @@
       ],
       "goalRequirements": [],
       "switchGroups": [],
-      "optimalCost": 13,
-      "optimalPushes": 6,
-      "goldMoveLimit": 17,
-      "platinumMoveLimit": 13,
+      "optimalCost": 7,
+      "optimalPushes": 2,
+      "goldMoveLimit": 10,
+      "platinumMoveLimit": 7,
       "allowPowerUps": true
     },
     {
@@ -1178,14 +1209,6 @@
         },
         {
           "x": 4,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 5
-        },
-        {
-          "x": 4,
           "y": 6
         },
         {
@@ -1203,10 +1226,6 @@
         {
           "x": 6,
           "y": 1
-        },
-        {
-          "x": 6,
-          "y": 2
         },
         {
           "x": 6,
@@ -1272,6 +1291,39 @@
         }
       ],
       "costly": [],
+      "ice": [],
+      "conveyors": [
+        {
+          "x": 2,
+          "y": 5,
+          "dir": "Left"
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "dir": "Left"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "dir": "Right"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "dir": "Left"
+        },
+        {
+          "x": 5,
+          "y": 2,
+          "dir": "Right"
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "dir": "Right"
+        }
+      ],
       "crates": [
         {
           "x": 2,
@@ -1291,10 +1343,10 @@
       ],
       "goalRequirements": [],
       "switchGroups": [],
-      "optimalCost": 23,
-      "optimalPushes": 8,
-      "goldMoveLimit": 30,
-      "platinumMoveLimit": 23,
+      "optimalCost": 19,
+      "optimalPushes": 7,
+      "goldMoveLimit": 25,
+      "platinumMoveLimit": 19,
       "allowPowerUps": true
     },
     {
@@ -1463,6 +1515,8 @@
         }
       ],
       "costly": [],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -1705,6 +1759,8 @@
           "y": 3
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -2002,22 +2058,28 @@
           "y": 3
         }
       ],
-      "costly": [
+      "costly": [],
+      "ice": [],
+      "conveyors": [
         {
           "x": 3,
-          "y": 3
+          "y": 3,
+          "dir": "Right"
         },
         {
           "x": 4,
-          "y": 3
+          "y": 3,
+          "dir": "Right"
         },
         {
           "x": 6,
-          "y": 2
+          "y": 2,
+          "dir": "Right"
         },
         {
           "x": 7,
-          "y": 2
+          "y": 2,
+          "dir": "Right"
         }
       ],
       "crates": [
@@ -2060,10 +2122,10 @@
           ]
         }
       ],
-      "optimalCost": 62,
-      "optimalPushes": 26,
-      "goldMoveLimit": 81,
-      "platinumMoveLimit": 62,
+      "optimalCost": 46,
+      "optimalPushes": 20,
+      "goldMoveLimit": 60,
+      "platinumMoveLimit": 46,
       "allowPowerUps": true
     },
     {
@@ -2250,6 +2312,8 @@
           "y": 4
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -2458,6 +2522,8 @@
         }
       ],
       "costly": [],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -2721,6 +2787,8 @@
           "y": 3
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -2995,6 +3063,8 @@
           "y": 4
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -3279,6 +3349,8 @@
           "y": 3
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -3589,6 +3661,8 @@
           "y": 3
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -3850,6 +3924,8 @@
           "y": 3
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -4112,6 +4188,8 @@
           "y": 4
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -4401,6 +4479,8 @@
           "y": 4
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -4643,6 +4723,8 @@
         }
       ],
       "costly": [],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -4858,6 +4940,8 @@
           "y": 4
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -5123,6 +5207,8 @@
           "y": 3
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -5381,6 +5467,8 @@
           "y": 3
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -5615,6 +5703,8 @@
         }
       ],
       "costly": [],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -5922,6 +6012,8 @@
           "y": 2
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -6181,6 +6273,8 @@
           "y": 4
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -6461,6 +6555,8 @@
           "y": 4
         }
       ],
+      "ice": [],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -6736,7 +6832,8 @@
           "y": 3
         }
       ],
-      "costly": [
+      "costly": [],
+      "ice": [
         {
           "x": 4,
           "y": 2
@@ -6750,6 +6847,7 @@
           "y": 4
         }
       ],
+      "conveyors": [],
       "crates": [
         {
           "x": 2,
@@ -6819,10 +6917,10 @@
           ]
         }
       ],
-      "optimalCost": 56,
-      "optimalPushes": 25,
-      "goldMoveLimit": 73,
-      "platinumMoveLimit": 56,
+      "optimalCost": 46,
+      "optimalPushes": 21,
+      "goldMoveLimit": 60,
+      "platinumMoveLimit": 46,
       "allowPowerUps": false
     }
   ]

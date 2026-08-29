@@ -116,19 +116,7 @@ MonoBehaviour:
     position:
       x: 2
       y: 3
-  costlyCells:
-  - x: 3
-    y: 2
-  - x: 3
-    y: 3
-  - x: 3
-    y: 4
-  - x: 4
-    y: 2
-  - x: 4
-    y: 3
-  - x: 4
-    y: 4
+  costlyCells: []
   switchGroups:
   - id: sg-a
     sensors:
@@ -137,6 +125,20 @@ MonoBehaviour:
     doors:
     - x: 5
       y: 3
-  goldMoveLimit: 52
-  platinumMoveLimit: 40
+  iceCells:
+  - x: 3
+    y: 2
+  - x: 3
+    y: 3
+  - x: 3
+    y: 4
+  - x: 4
+    y: 2
+  - x: 4
+    y: 3
+  - x: 4
+    y: 4
+  conveyors: []
+  goldMoveLimit: 41
+  platinumMoveLimit: 31
   allowPowerUps: 1

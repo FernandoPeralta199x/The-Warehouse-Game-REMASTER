@@ -10,6 +10,8 @@ namespace TW08.Puzzle
         private readonly HashSet<GridCoordinate> walls;
         private readonly HashSet<GridCoordinate> goals;
         private readonly HashSet<GridCoordinate> costlyCells;
+        private readonly HashSet<GridCoordinate> iceCells;
+        private readonly Dictionary<GridCoordinate, GridCoordinate> conveyors;
         private readonly HashSet<GridCoordinate> dynamicBlockedCells = new();
         private readonly Dictionary<GridCoordinate, PuzzleEntityKind> goalRequirements;
         private readonly Dictionary<GridCoordinate, string> crateByPosition;
@@ -22,6 +24,8 @@ namespace TW08.Puzzle
         public IReadOnlyCollection<GridCoordinate> Walls => walls;
         public IReadOnlyCollection<GridCoordinate> Goals => goals;
         public IReadOnlyCollection<GridCoordinate> CostlyCells => costlyCells;
+        public IReadOnlyCollection<GridCoordinate> IceCells => iceCells;
+        public IReadOnlyDictionary<GridCoordinate, GridCoordinate> Conveyors => conveyors;
         public IReadOnlyCollection<GridCoordinate> DynamicBlockedCells => dynamicBlockedCells;
         public IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> GoalRequirements => goalRequirements;
         public IReadOnlyDictionary<GridCoordinate, string> Crates => crateByPosition;
@@ -39,7 +43,11 @@ namespace TW08.Puzzle
                 level.CostlyCells,
                 level.GoalRequirements
                     .Where(requirement => requirement != null)
-                    .ToDictionary(requirement => requirement.Position, requirement => requirement.RequiredKind))
+                    .ToDictionary(requirement => requirement.Position, requirement => requirement.RequiredKind),
+                level.IceCells,
+                level.Conveyors
+                    .Where(conveyor => conveyor != null)
+                    .ToDictionary(conveyor => conveyor.Position, conveyor => conveyor.Step))
         {
         }
 
@@ -52,13 +60,19 @@ namespace TW08.Puzzle
             IReadOnlyDictionary<string, GridCoordinate> crates,
             IReadOnlyDictionary<string, PuzzleEntityKind> kinds = null,
             IEnumerable<GridCoordinate> costlyCells = null,
-            IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> goalRequirements = null)
+            IReadOnlyDictionary<GridCoordinate, PuzzleEntityKind> goalRequirements = null,
+            IEnumerable<GridCoordinate> iceCells = null,
+            IReadOnlyDictionary<GridCoordinate, GridCoordinate> conveyors = null)
         {
             Width = Guard.Positive(width, nameof(width));
             Height = Guard.Positive(height, nameof(height));
             this.walls = new HashSet<GridCoordinate>(walls ?? Array.Empty<GridCoordinate>());
             this.goals = new HashSet<GridCoordinate>(goals ?? Array.Empty<GridCoordinate>());
             this.costlyCells = new HashSet<GridCoordinate>(costlyCells ?? Array.Empty<GridCoordinate>());
+            this.iceCells = new HashSet<GridCoordinate>(iceCells ?? Array.Empty<GridCoordinate>());
+            this.conveyors = conveyors != null
+                ? new Dictionary<GridCoordinate, GridCoordinate>(conveyors)
+                : new Dictionary<GridCoordinate, GridCoordinate>();
             this.goalRequirements = goalRequirements != null
                 ? new Dictionary<GridCoordinate, PuzzleEntityKind>(goalRequirements)
                 : new Dictionary<GridCoordinate, PuzzleEntityKind>();
@@ -111,7 +125,7 @@ namespace TW08.Puzzle
 
             if (!crateByPosition.TryGetValue(destination, out string crateId))
             {
-                PlayerPosition = destination;
+                PlayerPosition = Slide(destination, direction, null);
                 MoveCount += moveCost;
                 move = new PuzzleMove(previousPlayer, PlayerPosition, moveCost);
                 return true;
@@ -124,13 +138,92 @@ namespace TW08.Puzzle
                 return false;
             }
 
+            // A carga desliza primeiro e só então o jogador entra: sem essa
+            // ordem o jogador ocuparia a célula que a carga ainda vai cruzar.
+            GridCoordinate crateFinal = Slide(crateDestination, direction, destination);
+
             crateByPosition.Remove(destination);
-            crateByPosition.Add(crateDestination, crateId);
-            PlayerPosition = destination;
+            crateByPosition.Add(crateFinal, crateId);
+
+            // O jogador para antes da carga — ele não a atravessa nem a empurra
+            // uma segunda vez no mesmo comando.
+            GridCoordinate playerFinal = Slide(destination, direction, null);
+
+            PlayerPosition = playerFinal;
             MoveCount += moveCost;
-            move = new PuzzleMove(previousPlayer, PlayerPosition, crateId, destination, crateDestination, moveCost);
+            move = new PuzzleMove(previousPlayer, PlayerPosition, crateId, destination, crateFinal, moveCost);
             return true;
         }
+
+        /// <summary>
+        /// Resolve o deslizamento a partir de <paramref name="start"/>, que já é
+        /// uma célula livre e ocupada pela entidade.
+        ///
+        /// Gelo mantém a direção de entrada; esteira impõe a própria. Quem entra
+        /// segue até pisar em piso comum ou até a próxima célula estar ocupada.
+        ///
+        /// <paramref name="vacated"/> é a célula que a entidade acabou de deixar
+        /// e que ainda consta como ocupada pelo dicionário durante o empurrão.
+        ///
+        /// O teto de iterações protege contra esteiras em circuito fechado: sem
+        /// ele um anel de esteiras giraria para sempre.
+        /// </summary>
+        private GridCoordinate Slide(GridCoordinate start, GridCoordinate direction, GridCoordinate? vacated)
+        {
+            GridCoordinate current = start;
+            int guard = Width * Height;
+
+            while (guard-- > 0)
+            {
+                GridCoordinate step;
+                if (conveyors.TryGetValue(current, out GridCoordinate conveyorStep))
+                {
+                    step = conveyorStep;
+                }
+                else if (iceCells.Contains(current))
+                {
+                    step = direction;
+                }
+                else
+                {
+                    return current;
+                }
+
+                GridCoordinate next = current + step;
+                if (!IsSlideTargetFree(next, vacated))
+                {
+                    return current;
+                }
+
+                current = next;
+                direction = step;
+            }
+
+            return current;
+        }
+
+        private bool IsSlideTargetFree(GridCoordinate cell, GridCoordinate? vacated)
+        {
+            if (!IsInside(cell) || IsBlocked(cell))
+            {
+                return false;
+            }
+
+            // A célula de origem do empurrão ainda aparece ocupada no dicionário
+            // enquanto a carga desliza; tratá-la como livre evita travar o deslize
+            // logo no primeiro passo.
+            if (vacated.HasValue && cell == vacated.Value)
+            {
+                return true;
+            }
+
+            return !crateByPosition.ContainsKey(cell);
+        }
+
+        public bool IsIce(GridCoordinate cell) => iceCells.Contains(cell);
+
+        public bool TryGetConveyor(GridCoordinate cell, out GridCoordinate step)
+            => conveyors.TryGetValue(cell, out step);
 
         public bool TryUndo(PuzzleMove move)
         {

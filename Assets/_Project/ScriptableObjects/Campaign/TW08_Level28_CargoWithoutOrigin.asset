@@ -165,6 +165,8 @@ MonoBehaviour:
     doors:
     - x: 7
       y: 3
+  iceCells: []
+  conveyors: []
   goldMoveLimit: 59
   platinumMoveLimit: 45
   allowPowerUps: 0

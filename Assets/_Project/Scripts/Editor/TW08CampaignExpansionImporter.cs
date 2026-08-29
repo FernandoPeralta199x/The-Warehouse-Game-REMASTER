@@ -34,6 +34,9 @@ namespace TW08.Editor
         private sealed class GoalReqDto { public int x; public int y; public string kind; }
 
         [Serializable]
+        private sealed class ConveyorDto { public int x; public int y; public string dir; }
+
+        [Serializable]
         private sealed class SwitchGroupDto
         {
             public string id;
@@ -57,6 +60,8 @@ namespace TW08.Editor
             public List<CoordDto> walls;
             public List<CoordDto> goals;
             public List<CoordDto> costly;
+            public List<CoordDto> ice;
+            public List<ConveyorDto> conveyors;
             public List<CrateDto> crates;
             public List<GoalReqDto> goalRequirements;
             public List<SwitchGroupDto> switchGroups;
@@ -157,6 +162,17 @@ namespace TW08.Editor
             WriteCoordList(so.FindProperty("walls"), dto.walls);
             WriteCoordList(so.FindProperty("goals"), dto.goals);
             WriteCoordList(so.FindProperty("costlyCells"), dto.costly);
+            WriteCoordList(so.FindProperty("iceCells"), dto.ice);
+
+            SerializedProperty conveyorList = so.FindProperty("conveyors");
+            conveyorList.arraySize = dto.conveyors?.Count ?? 0;
+            for (int i = 0; i < conveyorList.arraySize; i++)
+            {
+                ConveyorDto conveyor = dto.conveyors[i];
+                SerializedProperty element = conveyorList.GetArrayElementAtIndex(i);
+                WriteCoord(element.FindPropertyRelative("position"), conveyor.x, conveyor.y);
+                element.FindPropertyRelative("direction").enumValueIndex = (int)ParseDirection(conveyor.dir);
+            }
 
             SerializedProperty crates = so.FindProperty("crates");
             crates.arraySize = dto.crates?.Count ?? 0;
@@ -193,6 +209,13 @@ namespace TW08.Editor
             so.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(level);
             return level;
+        }
+
+        private static ConveyorDirection ParseDirection(string direction)
+        {
+            return Enum.TryParse(direction, out ConveyorDirection parsed)
+                ? parsed
+                : ConveyorDirection.Right;
         }
 
         private static PuzzleEntityKind ParseKind(string kind)
