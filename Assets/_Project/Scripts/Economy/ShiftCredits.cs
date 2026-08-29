@@ -41,6 +41,27 @@ namespace TW08.Economy
         /// <summary>Teto de créditos que uma única fase pode render.</summary>
         public const int MaxPerLevel = 250;
 
+        /// <summary>
+        /// Teto por medalha.
+        ///
+        /// Um teto único apagava a diferença entre medalhas: numa primeira
+        /// zerada limpa o bruto era 350 no bronze e 425 na platina, e os dois
+        /// batiam no mesmo 250 — jogar perfeito não pagava nada a mais, o que
+        /// esvazia a razão de existir das medalhas.
+        ///
+        /// A bíblia lista bônus que somam acima do próprio teto que ela define;
+        /// escalonar o teto respeita os dois números e preserva a ordenação.
+        /// </summary>
+        public static int CapFor(int medal)
+        {
+            return medal switch
+            {
+                3 => MaxPerLevel,
+                2 => 210,
+                _ => 175
+            };
+        }
+
         /// <summary>Total de créditos ganhos no turno, já com o teto aplicado.</summary>
         public static int Evaluate(PuzzleRunSummary summary)
         {
@@ -50,12 +71,15 @@ namespace TW08.Economy
                 total += entry.Amount;
             }
 
-            return total > MaxPerLevel ? MaxPerLevel : total;
+            int cap = CapFor(summary.Medal);
+            return total > cap ? cap : total;
         }
 
         /// <summary>
         /// Extrato detalhado, na ordem em que é exibido na tela de resultado.
-        /// Não aplica o teto: quem exibe mostra as linhas e o total já limitado.
+        ///
+        /// Não aplica o teto: quem exibe acrescenta a linha de corte, para o
+        /// jogador conseguir somar o que vê e chegar no que recebeu.
         /// </summary>
         public static IReadOnlyList<CreditEntry> BuildStatement(PuzzleRunSummary summary)
         {

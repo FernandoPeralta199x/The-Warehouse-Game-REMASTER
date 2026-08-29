@@ -118,7 +118,7 @@ namespace TW08.UI.Hud
             AnimatePanelEntrance();
             AnimateMedal(medal, assisted);
 
-            IReadOnlyList<ShiftReportLine> lines = ShiftReportPresenter.BuildLines(statement);
+            IReadOnlyList<ShiftReportLine> lines = ShiftReportPresenter.BuildLines(statement, ShiftCredits.CapFor(medal));
             float lastLineDelay = AnimateStatement(lines);
 
             AnimateTotals(creditsEarned, creditBalance, lastLineDelay);

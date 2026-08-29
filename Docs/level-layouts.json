@@ -851,6 +851,26 @@
           "kind": "HeavyCrate"
         }
       ]
+    },
+    {
+      "id": "TW08_Level06_WeightGate",
+      "displayName": "Portão de Peso",
+      "sectorId": "S02",
+      "gimmickTags": [
+        "weight_sensor",
+        "door",
+        "tool_crate",
+        "tutorial"
+      ],
+      "rows": [
+        "###########",
+        "#     #   #",
+        "# $   A . #",
+        "#@$ 1.#   #",
+        "#     #   #",
+        "#     #   #",
+        "###########"
+      ]
     }
   ]
 }

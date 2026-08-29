@@ -377,6 +377,20 @@
       "states": 751086,
       "replayOk": true,
       "replayCost": 46
+    },
+    {
+      "id": "TW08_Level06_WeightGate",
+      "displayName": "Portão de Peso",
+      "board": "11x7",
+      "crates": 2,
+      "goals": 2,
+      "solvable": true,
+      "optimalCost": 17,
+      "pushes": 9,
+      "solution": "RRLLURRRRRRLLLLDR",
+      "states": 1460,
+      "replayOk": true,
+      "replayCost": 17
     }
   ]
 }

@@ -149,6 +149,26 @@ Só uma tag segue sendo etiqueta de propósito:
 - `n8_jack` (L22) — o Macaco N-8 é ferramenta de loja, e a bíblia de design o
   exclui do MVP. A etiqueta está certa como está.
 
+## A caixa-ferramenta, e por que ela não existia
+
+`tool_crate` é o conceito central da bíblia: pôr a carga no sensor para abrir a
+porta e depois **tirá-la de lá** para levá-la ao alvo de verdade.
+
+Durante meses ela não aconteceu uma única vez. Ao desenhar as fases, várias specs
+pediam mais alvos do que cargas — e o motor exige que os dois números batam. Minha
+saída foi pôr um alvo em cima da célula do sensor. O número fechou e a mecânica
+morreu: se o sensor também é alvo, a carga estaciona nele e nunca precisa sair.
+Eram **23 de 23 sensores** assim.
+
+Medido: remover a porta de todas as 19 fases com sensor muda o custo ótimo de
+**uma** delas. Dezoito portas eram decorativas — o mesmo sintoma do robô, do botão
+e do portão, em escala dezenove vezes maior.
+
+A fase 06 (Portão de Peso) é a primeira com sensor que **não** é alvo. Trancar a
+porta permanentemente a torna insolúvel, e o desvio até o sensor custa 4
+movimentos reais. É recuperável sem reiniciar, o que importa num tutorial: o
+jogador deve perder porque pensou errado, não porque o jogo o prendeu.
+
 ## Botão de direção (`direction_button`)
 
 Pisar no botão **inverte todas as esteiras do tabuleiro**, e não só o trecho sob

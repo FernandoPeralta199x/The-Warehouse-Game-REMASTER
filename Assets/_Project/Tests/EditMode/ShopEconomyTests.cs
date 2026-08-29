@@ -30,6 +30,33 @@ namespace TW08.Tests.EditMode
         }
 
         [Test]
+        public void PlayingPerfectlyAlwaysPaysMoreThanScrapingBy()
+        {
+            // Regressão: com teto único, bronze e platina numa primeira zerada
+            // limpa batiam ambos em 250 — a medalha não valia nada em créditos.
+            PuzzleRunSummary bronze = new()
+            {
+                Moves = 90, Medal = 1, FirstAttempt = true, PersonalBest = true
+            };
+            PuzzleRunSummary platinum = new()
+            {
+                Moves = 20, Medal = 3, FirstAttempt = true, PersonalBest = true
+            };
+            PuzzleRunSummary gold = new()
+            {
+                Moves = 40, Medal = 2, FirstAttempt = true, PersonalBest = true
+            };
+
+            int bronzePay = ShiftCredits.Evaluate(bronze);
+            int goldPay = ShiftCredits.Evaluate(gold);
+            int platinumPay = ShiftCredits.Evaluate(platinum);
+
+            Assert.Greater(platinumPay, goldPay, "Platina precisa pagar mais que ouro.");
+            Assert.Greater(goldPay, bronzePay, "Ouro precisa pagar mais que bronze.");
+            Assert.LessOrEqual(platinumPay, ShiftCredits.MaxPerLevel);
+        }
+
+        [Test]
         public void BareCompletion_PaysOnlyCompletionAndBronze()
         {
             PuzzleRunSummary summary = new()
@@ -53,9 +80,10 @@ namespace TW08.Tests.EditMode
 
             Assert.IsTrue(clean.IsClean);
             Assert.IsFalse(assisted.IsClean);
-            Assert.AreEqual(
-                ShiftCredits.NoToolsReward,
-                ShiftCredits.Evaluate(clean) - ShiftCredits.Evaluate(assisted));
+
+            // A diferença exata depende de o turno bater ou não no teto da
+            // medalha; o que precisa valer sempre é que o turno limpo paga mais.
+            Assert.Greater(ShiftCredits.Evaluate(clean), ShiftCredits.Evaluate(assisted));
         }
 
         [Test]
@@ -64,6 +92,7 @@ namespace TW08.Tests.EditMode
             PuzzleRunSummary summary = new() { Moves = 30, Medal = 2, PersonalBest = true };
             List<string> labels = ShiftCredits.BuildStatement(summary).Select(entry => entry.Label).ToList();
 
+            // O extrato lista só o que foi ganho; a linha de corte é do presenter.
             CollectionAssert.AreEqual(
                 new[] { "TURNO CONCLUÍDO", "MEDALHA OURO", "SEM FERRAMENTAS", "SEM DICAS", "NOVO RECORDE" },
                 labels);

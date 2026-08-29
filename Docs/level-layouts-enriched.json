@@ -7184,6 +7184,226 @@
       "goldMoveLimit": 60,
       "platinumMoveLimit": 46,
       "allowPowerUps": false
+    },
+    {
+      "id": "TW08_Level06_WeightGate",
+      "displayName": "Portão de Peso",
+      "sectorId": "S02",
+      "briefing": "A porta só abre com peso sobre o sensor. Aceite que uma das caixas vira ferramenta antes de virar entrega.\nDuda: “Nem toda carga parada está esperando destino. Algumas estão segurando caminho.”",
+      "gimmickTags": [
+        "weight_sensor",
+        "door",
+        "tool_crate",
+        "tutorial"
+      ],
+      "kind": "main",
+      "specIndex": 6,
+      "width": 11,
+      "height": 7,
+      "player": {
+        "x": 1,
+        "y": 3
+      },
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "goals": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "costly": [],
+      "ice": [],
+      "fakeWalls": [],
+      "patrols": [],
+      "directionButtons": [],
+      "timedBlocks": [],
+      "fogMode": "None",
+      "fogRadius": 2,
+      "conveyors": [],
+      "crates": [
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "Crate"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Crate"
+        }
+      ],
+      "goalRequirements": [],
+      "switchGroups": [
+        {
+          "id": "sg-a",
+          "sensors": [
+            {
+              "x": 4,
+              "y": 3
+            }
+          ],
+          "doors": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ]
+        }
+      ],
+      "optimalCost": 17,
+      "optimalPushes": 9,
+      "goldMoveLimit": 23,
+      "platinumMoveLimit": 17,
+      "allowPowerUps": true
     }
   ]
 }

@@ -260,7 +260,7 @@ namespace TW08.Tests.EditMode
             };
 
             IReadOnlyList<CreditEntry> statement = ShiftCredits.BuildStatement(summary);
-            IReadOnlyList<ShiftReportLine> lines = ShiftReportPresenter.BuildLines(statement);
+            IReadOnlyList<ShiftReportLine> lines = ShiftReportPresenter.BuildLines(statement, summary);
             ShiftReportLine capLine = lines[lines.Count - 1];
 
             Assert.AreEqual(ShiftReportPresenter.CapLabel, capLine.Label);
@@ -282,13 +282,13 @@ namespace TW08.Tests.EditMode
             foreach (PuzzleRunSummary run in runs)
             {
                 IReadOnlyList<CreditEntry> statement = ShiftCredits.BuildStatement(run);
-                IReadOnlyList<ShiftReportLine> lines = ShiftReportPresenter.BuildLines(statement);
+                IReadOnlyList<ShiftReportLine> lines = ShiftReportPresenter.BuildLines(statement, run);
 
                 Assert.AreEqual(
                     ShiftCredits.Evaluate(run),
                     ShiftReportPresenter.VisibleTotal(lines),
                     "O extrato na tela precisa somar exatamente o crédito pago.");
-                Assert.AreEqual(ShiftCredits.Evaluate(run), ShiftReportPresenter.CappedTotal(statement));
+                Assert.AreEqual(ShiftCredits.Evaluate(run), ShiftReportPresenter.CappedTotal(statement, run));
             }
         }
 

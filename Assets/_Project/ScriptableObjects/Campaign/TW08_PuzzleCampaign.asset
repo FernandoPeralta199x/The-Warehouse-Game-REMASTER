@@ -94,3 +94,6 @@ MonoBehaviour:
   - level: {fileID: 11400000, guid: 5029c8d1bc93a4f4ea8c5fbd54cc08f3, type: 2}
     sceneName: TW08_Level30_LogisticsCore
     unlockedByDefault: 0
+  - level: {fileID: 11400000, guid: 25e8c6b749d302e4484bd9d1b694b76a, type: 2}
+    sceneName: TW08_Level06_WeightGate
+    unlockedByDefault: 0

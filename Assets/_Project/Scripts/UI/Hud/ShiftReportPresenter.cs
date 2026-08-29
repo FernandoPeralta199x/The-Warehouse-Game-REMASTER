@@ -37,6 +37,24 @@ namespace TW08.UI.Hud
 
         public static IReadOnlyList<ShiftReportLine> BuildLines(IReadOnlyList<CreditEntry> statement)
         {
+            return BuildLines(statement, ShiftCredits.MaxPerLevel);
+        }
+
+        /// <summary>
+        /// Versão que conhece o turno, e portanto o teto certo.
+        ///
+        /// O teto depende da medalha: com um teto único, bronze e platina numa
+        /// zerada limpa pagavam o mesmo e a soma na tela não fechava.
+        /// </summary>
+        public static IReadOnlyList<ShiftReportLine> BuildLines(
+            IReadOnlyList<CreditEntry> statement, PuzzleRunSummary summary)
+        {
+            return BuildLines(statement, ShiftCredits.CapFor(summary.Medal));
+        }
+
+        public static IReadOnlyList<ShiftReportLine> BuildLines(
+            IReadOnlyList<CreditEntry> statement, int cap)
+        {
             List<ShiftReportLine> lines = new();
             if (statement == null)
             {
@@ -50,9 +68,9 @@ namespace TW08.UI.Hud
                 raw += entry.Amount;
             }
 
-            if (raw > ShiftCredits.MaxPerLevel)
+            if (raw > cap)
             {
-                lines.Add(new ShiftReportLine(CapLabel, ShiftCredits.MaxPerLevel - raw));
+                lines.Add(new ShiftReportLine(CapLabel, cap - raw));
             }
 
             return lines;
@@ -78,8 +96,18 @@ namespace TW08.UI.Hud
         /// <summary>Soma que o jogador realmente recebe — igual ao que a economia credita.</summary>
         public static int CappedTotal(IReadOnlyList<CreditEntry> statement)
         {
+            return CappedTotal(statement, ShiftCredits.MaxPerLevel);
+        }
+
+        public static int CappedTotal(IReadOnlyList<CreditEntry> statement, PuzzleRunSummary summary)
+        {
+            return CappedTotal(statement, ShiftCredits.CapFor(summary.Medal));
+        }
+
+        public static int CappedTotal(IReadOnlyList<CreditEntry> statement, int cap)
+        {
             int raw = RawTotal(statement);
-            return raw > ShiftCredits.MaxPerLevel ? ShiftCredits.MaxPerLevel : raw;
+            return raw > cap ? cap : raw;
         }
 
         /// <summary>Somatório das linhas exibidas — precisa fechar com o crédito pago.</summary>
