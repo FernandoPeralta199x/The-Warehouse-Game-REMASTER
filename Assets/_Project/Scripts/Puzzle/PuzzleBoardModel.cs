@@ -168,7 +168,7 @@ namespace TW08.Puzzle
                 MoveCount += moveCost;
                 CommandCount++;
                 ApplyDirectionButton(landing);
-                move = new PuzzleMove(previousPlayer, PlayerPosition, moveCost);
+                move = new PuzzleMove(previousPlayer, PlayerPosition, moveCost, direction);
                 return true;
             }
 
@@ -194,7 +194,11 @@ namespace TW08.Puzzle
             // uma segunda vez no mesmo comando.
             GridCoordinate playerFinal = Slide(destination, direction, null, robots);
 
-            if (robots.Contains(playerFinal))
+            // Uma esteira invertida devolve a carga para a célula que ela acabou
+            // de deixar — que é exatamente onde o operador vai entrar. Sem esta
+            // checagem os dois terminam empilhados na mesma célula e o tabuleiro
+            // fica corrompido. O comando é recusado: a correia venceu o empurrão.
+            if (robots.Contains(playerFinal) || playerFinal == crateFinal)
             {
                 // Desfaz o empurrão: o comando inteiro é recusado.
                 crateByPosition.Remove(crateFinal);
@@ -206,7 +210,7 @@ namespace TW08.Puzzle
             MoveCount += moveCost;
             CommandCount++;
             ApplyDirectionButton(playerFinal);
-            move = new PuzzleMove(previousPlayer, PlayerPosition, crateId, destination, crateFinal, moveCost);
+            move = new PuzzleMove(previousPlayer, PlayerPosition, crateId, destination, crateFinal, moveCost, direction);
             return true;
         }
 
@@ -351,6 +355,13 @@ namespace TW08.Puzzle
             {
                 if (PlayerPosition == cell || crateByPosition.ContainsKey(cell))
                 {
+                    // Invariante: nunca existe porta fechada com algo dentro.
+                    //
+                    // Sem o Remove, desfazer um movimento podia devolver a carga
+                    // para uma célula que fechou depois — e o grupo continuava
+                    // constando como fechado, prendendo a carga ali para sempre
+                    // e tornando a fase invencível sem nenhum aviso.
+                    dynamicBlockedCells.Remove(cell);
                     return false;
                 }
 

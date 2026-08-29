@@ -146,12 +146,15 @@ namespace TW08.Race
             float finishTime = racer.FinishTime;
             float cargoDamage = playerCargo != null ? playerCargo.DamagePercent : 0f;
             int medal = track != null ? track.GetMedal(finishTime, cargoDamage) : 0;
-            RaceProgressStore.Record(track, finishTime);
+            // O dano de carga precisa ir junto: sem ele o save recalcula a
+            // medalha com dano zero e grava uma melhor do que a que a HUD
+            // acabou de mostrar ao jogador.
+            RaceProgressStore.Record(track, finishTime, cargoDamage);
 
             SaveManager saveManager = UnityEngine.Object.FindFirstObjectByType<SaveManager>();
             if (saveManager != null)
             {
-                saveManager.RecordRaceCompletion(track, finishTime);
+                saveManager.RecordRaceCompletion(track, finishTime, cargoDamage);
             }
 
             PlayerFinished?.Invoke(finishTime, medal);

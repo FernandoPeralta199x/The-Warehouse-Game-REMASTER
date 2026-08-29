@@ -60,6 +60,7 @@ namespace TW08.Audio
                 runtime.LevelCompleted += OnCompleted;
                 runtime.StaticDeadlockDetected += OnDeadlock;
                 runtime.SwitchGroupStateChanged += OnSwitchChanged;
+                runtime.MoveBlocked += OnMoveBlocked;
             }
 
             if (toolService != null)
@@ -82,6 +83,7 @@ namespace TW08.Audio
                 runtime.LevelCompleted -= OnCompleted;
                 runtime.StaticDeadlockDetected -= OnDeadlock;
                 runtime.SwitchGroupStateChanged -= OnSwitchChanged;
+                runtime.MoveBlocked -= OnMoveBlocked;
             }
 
             if (toolService != null)
@@ -137,6 +139,13 @@ namespace TW08.Audio
             {
                 Play(catalog.CrateHit);
             }
+        }
+
+        private void OnMoveBlocked()
+        {
+            // Recusa precisa soar diferente de ação: o jogador tem que saber que
+            // o comando chegou e foi negado, não que o jogo travou.
+            Play(catalog.UiDenied);
         }
 
         private void OnMoveUndone(PuzzleMove _)

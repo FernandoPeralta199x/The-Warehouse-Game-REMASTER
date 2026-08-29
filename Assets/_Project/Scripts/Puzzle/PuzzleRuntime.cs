@@ -47,6 +47,13 @@ namespace TW08.Puzzle
         /// <summary>Disparado quando uma ferramenta é acionada — a HUD reage a isso.</summary>
         public event Action AssistanceUsed;
 
+        /// <summary>
+        /// Comando recusado pelo tabuleiro: parede, carga travada, porta fechada,
+        /// robô no caminho. Sem isso a recusa era silêncio absoluto, e o jogador
+        /// não distinguia "não pode" de "o jogo não me ouviu".
+        /// </summary>
+        public event Action MoveBlocked;
+
         private void Start()
         {
             if (initializeOnStart)
@@ -104,8 +111,14 @@ namespace TW08.Puzzle
 
         public bool TryMove(GridCoordinate direction)
         {
-            if (Board == null || Board.IsComplete || !Board.TryMove(direction, out PuzzleMove move))
+            if (Board == null || Board.IsComplete)
             {
+                return false;
+            }
+
+            if (!Board.TryMove(direction, out PuzzleMove move))
+            {
+                MoveBlocked?.Invoke();
                 return false;
             }
 
@@ -184,8 +197,10 @@ namespace TW08.Puzzle
                 return false;
             }
 
-            GridCoordinate direction = move.PlayerTo - move.PlayerFrom;
-            if (!Board.TryMove(direction, out PuzzleMove repeated))
+            // A direção vem do movimento, não da diferença de posições: em gelo
+            // e esteira o comando move o operador várias células, e a diferença
+            // deixaria de ser unitária.
+            if (!Board.TryMove(move.Direction, out PuzzleMove repeated))
             {
                 history.PushRedo(move);
                 return false;

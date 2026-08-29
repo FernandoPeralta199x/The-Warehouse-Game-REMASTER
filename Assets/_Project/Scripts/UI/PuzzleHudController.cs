@@ -46,6 +46,7 @@ namespace TW08.UI
         private bool bound;
         private bool attemptRegistered;
         private bool hasReport;
+        private bool shiftCommitted;
         private bool exiting;
         private PuzzleShiftReport lastReport;
 
@@ -263,8 +264,18 @@ namespace TW08.UI
 
         private void OnCompleted()
         {
+            // Fechar o turno paga créditos, e desfazer/refazer sobre o tabuleiro
+            // já completo disparava este evento de novo — cada par de teclas
+            // rendia outra vez o prêmio inteiro da fase.
+            if (shiftCommitted)
+            {
+                Refresh();
+                return;
+            }
+
             if (runtime?.Level != null && runtime.Board != null)
             {
+                shiftCommitted = true;
                 PuzzleProgressStore.RecordCompletion(runtime.Level, runtime.Board.MoveCount);
 
                 SaveManager saveManager = Object.FindFirstObjectByType<SaveManager>();

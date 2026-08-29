@@ -26,12 +26,13 @@ namespace TW08.Editor
         /// <summary>Envelope ADSR simplificado, em fração da duração total.</summary>
         internal readonly struct Envelope
         {
-            public Envelope(float attack, float decay, float sustain, float release)
+            public Envelope(float attack, float decay, float sustain, float release, float decayShape = 1f)
             {
                 Attack = Mathf.Max(0.0001f, attack);
                 Decay = Mathf.Max(0f, decay);
                 Sustain = Mathf.Clamp01(sustain);
                 Release = Mathf.Max(0.0001f, release);
+                DecayShape = Mathf.Max(0.2f, decayShape);
             }
 
             public float Attack { get; }
@@ -39,9 +40,30 @@ namespace TW08.Editor
             public float Sustain { get; }
             public float Release { get; }
 
+            /// <summary>Curvatura do decaimento. 1 é linear; acima disso cai como corpo físico.</summary>
+            public float DecayShape { get; }
+
             public static Envelope Percussive => new(0.004f, 0.18f, 0f, 0.30f);
             public static Envelope Soft => new(0.06f, 0.10f, 0.75f, 0.35f);
             public static Envelope Sustained => new(0.02f, 0.05f, 0.90f, 0.20f);
+
+            /// <summary>
+            /// Impacto: decaimento exponencial ao longo de toda a duração.
+            ///
+            /// Existe porque <see cref="Percussive"/> combina decay de 0,18 com
+            /// sustain 0 — o sinal zera em 18,4% do arquivo e os outros 81,6%
+            /// são silêncio gravado. Todo transiente saía cinco vezes mais curto
+            /// que o declarado e sem cauda, soando como clique digital em vez de
+            /// objeto ressoando.
+            /// </summary>
+            public static Envelope Impact => new(0.0015f, 0.998f, 0f, 0.0015f, 2.6f);
+
+            /// <summary>
+            /// Loop: platô com micro-fades. <see cref="Sustained"/> tem release
+            /// em 20% da duração, o que derrubava a ambiência 6,3 dB no fim de
+            /// cada volta — uma respiração audível a cada poucos segundos.
+            /// </summary>
+            public static Envelope Looping => new(0.004f, 0.004f, 1f, 0.004f);
 
             public float Evaluate(float t)
             {
@@ -53,7 +75,10 @@ namespace TW08.Editor
                 float afterAttack = t - Attack;
                 if (afterAttack < Decay)
                 {
-                    return Mathf.Lerp(1f, Sustain, afterAttack / Decay);
+                    // DecayShape 1 reproduz exatamente o Lerp anterior, então
+                    // nenhum envelope existente muda de comportamento.
+                    float k = afterAttack / Decay;
+                    return Sustain + (1f - Sustain) * Mathf.Pow(1f - k, DecayShape);
                 }
 
                 float releaseStart = 1f - Release;

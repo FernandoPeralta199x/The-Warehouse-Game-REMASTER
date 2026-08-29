@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using TW08.Puzzle;
 
@@ -198,6 +199,88 @@ namespace TW08.Tests.EditMode
                 null, null, null, null, ring);
 
             Assert.DoesNotThrow(() => board.TryMove(GridCoordinate.Right, out _));
+        }
+
+        [Test]
+        public void RedoWorksAfterASlide()
+        {
+            // Regressão: Redo recalculava a direção como PlayerTo - PlayerFrom.
+            // Depois de deslizar três células isso vira (3,0), e TryMove recusa
+            // qualquer vetor que não seja unitário — refazer ficava impossível
+            // em toda fase com gelo ou esteira.
+            PuzzleBoardModel board = Build(ice: new[]
+            {
+                new GridCoordinate(2, 1), new GridCoordinate(3, 1), new GridCoordinate(4, 1)
+            });
+
+            Assert.IsTrue(board.TryMove(GridCoordinate.Right, out PuzzleMove move));
+            Assert.AreEqual(new GridCoordinate(5, 1), board.PlayerPosition);
+            Assert.AreEqual(GridCoordinate.Right, move.Direction, "O movimento precisa guardar a direção do comando.");
+
+            Assert.IsTrue(board.TryUndo(move));
+            Assert.AreEqual(new GridCoordinate(1, 1), board.PlayerPosition);
+
+            // Refazer: a direção guardada é unitária e o deslize se repete.
+            Assert.IsTrue(board.TryMove(move.Direction, out PuzzleMove again));
+            Assert.AreEqual(new GridCoordinate(5, 1), board.PlayerPosition);
+            Assert.AreEqual(move.PlayerTo, again.PlayerTo);
+        }
+
+        [Test]
+        public void MoveDirectionIsUnitEvenWhenTheSlideIsLong()
+        {
+            PuzzleBoardModel board = Build(
+                conveyors: new Dictionary<GridCoordinate, GridCoordinate>
+                {
+                    [new GridCoordinate(2, 1)] = GridCoordinate.Right,
+                    [new GridCoordinate(3, 1)] = GridCoordinate.Right,
+                    [new GridCoordinate(4, 1)] = GridCoordinate.Right
+                });
+
+            board.TryMove(GridCoordinate.Right, out PuzzleMove move);
+
+            Assert.AreEqual(1, move.Direction.ManhattanLength);
+            Assert.Greater((move.PlayerTo - move.PlayerFrom).ManhattanLength, 1,
+                "O deslize precisa ter movido mais de uma célula para o teste valer.");
+        }
+
+        [Test]
+        public void AClosedDoorNeverKeepsCargoTrappedInside()
+        {
+            // Regressão: desfazer podia devolver carga para uma célula de porta
+            // que fechou depois. O grupo seguia constando fechado, a carga ficava
+            // presa dentro dela e a fase virava invencível sem nenhum aviso.
+            PuzzleBoardModel board = Build(
+                crates: new Dictionary<string, GridCoordinate> { ["c1"] = new(3, 1) },
+                player: new GridCoordinate(2, 1));
+
+            GridCoordinate door = new(3, 1);
+
+            // A porta não fecha com a carga em cima, e sai do estado de fechada.
+            Assert.IsFalse(board.SetDynamicBlocked(door, true));
+            Assert.IsFalse(board.DynamicBlockedCells.Contains(door));
+            Assert.IsFalse(board.IsBlocked(door), "Carga dentro da porta significa porta aberta.");
+        }
+
+        [Test]
+        public void ConveyorRefusesThePushWhenItWouldStackPlayerAndCargo()
+        {
+            // Regressão: uma esteira apontando de volta devolvia a carga à célula
+            // que ela acabara de deixar — exatamente onde o jogador ia parar.
+            // Os dois terminavam empilhados e o tabuleiro ficava corrompido.
+            PuzzleBoardModel board = Build(
+                conveyors: new Dictionary<GridCoordinate, GridCoordinate>
+                {
+                    [new GridCoordinate(4, 1)] = GridCoordinate.Left
+                },
+                crates: new Dictionary<string, GridCoordinate> { ["c1"] = new(3, 1) },
+                player: new GridCoordinate(2, 1));
+
+            Assert.IsFalse(board.TryMove(GridCoordinate.Right, out _),
+                "A correia devolve a carga para onde o jogador entraria: comando recusado.");
+            Assert.AreEqual(new GridCoordinate(2, 1), board.PlayerPosition);
+            Assert.IsTrue(board.Crates.ContainsKey(new GridCoordinate(3, 1)),
+                "Comando recusado não pode deixar a carga deslocada.");
         }
 
         [Test]

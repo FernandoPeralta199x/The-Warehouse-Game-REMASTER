@@ -80,7 +80,7 @@
       "optimalCost": 20,
       "pushes": 2,
       "solution": "RRRRRRRLLLLLLLURDLDR",
-      "states": 997,
+      "states": 963,
       "replayOk": true,
       "replayCost": 20
     },
@@ -122,7 +122,7 @@
       "optimalCost": 46,
       "pushes": 20,
       "solution": "DDRULURLUURDRRRLDRRRRRLLLLULLLLDRDRRRLURRRRLDR",
-      "states": 101700,
+      "states": 100048,
       "replayOk": true,
       "replayCost": 46
     },

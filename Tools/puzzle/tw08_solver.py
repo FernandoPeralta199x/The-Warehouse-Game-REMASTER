@@ -588,6 +588,7 @@ def solve(level: Level, max_states=3_000_000):
                 continue
             step_cost = 2 if npos in level.costly else 1
             pushed = False
+            cfinal = None
             new_crates = crates
             if npos in crates:
                 cx, cy = nx + dx, ny + dy
@@ -616,7 +617,9 @@ def solve(level: Level, max_states=3_000_000):
                 pfinal = slide(level, npos, (dx, dy), crates, closed_doors,
                                robots=robots, inverted=inverted)
 
-            if pfinal in robots:
+            # Espelha PuzzleBoardModel: esteira invertida pode devolver a carga
+            # para a célula onde o jogador vai parar. Comando recusado.
+            if pfinal in robots or (pushed and pfinal == cfinal):
                 continue
 
             npos = pfinal
@@ -672,6 +675,8 @@ def replay(level: Level, solution: str):
             player = slide(level, npos, (dx, dy), crates, closed, robots=robots, inverted=inverted)
             if player in robots:
                 return False, f"jogador pararia sobre robô em {player}"
+            if player == cfinal:
+                return False, f"jogador e carga parariam juntos em {player}"
             if player in level.buttons:
                 inverted = not inverted
             continue

@@ -94,14 +94,28 @@ namespace TW08.Editor
             PuzzleRuntime runtime = UnityEngine.Object.FindFirstObjectByType<PuzzleRuntime>();
             if (runtime == null) return;
 
+            // PuzzleAudioDirector substitui o feedback legado e cobre tudo que
+            // ele cobria. Manter os dois fazia cada passo e cada empurrão tocar
+            // duas vezes, com pitch sorteado em separado — e na carga pesada o
+            // Director tocava o som grave enquanto o legado tocava o comum, o
+            // que transformava a distinção de peso em "mais alto".
+            PuzzleAudioDirector director = UnityEngine.Object.FindFirstObjectByType<PuzzleAudioDirector>();
             PuzzleAudioFeedback feedback = runtime.GetComponent<PuzzleAudioFeedback>();
-            if (feedback == null)
+
+            if (director != null)
+            {
+                if (feedback != null)
+                {
+                    UnityEngine.Object.DestroyImmediate(feedback);
+                }
+            }
+            else if (feedback == null)
             {
                 feedback = runtime.gameObject.AddComponent<PuzzleAudioFeedback>();
-            }
-            if (feedback == null)
-            {
-                throw new InvalidOperationException($"TW08 failed to attach PuzzleAudioFeedback in '{path}'.");
+                if (feedback == null)
+                {
+                    throw new InvalidOperationException($"TW08 failed to attach PuzzleAudioFeedback in '{path}'.");
+                }
             }
 
             SceneMusicPresenter music = UnityEngine.Object.FindFirstObjectByType<SceneMusicPresenter>();
@@ -114,9 +128,15 @@ namespace TW08.Editor
                 throw new InvalidOperationException($"TW08 failed to attach SceneMusicPresenter in puzzle scene '{path}'.");
             }
 
-            feedback.Configure(runtime, catalog);
+            // feedback é nulo quando o Director assumiu a cena — ele cobre tudo
+            // que o legado cobria, então não há o que configurar aqui.
+            if (feedback != null)
+            {
+                feedback.Configure(runtime, catalog);
+                EditorUtility.SetDirty(feedback);
+            }
+
             music.Configure(catalog.PuzzleMusic);
-            EditorUtility.SetDirty(feedback);
             EditorUtility.SetDirty(music);
             EditorSceneManager.MarkSceneDirty(scene);
             if (!EditorSceneManager.SaveScene(scene, path))

@@ -37,8 +37,8 @@ namespace TW08.Editor
                 "Puzzle_Step_Var",
                 new[] { "step_concrete_01", "step_concrete_02", "step_concrete_03" },
                 seed => TW08AudioSynth.Mix(
-                    TW08AudioSynth.Noise(0.075f, 0.55f, Env.Percussive, seed, 0.22f),
-                    TW08AudioSynth.Tone(0.06f, 132f, 96f, 0.30f, Env.Percussive)),
+                    TW08AudioSynth.Noise(0.075f, 0.55f, Env.Impact, seed, 0.22f),
+                    TW08AudioSynth.Tone(0.06f, 132f, 96f, 0.30f, Env.Impact)),
                 volume: 0.52f, pitchMin: 0.92f, pitchMax: 1.08f);
 
             // Empurrão: atrito longo de madeira arrastando.
@@ -65,8 +65,8 @@ namespace TW08.Editor
                 "Crate_Hit_Wood",
                 new[] { "crate_hit_wood_01", "crate_hit_wood_02", "crate_hit_wood_03" },
                 seed => TW08AudioSynth.Mix(
-                    TW08AudioSynth.Noise(0.13f, 0.70f, Env.Percussive, seed, 0.30f),
-                    TW08AudioSynth.Tone(0.13f, 190f, 70f, 0.55f, Env.Percussive, harmonics: 0.20f)),
+                    TW08AudioSynth.Noise(0.13f, 0.70f, Env.Impact, seed, 0.30f),
+                    TW08AudioSynth.Tone(0.13f, 190f, 70f, 0.55f, Env.Impact, harmonics: 0.20f)),
                 volume: 0.80f, pitchMin: 0.90f, pitchMax: 1.10f);
 
             // Carga no alvo: confirmação clara e curta, sem virar fanfarra —
@@ -75,8 +75,8 @@ namespace TW08.Editor
                 "Crate_On_Goal",
                 "crate_place_goal_01",
                 TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Tone(0.09f, 520f, 520f, 0.40f, Env.Percussive)),
-                    (0.07f, TW08AudioSynth.Tone(0.16f, 784f, 784f, 0.34f, Env.Percussive))),
+                    (0f, TW08AudioSynth.Tone(0.09f, 520f, 520f, 0.40f, Env.Impact)),
+                    (0.07f, TW08AudioSynth.Tone(0.16f, 784f, 784f, 0.34f, Env.Impact))),
                 volume: 0.72f, pitchMin: 0.99f, pitchMax: 1.01f);
 
             // Porta industrial: servo grave subindo/descendo.
@@ -96,50 +96,50 @@ namespace TW08.Editor
                         TW08AudioSynth.Tone(0.42f, 130f, 62f, 0.40f, Env.Soft, harmonics: 0.10f),
                         TW08AudioSynth.Noise(0.42f, 0.22f, Env.Soft, "door_close", 0.08f))),
                     (0.40f, TW08AudioSynth.Mix(
-                        TW08AudioSynth.Noise(0.14f, 0.62f, Env.Percussive, "door_clunk", 0.30f),
-                        TW08AudioSynth.Tone(0.14f, 96f, 52f, 0.50f, Env.Percussive)))),
+                        TW08AudioSynth.Noise(0.14f, 0.62f, Env.Impact, "door_clunk", 0.30f),
+                        TW08AudioSynth.Tone(0.14f, 96f, 52f, 0.50f, Env.Impact)))),
                 volume: 0.78f, pitchMin: 0.98f, pitchMax: 1.02f);
 
             // Sensor: bipe eletrônico limpo. Ligar sobe, desligar desce.
             events["sensorOn"] = SingleEvent(
                 "Sensor_On",
                 "sensor_activate_01",
-                TW08AudioSynth.Square(0.10f, 1180f, 0.30f, Env.Percussive, 0.35f),
+                TW08AudioSynth.Square(0.10f, 1180f, 0.30f, Env.Impact, 0.35f),
                 volume: 0.56f, pitchMin: 1f, pitchMax: 1f);
 
             events["sensorOff"] = SingleEvent(
                 "Sensor_Off",
                 "sensor_deactivate_01",
-                TW08AudioSynth.Square(0.12f, 620f, 0.28f, Env.Percussive, 0.35f),
+                TW08AudioSynth.Square(0.12f, 620f, 0.28f, Env.Impact, 0.35f),
                 volume: 0.52f, pitchMin: 1f, pitchMax: 1f);
 
             events["uiBack"] = SingleEvent(
                 "UI_Back",
                 "ui_back_01",
-                TW08AudioSynth.Tone(0.09f, 520f, 340f, 0.30f, Env.Percussive),
+                TW08AudioSynth.Tone(0.09f, 520f, 340f, 0.30f, Env.Impact),
                 volume: 0.60f, pitchMin: 1f, pitchMax: 1f);
 
             events["uiFocus"] = SingleEvent(
                 "UI_Focus",
                 "ui_focus_01",
-                TW08AudioSynth.Tone(0.045f, 880f, 940f, 0.20f, Env.Percussive),
+                TW08AudioSynth.Tone(0.045f, 880f, 940f, 0.20f, Env.Impact),
                 volume: 0.34f, pitchMin: 0.98f, pitchMax: 1.03f);
 
             events["uiDenied"] = SingleEvent(
                 "UI_Denied",
                 "ui_denied_01",
                 TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Square(0.07f, 220f, 0.30f, Env.Percussive, 0.5f)),
-                    (0.08f, TW08AudioSynth.Square(0.11f, 165f, 0.30f, Env.Percussive, 0.5f))),
+                    (0f, TW08AudioSynth.Square(0.07f, 220f, 0.30f, Env.Impact, 0.5f)),
+                    (0.08f, TW08AudioSynth.Square(0.11f, 165f, 0.30f, Env.Impact, 0.5f))),
                 volume: 0.62f, pitchMin: 1f, pitchMax: 1f);
 
             events["terminalBoot"] = SingleEvent(
                 "Terminal_Boot",
                 "terminal_boot_one_shot",
                 TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Square(0.06f, 440f, 0.22f, Env.Percussive, 0.3f)),
-                    (0.07f, TW08AudioSynth.Square(0.06f, 660f, 0.22f, Env.Percussive, 0.3f)),
-                    (0.14f, TW08AudioSynth.Square(0.06f, 880f, 0.22f, Env.Percussive, 0.3f)),
+                    (0f, TW08AudioSynth.Square(0.06f, 440f, 0.22f, Env.Impact, 0.3f)),
+                    (0.07f, TW08AudioSynth.Square(0.06f, 660f, 0.22f, Env.Impact, 0.3f)),
+                    (0.14f, TW08AudioSynth.Square(0.06f, 880f, 0.22f, Env.Impact, 0.3f)),
                     (0.21f, TW08AudioSynth.Tone(0.30f, 1320f, 1320f, 0.20f, Env.Soft))),
                 volume: 0.58f, pitchMin: 1f, pitchMax: 1f);
 
@@ -148,17 +148,17 @@ namespace TW08.Editor
                 "Forklift_Engine_Idle",
                 "forklift_engine_idle_loop",
                 TW08AudioSynth.MakeSeamless(TW08AudioSynth.Mix(
-                    TW08AudioSynth.Tone(2.4f, 62f, 62f, 0.42f, Env.Sustained, harmonics: 0.28f),
-                    TW08AudioSynth.Tone(2.4f, 93f, 93f, 0.16f, Env.Sustained),
-                    TW08AudioSynth.Noise(2.4f, 0.14f, Env.Sustained, "engine", 0.06f))),
+                    TW08AudioSynth.Tone(2.4f, 62f, 62f, 0.42f, Env.Looping, harmonics: 0.28f),
+                    TW08AudioSynth.Tone(2.4f, 93f, 93f, 0.16f, Env.Looping),
+                    TW08AudioSynth.Noise(2.4f, 0.14f, Env.Looping, "engine", 0.06f))),
                 volume: 0.44f);
 
             events["forkliftReverse"] = LoopEvent(
                 "Forklift_Reverse",
                 "forklift_reverse_beep_loop",
                 TW08AudioSynth.MakeSeamless(TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Square(0.18f, 990f, 0.30f, Env.Percussive, 0.5f)),
-                    (0.55f, TW08AudioSynth.Square(0.18f, 990f, 0.30f, Env.Percussive, 0.5f))),
+                    (0f, TW08AudioSynth.Square(0.18f, 990f, 0.30f, Env.Impact, 0.5f)),
+                    (0.55f, TW08AudioSynth.Square(0.18f, 990f, 0.30f, Env.Impact, 0.5f))),
                     0.05f),
                 volume: 0.50f);
 
@@ -166,8 +166,8 @@ namespace TW08.Editor
                 "Forklift_Impact",
                 new[] { "forklift_impact_01", "forklift_impact_02" },
                 seed => TW08AudioSynth.Mix(
-                    TW08AudioSynth.Noise(0.22f, 0.72f, Env.Percussive, seed, 0.36f),
-                    TW08AudioSynth.Tone(0.22f, 240f, 70f, 0.58f, Env.Percussive, harmonics: 0.34f)),
+                    TW08AudioSynth.Noise(0.22f, 0.72f, Env.Impact, seed, 0.36f),
+                    TW08AudioSynth.Tone(0.22f, 240f, 70f, 0.58f, Env.Impact, harmonics: 0.34f)),
                 volume: 0.84f, pitchMin: 0.90f, pitchMax: 1.08f);
 
             // ------------------------------------------------------- P1 --
@@ -184,8 +184,8 @@ namespace TW08.Editor
                 "Tool_Scanner",
                 "powerup_scanner_activate_01",
                 TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Square(0.05f, 1320f, 0.22f, Env.Percussive, 0.25f)),
-                    (0.10f, TW08AudioSynth.Square(0.05f, 1320f, 0.22f, Env.Percussive, 0.25f)),
+                    (0f, TW08AudioSynth.Square(0.05f, 1320f, 0.22f, Env.Impact, 0.25f)),
+                    (0.10f, TW08AudioSynth.Square(0.05f, 1320f, 0.22f, Env.Impact, 0.25f)),
                     (0.20f, TW08AudioSynth.Tone(0.34f, 1760f, 1320f, 0.24f, Env.Soft))),
                 volume: 0.62f, pitchMin: 1f, pitchMax: 1f);
 
@@ -193,14 +193,14 @@ namespace TW08.Editor
                 "Tool_Assistant",
                 "powerup_assistant_activate_01",
                 TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Tone(0.16f, 587f, 587f, 0.28f, Env.Percussive)),
+                    (0f, TW08AudioSynth.Tone(0.16f, 587f, 587f, 0.28f, Env.Impact)),
                     (0.14f, TW08AudioSynth.Tone(0.28f, 784f, 784f, 0.26f, Env.Soft))),
                 volume: 0.60f, pitchMin: 1f, pitchMax: 1f);
 
             events["toolMarker"] = SingleEvent(
                 "Tool_Marker",
                 "powerup_marker_activate_01",
-                TW08AudioSynth.Tone(0.24f, 440f, 1100f, 0.28f, Env.Percussive),
+                TW08AudioSynth.Tone(0.24f, 440f, 1100f, 0.28f, Env.Impact),
                 volume: 0.58f, pitchMin: 1f, pitchMax: 1f);
 
             // Medalhas: três degraus de celebração, do reconhecimento ao brilho.
@@ -208,7 +208,7 @@ namespace TW08.Editor
                 "Medal_Bronze",
                 "victory_bronze_stinger",
                 TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Tone(0.20f, 392f, 392f, 0.34f, Env.Percussive)),
+                    (0f, TW08AudioSynth.Tone(0.20f, 392f, 392f, 0.34f, Env.Impact)),
                     (0.16f, TW08AudioSynth.Tone(0.34f, 523f, 523f, 0.32f, Env.Soft))),
                 volume: 0.74f, pitchMin: 1f, pitchMax: 1f);
 
@@ -216,8 +216,8 @@ namespace TW08.Editor
                 "Medal_Gold",
                 "victory_gold_stinger",
                 TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Tone(0.16f, 523f, 523f, 0.34f, Env.Percussive)),
-                    (0.14f, TW08AudioSynth.Tone(0.16f, 659f, 659f, 0.34f, Env.Percussive)),
+                    (0f, TW08AudioSynth.Tone(0.16f, 523f, 523f, 0.34f, Env.Impact)),
+                    (0.14f, TW08AudioSynth.Tone(0.16f, 659f, 659f, 0.34f, Env.Impact)),
                     (0.28f, TW08AudioSynth.Tone(0.44f, 784f, 784f, 0.36f, Env.Soft, harmonics: 0.12f))),
                 volume: 0.80f, pitchMin: 1f, pitchMax: 1f);
 
@@ -225,9 +225,9 @@ namespace TW08.Editor
                 "Medal_Platinum",
                 "victory_platinum_stinger",
                 TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Tone(0.14f, 523f, 523f, 0.32f, Env.Percussive)),
-                    (0.12f, TW08AudioSynth.Tone(0.14f, 659f, 659f, 0.32f, Env.Percussive)),
-                    (0.24f, TW08AudioSynth.Tone(0.14f, 784f, 784f, 0.32f, Env.Percussive)),
+                    (0f, TW08AudioSynth.Tone(0.14f, 523f, 523f, 0.32f, Env.Impact)),
+                    (0.12f, TW08AudioSynth.Tone(0.14f, 659f, 659f, 0.32f, Env.Impact)),
+                    (0.24f, TW08AudioSynth.Tone(0.14f, 784f, 784f, 0.32f, Env.Impact)),
                     (0.36f, TW08AudioSynth.Tone(0.62f, 1046f, 1046f, 0.38f, Env.Soft, harmonics: 0.18f))),
                 volume: 0.86f, pitchMin: 1f, pitchMax: 1f);
 
@@ -236,14 +236,14 @@ namespace TW08.Editor
                 "Shop_Purchase",
                 "shop_purchase_01",
                 TW08AudioSynth.Sequence(
-                    (0f, TW08AudioSynth.Square(0.05f, 880f, 0.24f, Env.Percussive, 0.3f)),
+                    (0f, TW08AudioSynth.Square(0.05f, 880f, 0.24f, Env.Impact, 0.3f)),
                     (0.06f, TW08AudioSynth.Tone(0.30f, 1318f, 1318f, 0.28f, Env.Soft))),
                 volume: 0.68f, pitchMin: 1f, pitchMax: 1f);
 
             events["creditsTick"] = SingleEvent(
                 "Credits_Tick",
                 "ui_credit_tick_01",
-                TW08AudioSynth.Tone(0.035f, 1480f, 1480f, 0.16f, Env.Percussive),
+                TW08AudioSynth.Tone(0.035f, 1480f, 1480f, 0.16f, Env.Impact),
                 volume: 0.30f, pitchMin: 0.96f, pitchMax: 1.06f);
 
             // Alarme de lockdown e ambiências de setor.
@@ -260,24 +260,24 @@ namespace TW08.Editor
                 "Conveyor_Belt",
                 "conveyor_belt_loop",
                 TW08AudioSynth.MakeSeamless(TW08AudioSynth.Mix(
-                    TW08AudioSynth.Noise(2.0f, 0.30f, Env.Sustained, "conveyor", 0.05f),
-                    TW08AudioSynth.Tone(2.0f, 88f, 88f, 0.14f, Env.Sustained))),
+                    TW08AudioSynth.Noise(2.0f, 0.30f, Env.Looping, "conveyor", 0.05f),
+                    TW08AudioSynth.Tone(2.0f, 88f, 88f, 0.14f, Env.Looping))),
                 volume: 0.36f);
 
             events["warehouseAmbience"] = LoopEvent(
                 "Ambience_Warehouse",
                 "sector_warehouse_ambience_loop",
                 TW08AudioSynth.MakeSeamless(TW08AudioSynth.Mix(
-                    TW08AudioSynth.Noise(4.0f, 0.16f, Env.Sustained, "ambience", 0.03f),
-                    TW08AudioSynth.Tone(4.0f, 48f, 48f, 0.10f, Env.Sustained))),
+                    TW08AudioSynth.Noise(4.0f, 0.16f, Env.Looping, "ambience", 0.03f),
+                    TW08AudioSynth.Tone(4.0f, 48f, 48f, 0.10f, Env.Looping))),
                 volume: 0.26f);
 
             events["freezerAmbience"] = LoopEvent(
                 "Ambience_Freezer",
                 "sector03_freezer_ambience_loop",
                 TW08AudioSynth.MakeSeamless(TW08AudioSynth.Mix(
-                    TW08AudioSynth.Noise(4.0f, 0.22f, Env.Sustained, "freezer", 0.10f),
-                    TW08AudioSynth.Tone(4.0f, 116f, 116f, 0.07f, Env.Sustained))),
+                    TW08AudioSynth.Noise(4.0f, 0.22f, Env.Looping, "freezer", 0.10f),
+                    TW08AudioSynth.Tone(4.0f, 116f, 116f, 0.07f, Env.Looping))),
                 volume: 0.30f);
 
             // Voz de narrativa: o documento pede um marcador de fala por
@@ -285,19 +285,19 @@ namespace TW08.Editor
             events["voiceJohn"] = SingleEvent(
                 "Voice_John",
                 "voice_john_blip_01",
-                TW08AudioSynth.Tone(0.045f, 190f, 175f, 0.22f, Env.Percussive),
+                TW08AudioSynth.Tone(0.045f, 190f, 175f, 0.22f, Env.Impact),
                 volume: 0.32f, pitchMin: 0.96f, pitchMax: 1.05f);
 
             events["voiceDuda"] = SingleEvent(
                 "Voice_Duda",
                 "voice_duda_blip_01",
-                TW08AudioSynth.Tone(0.042f, 330f, 310f, 0.20f, Env.Percussive),
+                TW08AudioSynth.Tone(0.042f, 330f, 310f, 0.20f, Env.Impact),
                 volume: 0.32f, pitchMin: 0.96f, pitchMax: 1.05f);
 
             events["voiceRobert"] = SingleEvent(
                 "Voice_Robert",
                 "voice_robert_blip_01",
-                TW08AudioSynth.Tone(0.05f, 140f, 128f, 0.24f, Env.Percussive),
+                TW08AudioSynth.Tone(0.05f, 140f, 128f, 0.24f, Env.Impact),
                 volume: 0.34f, pitchMin: 0.96f, pitchMax: 1.05f);
 
             AssetDatabase.SaveAssets();
