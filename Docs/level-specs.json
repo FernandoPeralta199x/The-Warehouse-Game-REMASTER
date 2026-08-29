@@ -198,9 +198,9 @@
       ]
     },
     {
-      "index": 6,
+      "index": 10,
       "kind": "main",
-      "id": "TW08_Level06_WeightGate",
+      "id": "TW08_Level10_WeightGate",
       "displayName": "Portão de Peso",
       "sectorId": "S02",
       "sectorName": "Expedição",

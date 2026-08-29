@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TW08.Puzzle;
 using UnityEditor;
 using UnityEngine;
@@ -337,8 +338,59 @@ namespace TW08.Editor
                 el.FindPropertyRelative("unlockedByDefault").boolValue = false;
             }
 
+            SortCampaignByLevelNumber(levels);
+
             so.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(campaign);
+        }
+
+        /// <summary>
+        /// Reordena a campanha pelo número da fase no id.
+        ///
+        /// Novas fases entram no fim da lista, e sem esta passada uma fase 06
+        /// acrescentada depois ficaria na posição 28 — atrás do final do jogo.
+        /// O número no id é a única ordem que vale, porque as nove fases
+        /// originais não vêm do JSON e não têm specIndex.
+        /// </summary>
+        private static void SortCampaignByLevelNumber(SerializedProperty levels)
+        {
+            var entries = new List<(int order, PuzzleLevelDefinition level, string scene, bool unlocked)>();
+            for (int i = 0; i < levels.arraySize; i++)
+            {
+                SerializedProperty element = levels.GetArrayElementAtIndex(i);
+                var level = element.FindPropertyRelative("level").objectReferenceValue as PuzzleLevelDefinition;
+                if (level == null)
+                {
+                    continue;
+                }
+
+                entries.Add((
+                    ExtractLevelNumber(level.LevelId),
+                    level,
+                    element.FindPropertyRelative("sceneName").stringValue,
+                    element.FindPropertyRelative("unlockedByDefault").boolValue));
+            }
+
+            entries.Sort((a, b) => a.order.CompareTo(b.order));
+
+            levels.arraySize = entries.Count;
+            for (int i = 0; i < entries.Count; i++)
+            {
+                SerializedProperty element = levels.GetArrayElementAtIndex(i);
+                element.FindPropertyRelative("level").objectReferenceValue = entries[i].level;
+                element.FindPropertyRelative("sceneName").stringValue = entries[i].scene;
+
+                // Só a primeira da campanha abre sozinha; o resto segue a corrente.
+                element.FindPropertyRelative("unlockedByDefault").boolValue = i == 0;
+            }
+        }
+
+        private static int ExtractLevelNumber(string levelId)
+        {
+            Match match = Regex.Match(levelId ?? string.Empty, @"Level(\d+)");
+            return match.Success && int.TryParse(match.Groups[1].Value, out int number)
+                ? number
+                : int.MaxValue;
         }
 
         private static void RegisterSecretCampaign(

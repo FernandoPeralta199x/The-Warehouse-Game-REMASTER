@@ -40,6 +40,9 @@ MonoBehaviour:
   - level: {fileID: 11400000, guid: 1e1ede62cc15dee49acc52acd8a24c41, type: 2}
     sceneName: TW08_Level09_CrossDispatch
     unlockedByDefault: 0
+  - level: {fileID: 11400000, guid: 86c0919c93d36f94eb02a01b9e48fdd0, type: 2}
+    sceneName: TW08_Level10_WeightGate
+    unlockedByDefault: 0
   - level: {fileID: 11400000, guid: e6dd1c06ffe1b9c4789e0521a5e3a307, type: 2}
     sceneName: TW08_Level11_IcedFloor
     unlockedByDefault: 0
@@ -93,7 +96,4 @@ MonoBehaviour:
     unlockedByDefault: 0
   - level: {fileID: 11400000, guid: 5029c8d1bc93a4f4ea8c5fbd54cc08f3, type: 2}
     sceneName: TW08_Level30_LogisticsCore
-    unlockedByDefault: 0
-  - level: {fileID: 11400000, guid: 25e8c6b749d302e4484bd9d1b694b76a, type: 2}
-    sceneName: TW08_Level06_WeightGate
     unlockedByDefault: 0

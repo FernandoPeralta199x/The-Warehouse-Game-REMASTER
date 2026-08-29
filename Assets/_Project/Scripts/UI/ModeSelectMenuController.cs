@@ -6,7 +6,7 @@ namespace TW08.UI
     [DisallowMultipleComponent]
     public sealed class ModeSelectMenuController : MonoBehaviour
     {
-        [SerializeField] private string campaignScene = "TW08_PuzzleSelect";
+        [SerializeField] private string campaignScene = "TW08_CampaignMap";
         [SerializeField] private string raceScene = "TW08_RaceSelect";
         [SerializeField] private string operatorsScene = "TW08_OperatorSelect";
         [SerializeField] private string settingsScene = "TW08_Settings";

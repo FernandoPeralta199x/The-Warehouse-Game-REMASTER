@@ -76,6 +76,10 @@ namespace TW08.Editor
             string shopScene = TW08ShopSetup.BuildShopScene();
             Debug.Log($"Pipeline: Oficina N-8 construída em {shopScene}.");
 
+            // 4b. Mapa da campanha — precisa da campanha já ordenada pelo passo 1.
+            string mapScene = TW08WarehouseMapBuilder.Build();
+            Debug.Log($"Pipeline: mapa da campanha construído em {mapScene}.");
+
             // 5. Scene List global: base (já configurada pelo passo 2) + secretas + loja.
             var extraScenes = new List<string>(secretScenes);
             if (System.IO.File.Exists(TW08MenuSceneBuilder.SecretSelectPath))
@@ -86,6 +90,11 @@ namespace TW08.Editor
             if (!string.IsNullOrWhiteSpace(shopScene))
             {
                 extraScenes.Add(shopScene);
+            }
+
+            if (!string.IsNullOrWhiteSpace(mapScene))
+            {
+                extraScenes.Add(mapScene);
             }
 
             if (extraScenes.Count > 0)

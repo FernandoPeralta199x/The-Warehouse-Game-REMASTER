@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6028ca1cdbf8e3d49922bb9935d0eae7, type: 3}
-  m_Name: TW08_Level06_WeightGate
+  m_Name: TW08_Level10_WeightGate
   m_EditorClassIdentifier: TW08.Runtime::TW08.Puzzle.PuzzleLevelDefinition
-  levelId: TW08_Level06_WeightGate
+  levelId: TW08_Level10_WeightGate
   displayName: "Port\xE3o de Peso"
   sectorId: S02
   briefing: "A porta s\xF3 abre com peso sobre o sensor. Aceite que uma das caixas

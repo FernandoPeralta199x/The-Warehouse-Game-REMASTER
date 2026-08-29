@@ -159,6 +159,11 @@ namespace TW08.Editor
                 paths.Add(TW08ShopSetup.ShopScenePath);
             }
 
+            if (SceneFileExists(TW08WarehouseMapBuilder.MapScenePath))
+            {
+                paths.Add(TW08WarehouseMapBuilder.MapScenePath);
+            }
+
             foreach (PuzzleCampaignEntry entry in puzzleCampaign.Levels)
             {
                 if (entry == null || string.IsNullOrWhiteSpace(entry.SceneName)) continue;

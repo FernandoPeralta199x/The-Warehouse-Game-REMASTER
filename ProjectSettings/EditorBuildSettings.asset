@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/Production/Menus/TW08_ShopN8.unity
     guid: fc7da89b466e86b41a49cd49fd57d728
   - enabled: 1
+    path: Assets/_Project/Scenes/Production/Menus/TW08_CampaignMap.unity
+    guid: 22fa47fa13506954a9140afbf1154bdb
+  - enabled: 1
     path: Assets/_Project/Scenes/VerticalSlice/TW08_Level01_FirstShift.unity
     guid: 6701d2014c4c15e48a9e712bb8e62611
   - enabled: 1
@@ -56,6 +59,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/VerticalSlice/TW08_Level09_CrossDispatch.unity
     guid: 94a1cde8298f0b34dbea3a7d89c0664d
+  - enabled: 1
+    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level10_WeightGate.unity
+    guid: aa1a86509a03194439c98148da7def3d
   - enabled: 1
     path: Assets/_Project/Scenes/VerticalSlice/TW08_Level11_IcedFloor.unity
     guid: 6caba2ecfec96254a86b50c2ec8ea4bd
@@ -110,9 +116,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/VerticalSlice/TW08_Level30_LogisticsCore.unity
     guid: 2fbfab0723f49cd4cb2628d7d0e3c2c8
-  - enabled: 1
-    path: Assets/_Project/Scenes/VerticalSlice/TW08_Level06_WeightGate.unity
-    guid: 6681c870a559a8c4bb5e9bab5653f86a
   - enabled: 1
     path: Assets/_Project/Scenes/Secret/TW08_Secret01_OffRecordCrate.unity
     guid: 534847a0df371e74c845d2c092c67177

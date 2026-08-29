@@ -7186,7 +7186,7 @@
       "allowPowerUps": false
     },
     {
-      "id": "TW08_Level06_WeightGate",
+      "id": "TW08_Level10_WeightGate",
       "displayName": "Portão de Peso",
       "sectorId": "S02",
       "briefing": "A porta só abre com peso sobre o sensor. Aceite que uma das caixas vira ferramenta antes de virar entrega.\nDuda: “Nem toda carga parada está esperando destino. Algumas estão segurando caminho.”",
@@ -7197,7 +7197,7 @@
         "tutorial"
       ],
       "kind": "main",
-      "specIndex": 6,
+      "specIndex": 10,
       "width": 11,
       "height": 7,
       "player": {
