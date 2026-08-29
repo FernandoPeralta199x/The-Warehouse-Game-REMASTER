@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd71ca90e796c584f9e265843af76ad0, type: 3}
+  m_Name: TW08_ToolCatalog
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Economy.PuzzleToolCatalog
+  tools:
+  - {fileID: 11400000, guid: 8bf760f97e153b6479aa7344ec49f7ea, type: 2}
+  - {fileID: 11400000, guid: e68279ef40041fd448811ab0e9485e7f, type: 2}
+  - {fileID: 11400000, guid: e5bf8b81880c3ff4fb55c24b93ff883f, type: 2}
+  - {fileID: 11400000, guid: addff1c7322be544ca8a7de68cac12bc, type: 2}
+  equipSlots: 2

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08758f1edd16a1b4bad4b1fd6fb76ee8, type: 3}
+  m_Name: Tool_logistics-scanner
+  m_EditorClassIdentifier: TW08.Runtime::TW08.Economy.PuzzleToolDefinition
+  toolId: logistics-scanner
+  kind: 2
+  rarity: 1
+  displayName: "Scanner Log\xEDstico"
+  shortLabel: SCANNER
+  description: "Aponta a carga em situa\xE7\xE3o mais cr\xEDtica do setor."
+  price: 80
+  usesPerLevel: 1
+  icon: {fileID: 0}

@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/Production/Menus/TW08_Credits.unity
     guid: 01afe1381c7a1824684a6f211b8c7cb8
   - enabled: 1
+    path: Assets/_Project/Scenes/Production/Menus/TW08_ShopN8.unity
+    guid: fc7da89b466e86b41a49cd49fd57d728
+  - enabled: 1
     path: Assets/_Project/Scenes/VerticalSlice/TW08_Level01_FirstShift.unity
     guid: 6701d2014c4c15e48a9e712bb8e62611
   - enabled: 1
