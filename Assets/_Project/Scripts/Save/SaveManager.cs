@@ -75,6 +75,19 @@ namespace TW08.Save
             if (Data == null || string.IsNullOrWhiteSpace(levelId)) return 0;
             LevelProgressRecord record = Data.GetOrCreateLevel(levelId);
             record.attempts = Mathf.Max(0, record.attempts) + 1;
+
+            // Marca onde o jogador está para o "Continuar" do menu principal.
+            // O campo existia desde o começo e nunca era escrito: ficava no
+            // valor padrão para sempre, e continuar levaria sempre à fase 01.
+            //
+            // Guarda o nome da CENA, não o id da fase: as nove fases originais
+            // têm cena com nome diferente do id, e é a cena que se carrega.
+            string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            if (!string.IsNullOrWhiteSpace(sceneName))
+            {
+                Data.lastUnlockedLevel = sceneName;
+            }
+
             Save();
             return record.attempts;
         }

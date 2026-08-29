@@ -1,3 +1,4 @@
+using TW08.Save;
 using TW08.UI.Menus;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -27,8 +28,31 @@ namespace TW08.UI
         private void Awake()
         {
             ResolveSceneReferences();
-            if (continueButton != null) continueButton.interactable = false;
+            RefreshContinueButton();
             if (versionText != null) versionText.text = $"BUILD {Application.version} // UNITY 6.3 LTS";
+        }
+
+        /// <summary>
+        /// Continuar só existe quando há turno para retomar. Um botão aceso que
+        /// não leva a lugar nenhum é pior do que um botão apagado.
+        /// </summary>
+        private void RefreshContinueButton()
+        {
+            SaveManager saveManager = FindFirstObjectByType<SaveManager>();
+            SaveGameData data = saveManager != null ? saveManager.Data : null;
+            bool hasProgress = data != null
+                               && data.levels != null
+                               && data.levels.Exists(record => record != null && record.completed);
+
+            if (continueButton != null)
+            {
+                continueButton.interactable = hasProgress;
+                Text label = continueButton.GetComponentInChildren<Text>();
+                if (label != null)
+                {
+                    label.text = hasProgress ? "CONTINUAR TURNO" : "CONTINUAR [SEM REGISTRO]";
+                }
+            }
         }
 
         private void Start() => SelectInitialButton();
@@ -45,9 +69,18 @@ namespace TW08.UI
 
         public void ContinueShift()
         {
-            // Reservado para retomada direta. Até lá o botão recusa com tremor em
-            // vez de não fazer nada — silêncio parece bug.
-            MenuFeedback.Denied(continueButton);
+            SaveManager saveManager = FindFirstObjectByType<SaveManager>();
+            string target = saveManager?.Data?.lastUnlockedLevel;
+
+            // Sem registro não há o que retomar: recusa com tremor em vez de
+            // carregar uma cena que não existe.
+            if (string.IsNullOrWhiteSpace(target))
+            {
+                MenuFeedback.Denied(continueButton);
+                return;
+            }
+
+            MenuTransition.Go(target, "último turno");
         }
 
         public void OpenOptions() => Debug.Log("Options shell is reserved for the settings milestone.");
