@@ -132,8 +132,38 @@ terminar o passo dentro dele.
 O estado do solver passou a carregar a fase do ciclo. Sem isso ele encontraria
 "soluções" que dependem de o robô estar em dois lugares ao mesmo tempo.
 
+**O robô recolhe e devolve.** Ao passar por cima de uma carga, ele a manda de
+volta ao ponto de partida — é o que o nome promete: arrumar o setor. Deixou de
+ser barreira e virou ameaça ao planejamento.
+
+Duas regras que a mecânica exigiu:
+
+- **Uma carga por comando**, a primeira encontrada. O robô tem um par de garfos,
+  e resolver várias de uma vez tornaria o efeito ilegível para quem planeja.
+- **Origem ocupada, carga fica onde está** — inclusive quando o ocupante é o
+  operador. Empilhar corromperia o tabuleiro, e um robô que às vezes não
+  consegue arrumar é mais justo do que um que teleporta carga por cima de algo.
+
+A devolução vive dentro do `PuzzleMove`: sem isso, desfazer restauraria o
+operador e deixaria a carga na origem, e o tabuleiro divergiria.
+
 Em L18 Robô de Limpeza a rota varre a coluna que liga as cargas aos alvos: vira
-uma porta que abre e fecha sozinha. O primeiro traçado que testei patrulhava uma
+uma porta que abre e fecha sozinha.
+
+Três traçados foram medidos antes de fixar o atual:
+
+| Rota | Ótimo |
+|---|---|
+| 8 passos, coluna inteira | **36** — mantida |
+| 4 passos, só o miolo | 34, *mais fácil* |
+| Dois robôs em contrafase | **insolúvel** |
+
+Encurtar o ciclo facilitou: o robô fica tão previsível que o jogador cronometra
+sem esforço. Ameaça regular é ameaça fraca.
+
+O ótimo continua 36 porque quem joga perfeito nunca deixa carga no caminho. O que
+mudou é o preço do erro — de um movimento perdido para todo o trabalho daquela
+carga. É dificuldade que o solver não mede, porque o solver joga perfeito. O primeiro traçado que testei patrulhava uma
 faixa que a solução ótima nem usava — o custo ficou idêntico ao de antes, prova
 de que o robô não estava atrapalhando nada. Movido para o corredor certo, o custo
 subiu de 34 para 36.

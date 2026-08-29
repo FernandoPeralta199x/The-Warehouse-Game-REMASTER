@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="140" result="Failed(Child)" total="140" passed="138" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0,2892997">
+  <test-suite type="TestSuite" id="1000" name="Shove It - The Warehouse Game REMASTER" fullname="Shove It - The Warehouse Game REMASTER" runstate="Runnable" testcasecount="140" result="Failed" site="Child" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.289300" total="140" passed="138" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1155" name="TW08.Tests.EditMode.dll" fullname="X:/Shove-It-The-Warehouse/Shove It - The Warehouse Game REMASTER/Library/ScriptAssemblies/TW08.Tests.EditMode.dll" runstate="Runnable" testcasecount="139" result="Failed" site="Child" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.275336" total="139" passed="137" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="23424" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1156" name="TW08" fullname="TW08" runstate="Runnable" testcasecount="139" result="Failed" site="Child" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.274733" total="139" passed="137" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1157" name="Tests" fullname="TW08.Tests" runstate="Runnable" testcasecount="139" result="Failed" site="Child" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.274250" total="139" passed="137" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1158" name="EditMode" fullname="TW08.Tests.EditMode" runstate="Runnable" testcasecount="132" result="Failed" site="Child" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.266190" total="132" passed="130" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1010" name="ExpansionProgressionTests" fullname="TW08.Tests.EditMode.ExpansionProgressionTests" classname="TW08.Tests.EditMode.ExpansionProgressionTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.043728" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1012" name="RaceDefinitionAwardsExpectedMedals" fullname="TW08.Tests.EditMode.ExpansionProgressionTests.RaceDefinitionAwardsExpectedMedals" methodname="RaceDefinitionAwardsExpectedMedals" classname="TW08.Tests.EditMode.ExpansionProgressionTests" runstate="Runnable" seed="1956598184" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.021089" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="SaveMigrationV1ToV2InitializesNewFields" fullname="TW08.Tests.EditMode.ExpansionProgressionTests.SaveMigrationV1ToV2InitializesNewFields" methodname="SaveMigrationV1ToV2InitializesNewFields" classname="TW08.Tests.EditMode.ExpansionProgressionTests" runstate="Runnable" seed="749461783" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.004332" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1013" name="FacingDirectionTests" fullname="TW08.Tests.EditMode.FacingDirectionTests" classname="TW08.Tests.EditMode.FacingDirectionTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.003318" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1014" name="CardinalDeltasMapToExpectedFacing" fullname="TW08.Tests.EditMode.FacingDirectionTests.CardinalDeltasMapToExpectedFacing" methodname="CardinalDeltasMapToExpectedFacing" classname="TW08.Tests.EditMode.FacingDirectionTests" runstate="Runnable" seed="559152571" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001696" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1016" name="DominantAxisWinsForNonCardinalInput" fullname="TW08.Tests.EditMode.FacingDirectionTests.DominantAxisWinsForNonCardinalInput" methodname="DominantAxisWinsForNonCardinalInput" classname="TW08.Tests.EditMode.FacingDirectionTests" runstate="Runnable" seed="1745105572" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000320" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1015" name="ZeroDeltaPreservesFallbackFacing" fullname="TW08.Tests.EditMode.FacingDirectionTests.ZeroDeltaPreservesFallbackFacing" methodname="ZeroDeltaPreservesFallbackFacing" classname="TW08.Tests.EditMode.FacingDirectionTests" runstate="Runnable" seed="859182091" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000196" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1017" name="HudTests" fullname="TW08.Tests.EditMode.HudTests" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" testcasecount="32" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.045907" total="32" passed="32" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1026" name="BestTime_ShowsAPlaceholderUntilThereIsARecord" fullname="TW08.Tests.EditMode.HudTests.BestTime_ShowsAPlaceholderUntilThereIsARecord" methodname="BestTime_ShowsAPlaceholderUntilThereIsARecord" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="2071669734" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.003443" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="CargoIntegrity_ReportsLossBeforePercentage" fullname="TW08.Tests.EditMode.HudTests.CargoIntegrity_ReportsLossBeforePercentage" methodname="CargoIntegrity_ReportsLossBeforePercentage" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="735719216" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000372" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1038" name="CompletionLabel_ShowsCreditsOnlyAfterTheShiftIsCommitted" fullname="TW08.Tests.EditMode.HudTests.CompletionLabel_ShowsCreditsOnlyAfterTheShiftIsCommitted" methodname="CompletionLabel_ShowsCreditsOnlyAfterTheShiftIsCommitted" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1007430649" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000412" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1033" name="DoorNotice_NamesTheGroupInUppercase" fullname="TW08.Tests.EditMode.HudTests.DoorNotice_NamesTheGroupInUppercase" methodname="DoorNotice_NamesTheGroupInUppercase" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1982848154" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000346" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1027" name="Lap_ClampsToTheTrackLength" fullname="TW08.Tests.EditMode.HudTests.Lap_ClampsToTheTrackLength" methodname="Lap_ClampsToTheTrackLength" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1271519162" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000553" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1023" name="LevelTitle_FallsBackWhenTheLevelHasNoIdentity" fullname="TW08.Tests.EditMode.HudTests.LevelTitle_FallsBackWhenTheLevelHasNoIdentity" methodname="LevelTitle_FallsBackWhenTheLevelHasNoIdentity" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1873736052" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000401" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1022" name="LevelTitle_JoinsSectorAndNameInUppercase" fullname="TW08.Tests.EditMode.HudTests.LevelTitle_JoinsSectorAndNameInUppercase" methodname="LevelTitle_JoinsSectorAndNameInUppercase" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="629961836" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000175" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1047" name="MedalLabels_CoverEveryTier" fullname="TW08.Tests.EditMode.HudTests.MedalLabels_CoverEveryTier" methodname="MedalLabels_CoverEveryTier" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="955197558" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000239" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1019" name="MoveHistory_LeavesTheNumberForTheAnimatedCounter" fullname="TW08.Tests.EditMode.HudTests.MoveHistory_LeavesTheNumberForTheAnimatedCounter" methodname="MoveHistory_LeavesTheNumberForTheAnimatedCounter" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="327539303" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000210" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1018" name="MoveSummary_KeepsTheLegacyCompositeLayout" fullname="TW08.Tests.EditMode.HudTests.MoveSummary_KeepsTheLegacyCompositeLayout" methodname="MoveSummary_KeepsTheLegacyCompositeLayout" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="770196630" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000228" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1020" name="MovesValueFormat_IsUsableByTheCounterTween" fullname="TW08.Tests.EditMode.HudTests.MovesValueFormat_IsUsableByTheCounterTween" methodname="MovesValueFormat_IsUsableByTheCounterTween" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="774705525" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000233" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1021" name="NegativeCounters_NeverReachTheScreen" fullname="TW08.Tests.EditMode.HudTests.NegativeCounters_NeverReachTheScreen" methodname="NegativeCounters_NeverReachTheScreen" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1329947934" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000214" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1024" name="Operator_AlwaysHasAPlaceholder" fullname="TW08.Tests.EditMode.HudTests.Operator_AlwaysHasAPlaceholder" methodname="Operator_AlwaysHasAPlaceholder" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="944267977" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000216" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1028" name="Position_ShowsAPlaceholderBeforeTheFirstStanding" fullname="TW08.Tests.EditMode.HudTests.Position_ShowsAPlaceholderBeforeTheFirstStanding" methodname="Position_ShowsAPlaceholderBeforeTheFirstStanding" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="624150917" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000298" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1032" name="RankingCopy_DistinguishesCleanFromAssisted" fullname="TW08.Tests.EditMode.HudTests.RankingCopy_DistinguishesCleanFromAssisted" methodname="RankingCopy_DistinguishesCleanFromAssisted" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1199869314" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000228" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1048" name="RankingLabel_SaysWhetherTheRunCounts" fullname="TW08.Tests.EditMode.HudTests.RankingLabel_SaysWhetherTheRunCounts" methodname="RankingLabel_SaysWhetherTheRunCounts" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1608692269" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000567" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1031" name="Signed_AlwaysShowsTheSignOnTheStatement" fullname="TW08.Tests.EditMode.HudTests.Signed_AlwaysShowsTheSignOnTheStatement" methodname="Signed_AlwaysShowsTheSignOnTheStatement" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="300931847" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000506" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1030" name="SpeedReading_StaysNonNegativeForTheCounter" fullname="TW08.Tests.EditMode.HudTests.SpeedReading_StaysNonNegativeForTheCounter" methodname="SpeedReading_StaysNonNegativeForTheCounter" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1173168596" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.003641" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1043" name="Statement_AddsAnExplicitCapLineWhenBonusesOverflow" fullname="TW08.Tests.EditMode.HudTests.Statement_AddsAnExplicitCapLineWhenBonusesOverflow" methodname="Statement_AddsAnExplicitCapLineWhenBonusesOverflow" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1422703659" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.003486" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1042" name="Statement_KeepsEveryLineWhenUnderTheLevelCeiling" fullname="TW08.Tests.EditMode.HudTests.Statement_KeepsEveryLineWhenUnderTheLevelCeiling" methodname="Statement_KeepsEveryLineWhenUnderTheLevelCeiling" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="2053771037" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.002685" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1046" name="Statement_LinesCarryTheirSign" fullname="TW08.Tests.EditMode.HudTests.Statement_LinesCarryTheirSign" methodname="Statement_LinesCarryTheirSign" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="786520913" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000715" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1045" name="Statement_SurvivesAMissingReport" fullname="TW08.Tests.EditMode.HudTests.Statement_SurvivesAMissingReport" methodname="Statement_SurvivesAMissingReport" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="915506640" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000922" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1044" name="Statement_VisibleTotalAlwaysMatchesWhatTheEconomyPays" fullname="TW08.Tests.EditMode.HudTests.Statement_VisibleTotalAlwaysMatchesWhatTheEconomyPays" methodname="Statement_VisibleTotalAlwaysMatchesWhatTheEconomyPays" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="128358232" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000996" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1039" name="Status_ColorsAreDistinctPerState" fullname="TW08.Tests.EditMode.HudTests.Status_ColorsAreDistinctPerState" methodname="Status_ColorsAreDistinctPerState" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1977433616" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.002265" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1034" name="Status_CompletionWinsOverDeadlock" fullname="TW08.Tests.EditMode.HudTests.Status_CompletionWinsOverDeadlock" methodname="Status_CompletionWinsOverDeadlock" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1050213426" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000270" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1036" name="Status_LabelsMatchTheTerminalCopy" fullname="TW08.Tests.EditMode.HudTests.Status_LabelsMatchTheTerminalCopy" methodname="Status_LabelsMatchTheTerminalCopy" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="538211306" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000269" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1040" name="Status_MatchesTheRealDeadlockDetectorOnACorneredCrate" fullname="TW08.Tests.EditMode.HudTests.Status_MatchesTheRealDeadlockDetectorOnACorneredCrate" methodname="Status_MatchesTheRealDeadlockDetectorOnACorneredCrate" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="2103464145" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.011316" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1037" name="Status_OnlyDeadlockTriggersTheAlarm" fullname="TW08.Tests.EditMode.HudTests.Status_OnlyDeadlockTriggersTheAlarm" methodname="Status_OnlyDeadlockTriggersTheAlarm" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1671422090" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000472" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1041" name="Status_StaysActiveWhileTheCargoCanStillMove" fullname="TW08.Tests.EditMode.HudTests.Status_StaysActiveWhileTheCargoCanStillMove" methodname="Status_StaysActiveWhileTheCargoCanStillMove" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="600708604" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000434" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1035" name="Status_WithoutABoardIsUnavailable" fullname="TW08.Tests.EditMode.HudTests.Status_WithoutABoardIsUnavailable" methodname="Status_WithoutABoardIsUnavailable" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1837071955" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000313" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1025" name="Time_UsesInvariantSeparatorsAndPadding" fullname="TW08.Tests.EditMode.HudTests.Time_UsesInvariantSeparatorsAndPadding" methodname="Time_UsesInvariantSeparatorsAndPadding" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1807850607" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000198" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1049" name="VisibleLineCount_NeverExceedsTheSlotsBuiltIntoTheScene" fullname="TW08.Tests.EditMode.HudTests.VisibleLineCount_NeverExceedsTheSlotsBuiltIntoTheScene" methodname="VisibleLineCount_NeverExceedsTheSlotsBuiltIntoTheScene" classname="TW08.Tests.EditMode.HudTests" runstate="Runnable" seed="1372641816" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000462" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1050" name="MenuTests" fullname="TW08.Tests.EditMode.MenuTests" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.010856" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1055" name="CardTint_MedalOutranksTheNextLevelHighlight" fullname="TW08.Tests.EditMode.MenuTests.CardTint_MedalOutranksTheNextLevelHighlight" methodname="CardTint_MedalOutranksTheNextLevelHighlight" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1681351719" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000492" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1056" name="CardTint_UnplayedNextLevelIsHighlighted" fullname="TW08.Tests.EditMode.MenuTests.CardTint_UnplayedNextLevelIsHighlighted" methodname="CardTint_UnplayedNextLevelIsHighlighted" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1565974581" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000333" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1062" name="Credits_LoopOfZeroKeepsTheTextStill" fullname="TW08.Tests.EditMode.MenuTests.Credits_LoopOfZeroKeepsTheTextStill" methodname="Credits_LoopOfZeroKeepsTheTextStill" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1391511880" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001328" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1061" name="Credits_ScrollWrapsAroundInsteadOfRunningOff" fullname="TW08.Tests.EditMode.MenuTests.Credits_ScrollWrapsAroundInsteadOfRunningOff" methodname="Credits_ScrollWrapsAroundInsteadOfRunningOff" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="865080618" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000175" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1052" name="LevelCard_DistinguishesLockedFromUnplayed" fullname="TW08.Tests.EditMode.MenuTests.LevelCard_DistinguishesLockedFromUnplayed" methodname="LevelCard_DistinguishesLockedFromUnplayed" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1700474727" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001429" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1054" name="LevelCard_EmptySlotStaysNeutral" fullname="TW08.Tests.EditMode.MenuTests.LevelCard_EmptySlotStaysNeutral" methodname="LevelCard_EmptySlotStaysNeutral" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="72240101" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000266" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1053" name="LevelCard_FallsBackToAGenericNameWhenTheLevelHasNone" fullname="TW08.Tests.EditMode.MenuTests.LevelCard_FallsBackToAGenericNameWhenTheLevelHasNone" methodname="LevelCard_FallsBackToAGenericNameWhenTheLevelHasNone" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1684524893" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000154" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1051" name="LevelCard_ShowsBestRunOnceTheLevelWasCleared" fullname="TW08.Tests.EditMode.MenuTests.LevelCard_ShowsBestRunOnceTheLevelWasCleared" methodname="LevelCard_ShowsBestRunOnceTheLevelWasCleared" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1571948801" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000185" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1057" name="Scroll_DoesNotMoveWhenTheItemIsAlreadyFramed" fullname="TW08.Tests.EditMode.MenuTests.Scroll_DoesNotMoveWhenTheItemIsAlreadyFramed" methodname="Scroll_DoesNotMoveWhenTheItemIsAlreadyFramed" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1102680654" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000265" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1059" name="Scroll_NormalizedPositionIsInvertedAndClamped" fullname="TW08.Tests.EditMode.MenuTests.Scroll_NormalizedPositionIsInvertedAndClamped" methodname="Scroll_NormalizedPositionIsInvertedAndClamped" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="305729745" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000202" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1058" name="Scroll_PullsTheViewportToReachItemsAboveAndBelow" fullname="TW08.Tests.EditMode.MenuTests.Scroll_PullsTheViewportToReachItemsAboveAndBelow" methodname="Scroll_PullsTheViewportToReachItemsAboveAndBelow" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1111731627" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000211" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1060" name="Scroll_SurvivesContentShorterThanTheViewport" fullname="TW08.Tests.EditMode.MenuTests.Scroll_SurvivesContentShorterThanTheViewport" methodname="Scroll_SurvivesContentShorterThanTheViewport" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="2014136040" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001387" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1063" name="Shop_AffordabilityAndShortfall" fullname="TW08.Tests.EditMode.MenuTests.Shop_AffordabilityAndShortfall" methodname="Shop_AffordabilityAndShortfall" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1028034663" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000468" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1064" name="Shop_EquipRequiresStockUnlessAlreadyEquipped" fullname="TW08.Tests.EditMode.MenuTests.Shop_EquipRequiresStockUnlessAlreadyEquipped" methodname="Shop_EquipRequiresStockUnlessAlreadyEquipped" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="2027177328" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000214" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1066" name="Shop_LabelsReadAsTheTerminalWouldPrintThem" fullname="TW08.Tests.EditMode.MenuTests.Shop_LabelsReadAsTheTerminalWouldPrintThem" methodname="Shop_LabelsReadAsTheTerminalWouldPrintThem" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="1992672976" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000619" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1065" name="Shop_SlotLimitBlocksTheThirdTool" fullname="TW08.Tests.EditMode.MenuTests.Shop_SlotLimitBlocksTheThirdTool" methodname="Shop_SlotLimitBlocksTheThirdTool" classname="TW08.Tests.EditMode.MenuTests" runstate="Runnable" seed="759831495" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000271" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1067" name="NarrativeTests" fullname="TW08.Tests.EditMode.NarrativeTests" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" testcasecount="21" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.028565" total="21" passed="21" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1077" name="Catalog_FallsBackToTheNextCandidateWhenThePreferredOneIsNotEligible" fullname="TW08.Tests.EditMode.NarrativeTests.Catalog_FallsBackToTheNextCandidateWhenThePreferredOneIsNotEligible" methodname="Catalog_FallsBackToTheNextCandidateWhenThePreferredOneIsNotEligible" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1849475879" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.006500" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1079" name="Catalog_FindLocatesBySequenceIdIgnoringCase" fullname="TW08.Tests.EditMode.NarrativeTests.Catalog_FindLocatesBySequenceIdIgnoringCase" methodname="Catalog_FindLocatesBySequenceIdIgnoringCase" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1065887988" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000974" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1078" name="Catalog_IgnoresNullEntriesAndSequencesWithoutLines" fullname="TW08.Tests.EditMode.NarrativeTests.Catalog_IgnoresNullEntriesAndSequencesWithoutLines" methodname="Catalog_IgnoresNullEntriesAndSequencesWithoutLines" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1716862682" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000688" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1076" name="Catalog_PrefersTheLevelSpecificSequenceOverTheSectorOne" fullname="TW08.Tests.EditMode.NarrativeTests.Catalog_PrefersTheLevelSpecificSequenceOverTheSectorOne" methodname="Catalog_PrefersTheLevelSpecificSequenceOverTheSectorOne" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1096602454" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000526" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1071" name="Matching_EmptyFilterActsAsAWildcard" fullname="TW08.Tests.EditMode.NarrativeTests.Matching_EmptyFilterActsAsAWildcard" methodname="Matching_EmptyFilterActsAsAWildcard" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="235970037" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000274" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1072" name="Matching_IsCaseAndWhitespaceInsensitive" fullname="TW08.Tests.EditMode.NarrativeTests.Matching_IsCaseAndWhitespaceInsensitive" methodname="Matching_IsCaseAndWhitespaceInsensitive" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="643354401" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000385" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1075" name="Matching_LevelFilterOutweighsSectorFilter" fullname="TW08.Tests.EditMode.NarrativeTests.Matching_LevelFilterOutweighsSectorFilter" methodname="Matching_LevelFilterOutweighsSectorFilter" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1138706247" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000323" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1074" name="Matching_ManualNeverFiresByContext" fullname="TW08.Tests.EditMode.NarrativeTests.Matching_ManualNeverFiresByContext" methodname="Matching_ManualNeverFiresByContext" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="2100598205" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000219" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1073" name="Matching_RejectsAnotherSectorAnotherLevelAndAnotherMoment" fullname="TW08.Tests.EditMode.NarrativeTests.Matching_RejectsAnotherSectorAnotherLevelAndAnotherMoment" methodname="Matching_RejectsAnotherSectorAnotherLevelAndAnotherMoment" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="2028445904" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000265" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1070" name="Playback_RewindReturnsToTheFirstUsableLine" fullname="TW08.Tests.EditMode.NarrativeTests.Playback_RewindReturnsToTheFirstUsableLine" methodname="Playback_RewindReturnsToTheFirstUsableLine" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="832023546" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001176" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1068" name="Playback_SkipsBlankLinesAndStopsAtTheEnd" fullname="TW08.Tests.EditMode.NarrativeTests.Playback_SkipsBlankLinesAndStopsAtTheEnd" methodname="Playback_SkipsBlankLinesAndStopsAtTheEnd" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1550235217" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000483" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1069" name="Playback_WithoutUsableContentIsFinishedImmediately" fullname="TW08.Tests.EditMode.NarrativeTests.Playback_WithoutUsableContentIsFinishedImmediately" methodname="Playback_WithoutUsableContentIsFinishedImmediately" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="557557052" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000400" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1086" name="PlayOnce_ResetPutsTheSequenceBackInRotation" fullname="TW08.Tests.EditMode.NarrativeTests.PlayOnce_ResetPutsTheSequenceBackInRotation" methodname="PlayOnce_ResetPutsTheSequenceBackInRotation" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="670385728" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.002432" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1085" name="PlayOnce_SurvivesAcrossServiceInstances" fullname="TW08.Tests.EditMode.NarrativeTests.PlayOnce_SurvivesAcrossServiceInstances" methodname="PlayOnce_SurvivesAcrossServiceInstances" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1062492294" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001481" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1087" name="RepeatableSequence_IgnoresTheAlreadyPlayedMark" fullname="TW08.Tests.EditMode.NarrativeTests.RepeatableSequence_IgnoresTheAlreadyPlayedMark" methodname="RepeatableSequence_IgnoresTheAlreadyPlayedMark" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="324960335" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000808" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1088" name="Sequence_UsesTheLineSpeedWhenItOverridesTheDefault" fullname="TW08.Tests.EditMode.NarrativeTests.Sequence_UsesTheLineSpeedWhenItOverridesTheDefault" methodname="Sequence_UsesTheLineSpeedWhenItOverridesTheDefault" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1774305756" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001138" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1084" name="Service_HandlesNullAndEmptySequencesWithoutThrowing" fullname="TW08.Tests.EditMode.NarrativeTests.Service_HandlesNullAndEmptySequencesWithoutThrowing" methodname="Service_HandlesNullAndEmptySequencesWithoutThrowing" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="885908537" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001053" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1082" name="Service_QueueChainsTheOpeningIntoTheSectorEntry" fullname="TW08.Tests.EditMode.NarrativeTests.Service_QueueChainsTheOpeningIntoTheSectorEntry" methodname="Service_QueueChainsTheOpeningIntoTheSectorEntry" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="651103472" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001751" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1081" name="Service_RefusesASecondSequenceWhileOneIsOnScreen" fullname="TW08.Tests.EditMode.NarrativeTests.Service_RefusesASecondSequenceWhileOneIsOnScreen" methodname="Service_RefusesASecondSequenceWhileOneIsOnScreen" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1072802665" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000757" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1083" name="Service_SkipAllDropsTheQueueAndClosesTheScene" fullname="TW08.Tests.EditMode.NarrativeTests.Service_SkipAllDropsTheQueueAndClosesTheScene" methodname="Service_SkipAllDropsTheQueueAndClosesTheScene" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="1505411597" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001218" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1080" name="Service_WalksEveryLineAndThenCompletes" fullname="TW08.Tests.EditMode.NarrativeTests.Service_WalksEveryLineAndThenCompletes" methodname="Service_WalksEveryLineAndThenCompletes" classname="TW08.Tests.EditMode.NarrativeTests" runstate="Runnable" seed="992104070" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001430" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1089" name="PatrolMechanicsTests" fullname="TW08.Tests.EditMode.PatrolMechanicsTests" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" testcasecount="10" result="Failed" site="Child" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.028738" total="10" passed="8" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1099" name="BoardWithoutPatrolsKeepsTheOldBehaviour" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.BoardWithoutPatrolsKeepsTheOldBehaviour" methodname="BoardWithoutPatrolsKeepsTheOldBehaviour" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="789259790" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.003800" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1095" name="CommandClockDrivesTheRobotAndUndoRewindsIt" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.CommandClockDrivesTheRobotAndUndoRewindsIt" methodname="CommandClockDrivesTheRobotAndUndoRewindsIt" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="1037740831" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.002038" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1092" name="MoveIsRefusedWhenItWouldEndInsideTheRobot" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.MoveIsRefusedWhenItWouldEndInsideTheRobot" methodname="MoveIsRefusedWhenItWouldEndInsideTheRobot" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="1632810548" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000507" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1091" name="NegativeStepStillLandsOnTheRoute" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.NegativeStepStillLandsOnTheRoute" methodname="NegativeStepStillLandsOnTheRoute" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="151591662" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000313" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1094" name="RobotBlocksACrateFromBeingPushedIntoIt" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.RobotBlocksACrateFromBeingPushedIntoIt" methodname="RobotBlocksACrateFromBeingPushedIntoIt" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="34572901" result="Failed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.016392" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: False
+  But was:  True
+]]></message>
+                  <stack-trace><![CDATA[at TW08.Tests.EditMode.PatrolMechanicsTests.RobotBlocksACrateFromBeingPushedIntoIt () [0x0004a] in X:\Shove-It-The-Warehouse\Shove It - The Warehouse Game REMASTER\Assets\_Project\Tests\EditMode\PatrolMechanicsTests.cs:107
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1098" name="RobotLeavesCargoAloneWhenTheOriginIsOccupied" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.RobotLeavesCargoAloneWhenTheOriginIsOccupied" methodname="RobotLeavesCargoAloneWhenTheOriginIsOccupied" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="1465886530" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000706" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1096" name="RobotReturnsCargoToWhereItStarted" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.RobotReturnsCargoToWhereItStarted" methodname="RobotReturnsCargoToWhereItStarted" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="511396456" result="Failed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000896" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  O robô precisa registrar a devolução no movimento.
+  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at TW08.Tests.EditMode.PatrolMechanicsTests.RobotReturnsCargoToWhereItStarted () [0x00065] in X:\Shove-It-The-Warehouse\Shove It - The Warehouse Game REMASTER\Assets\_Project\Tests\EditMode\PatrolMechanicsTests.cs:141
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1090" name="RouteWrapsAroundAndRepeats" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.RouteWrapsAroundAndRepeats" methodname="RouteWrapsAroundAndRepeats" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="291225745" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000477" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1093" name="SameCellIsFreeOnceTheRobotHasMovedOn" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.SameCellIsFreeOnceTheRobotHasMovedOn" methodname="SameCellIsFreeOnceTheRobotHasMovedOn" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="965183557" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000347" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1097" name="UndoRestoresCargoTheRobotTookAway" fullname="TW08.Tests.EditMode.PatrolMechanicsTests.UndoRestoresCargoTheRobotTookAway" methodname="UndoRestoresCargoTheRobotTookAway" classname="TW08.Tests.EditMode.PatrolMechanicsTests" runstate="Runnable" seed="257545691" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000514" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1100" name="PuzzleAdvancedMechanicsTests" fullname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests" classname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.006956" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1101" name="CostlyCellAddsTwoMovesAndUndoRestoresScore" fullname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests.CostlyCellAddsTwoMovesAndUndoRestoresScore" methodname="CostlyCellAddsTwoMovesAndUndoRestoresScore" classname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests" runstate="Runnable" seed="441539771" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001096" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1102" name="DynamicDoorBlocksAndUnblocksMovement" fullname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests.DynamicDoorBlocksAndUnblocksMovement" methodname="DynamicDoorBlocksAndUnblocksMovement" classname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests" runstate="Runnable" seed="2092859697" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000871" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1104" name="TypedDockAcceptsMatchingCargoKind" fullname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests.TypedDockAcceptsMatchingCargoKind" methodname="TypedDockAcceptsMatchingCargoKind" classname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests" runstate="Runnable" seed="982233022" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.002798" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1103" name="TypedDockRejectsWrongCargoKind" fullname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests.TypedDockRejectsWrongCargoKind" methodname="TypedDockRejectsWrongCargoKind" classname="TW08.Tests.EditMode.PuzzleAdvancedMechanicsTests" runstate="Runnable" seed="772546950" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000718" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1105" name="PuzzleLevelValidatorTests" fullname="TW08.Tests.EditMode.PuzzleLevelValidatorTests" classname="TW08.Tests.EditMode.PuzzleLevelValidatorTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.016579" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1107" name="ValidatorAcceptsSimpleValidPuzzle" fullname="TW08.Tests.EditMode.PuzzleLevelValidatorTests.ValidatorAcceptsSimpleValidPuzzle" methodname="ValidatorAcceptsSimpleValidPuzzle" classname="TW08.Tests.EditMode.PuzzleLevelValidatorTests" runstate="Runnable" seed="1398424099" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.006889" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1109" name="ValidatorRejectsCrateOnPlayerStart" fullname="TW08.Tests.EditMode.PuzzleLevelValidatorTests.ValidatorRejectsCrateOnPlayerStart" methodname="ValidatorRejectsCrateOnPlayerStart" classname="TW08.Tests.EditMode.PuzzleLevelValidatorTests" runstate="Runnable" seed="514947712" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001383" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1110" name="ValidatorRejectsEmptyPuzzle" fullname="TW08.Tests.EditMode.PuzzleLevelValidatorTests.ValidatorRejectsEmptyPuzzle" methodname="ValidatorRejectsEmptyPuzzle" classname="TW08.Tests.EditMode.PuzzleLevelValidatorTests" runstate="Runnable" seed="1434109064" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000789" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1108" name="ValidatorRejectsGoalOnWall" fullname="TW08.Tests.EditMode.PuzzleLevelValidatorTests.ValidatorRejectsGoalOnWall" methodname="ValidatorRejectsGoalOnWall" classname="TW08.Tests.EditMode.PuzzleLevelValidatorTests" runstate="Runnable" seed="927441233" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001340" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1111" name="ValidatorRejectsMismatchedCratesAndGoals" fullname="TW08.Tests.EditMode.PuzzleLevelValidatorTests.ValidatorRejectsMismatchedCratesAndGoals" methodname="ValidatorRejectsMismatchedCratesAndGoals" classname="TW08.Tests.EditMode.PuzzleLevelValidatorTests" runstate="Runnable" seed="675899358" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000852" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1106" name="ValidatorRejectsNullDefinition" fullname="TW08.Tests.EditMode.PuzzleLevelValidatorTests.ValidatorRejectsNullDefinition" methodname="ValidatorRejectsNullDefinition" classname="TW08.Tests.EditMode.PuzzleLevelValidatorTests" runstate="Runnable" seed="425313698" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000310" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1112" name="PuzzleShiftTrackingTests" fullname="TW08.Tests.EditMode.PuzzleShiftTrackingTests" classname="TW08.Tests.EditMode.PuzzleShiftTrackingTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.024066" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1117" name="BuildSummary_ReportsTheBoardCostAndPushes" fullname="TW08.Tests.EditMode.PuzzleShiftTrackingTests.BuildSummary_ReportsTheBoardCostAndPushes" methodname="BuildSummary_ReportsTheBoardCostAndPushes" classname="TW08.Tests.EditMode.PuzzleShiftTrackingTests" runstate="Runnable" seed="2127734464" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.014956" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1116" name="HintsAndToolsAreCountedSeparately" fullname="TW08.Tests.EditMode.PuzzleShiftTrackingTests.HintsAndToolsAreCountedSeparately" methodname="HintsAndToolsAreCountedSeparately" classname="TW08.Tests.EditMode.PuzzleShiftTrackingTests" runstate="Runnable" seed="1164281633" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001347" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1114" name="PushCount_FollowsUndoAndRedo" fullname="TW08.Tests.EditMode.PuzzleShiftTrackingTests.PushCount_FollowsUndoAndRedo" methodname="PushCount_FollowsUndoAndRedo" classname="TW08.Tests.EditMode.PuzzleShiftTrackingTests" runstate="Runnable" seed="1763628208" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001521" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1115" name="RestartingTheLevel_ClearsTheWholeShiftRecord" fullname="TW08.Tests.EditMode.PuzzleShiftTrackingTests.RestartingTheLevel_ClearsTheWholeShiftRecord" methodname="RestartingTheLevel_ClearsTheWholeShiftRecord" classname="TW08.Tests.EditMode.PuzzleShiftTrackingTests" runstate="Runnable" seed="2031319152" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001505" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1113" name="WalkingWithoutTouchingCargo_DoesNotCountAsPush" fullname="TW08.Tests.EditMode.PuzzleShiftTrackingTests.WalkingWithoutTouchingCargo_DoesNotCountAsPush" methodname="WalkingWithoutTouchingCargo_DoesNotCountAsPush" classname="TW08.Tests.EditMode.PuzzleShiftTrackingTests" runstate="Runnable" seed="1188672429" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000901" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1118" name="RaceProductionSystemsTests" fullname="TW08.Tests.EditMode.RaceProductionSystemsTests" classname="TW08.Tests.EditMode.RaceProductionSystemsTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.022458" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1121" name="PowerUpEnumPreservesLegacySerializedValues" fullname="TW08.Tests.EditMode.RaceProductionSystemsTests.PowerUpEnumPreservesLegacySerializedValues" methodname="PowerUpEnumPreservesLegacySerializedValues" classname="TW08.Tests.EditMode.RaceProductionSystemsTests" runstate="Runnable" seed="808998821" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000759" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1120" name="RaceManagerExposesCheckpointPositionForAiAndScanner" fullname="TW08.Tests.EditMode.RaceProductionSystemsTests.RaceManagerExposesCheckpointPositionForAiAndScanner" methodname="RaceManagerExposesCheckpointPositionForAiAndScanner" classname="TW08.Tests.EditMode.RaceProductionSystemsTests" runstate="Runnable" seed="1226681346" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.005701" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1119" name="RaceManagerRanksRacerThatAdvancedCheckpointAhead" fullname="TW08.Tests.EditMode.RaceProductionSystemsTests.RaceManagerRanksRacerThatAdvancedCheckpointAhead" methodname="RaceManagerRanksRacerThatAdvancedCheckpointAhead" classname="TW08.Tests.EditMode.RaceProductionSystemsTests" runstate="Runnable" seed="862736527" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.006301" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1122" name="SaveIntegrityTests" fullname="TW08.Tests.EditMode.SaveIntegrityTests" classname="TW08.Tests.EditMode.SaveIntegrityTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.003806" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1123" name="ChecksumDetectsPayloadChanges" fullname="TW08.Tests.EditMode.SaveIntegrityTests.ChecksumDetectsPayloadChanges" methodname="ChecksumDetectsPayloadChanges" classname="TW08.Tests.EditMode.SaveIntegrityTests" runstate="Runnable" seed="1785480746" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.002632" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1124" name="ShopEconomyTests" fullname="TW08.Tests.EditMode.ShopEconomyTests" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.014169" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1136" name="Advisor_HintsGetMoreDirectWithEachTier" fullname="TW08.Tests.EditMode.ShopEconomyTests.Advisor_HintsGetMoreDirectWithEachTier" methodname="Advisor_HintsGetMoreDirectWithEachTier" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="2015809108" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.005059" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1134" name="Advisor_PrefersACrateLockedInACorner" fullname="TW08.Tests.EditMode.ShopEconomyTests.Advisor_PrefersACrateLockedInACorner" methodname="Advisor_PrefersACrateLockedInACorner" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="136098715" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000519" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1135" name="Advisor_ReportsNoCriticalCrateWhenEverythingIsPlaced" fullname="TW08.Tests.EditMode.ShopEconomyTests.Advisor_ReportsNoCriticalCrateWhenEverythingIsPlaced" methodname="Advisor_ReportsNoCriticalCrateWhenEverythingIsPlaced" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="1576428493" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000452" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1127" name="BareCompletion_PaysOnlyCompletionAndBronze" fullname="TW08.Tests.EditMode.ShopEconomyTests.BareCompletion_PaysOnlyCompletionAndBronze" methodname="BareCompletion_PaysOnlyCompletionAndBronze" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="1195087839" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000205" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1131" name="EnsureDefaults_DropsEmptyStacksAndNegativeCredits" fullname="TW08.Tests.EditMode.ShopEconomyTests.EnsureDefaults_DropsEmptyStacksAndNegativeCredits" methodname="EnsureDefaults_DropsEmptyStacksAndNegativeCredits" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="855747132" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000593" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1133" name="MigrationV2ToV3_LeavesUnfinishedLevelsOutOfTheCleanRanking" fullname="TW08.Tests.EditMode.ShopEconomyTests.MigrationV2ToV3_LeavesUnfinishedLevelsOutOfTheCleanRanking" methodname="MigrationV2ToV3_LeavesUnfinishedLevelsOutOfTheCleanRanking" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="1425584034" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000740" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1132" name="MigrationV2ToV3_PromotesOldRecordsToCleanRanking" fullname="TW08.Tests.EditMode.ShopEconomyTests.MigrationV2ToV3_PromotesOldRecordsToCleanRanking" methodname="MigrationV2ToV3_PromotesOldRecordsToCleanRanking" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="1917411725" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000419" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1125" name="PerfectCleanRun_IsCappedAtLevelMaximum" fullname="TW08.Tests.EditMode.ShopEconomyTests.PerfectCleanRun_IsCappedAtLevelMaximum" methodname="PerfectCleanRun_IsCappedAtLevelMaximum" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="1977586346" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000186" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1126" name="PlayingPerfectlyAlwaysPaysMoreThanScrapingBy" fullname="TW08.Tests.EditMode.ShopEconomyTests.PlayingPerfectlyAlwaysPaysMoreThanScrapingBy" methodname="PlayingPerfectlyAlwaysPaysMoreThanScrapingBy" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="587148663" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000476" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1129" name="Statement_ListsEveryEarnedBonus" fullname="TW08.Tests.EditMode.ShopEconomyTests.Statement_ListsEveryEarnedBonus" methodname="Statement_ListsEveryEarnedBonus" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="1923009765" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001327" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1130" name="ToolStock_AddsAndConsumesWithoutGoingNegative" fullname="TW08.Tests.EditMode.ShopEconomyTests.ToolStock_AddsAndConsumesWithoutGoingNegative" methodname="ToolStock_AddsAndConsumesWithoutGoingNegative" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="1372882900" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000886" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1128" name="UsingATool_RemovesTheCleanBonusAndClearsCompetitiveFlag" fullname="TW08.Tests.EditMode.ShopEconomyTests.UsingATool_RemovesTheCleanBonusAndClearsCompetitiveFlag" methodname="UsingATool_RemovesTheCleanBonusAndClearsCompetitiveFlag" classname="TW08.Tests.EditMode.ShopEconomyTests" runstate="Runnable" seed="1513053173" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000318" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1137" name="SlideMechanicsTests" fullname="TW08.Tests.EditMode.SlideMechanicsTests" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.013162" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1149" name="AClosedDoorNeverKeepsCargoTrappedInside" fullname="TW08.Tests.EditMode.SlideMechanicsTests.AClosedDoorNeverKeepsCargoTrappedInside" methodname="AClosedDoorNeverKeepsCargoTrappedInside" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="1916792634" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001233" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1146" name="ClosedConveyorLoopTerminatesInsteadOfHanging" fullname="TW08.Tests.EditMode.SlideMechanicsTests.ClosedConveyorLoopTerminatesInsteadOfHanging" methodname="ClosedConveyorLoopTerminatesInsteadOfHanging" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="1735464747" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001382" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1145" name="ConveyorCarriesACrateToTheEndOfTheBelt" fullname="TW08.Tests.EditMode.SlideMechanicsTests.ConveyorCarriesACrateToTheEndOfTheBelt" methodname="ConveyorCarriesACrateToTheEndOfTheBelt" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="2057080643" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000703" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1144" name="ConveyorImposesItsOwnDirection" fullname="TW08.Tests.EditMode.SlideMechanicsTests.ConveyorImposesItsOwnDirection" methodname="ConveyorImposesItsOwnDirection" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="1867182113" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000314" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1150" name="ConveyorRefusesThePushWhenItWouldStackPlayerAndCargo" fullname="TW08.Tests.EditMode.SlideMechanicsTests.ConveyorRefusesThePushWhenItWouldStackPlayerAndCargo" methodname="ConveyorRefusesThePushWhenItWouldStackPlayerAndCargo" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="1807912923" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000871" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1151" name="HeavyCargoCostsAnExtraMoveToPush" fullname="TW08.Tests.EditMode.SlideMechanicsTests.HeavyCargoCostsAnExtraMoveToPush" methodname="HeavyCargoCostsAnExtraMoveToPush" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="231668130" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000852" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1152" name="HeavyCargoDoesNotSlideOnIce" fullname="TW08.Tests.EditMode.SlideMechanicsTests.HeavyCargoDoesNotSlideOnIce" methodname="HeavyCargoDoesNotSlideOnIce" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="774984173" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000477" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1153" name="HeavyCargoIgnoresTheConveyor" fullname="TW08.Tests.EditMode.SlideMechanicsTests.HeavyCargoIgnoresTheConveyor" methodname="HeavyCargoIgnoresTheConveyor" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="1197226418" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000359" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1148" name="MoveDirectionIsUnitEvenWhenTheSlideIsLong" fullname="TW08.Tests.EditMode.SlideMechanicsTests.MoveDirectionIsUnitEvenWhenTheSlideIsLong" methodname="MoveDirectionIsUnitEvenWhenTheSlideIsLong" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="230916977" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000421" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1154" name="PlainFloorStillMovesExactlyOneCell" fullname="TW08.Tests.EditMode.SlideMechanicsTests.PlainFloorStillMovesExactlyOneCell" methodname="PlainFloorStillMovesExactlyOneCell" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="2124420937" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000361" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1138" name="PlayerKeepsSlidingUntilTheIceEnds" fullname="TW08.Tests.EditMode.SlideMechanicsTests.PlayerKeepsSlidingUntilTheIceEnds" methodname="PlayerKeepsSlidingUntilTheIceEnds" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="1369485504" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000439" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1142" name="PlayerNeverSlidesThroughTheCrateItJustPushed" fullname="TW08.Tests.EditMode.SlideMechanicsTests.PlayerNeverSlidesThroughTheCrateItJustPushed" methodname="PlayerNeverSlidesThroughTheCrateItJustPushed" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="1918253614" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000449" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1141" name="PushedCrateSlidesAndThePlayerStopsBehindIt" fullname="TW08.Tests.EditMode.SlideMechanicsTests.PushedCrateSlidesAndThePlayerStopsBehindIt" methodname="PushedCrateSlidesAndThePlayerStopsBehindIt" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="1708561071" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000476" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1147" name="RedoWorksAfterASlide" fullname="TW08.Tests.EditMode.SlideMechanicsTests.RedoWorksAfterASlide" methodname="RedoWorksAfterASlide" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="339567739" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000470" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1139" name="SlidingCostsOneCommandNotOneCellPerStep" fullname="TW08.Tests.EditMode.SlideMechanicsTests.SlidingCostsOneCommandNotOneCellPerStep" methodname="SlidingCostsOneCommandNotOneCellPerStep" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="1841906145" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000397" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1140" name="SlidingStopsAgainstAWall" fullname="TW08.Tests.EditMode.SlideMechanicsTests.SlidingStopsAgainstAWall" methodname="SlidingStopsAgainstAWall" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="719731714" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000382" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1143" name="UndoRestoresBothEndsOfASlide" fullname="TW08.Tests.EditMode.SlideMechanicsTests.UndoRestoresBothEndsOfASlide" methodname="UndoRestoresBothEndsOfASlide" classname="TW08.Tests.EditMode.SlideMechanicsTests" runstate="Runnable" seed="644906425" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000647" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1001" name="PuzzleBoardModelTests" fullname="TW08.Tests.PuzzleBoardModelTests" classname="TW08.Tests.PuzzleBoardModelTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.004328" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1007" name="BoardCompletesWhenEveryGoalHasCrate" fullname="TW08.Tests.PuzzleBoardModelTests.BoardCompletesWhenEveryGoalHasCrate" methodname="BoardCompletesWhenEveryGoalHasCrate" classname="TW08.Tests.PuzzleBoardModelTests" runstate="Runnable" seed="18708645" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000432" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="PlayerCannotMoveThroughWall" fullname="TW08.Tests.PuzzleBoardModelTests.PlayerCannotMoveThroughWall" methodname="PlayerCannotMoveThroughWall" classname="TW08.Tests.PuzzleBoardModelTests" runstate="Runnable" seed="1281580951" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000266" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="PlayerCannotPushTwoCrates" fullname="TW08.Tests.PuzzleBoardModelTests.PlayerCannotPushTwoCrates" methodname="PlayerCannotPushTwoCrates" classname="TW08.Tests.PuzzleBoardModelTests" runstate="Runnable" seed="2135389299" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000266" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="PlayerMovesIntoFreeCell" fullname="TW08.Tests.PuzzleBoardModelTests.PlayerMovesIntoFreeCell" methodname="PlayerMovesIntoFreeCell" classname="TW08.Tests.PuzzleBoardModelTests" runstate="Runnable" seed="663963074" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000259" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="PlayerPushesSingleCrate" fullname="TW08.Tests.PuzzleBoardModelTests.PlayerPushesSingleCrate" methodname="PlayerPushesSingleCrate" classname="TW08.Tests.PuzzleBoardModelTests" runstate="Runnable" seed="1597144728" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000856" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="UndoRestoresPlayerAndCrate" fullname="TW08.Tests.PuzzleBoardModelTests.UndoRestoresPlayerAndCrate" methodname="UndoRestoresPlayerAndCrate" classname="TW08.Tests.PuzzleBoardModelTests" runstate="Runnable" seed="1635277805" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000747" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1008" name="PuzzleRuntimeTests" fullname="TW08.Tests.PuzzleRuntimeTests" classname="TW08.Tests.PuzzleRuntimeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.002966" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1009" name="RedoWinningMoveRaisesCompletionAgain" fullname="TW08.Tests.PuzzleRuntimeTests.RedoWinningMoveRaisesCompletionAgain" methodname="RedoWinningMoveRaisesCompletionAgain" classname="TW08.Tests.PuzzleRuntimeTests" runstate="Runnable" seed="216415648" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.002226" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1161" name="Unity.Addressables.DocExampleCode.Editor.Tests.dll" fullname="X:/Shove-It-The-Warehouse/Shove It - The Warehouse Game REMASTER/Library/ScriptAssemblies/Unity.Addressables.DocExampleCode.Editor.Tests.dll" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.002218" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="23424" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1162" name="AddressableAssets" fullname="AddressableAssets" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001597" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1163" name="DocExampleCode" fullname="AddressableAssets.DocExampleCode" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.001317" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1159" name="TestStub" fullname="AddressableAssets.DocExampleCode.TestStub" classname="AddressableAssets.DocExampleCode.TestStub" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000977" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1160" name="RequiredTest" fullname="AddressableAssets.DocExampleCode.TestStub.RequiredTest" methodname="RequiredTest" classname="AddressableAssets.DocExampleCode.TestStub" runstate="Runnable" seed="277413778" result="Passed" start-time="2026-08-29 21:17:25Z" end-time="2026-08-29 21:17:25Z" duration="0.000171" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: TestResults-robot.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

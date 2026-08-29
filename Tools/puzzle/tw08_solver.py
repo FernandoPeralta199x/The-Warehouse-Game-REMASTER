@@ -55,6 +55,7 @@ class Level:
     conveyors: dict = field(default_factory=dict)  # (x,y) -> (dx,dy)
     patrols: tuple = ()   # tupla de rotas; cada rota é uma tupla de células
     buttons: frozenset = frozenset()   # botões que invertem as esteiras
+    origins: tuple = ()   # posições iniciais das cargas, na ordem de criação
     timed: tuple = ()     # ((x,y), abre_apos_comandos), ...)
     display_name: str = ""
 
@@ -68,6 +69,25 @@ class Level:
 
     def patrol_cells(self, step):
         return frozenset(route[step % len(route)] for route in self.patrols)
+
+    def origin_of(self, position, crates):
+        """Origem da carga que está em `position`.
+
+        O solver não guarda id de carga: identifica pela ordem estável das
+        posições iniciais e pelo tipo, que é o que distingue as cargas para a
+        regra de completude.
+        """
+        kind = crates.get(position)
+        if kind is None:
+            return None
+
+        # Uma origem livre do mesmo tipo é destino válido; a primeira serve,
+        # porque cargas do mesmo tipo são intercambiáveis para o objetivo.
+        for origin, origin_kind in self.origins:
+            if origin_kind == kind and origin not in crates:
+                return origin
+
+        return None
 
     @property
     def timed_horizon(self):
@@ -356,6 +376,7 @@ def parse_layout(obj: dict) -> Level:
             for patrol in obj.get("patrols", []) if patrol.get("route")
         ),
         buttons=frozenset((b["x"], b["y"]) for b in obj.get("directionButtons", [])),
+        origins=tuple(sorted((pos, kind) for pos, kind in crates.items())),
         timed=tuple(((b["x"], b["y"]), b["opensAfter"]) for b in obj.get("timedBlocks", [])),
         display_name=obj.get("displayName", ""),
     )
@@ -399,6 +420,35 @@ def slide(level: Level, start, direction, crates, closed_doors, vacated=None,
         direction = step
 
     return current
+
+
+def patrol_pickup(level: Level, crates, commands, player, closed_doors):
+    """Espelha PuzzleBoardModel.ApplyPatrolPickup.
+
+    O robô recolhe a carga que ficou sob ele e a devolve à origem. Uma por
+    comando, a primeira encontrada; se a origem estiver ocupada, a carga fica
+    onde está.
+    """
+    if not level.patrols:
+        return crates
+
+    for robot in sorted(level.patrol_cells(commands)):
+        if robot not in crates:
+            continue
+        origin = level.origin_of(robot, crates)
+        if origin is None or origin == robot:
+            continue
+        if origin in crates or origin == player:
+            continue
+        if origin in level.walls or origin in closed_doors:
+            continue
+
+        moved = dict(crates)
+        kind = moved.pop(robot)
+        moved[origin] = kind
+        return moved
+
+    return crates
 
 
 def door_state(level: Level, player, crates):
@@ -595,7 +645,8 @@ def solve(level: Level, max_states=3_000_000):
                 cpos = (cx, cy)
                 if not (0 <= cx < level.width and 0 <= cy < level.height):
                     continue
-                if cpos in level.walls or cpos in closed_doors or cpos in crates or cpos in robots:
+                # O robô não barra mais a carga: ele passa por cima e a devolve.
+                if cpos in level.walls or cpos in closed_doors or cpos in crates:
                     continue
                 # Carga pesada custa um movimento a mais e não escorrega:
                 # espelha PuzzleBoardModel.TryMove.
@@ -607,9 +658,7 @@ def solve(level: Level, max_states=3_000_000):
                     # A carga desliza antes de o jogador entrar; a célula que ela
                     # deixou conta como livre durante o próprio deslize.
                     cfinal = slide(level, cpos, (dx, dy), crates, closed_doors, vacated=npos,
-                                   robots=robots, inverted=inverted)
-                if cfinal in robots:
-                    continue
+                                   inverted=inverted)
                 if cfinal not in live:
                     continue  # célula morta: caixa nunca mais alcança goal
                 new_crates = dict(crates)
@@ -631,6 +680,7 @@ def solve(level: Level, max_states=3_000_000):
 
             npos = pfinal
             next_inverted = inverted != (npos in level.buttons)
+            new_crates = patrol_pickup(level, new_crates, next_commands, npos, closed_doors)
             nk = key(npos, new_crates, next_phase, next_inverted, next_commands)
             ncost = cost + step_cost
             if ncost < dist.get(nk, 1 << 60):
@@ -670,13 +720,9 @@ def replay(level: Level, solution: str):
             if (cpos in level.walls or cpos in closed or cpos in crates
                     or not (0 <= cpos[0] < level.width and 0 <= cpos[1] < level.height)):
                 return False, f"empurrão inválido para {cpos}"
-            if cpos in robots:
-                return False, f"robô bloqueia a carga em {cpos}"
             heavy = crates[npos] == 2
             cfinal = cpos if heavy else slide(level, cpos, (dx, dy), crates, closed, vacated=npos,
-                                              robots=robots, inverted=inverted)
-            if cfinal in robots:
-                return False, f"carga pararia sobre robô em {cfinal}"
+                                              inverted=inverted)
             crate_kind = crates.pop(npos)
             crates[cfinal] = crate_kind
             cost += (2 if npos in level.costly else 1) + (1 if heavy else 0)
@@ -687,6 +733,7 @@ def replay(level: Level, solution: str):
                 return False, f"jogador e carga parariam juntos em {player}"
             if player in level.buttons:
                 inverted = not inverted
+            crates = patrol_pickup(level, crates, commands, player, closed)
             continue
 
         cost += 2 if npos in level.costly else 1
@@ -695,6 +742,8 @@ def replay(level: Level, solution: str):
             return False, f"jogador pararia sobre robô em {player}"
         if player in level.buttons:
             inverted = not inverted
+        crates = patrol_pickup(level, crates, commands, player, closed)
+
     if not is_complete(level, crates):
         return False, "solução não completa o nível"
     return True, cost

@@ -19,6 +19,7 @@ namespace TW08.Puzzle
         private readonly Dictionary<GridCoordinate, PuzzleEntityKind> goalRequirements;
         private readonly Dictionary<GridCoordinate, string> crateByPosition;
         private readonly Dictionary<string, PuzzleEntityKind> crateKinds;
+        private readonly Dictionary<string, GridCoordinate> crateOrigins = new();
 
         public int Width { get; }
         public int Height { get; }
@@ -117,6 +118,7 @@ namespace TW08.Puzzle
                 }
 
                 crateByPosition.Add(crate.Value, crate.Key);
+                crateOrigins[crate.Key] = crate.Value;
                 crateKinds[crate.Key] = kinds != null && kinds.TryGetValue(crate.Key, out PuzzleEntityKind kind)
                     ? kind
                     : PuzzleEntityKind.Crate;
@@ -169,12 +171,16 @@ namespace TW08.Puzzle
                 CommandCount++;
                 ApplyDirectionButton(landing);
                 move = new PuzzleMove(previousPlayer, PlayerPosition, moveCost, direction);
+                move = ApplyPatrolPickup(move);
                 return true;
             }
 
             GridCoordinate crateDestination = destination + direction;
 
-            if (!IsFree(crateDestination) || robots.Contains(crateDestination))
+            // A carga não é mais barrada pelo robô: ele passa por cima dela e a
+            // devolve ao ponto de partida. Só o operador continua impedido de
+            // ocupar a mesma célula.
+            if (!IsFree(crateDestination))
             {
                 return false;
             }
@@ -196,11 +202,7 @@ namespace TW08.Puzzle
             // mecânicas em vez de conviver ao lado delas.
             GridCoordinate crateFinal = heavy
                 ? crateDestination
-                : Slide(crateDestination, direction, destination, robots);
-            if (robots.Contains(crateFinal))
-            {
-                return false;
-            }
+                : Slide(crateDestination, direction, destination);
 
             crateByPosition.Remove(destination);
             crateByPosition.Add(crateFinal, crateId);
@@ -226,7 +228,53 @@ namespace TW08.Puzzle
             CommandCount++;
             ApplyDirectionButton(playerFinal);
             move = new PuzzleMove(previousPlayer, PlayerPosition, crateId, destination, crateFinal, moveCost, direction);
+            move = ApplyPatrolPickup(move);
             return true;
+        }
+
+        /// <summary>
+        /// O robô de limpeza recolhe a carga que ficou sob ele e a devolve ao
+        /// ponto de partida — é o que o nome dele promete: arrumar o setor.
+        ///
+        /// Devolve só uma carga por comando, a primeira que encontrar: o robô
+        /// tem um par de garfos, e resolver várias de uma vez tornaria o efeito
+        /// ilegível para quem está planejando.
+        ///
+        /// Se a origem estiver ocupada, a carga fica onde está. Empilhar duas
+        /// cargas na mesma célula corromperia o tabuleiro, e um robô que às
+        /// vezes não consegue arrumar é mais justo do que um que teleporta
+        /// carga por cima de outra.
+        /// </summary>
+        private PuzzleMove ApplyPatrolPickup(PuzzleMove move)
+        {
+            if (patrols.Count == 0)
+            {
+                return move;
+            }
+
+            foreach (GridCoordinate robot in GetPatrolCells(CommandCount))
+            {
+                if (!crateByPosition.TryGetValue(robot, out string crateId))
+                {
+                    continue;
+                }
+
+                // IsFree ignora o operador — ele não é obstáculo para empurrão.
+                // Aqui é: devolver a carga para cima dele empilharia os dois.
+                if (!crateOrigins.TryGetValue(crateId, out GridCoordinate origin)
+                    || origin == robot
+                    || origin == PlayerPosition
+                    || !IsFree(origin))
+                {
+                    continue;
+                }
+
+                crateByPosition.Remove(robot);
+                crateByPosition.Add(origin, crateId);
+                return move.WithReturn(crateId, robot, origin);
+            }
+
+            return move;
         }
 
         /// <summary>
@@ -336,6 +384,20 @@ namespace TW08.Puzzle
             if (PlayerPosition != move.PlayerTo)
             {
                 return false;
+            }
+
+            // A devolução do robô aconteceu depois do comando, então é a
+            // primeira coisa a desfazer.
+            if (move.CrateReturned)
+            {
+                if (!crateByPosition.TryGetValue(move.ReturnedTo, out string returned)
+                    || returned != move.ReturnedCrateId)
+                {
+                    return false;
+                }
+
+                crateByPosition.Remove(move.ReturnedTo);
+                crateByPosition.Add(move.ReturnedFrom, move.ReturnedCrateId);
             }
 
             if (move.CrateMoved)

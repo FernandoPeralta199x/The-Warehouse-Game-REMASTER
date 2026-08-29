@@ -96,16 +96,19 @@ namespace TW08.Tests.EditMode
         }
 
         [Test]
-        public void RobotBlocksACrateFromBeingPushedIntoIt()
+        public void RobotNoLongerBlocksCargoItCollectsIt()
         {
+            // A regra mudou: o robô deixou de ser barreira para a carga. Ele
+            // passa por cima e a devolve — empurrar para cima dele é permitido,
+            // e é justamente o erro que a fase quer punir.
             PuzzleBoardModel board = Build(
                 new[] { new GridCoordinate(1, 2), new GridCoordinate(3, 1) },
                 player: new GridCoordinate(1, 1),
                 crates: new Dictionary<string, GridCoordinate> { ["c1"] = new(2, 1) });
 
-            // A carga iria para (3,1), onde o robô estará.
-            Assert.IsFalse(board.TryMove(GridCoordinate.Right, out _));
-            Assert.IsTrue(board.Crates.ContainsKey(new GridCoordinate(2, 1)), "A carga não pode ter se mexido.");
+            Assert.IsTrue(board.TryMove(GridCoordinate.Right, out _),
+                "O comando é aceito; o preço o jogador paga ao ver a carga voltar.");
+            Assert.AreEqual(1, board.Crates.Count, "A carga não pode sumir nem duplicar.");
         }
 
         [Test]
@@ -123,6 +126,68 @@ namespace TW08.Tests.EditMode
             board.TryUndo(move);
             Assert.AreEqual(0, board.CommandCount, "Desfazer devolve o robô ao passo anterior.");
             Assert.AreEqual(new GridCoordinate(1, 2), board.Patrols[0].PositionAt(board.CommandCount));
+        }
+
+        [Test]
+        public void RobotReturnsCargoToWhereItStarted()
+        {
+            // Comando 1: o operador empurra a carga de (2,1) para (3,1) e ocupa
+            // (2,1). Comando 2: ele recua, liberando a origem, e o robô chega a
+            // (3,1) — recolhe a carga e a devolve para (2,1).
+            PuzzleBoardModel board = Build(
+                new[] { new GridCoordinate(1, 2), new GridCoordinate(2, 2), new GridCoordinate(3, 1) },
+                player: new GridCoordinate(1, 1),
+                crates: new Dictionary<string, GridCoordinate> { ["c1"] = new(2, 1) });
+
+            Assert.IsTrue(board.TryMove(GridCoordinate.Right, out _));
+            Assert.IsTrue(board.Crates.ContainsKey(new GridCoordinate(3, 1)));
+
+            Assert.IsTrue(board.TryMove(GridCoordinate.Left, out PuzzleMove second));
+
+            Assert.IsTrue(second.CrateReturned, "O robô precisa registrar a devolução no movimento.");
+            Assert.IsTrue(board.Crates.ContainsKey(new GridCoordinate(2, 1)), "A carga volta para onde começou.");
+            Assert.AreEqual(1, board.Crates.Count);
+        }
+
+        [Test]
+        public void UndoRestoresCargoTheRobotTookAway()
+        {
+            // Sem a devolução registrada no movimento, desfazer restauraria o
+            // operador e deixaria a carga na origem — o tabuleiro divergiria.
+            PuzzleBoardModel board = Build(
+                new[] { new GridCoordinate(1, 2), new GridCoordinate(2, 2), new GridCoordinate(3, 1) },
+                player: new GridCoordinate(1, 1),
+                crates: new Dictionary<string, GridCoordinate> { ["c1"] = new(2, 1) });
+
+            board.TryMove(GridCoordinate.Right, out _);
+            board.TryMove(GridCoordinate.Left, out PuzzleMove second);
+            Assert.IsTrue(second.CrateReturned);
+
+            Assert.IsTrue(board.TryUndo(second));
+
+            Assert.IsTrue(board.Crates.ContainsKey(new GridCoordinate(3, 1)),
+                "Desfazer devolve a carga para onde o robô a pegou.");
+            Assert.AreEqual(1, board.Crates.Count, "Desfazer não pode duplicar carga.");
+        }
+
+        [Test]
+        public void RobotLeavesCargoAloneWhenTheOriginIsOccupied()
+        {
+            // Duas cargas com a mesma origem livre indisponível: devolver
+            // empilharia as duas na mesma célula e corromperia o tabuleiro.
+            PuzzleBoardModel board = Build(
+                new[] { new GridCoordinate(3, 1), new GridCoordinate(3, 2) },
+                player: new GridCoordinate(1, 1),
+                crates: new Dictionary<string, GridCoordinate>
+                {
+                    ["c1"] = new(2, 1),
+                    ["c2"] = new(3, 1)
+                });
+
+            int before = board.Crates.Count;
+            board.TryMove(GridCoordinate.Right, out _);
+
+            Assert.AreEqual(before, board.Crates.Count, "Nenhuma carga pode sumir nem duplicar.");
         }
 
         [Test]

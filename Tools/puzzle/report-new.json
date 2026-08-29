@@ -93,8 +93,8 @@
       "solvable": true,
       "optimalCost": 36,
       "pushes": 17,
-      "solution": "DRRRRRDRULLLLLLURLURRRRRLLLDLDRRUDRR",
-      "states": 117768,
+      "solution": "DRRRRRDRULLLLLLURLURRRRRLLLDLDRUDRRR",
+      "states": 74644,
       "replayOk": true,
       "replayCost": 36
     },
