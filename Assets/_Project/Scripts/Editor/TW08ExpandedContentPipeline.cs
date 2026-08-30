@@ -51,6 +51,10 @@ namespace TW08.Editor
             //    que dimensionam a barra de ferramentas pelos slots do catálogo.
             Debug.Log($"Pipeline: catálogo da Oficina N-8 com {TW08ShopSetup.EnsureCatalog().Tools.Count} ferramentas.");
 
+            // 0b. Power-ups da corrida: as pistas precisam da roleta já existir
+            //     para poder espalhar as caixas de item pelo traçado.
+            Debug.Log($"Pipeline: roleta de power-ups com {TW08RacePowerUpSetup.EnsureAll().name}.");
+
             // 1. Fases novas (assets + registro nas campanhas).
             int imported = TW08CampaignExpansionImporter.ImportAll();
             Debug.Log($"Pipeline: {imported} fases importadas.");

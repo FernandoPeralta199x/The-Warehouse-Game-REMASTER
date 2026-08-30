@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TW08.Input;
 using TW08.Motion;
 using TW08.Presentation;
+using TW08.PowerUps;
 using TW08.Race;
 using TW08.UI;
 using TW08.UI.Hud;
@@ -118,7 +119,8 @@ namespace TW08.Editor
             RaceSessionController session = new GameObject("Race Session").AddComponent<RaceSessionController>();
             session.Configure(track, manager, countdown, controller, progress);
 
-            CreateCamera();
+            CreateItemBoxes(manager);
+            CreateCamera(controller);
             CreateHud(track, session, controller);
 
             EditorUtility.SetDirty(input);
@@ -250,9 +252,18 @@ namespace TW08.Editor
             controller = go.AddComponent<ArcadeForkliftController2D>();
             controller.Configure(input, stats, true);
             controller.SetSurfaceGripMultiplier(track.SurfaceGrip);
-            go.AddComponent<ForkliftDamage>();
+            ForkliftDamage damage = go.AddComponent<ForkliftDamage>();
             progress = go.AddComponent<RacerProgress>();
             progress.Configure(manager, "player");
+
+            // Inventário e executor: sem eles pegar uma caixa não guardava nada
+            // e o botão de usar item não fazia nada. O HUD já tinha o campo de
+            // item e o método para ligá-lo, que nunca era chamado.
+            PowerUpInventory inventory = go.AddComponent<PowerUpInventory>();
+            PowerUpExecutor executor = go.AddComponent<PowerUpExecutor>();
+            executor.Configure(input, inventory, controller, damage);
+            EditorUtility.SetDirty(inventory);
+            EditorUtility.SetDirty(executor);
 
             RaceSelectedVehiclePresenter presenter = go.AddComponent<RaceSelectedVehiclePresenter>();
             presenter.Configure(go.GetComponent<SpriteRenderer>(), john, duda);
@@ -262,10 +273,57 @@ namespace TW08.Editor
             return go;
         }
 
-        private static void CreateCamera()
+        private static void CreateCamera(ArcadeForkliftController2D player)
         {
             Camera camera = TW08ProductionSceneUtility.CreateCamera(new Vector3(0f, 0f, -10f), 6.65f);
             camera.backgroundColor = new Color(0.011f, 0.016f, 0.018f, 1f);
+
+            // Era uma câmera fixa mostrando a pista inteira: o veículo virava um
+            // ponto e não havia sensação de velocidade nenhuma.
+            RaceChaseCamera chase = camera.gameObject.AddComponent<RaceChaseCamera>();
+            chase.Configure(player);
+            EditorUtility.SetDirty(chase);
+        }
+
+        /// <summary>
+        /// Caixas de item ao longo do traçado.
+        ///
+        /// Todo o sistema de power-up já existia — doze efeitos implementados,
+        /// inventário, roleta ponderada — e nunca teve um único asset nem uma
+        /// caixa na pista. A corrida rodava com o sistema inteiro vazio.
+        /// </summary>
+        private static void CreateItemBoxes(RaceManager manager)
+        {
+            WeightedPowerUpTable table =
+                AssetDatabase.LoadAssetAtPath<WeightedPowerUpTable>(TW08RacePowerUpSetup.TablePath);
+            if (table == null)
+            {
+                return;
+            }
+
+            Sprite sprite = TW08ExpansionStarterArt.LoadRaceSprite("Checkpoint");
+
+            // Trios nas retas, entre checkpoints: pegar item não pode competir
+            // com fazer a curva, senão o jogador escolhe entre pilotar e jogar.
+            Vector2[] positions =
+            {
+                new(-2.5f, -4.2f), new(0f, -4.2f), new(2.5f, -4.2f),
+                new(7.9f, 0.4f), new(7.9f, -1.2f),
+                new(2.5f, 4.2f), new(0f, 4.2f), new(-2.5f, 4.2f),
+                new(-7.9f, 0.4f), new(-7.9f, -1.2f),
+            };
+
+            for (int i = 0; i < positions.Length; i++)
+            {
+                GameObject box = TW08ProductionSceneUtility.CreateSprite(
+                    $"Item Box {i + 1:00}", positions[i], sprite, 3,
+                    new Color(1f, 0.84f, 0.32f, 0.92f), Vector3.one * 0.55f);
+                TW08ProductionSceneUtility.AddBoxCollider(box, Vector2.one, true);
+
+                PowerUpPickup pickup = box.AddComponent<PowerUpPickup>();
+                pickup.Configure(table, manager);
+                EditorUtility.SetDirty(pickup);
+            }
         }
 
         private static void CreateHud(
@@ -316,12 +374,50 @@ namespace TW08.Editor
             TW08ProductionSceneUtility.SetRect((RectTransform)restart.transform, new Vector2(1f, 0.5f), new Vector2(170f, 48f), new Vector2(-280f, 0f));
             TW08ProductionSceneUtility.SetRect((RectTransform)exit.transform, new Vector2(1f, 0.5f), new Vector2(150f, 48f), new Vector2(-90f, 0f));
 
+            // Painel de item: o slot que mostra o que está guardado. Sem ele o
+            // jogador pega uma caixa e não tem como saber o que ganhou.
+            Image itemSlot = TW08ProductionSceneUtility.CreatePanel(
+                canvas.transform, "Item Slot", new Color(0.05f, 0.07f, 0.08f, 0.92f));
+            TW08ProductionSceneUtility.SetRect(
+                itemSlot.rectTransform, new Vector2(1f, 0.5f), new Vector2(230f, 110f), new Vector2(-140f, 120f));
+
+            Text itemCaption = TW08ProductionSceneUtility.CreateText(
+                itemSlot.transform, "Item Caption", "ITEM [SPACE]", 13,
+                TW08ProductionSceneUtility.TextMuted, TextAnchor.UpperCenter);
+            TW08ProductionSceneUtility.SetRect(
+                itemCaption.rectTransform, new Vector2(0.5f, 1f), new Vector2(210f, 20f), new Vector2(0f, -10f));
+
+            Text item = TW08ProductionSceneUtility.CreateText(
+                itemSlot.transform, "Item", "VAZIO", 17,
+                TW08ProductionSceneUtility.Amber, TextAnchor.MiddleCenter);
+            TW08ProductionSceneUtility.SetRect(
+                item.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(210f, 56f), new Vector2(0f, -8f));
+
+            // Posição na corrida: em kart é a informação que mais importa, e
+            // ficava só no relatório final.
+            Text position = TW08ProductionSceneUtility.CreateText(
+                canvas.transform, "Position", "1º", 52,
+                TW08ProductionSceneUtility.Green, TextAnchor.MiddleLeft);
+            TW08ProductionSceneUtility.SetRect(
+                position.rectTransform, new Vector2(0f, 0f), new Vector2(220f, 70f), new Vector2(60f, 150f));
+
+            Text cargoLabel = TW08ProductionSceneUtility.CreateText(
+                canvas.transform, "Cargo", "CARGA 100%", 16,
+                TW08ProductionSceneUtility.Cyan, TextAnchor.MiddleLeft);
+            TW08ProductionSceneUtility.SetRect(
+                cargoLabel.rectTransform, new Vector2(0f, 0f), new Vector2(260f, 26f), new Vector2(64f, 112f));
+
             RaceResultPanel result = CreateRaceResultPanel(canvas);
             ScreenFader fader = CreateRaceScreenFader(canvas);
 
             RaceHudController hud = new GameObject("Race HUD Controller").AddComponent<RaceHudController>();
             hud.Configure(session, trackText, timer, lap, best, pilot, status, restart, exit, "TW08_RaceSelect");
             hud.ConfigureMotion(playerVehicle, speed, lastLap, checkpoint, result, fader);
+
+            if (playerVehicle != null && playerVehicle.TryGetComponent(out PowerUpInventory inventory))
+            {
+                hud.ConfigureArcadeOverlay(position, item, cargoLabel, inventory);
+            }
 
             AddRaceEntrance(top.gameObject, EntranceStyle.SlideDown, 0.05f);
             AddRaceEntrance(bottom.gameObject, EntranceStyle.SlideUp, 0.16f);

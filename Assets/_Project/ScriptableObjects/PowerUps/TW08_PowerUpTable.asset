@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0763e46892bc0ce429e967e8d6405c1a, type: 3}
+  m_Name: TW08_PowerUpTable
+  m_EditorClassIdentifier: TW08.Runtime::TW08.PowerUps.WeightedPowerUpTable
+  entries:
+  - definition: {fileID: 11400000, guid: 23c9f557219ac5b48a1cd720b456c7b0, type: 2}
+    minimumRank: 0.15
+    maximumRank: 1
+    weight: 1.4
+  - definition: {fileID: 11400000, guid: c5c6ce51062a0934bb4e06d368307b5e, type: 2}
+    minimumRank: 0.55
+    maximumRank: 1
+    weight: 1.1
+  - definition: {fileID: 11400000, guid: c20a2927fd3cfaf4a86738dfab3fd152, type: 2}
+    minimumRank: 0
+    maximumRank: 0.7
+    weight: 1.2
+  - definition: {fileID: 11400000, guid: fac3840120f40614fb1be676f40a32ea, type: 2}
+    minimumRank: 0
+    maximumRank: 0.8
+    weight: 1
+  - definition: {fileID: 11400000, guid: 5ddf4a25e991ba544a5a519c328aa5dc, type: 2}
+    minimumRank: 0
+    maximumRank: 0.75
+    weight: 0.9
+  - definition: {fileID: 11400000, guid: f4ff2c79cafc9af49bc6ec982d780d4f, type: 2}
+    minimumRank: 0
+    maximumRank: 1
+    weight: 0.9
+  - definition: {fileID: 11400000, guid: f92765348e659b441b8a3b96aecf9a9d, type: 2}
+    minimumRank: 0.2
+    maximumRank: 1
+    weight: 0.8
+  - definition: {fileID: 11400000, guid: df5aa5acbf8b33043baa2662330220c0, type: 2}
+    minimumRank: 0.3
+    maximumRank: 1
+    weight: 0.7
+  - definition: {fileID: 11400000, guid: 2b0a36cbff0571547bbd2c4917aa2e09, type: 2}
+    minimumRank: 0.25
+    maximumRank: 1
+    weight: 1.2
+  - definition: {fileID: 11400000, guid: a213407bfe859b84aa6a57728f71dd05, type: 2}
+    minimumRank: 0.5
+    maximumRank: 1
+    weight: 0.7
+  - definition: {fileID: 11400000, guid: 00b30ca5bb5d3a142a2fe1165166c72e, type: 2}
+    minimumRank: 0.35
+    maximumRank: 1
+    weight: 0.9
+  - definition: {fileID: 11400000, guid: c7f33e257f459a84c96524ca8e752903, type: 2}
+    minimumRank: 0.2
+    maximumRank: 1
+    weight: 1

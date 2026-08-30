@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0,1933678">
+  <test-suite type="TestSuite" id="1012" name="Shove It - The Warehouse Game REMASTER" fullname="Shove It - The Warehouse Game REMASTER" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.193368" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1006" name="TW08.Tests.PlayMode.dll" fullname="X:/Shove-It-The-Warehouse/Shove It - The Warehouse Game REMASTER/Library/ScriptAssemblies/TW08.Tests.PlayMode.dll" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.185647" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="35012" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1007" name="TW08" fullname="TW08" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.184933" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1008" name="Tests" fullname="TW08.Tests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.184621" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1009" name="PlayMode" fullname="TW08.Tests.PlayMode" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.184288" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1001" name="BootstrapSmokeTests" fullname="TW08.Tests.PlayMode.BootstrapSmokeTests" classname="TW08.Tests.PlayMode.BootstrapSmokeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.026929" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1002" name="GameStateMachineTransitions" fullname="TW08.Tests.PlayMode.BootstrapSmokeTests.GameStateMachineTransitions" methodname="GameStateMachineTransitions" classname="TW08.Tests.PlayMode.BootstrapSmokeTests" runstate="Runnable" seed="1436836175" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.016109" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1003" name="PuzzleEntityViewPlayModeTests" fullname="TW08.Tests.PlayMode.PuzzleEntityViewPlayModeTests" classname="TW08.Tests.PlayMode.PuzzleEntityViewPlayModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.156315" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1004" name="AnimatedMoveReachesLogicalTarget" fullname="TW08.Tests.PlayMode.PuzzleEntityViewPlayModeTests.AnimatedMoveReachesLogicalTarget" methodname="AnimatedMoveReachesLogicalTarget" classname="TW08.Tests.PlayMode.PuzzleEntityViewPlayModeTests" runstate="Runnable" seed="247899739" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.152668" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="NonAnimatedMoveSnapsImmediately" fullname="TW08.Tests.PlayMode.PuzzleEntityViewPlayModeTests.NonAnimatedMoveSnapsImmediately" methodname="NonAnimatedMoveSnapsImmediately" classname="TW08.Tests.PlayMode.PuzzleEntityViewPlayModeTests" runstate="Runnable" seed="1251782111" result="Passed" start-time="2026-08-30 03:52:26Z" end-time="2026-08-30 03:52:26Z" duration="0.002297" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: TestResults-race2-play.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
